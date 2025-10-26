@@ -1,0 +1,217 @@
+/* ----------------------
+   상단 헤더
+---------------------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+  min-width: 200px;       /* 최소 폭 확보 */
+  margin-right: 5px;      /* 기존 20px → 5px로 줄여 왼쪽으로 이동 */
+}
+
+.header-right input {
+  margin-right: 5px;      /* 버튼과 간격 */
+  width: 100px;
+}
+
+
+.header-right input {
+  margin-right: 5px;  /* 버튼과 간격 */
+  width: 100px;       /* 필요시 폭 제한 */
+}
+
+
+.header-center img {
+  width: 60px; /* 기존 150px → 120px로 줄임 */
+  height: auto;
+}
+
+
+.header-center a {
+  display: inline-block;
+}
+
+/* ----------------------
+   메뉴바
+---------------------- */
+.menu-bar {
+  position: fixed;
+  top: 60px; /* 헤더 바로 아래 */
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px 0;
+  z-index: 999;
+}
+
+.menu-bar a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.menu-bar a.active {
+  color: #e60000;
+}
+
+/* ----------------------
+   main 컨텐츠 여백
+---------------------- */
+main {
+  margin-top: 120px; /* 헤더 + 메뉴바 합산 */
+  padding: 0 20px;
+}
+
+/* ----------------------
+   뉴스 탭 버튼
+---------------------- */
+.news-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.news-tabs button {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.news-tabs button.active,
+.news-tabs button:hover {
+  background-color: #e60000;
+  color: #fff;
+  border-color: #e60000;
+}
+
+/* ----------------------
+   정렬 옵션 버튼
+---------------------- */
+.sort-options {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.sort-options button {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.sort-options button.active,
+.sort-options button:hover {
+  background-color: #e60000;
+  color: #fff;
+  border-color: #e60000;
+}
+
+/* ----------------------
+   뉴스 작성 폼
+---------------------- */
+.news-form-section {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 30px;
+  border-radius: 6px;
+  background-color: #fefefe;
+}
+
+.news-form-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.news-form-section input,
+.news-form-section select,
+.news-form-section textarea,
+.news-form-section button {
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.news-form-section textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.news-form-section button {
+  background-color: #e60000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100px;
+}
+
+/* ----------------------
+   뉴스 카드
+---------------------- */
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.news-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  background-color: #fff;
+}
+
+.news-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.news-card h3 {
+  margin: 0 0 5px 0;
+}
+
+.news-card p {
+  margin: 5px 0;
+}
+
+.news-card button.delete-btn {
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}

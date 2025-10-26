@@ -1,0 +1,176 @@
+/* 기본 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #fafafa;
+  color: #222;
+}
+
+/* 헤더 */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 40px;
+  border-bottom: 1px solid #ddd;
+  background-color: white;
+}
+
+.header-left img {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.header-center {
+  transform: translateX(60px); /* 로고 살짝 오른쪽 */
+}
+
+.logo {
+  width: 130px;
+  height: auto;
+  vertical-align: middle;
+}
+
+.header-right {
+  min-width: 120px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search-input {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  outline: none;
+  width: 140px;
+}
+
+/* 메뉴바 */
+.navbar {
+  background-color: #222;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar li {
+  margin: 0 20px;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 0;
+  display: inline-block;
+  transition: color 0.3s;
+}
+
+.navbar a:hover {
+  color: #ff4d4d;
+}
+
+.navbar a.active {
+  color: #ff4d4d;
+  font-weight: 600;
+}
+
+/* 본문 */
+.schedule-section {
+  max-width: 1000px;
+  margin: 60px auto;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.schedule-section h1 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #ff4d4d;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+/* 카드 스타일 */
+.schedule-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.schedule-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+.schedule-card h2 {
+  font-size: 20px;
+  color: #ff4d4d;
+  margin-bottom: 8px;
+}
+
+.schedule-card h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.schedule-card p {
+  margin-bottom: 6px;
+}
+
+.results {
+  margin-top: 10px;
+  background-color: #f9f9f9;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.results div {
+  margin-bottom: 4px;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+  }
+
+  .header-left,
+  .header-right {
+    display: none;
+  }
+
+  .logo {
+    width: 100px;
+  }
+
+  .navbar ul {
+    flex-wrap: wrap;
+  }
+
+  .navbar li {
+    margin: 8px 10px;
+  }
+
+  .schedule-section {
+    margin: 40px 10px;
+  }
+
+  .schedule-card {
+    padding: 16px;
+  }
+}

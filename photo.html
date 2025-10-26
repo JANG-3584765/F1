@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>포토 갤러리 | WhatisF1</title>
+  <link rel="stylesheet" href="style.css"> <!-- 공통 스타일 -->
+  <link rel="stylesheet" href="photo.css"> <!-- 포토 전용 스타일 -->
+</head>
+<body>
+  <!-- 상단 헤더 -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="https://www.instagram.com/what_is_f1__?igsh=NXE3bmprbHJwcTZi" target="_blank">
+        <img src="images/Instagram.png" alt="인스타그램" width="40">
+      </a>
+    </div>
+
+    <div class="header-center">
+      <a href="index.html">
+        <img src="images/logo.png" alt="WhatisF1 로고" width="150">
+      </a>
+    </div>
+
+    <div class="header-right">
+      <input type="text" placeholder="검색...">
+      <button>검색</button>
+    </div>
+  </header>
+
+  <!-- 메뉴바 -->
+  <nav class="menu-bar">
+    <a href="index.html">홈</a>
+    <a href="news.html">뉴스</a>
+    <a href="schedule.html">일정</a>
+    <a href="ranking.html">순위</a>
+    <a href="videos.html">영상</a>
+    <a href="prediction.html">승부예측</a>
+    <a href="photo.html" class="active">포토</a>
+  </nav>
+
+  <main>
+    <section class="photo-section">
+      <h1>포토 갤러리</h1>
+      <div id="photo-gallery" class="photo-gallery">
+        <!-- JS에서 이미지 카드 추가 -->
+      </div>
+    </section>
+  </main>
+
+  <!-- 모달 -->
+  <div id="photo-modal" class="photo-modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modal-img">
+    <div id="modal-caption"></div>
+  </div>
+
+  <script src="photo.js"></script>
+</body>
+</html>

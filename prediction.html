@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F1 승부예측 | WhatisF1</title>
+  <link rel="stylesheet" href="style.css"> <!-- 공통 스타일 -->
+  <link rel="stylesheet" href="prediction.css"> <!-- 예측 전용 스타일 -->
+</head>
+<body>
+
+  <!-- 상단 헤더 -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="https://www.instagram.com/what_is_f1__?igsh=NXE3bmprbHJwcTZi" target="_blank">
+        <img src="images/Instagram.png" alt="인스타그램" width="40">
+      </a>
+    </div>
+
+    <div class="header-center">
+      <a href="index.html">
+        <img src="images/logo.png" alt="WhatisF1 로고" width="150">
+      </a>
+    </div>
+
+    <div class="header-right">
+      <input type="text" placeholder="검색...">
+      <button>검색</button>
+    </div>
+  </header>
+
+  <!-- 메뉴바 -->
+  <nav class="menu-bar">
+    <a href="index.html">홈</a>
+    <a href="news.html">뉴스</a>
+    <a href="schedule.html">일정</a>
+    <a href="ranking.html">순위</a>
+    <a href="videos.html">영상</a>
+    <a href="prediction.html" class="active">승부예측</a>
+    <a href="photo.html">포토</a>
+  </nav>
+
+  <main>
+    <section class="prediction-section">
+      <h1>승부예측</h1>
+      <div id="prediction-list">
+        <!-- JS에서 경기별 예측 카드가 생성될 예정 -->
+      </div>
+    </section>
+  </main>
+
+  <script src="prediction.js"></script>
+</body>
+</html>

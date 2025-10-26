@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2025 F1 시즌 순위 | WhatisF1</title>
+  <link rel="stylesheet" href="ranking.css">
+</head>
+<body>
+  <!-- 상단 헤더 -->
+  <header>
+    <div class="header-container">
+      <div class="header-left">
+        <a href="https://www.instagram.com/what_is_f1__?igsh=NXE3bmprbHJwcTZi" target="_blank">
+          <img src="images/instagram.png" alt="Instagram" class="insta-icon">
+        </a>
+      </div>
+
+      <div class="header-center">
+        <a href="index.html">
+          <img src="images/logo.png" alt="What is F1 Logo" class="logo">
+        </a>
+      </div>
+
+      <div class="header-right">
+        <input type="text" placeholder="검색..." class="search-input">
+      </div>
+    </div>
+
+    <!-- 메뉴바 -->
+    <nav class="navbar">
+      <ul>
+        <li><a href="index.html">홈</a></li>
+        <li><a href="news.html">뉴스</a></li>
+        <li><a href="schedule.html">일정</a></li>
+        <li><a href="ranking.html" class="active">순위</a></li>
+        <li><a href="videos.html">영상</a></li>
+        <li><a href="prediction.html">승부예측</a></li>
+        <li><a href="photos.html">포토</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main-section">
+    <h1>2025 시즌 순위</h1>
+
+    <!-- 드라이버 순위 -->
+    <div class="drivers-section">
+      <h2 class="section-title">월드 드라이버 챔피언십</h2>
+      <table class="ranking-table" id="drivers-table">
+        <thead>
+          <tr>
+            <th>순위</th>
+            <th>드라이버</th>
+            <th>팀</th>
+            <th>포인트</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- 컨스트럭터 순위 -->
+    <div class="constructors-section">
+      <h2 class="section-title">월드 컨스트럭터 챔피언십</h2>
+      <table class="ranking-table" id="constructors-table">
+        <thead>
+          <tr>
+            <th>순위</th>
+            <th>팀</th>
+            <th>드라이버</th>
+            <th>포인트</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- JS 분리 -->
+  <script src="ranking.js"></script>
+</body>
+</html>

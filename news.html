@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F1 뉴스 프로토타입</title>
+  <link rel="stylesheet" href="style.css"> <!-- 공통 스타일 -->
+  <link rel="stylesheet" href="news.css">  <!-- 뉴스 전용 스타일 -->
+</head>
+<body>
+
+  <!-- 상단 헤더 -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="https://www.instagram.com/what_is_f1__?igsh=NXE3bmprbHJwcTZi" target="_blank">
+        <img src="images/Instagram.png" alt="인스타그램" width="40">
+      </a>
+    </div>
+
+    <div class="header-center">
+      <a href="index.html">
+        <img src="images/logo.png" alt="WhatisF1 로고" width="150">
+      </a>
+    </div>
+
+    <div class="header-right">
+      <input type="text" placeholder="검색...">
+      <button>검색</button>
+    </div>
+  </header>
+
+  <!-- 메뉴바 -->
+  <nav class="menu-bar">
+    <a href="index.html">홈</a>
+    <a href="news.html" class="active">뉴스</a>
+    <a href="schedule.html">일정</a>
+    <a href="ranking.html">순위</a>
+    <a href="videos.html">영상</a>
+    <a href="prediction.html">승부예측</a>
+    <a href="photo.html">포토</a>
+  </nav>
+
+  <main>
+    <!-- 뉴스 필터 탭 -->
+    <div class="news-tabs">
+      <button data-team="all" class="active">전체</button>
+      <button data-team="McLaren">맥라렌</button>
+      <button data-team="Mercedes">메르세데스</button>
+      <button data-team="Ferrari">페라리</button>
+      <button data-team="RedBull">레드불 레이싱</button>
+      <button data-team="Williams">윌리엄스</button>
+      <button data-team="RacingBulls">레이싱 불스</button>
+      <button data-team="AstonMartin">애스턴 마틴</button>
+      <button data-team="Haas">하스</button>
+      <button data-team="Alpine">알핀</button>
+      <button data-team="Cadillac">캐딜락</button>
+    </div>
+
+    <!-- 정렬 옵션 -->
+    <div class="sort-options">
+      <button data-sort="latest" class="active">최신순</button>
+      <button data-sort="popular">인기순</button>
+    </div>
+
+    <!-- 뉴스 작성 폼 (운영자만 보임) -->
+    <section class="news-form-section">
+      <h2>📝 뉴스 작성 (운영자용)</h2>
+      <form id="news-form">
+        <input type="text" id="news-title" placeholder="제목" required>
+        <select id="news-team" required>
+          <option value="">팀 선택</option>
+          <option value="McLaren">맥라렌</option>
+          <option value="Mercedes">메르세데스</option>
+          <option value="Ferrari">페라리</option>
+          <option value="RedBull">레드불 레이싱</option>
+          <option value="Williams">윌리엄스</option>
+          <option value="AlphaTauri">알파 타우리</option>
+          <option value="AstonMartin">애스턴 마틴</option>
+          <option value="Haas">하스</option>
+          <option value="Alpine">알핀</option>
+          <option value="Cadillac">캐딜락</option>
+        </select>
+        <input type="date" id="news-date" required>
+        <input type="text" id="news-img" placeholder="이미지 URL">
+        <textarea id="news-content" placeholder="내용" required></textarea>
+        <button type="submit">뉴스 추가</button>
+      </form>
+    </section>
+
+    <!-- 뉴스 리스트 -->
+    <section id="news-list" class="news-list"></section>
+  </main>
+
+  <script src="news.js"></script>
+</body>
+</html>

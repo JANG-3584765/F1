@@ -1,0 +1,75 @@
+.prediction-section {
+  max-width: 900px;
+  margin: 60px auto;
+  text-align: center;
+}
+
+.prediction-section h1 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #ff4d4d;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.prediction-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  text-align: left;
+}
+
+.prediction-card h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.prediction-card form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.prediction-card label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  min-width: 100px;
+}
+
+.prediction-card select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.prediction-card button {
+  padding: 6px 12px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.prediction-card button:hover {
+  background-color: #e03e3e;
+}
+
+.prediction-result {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #222;
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+  .prediction-card form {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
