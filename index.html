@@ -23,19 +23,25 @@
   <div id="header-container"></div>
   <main>
     <!-- 1. NEXT RACE SECTION -->
-    <section id="next-race" class="next-race-section">
-      <h2 class="section-title">Next Race</h2>
+<section id="next-race" class="next-race-section">
+  <!-- 섹션 제목 대신 국기 표시 -->
+  <h2 class="section-title">
+    <span id="race-flag" class="race-flag">🇦🇺</span>
+  </h2>
 
-      <!-- JS로 동적 채움 -->
-      <div id="next-race-box" class="next-race-box">
-        <p>불러오는 중...</p>
-      </div>
+  <!-- JS로 동적 채움 -->
+  <div id="next-race-box" class="next-race-box">
+    <img id="race-img" src="./images/placeholder.jpg" alt="Next Race">
+    <!-- 타이머 -->
+    <div id="race-timer" class="race-timer">불러오는 중...</div>
+  </div>
 
-      <!-- 전체 일정 보기 버튼 -->
-      <div class="full-schedule-btn-wrap">
-        <a href="./schedule/schedule.html" class="full-schedule-btn">전체 일정 보기</a>
-      </div>
-    </section>
+  <!-- 전체 일정 보기 버튼 -->
+  <div class="full-schedule-btn-wrap">
+    <a href="/schedule/schedule.html" class="full-schedule-btn">전체 일정 보기</a>
+  </div>
+</section>
+
   </main>
   <div id="footer-container"></div>
 
