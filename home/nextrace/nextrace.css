@@ -1,0 +1,51 @@
+.race-card {
+  position: relative;
+  width: 300px; /* 원하는 카드 크기 */
+  margin: 20px auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  background-color: #fff;
+  padding-bottom: 20px;
+}
+
+.race-card .flag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 30px;
+  height: 20px;
+  border-radius: 3px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+.race-card .race-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.race-card .timer {
+  margin: 15px 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.race-card .schedule-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.race-card .schedule-btn:hover {
+  background-color: #0056b3;
+}

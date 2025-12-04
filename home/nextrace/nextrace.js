@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "카타르": "🇶🇦", "아부다비": "🇦🇪", "아랍에미리트": "🇦🇪"
   };
 
-  // 2025, 2026 시즌 JSON 모두 불러오기
+  // 시즌별 JSON 불러오기
   Promise.all([
     fetch("/data/2025_schedule.json").then(res => res.json()),
     fetch("/data/2026_schedule.json").then(res => res.json())
@@ -31,7 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
   })
   .catch(err => {
     console.error(err);
-    box.innerHTML = "<p>데이터를 불러오는 데 실패했습니다.</p>";
+    imgEl.src = "./images/placeholder.jpg";
+    flagEl.textContent = "🏁";
+    timerEl.textContent = "데이터를 불러오는 데 실패했습니다.";
   });
 
   function updateNextRace() {
@@ -72,10 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
     imgEl.src = nextRace.img; // JSON에 img 속성 필요
     flagEl.textContent = flagEmoji;
 
-    // Twemoji 적용 (필요 시)
     if (window.twemoji) requestAnimationFrame(() => twemoji.parse(flagEl));
 
-    // 기존 타이머 제거
     if (countdownInterval) clearInterval(countdownInterval);
 
     countdownInterval = setInterval(() => {
