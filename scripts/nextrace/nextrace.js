@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 시즌별 JSON 불러오기
   Promise.all([
-    fetch("/data/2025_schedule.json").then(res => res.json()),
-    fetch("/data/2026_schedule.json").then(res => res.json())
+    fetch("./data/2025_schedule.json").then(res => res.json()),
+    fetch("./data/2026_schedule.json").then(res => res.json())
   ])
   .then(([data2025, data2026]) => {
     scheduleData = [...data2025, ...data2026];
