@@ -1,10 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>F1 Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatisF1</title>
+
+  <!-- 공통 CSS -->
+  <link rel="stylesheet" href="/common/header.css">
+  <link rel="stylesheet" href="/common/footer.css">
+
+  <!-- 페이지 전용 CSS -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/scripts/nextrace/nextrace.css">
+  <link rel="stylesheet" href="/scripts/top3/top3.css">
+
+  <!-- Twemoji -->
+  <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
 </head>
 <body>
-  <h1>GitHub Pages 테스트 성공!</h1>
+
+  <!-- 공통 헤더/푸터 컨테이너 -->
+  <div id="header-container"></div>
+  <main>
+    <!-- 1. NEXT RACE SECTION -->
+    <section id="next-race" class="next-race-section">
+      <h2 class="section-title">Next Race</h2>
+
+      <!-- JS로 동적 채움 -->
+      <div id="next-race-box" class="next-race-box">
+        <p>불러오는 중...</p>
+      </div>
+
+      <!-- 전체 일정 보기 버튼 -->
+      <div class="full-schedule-btn-wrap">
+        <a href="/schedule/schedule.html" class="full-schedule-btn">전체 일정 보기</a>
+      </div>
+    </section>
+  </main>
+  <div id="footer-container"></div>
+
+  <!-- 공통 헤더 / 푸터 로드 + JS 실행 -->
+  <script>
+    // 🔹 header 로드
+    fetch("/common/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-container").innerHTML = html;
+
+        // header HTML 삽입 완료 후 init 실행
+        const headerScript = document.createElement("script");
+        headerScript.src = "/common/header.js";
+        document.body.appendChild(headerScript);
+      })
+      .catch(err => console.error("Header load error:", err));
+
+    // 🔹 footer 로드
+    fetch("/common/footer.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("footer-container").innerHTML = html;
+
+        // footer JS 실행
+        const footerScript = document.createElement("script");
+        footerScript.src = "/common/footer.js";
+        document.body.appendChild(footerScript);
+      })
+      .catch(err => console.error("Footer load error:", err));
+  </script>
+
+  <!-- 페이지 전용 JS -->
+  <script src="/scripts/nextrace/nextrace.js"></script>
+  <script src="/scripts/top3/top3.js"></script>
+
 </body>
 </html>

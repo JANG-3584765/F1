@@ -1,0 +1,145 @@
+/* 공용 헤더 */
+.top-header {
+    width: 100%;
+    background: white;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr; /* 왼쪽 - 로고 - 오른쪽 */
+    align-items: center;
+
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    z-index: 9000;
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+/* 좌측 / 중앙 / 우측 영역 */
+.header-left {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.header-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+}
+
+/* 로고 */
+.logo-img {
+    height: 64px;
+    object-fit: contain;
+}
+
+/* 버튼 공통 스타일 */
+.login-btn,
+.hamburger-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+
+    padding: 8px 12px; /* 클릭면적 확장 */
+    border-radius: 6px;
+
+    transition: background 0.2s ease;
+}
+
+.login-btn:hover,
+.hamburger-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* 사이드 메뉴 */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -260px; /* 초기 숨김 */
+
+    width: 260px;
+    height: 100vh;
+
+    background: white;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+
+    transition: right 0.3s ease;
+    padding-top: 80px; /* 헤더 영역과 충돌 방지 */
+
+    z-index: 9999; /* 헤더보다 무조건 위 */
+}
+
+.side-menu.open {
+    right: 0;
+}
+
+/* 닫기 버튼 */
+.close-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    font-size: 32px;
+    line-height: 1;
+
+    padding: 8px;
+    z-index: 10000; /* 메뉴 제일 위 */
+}
+
+.close-menu:hover {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+}
+
+/* 메뉴 리스트 */
+.side-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.side-menu li {
+    padding: 18px 24px;
+    border-bottom: 1px solid #eee;
+}
+
+.side-menu a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    display: block;
+    transition: background 0.2s ease;
+}
+
+.side-menu a:hover {
+    background: #f5f5f5;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 480px) {
+    .side-menu {
+        width: 220px; /* 모바일에서 더 슬림하게 */
+    }
+
+    .logo-img {
+        height: 52px;
+    }
+}
