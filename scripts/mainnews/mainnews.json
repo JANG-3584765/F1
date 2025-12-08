@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "페라리, 2026 파워유닛 첫 테스트 성공",
+    "summary": "2026 레귤레이션 대비 첫 파워유닛 테스트에서 긍정적 성과를 얻었다는 소식.",
+    "image": "/images/mainnews/tech.jpg",
+    "date": "2025-12-07",
+    "category": "Tech",
+    "link": "/news/1"
+  },
+  {
+    "id": 2,
+    "title": "베르스타펜, 2026 시즌 준비 상황 공개",
+    "summary": "레드불의 베르스타펜이 새로운 시즌 준비 상황을 상세히 전했다.",
+    "image": "/images/mainnews/driver.jpg",
+    "date": "2025-12-05",
+    "category": "Driver",
+    "link": "/news/2"
+  },
+  {
+    "id": 3,
+    "title": "FIA, 2026 에어로 패키지 규정 초안 발표",
+    "summary": "2026년 에어로 패키지의 주요 변경 사항이 공식 초안으로 공개되었다.",
+    "image": "/images/mainnews/regulation.jpg",
+    "date": "2025-12-03",
+    "category": "Regulation",
+    "link": "/news/3"
+  },
+  {
+    "id": 4,
+    "title": "메르세데스, 새 기술 디렉터 영입",
+    "summary": "메르세데스가 2026 개혁을 앞두고 새 기술 디렉터를 영입했다.",
+    "image": "/images/mainnews/team.jpg",
+    "date": "2025-12-02",
+    "category": "Team",
+    "link": "/news/4"
+  },
+  {
+    "id": 5,
+    "title": "알론소, 2026 시즌 포드와 협상 중?",
+    "summary": "여러 매체에서 알론소와 포드의 극비 협상이 포착되었다는 보도가 나오고 있다.",
+    "image": "/images/mainnews/rumor.jpg",
+    "date": "2025-12-01",
+    "category": "Rumor",
+    "link": "/news/5"
+  }
+]

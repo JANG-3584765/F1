@@ -1,0 +1,101 @@
+.main-news-section {
+  padding: 40px 20px 60px;
+  background: #fff;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.main-news-swiper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.swiper-slide {
+  position: relative;
+  aspect-ratio: 1 / 1; /* 정사각형 유지 */
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-size: cover;
+  background-position: center;
+}
+
+.news-category-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  z-index: 2;
+}
+
+.news-category-badge[data-category="Driver"] { background: rgba(0,102,255,0.8); }
+.news-category-badge[data-category="Team"] { background: rgba(255,40,40,0.85); }
+.news-category-badge[data-category="Tech"] { background: rgba(35,35,35,0.85); }
+.news-category-badge[data-category="Rumor"] { background: rgba(160,0,255,0.8); }
+.news-category-badge[data-category="Regulation"] { background: rgba(255,150,0,0.85); }
+
+.main-news-text {
+  background: rgba(255,255,255,0.9);
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: right;
+}
+
+.main-news-text h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* 화살표 */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #000;
+  width: 30px;
+  height: 30px;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 18px;
+}
+
+/* 점 숨김 */
+.swiper-pagination { display: none; }
+
+/* 버튼 통일 */
+.more-news-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  background: #000;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.more-news-btn-wrap {
+  margin-top: 40px; /* 기존 20px에서 40px로 늘림 */
+  text-align: left; /* 버튼 왼쪽 정렬 */
+}
+
+.more-news-btn:hover { background: #222; }
+
+/* 모바일 */
+@media (max-width: 1024px) { .swiper-slide { width: 45%; } }
+@media (max-width: 768px) { .swiper-slide { width: 90%; } }
+@media (max-width: 480px) { .swiper-slide { width: 95%; } }
