@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이용약관 - WhatisF1</title>
+
+  <!-- 공통 헤더 CSS -->
+  <link rel="stylesheet" href="../common/header.css">
+
+  <!-- 정책 페이지 공통 CSS -->
+  <link rel="stylesheet" href="./policy.css">
+</head>
+
+<body>
+
+  <!-- 헤더 -->
+  <div id="header-container"></div>
+
+  <!-- 메인 -->
+  <main class="policy-main">
+    <div class="policy-container">
+
+      <h1 class="policy-title">이용약관</h1>
+      <p class="policy-date">최종 수정일: 2025년 12월 23일</p>
+
+      <!-- 제1조 -->
+      <section class="policy-section">
+        <h3>제1조 (목적)</h3>
+        <p>
+          본 약관은 WhatisF1(이하 “본 사이트”)이 제공하는 Formula 1 관련 정보 서비스의
+          이용 조건 및 절차, 이용자와 운영자 간의 권리·의무 및 책임 사항을 규정함을
+          목적으로 합니다.
+        </p>
+      </section>
+
+      <!-- 제2조 -->
+      <section class="policy-section">
+        <h3>제2조 (사이트 성격)</h3>
+        <p>
+          본 사이트는 Formula 1®과 공식적으로 제휴되지 않은
+          <span class="policy-strong">비공식 정보 제공 사이트</span>입니다.
+        </p>
+        <p>
+          제공되는 모든 정보는 팬과 이용자를 위한 참고 자료이며,
+          공식 기록 및 공지는 Formula 1® 공식 채널을 기준으로 합니다.
+        </p>
+      </section>
+
+      <!-- 제3조 -->
+      <section class="policy-section">
+        <h3>제3조 (저작권 및 지식재산권)</h3>
+        <p>
+          본 사이트에 포함된 텍스트, 이미지, 영상, 데이터 등 모든 콘텐츠의 권리는
+          각 권리자에게 귀속됩니다.
+        </p>
+        <ul>
+          <li>Formula 1®, 팀, 드라이버 관련 상표 및 자료는 각 소유자의 자산입니다.</li>
+          <li>본 사이트는 이를 정보 제공 목적에 한하여 사용합니다.</li>
+          <li>무단 복제, 재배포, 상업적 이용을 금지합니다.</li>
+        </ul>
+      </section>
+
+      <!-- 제4조 -->
+      <section class="policy-section">
+        <h3>제4조 (서비스 제공 및 변경)</h3>
+        <p>
+          본 사이트는 운영자의 판단에 따라 제공하는 서비스의 일부 또는 전부를
+          사전 공지 없이 변경하거나 중단할 수 있습니다.
+        </p>
+      </section>
+
+      <!-- 제5조 -->
+      <section class="policy-section">
+        <h3>제5조 (책임의 제한)</h3>
+        <p>
+          본 사이트는 제공되는 정보의 정확성을 위해 노력하지만,
+          정보의 완전성·정확성·신뢰성에 대해 법적 책임을 지지 않습니다.
+        </p>
+        <p>
+          이용자가 본 사이트의 정보를 이용하여 발생한 손해에 대해서
+          운영자는 책임을 부담하지 않습니다.
+        </p>
+      </section>
+
+      <!-- 제6조 -->
+      <section class="policy-section">
+        <h3>제6조 (약관의 변경)</h3>
+        <p>
+          본 약관은 필요 시 변경될 수 있으며,
+          변경 사항은 본 페이지를 통해 공지합니다.
+        </p>
+      </section>
+
+      <!-- 하단 안내 -->
+      <div class="policy-footer-note">
+        본 약관에 명시되지 않은 사항은 관계 법령 및 일반적인 관행을 따릅니다.
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 공통 헤더 로드 -->
+  <script>
+    fetch("/F1/common/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-container").innerHTML = html;
+        document.dispatchEvent(new Event("headerLoaded"));
+      })
+      .catch(err => console.error("Header load error:", err));
+  </script>
+
+  <!-- 공통 헤더 JS -->
+  <script src="/F1/common/header.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>개인정보처리방침 - WhatisF1</title>
+
+  <!-- 공통 헤더 CSS -->
+  <link rel="stylesheet" href="../common/header.css">
+
+  <!-- 정책 페이지 공통 CSS -->
+  <link rel="stylesheet" href="./policy.css">
+</head>
+
+<body>
+
+  <!-- 헤더 -->
+  <div id="header-container"></div>
+
+  <!-- 메인 -->
+  <main class="policy-main">
+    <div class="policy-container">
+
+      <h1 class="policy-title">개인정보처리방침</h1>
+      <p class="policy-date">최종 수정일: 2025년 12월 23일</p>
+
+      <!-- 1 -->
+      <section class="policy-section">
+        <h3>1. 개인정보의 처리 목적</h3>
+        <p>
+          WhatisF1(이하 “본 사이트”)는 다음의 목적을 위하여 최소한의 개인정보를 처리합니다.
+        </p>
+        <ul>
+          <li>회원 식별 및 로그인 기능 제공</li>
+          <li>서비스 이용에 따른 본인 확인</li>
+          <li>문의 응대 및 서비스 개선</li>
+        </ul>
+      </section>
+
+      <!-- 2 -->
+      <section class="policy-section">
+        <h3>2. 수집하는 개인정보 항목</h3>
+        <p>본 사이트는 다음과 같은 개인정보를 수집할 수 있습니다.</p>
+        <ul>
+          <li>이메일 주소 (아이디)</li>
+          <li>비밀번호 (암호화 저장 예정)</li>
+        </ul>
+        <p class="policy-note">
+          ※ 서비스 이용 과정에서 IP 주소, 접속 로그 등의 정보가 자동으로 생성될 수 있습니다.
+        </p>
+      </section>
+
+      <!-- 3 -->
+      <section class="policy-section">
+        <h3>3. 개인정보의 보유 및 이용 기간</h3>
+        <p>
+          개인정보는 회원 탈퇴 시 또는 수집 목적이 달성된 후 지체 없이 파기됩니다.
+        </p>
+        <p>
+          단, 관계 법령에 따라 보존이 필요한 경우 해당 기간 동안 보관할 수 있습니다.
+        </p>
+      </section>
+
+      <!-- 4 -->
+      <section class="policy-section">
+        <h3>4. 개인정보의 제3자 제공</h3>
+        <p>
+          본 사이트는 원칙적으로 이용자의 개인정보를 외부에 제공하지 않습니다.
+        </p>
+        <p>
+          다만, 법령에 근거한 요청이 있는 경우에 한해 예외로 제공될 수 있습니다.
+        </p>
+      </section>
+
+      <!-- 5 -->
+      <section class="policy-section">
+        <h3>5. 개인정보의 안전성 확보 조치</h3>
+        <p>
+          본 사이트는 개인정보 보호를 위해 다음과 같은 조치를 취하고 있습니다.
+        </p>
+        <ul>
+          <li>비밀번호 암호화 처리</li>
+          <li>접근 권한 최소화</li>
+          <li>보안 취약점 개선 노력</li>
+        </ul>
+      </section>
+
+      <!-- 6 -->
+      <section class="policy-section">
+        <h3>6. 이용자의 권리</h3>
+        <p>
+          이용자는 언제든지 본인의 개인정보에 대해 열람, 수정, 삭제를 요청할 수 있습니다.
+        </p>
+      </section>
+
+      <!-- 7 -->
+      <section class="policy-section">
+        <h3>7. 개인정보 보호 책임자</h3>
+        <p>
+          개인정보 보호 관련 문의는 아래 이메일을 통해 접수하실 수 있습니다.
+        </p>
+        <p class="policy-strong">
+          📧 whatisf1@gmail.com
+        </p>
+      </section>
+
+      <!-- 하단 안내 -->
+      <div class="policy-footer-note">
+        본 개인정보처리방침은 서비스 변경 또는 관련 법령 개정 시 수정될 수 있습니다.
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 공통 헤더 로드 -->
+  <script>
+    fetch("/F1/common/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-container").innerHTML = html;
+        document.dispatchEvent(new Event("headerLoaded"));
+      })
+      .catch(err => console.error("Header load error:", err));
+  </script>
+
+  <!-- 공통 헤더 JS -->
+  <script src="/F1/common/header.js"></script>
+
+</body>
+</html>

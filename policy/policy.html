@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>운영정책 - WhatisF1</title>
+
+  <!-- 공통 헤더 CSS -->
+  <link rel="stylesheet" href="../common/header.css">
+
+  <!-- 정책 페이지 공통 CSS -->
+  <link rel="stylesheet" href="./policy.css">
+</head>
+
+<body>
+
+  <!-- 헤더 -->
+  <div id="header-container"></div>
+
+  <!-- 메인 -->
+  <main class="policy-main">
+    <div class="policy-container">
+
+      <h1 class="policy-title">운영정책</h1>
+      <p class="policy-date">최종 수정일: 2025년 12월 23일</p>
+
+      <!-- 1 -->
+      <section class="policy-section">
+        <h3>1. 운영 목적</h3>
+        <p>
+          WhatisF1은 Formula 1을 사랑하는 팬들을 위한
+          <strong>비공식 정보 제공 플랫폼</strong>입니다.
+        </p>
+        <p>
+          본 사이트는 뉴스, 경기 일정, 결과, 순위, 하이라이트 등
+          F1 관련 정보를 보다 쉽게 전달하는 것을 목표로 합니다.
+        </p>
+      </section>
+
+      <!-- 2 -->
+      <section class="policy-section">
+        <h3>2. 콘텐츠 운영 원칙</h3>
+        <ul>
+          <li>모든 콘텐츠는 정보 제공 및 팬 활동 목적을 기반으로 합니다.</li>
+          <li>허위 정보, 루머, 비방성 콘텐츠는 지양합니다.</li>
+          <li>공식 기록과 상이한 경우 공식 Formula 1® 자료를 우선합니다.</li>
+        </ul>
+      </section>
+
+      <!-- 3 -->
+      <section class="policy-section">
+        <h3>3. 회원 활동 정책</h3>
+        <p>
+          회원은 사이트 내 제공되는 기능을 정상적인 범위 내에서 이용해야 합니다.
+        </p>
+        <ul>
+          <li>타인의 권리를 침해하는 행위</li>
+          <li>사이트 운영을 방해하는 행위</li>
+          <li>불법적이거나 부적절한 활동</li>
+        </ul>
+        <p>
+          위와 같은 행위가 확인될 경우, 사전 통보 없이 이용 제한이 이루어질 수 있습니다.
+        </p>
+      </section>
+
+      <!-- 4 -->
+      <section class="policy-section">
+        <h3>4. 외부 링크 및 자료</h3>
+        <p>
+          본 사이트에는 외부 사이트로 연결되는 링크가 포함될 수 있습니다.
+        </p>
+        <p>
+          외부 사이트에서 제공하는 콘텐츠에 대해서는
+          WhatisF1이 책임을 지지 않습니다.
+        </p>
+      </section>
+
+      <!-- 5 -->
+      <section class="policy-section">
+        <h3>5. 운영 정책 변경</h3>
+        <p>
+          본 운영정책은 서비스 개선 및 관련 법령 변경에 따라 수정될 수 있습니다.
+        </p>
+        <p>
+          변경 사항은 본 페이지를 통해 공지하며,
+          공지 이후에도 서비스를 계속 이용할 경우 변경 사항에 동의한 것으로 간주됩니다.
+        </p>
+      </section>
+
+      <!-- 하단 안내 -->
+      <div class="policy-footer-note">
+        본 운영정책에 명시되지 않은 사항은 관련 법령 및 일반적인 서비스 운영 관행을 따릅니다.
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 공통 헤더 로드 -->
+  <script>
+    fetch("/F1/common/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-container").innerHTML = html;
+        document.dispatchEvent(new Event("headerLoaded"));
+      })
+      .catch(err => console.error("Header load error:", err));
+  </script>
+
+  <!-- 공통 헤더 JS -->
+  <script src="/F1/common/header.js"></script>
+
+</body>
+</html>
