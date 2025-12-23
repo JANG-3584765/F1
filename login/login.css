@@ -41,7 +41,7 @@ body {
 }
 
 /* 로그인 버튼 */
-.login-btn {
+.login-redbtn {
     width: 100%;
     padding: 12px;
     background: #e10600; /* F1 레드 */

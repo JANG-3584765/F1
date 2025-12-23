@@ -1,34 +1,58 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 - WhatisF1</title>
-    <link rel="stylesheet" href="./login.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인 - WhatisF1</title>
+
+  <!-- 공통 헤더 CSS -->
+  <link rel="stylesheet" href="../common/header.css">
+
+  <!-- 로그인 페이지 CSS -->
+  <link rel="stylesheet" href="./login.css">
 </head>
 
-<body>
+<body class="auth-page">
 
-    <!-- 로그인 전체 래퍼 -->
+  <!-- 헤더 -->
+  <div id="header-container"></div>
+
+  <!-- 로그인 전체 래퍼 -->
+  <main class="login-main">
     <div class="login-wrapper">
-        
-        <!-- 카드 형태 로그인 박스 -->
-        <div class="login-card">
-            <h2 class="login-title">로그인</h2>
+      <div class="login-card">
+        <h2 class="login-title">로그인</h2>
 
-            <!-- 로그인 폼 -->
-            <form>
-                <input type="text" placeholder="아이디" class="input-box">
-                <input type="password" placeholder="비밀번호" class="input-box">
-                <button type="submit" class="login-btn">로그인</button>
-                <p class="signup-link">
-                    계정이 없으신가요? <a href="./signup.html">회원가입</a>
-                </p>
-            </form>
+        <!-- 로그인 폼 -->
+        <form>
+          <input type="text" placeholder="아이디" class="input-box">
+          <input type="password" placeholder="비밀번호" class="input-box">
+          <button type="submit" class="loginred-btn">로그인</button>
 
-        </div>
+          <p class="signup-link">
+            계정이 없으신가요? <a href="./signup.html">회원가입</a>
+          </p>
+        </form>
+      </div>
     </div>
+  </main>
 
-    <script src="./login.js"></script>
+  <!-- 공통 헤더 로드 -->
+  <script>
+    fetch("../common/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-container").innerHTML = html;
+        document.dispatchEvent(new Event("headerLoaded"));
+      })
+      .catch(err => console.error("Header load error:", err));
+  </script>
+
+  <!-- 공통 헤더 JS -->
+  <script src="../common/header.js"></script>
+
+  <!-- 로그인 전용 JS -->
+  <script src="./login.js"></script>
+
 </body>
 </html>
