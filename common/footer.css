@@ -1,10 +1,10 @@
 /* =====================================================
    Footer (WhatisF1)
-   - 모바일 우선 설계
-   - 데스크톱/모바일 동일한 정보 흐름
+   - 모든 해상도에서 동일한 레이아웃 철학
+   - 중앙 묶음 유지 (Portal-style)
    ===================================================== */
 
-/* 전체 푸터 영역 */
+/* 전체 푸터 */
 .footer {
   width: 100%;
   background-color: #ffffff;
@@ -14,18 +14,16 @@
   font-family: "Pretendard", "Noto Sans KR", sans-serif;
 }
 
-/* -----------------------------------------------------
-   푸터 상단 영역 (브랜드 / SNS / 정책)
-   ----------------------------------------------------- */
+/* 푸터 상단 묶음 */
 .footer-inner {
-  max-width: 1200px;
+  max-width: 960px;            /* 너무 넓어지지 않게 제한 */
   margin: 0 auto;
   padding: 0 20px;
 
   display: flex;
-  flex-direction: column;   /* 모바일 기준 */
+  flex-direction: column;      /* 끝까지 column 유지 */
   align-items: center;
-  gap: 20px;
+  gap: 18px;
   text-align: center;
 }
 
@@ -48,14 +46,12 @@
   margin: 0;
 }
 
-/* -----------------------------------------------------
-   SNS 영역
-   ----------------------------------------------------- */
+/* SNS */
 .footer-sns {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .sns-text {
@@ -64,16 +60,9 @@
   margin: 0;
 }
 
-.sns-icon {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .sns-img {
   width: 28px;
   height: 28px;
-  object-fit: contain;
   transition: opacity 0.2s ease;
 }
 
@@ -81,14 +70,13 @@
   opacity: 0.7;
 }
 
-/* -----------------------------------------------------
-   이용 안내 링크
-   ----------------------------------------------------- */
+/* 이용 안내 */
 .footer-info {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  gap: 8px;
   font-size: 13px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .info-link {
@@ -104,11 +92,9 @@
   color: #bbb;
 }
 
-/* -----------------------------------------------------
-   하단 고지 영역
-   ----------------------------------------------------- */
+/* 하단 고지 */
 .footer-bottom {
-  margin-top: 24px;
+  margin-top: 22px;
   padding: 0 20px;
   text-align: center;
 }
@@ -117,7 +103,8 @@
   font-size: 12px;
   line-height: 1.6;
   color: #888;
-  margin: 0 0 8px;
+  max-width: 960px;
+  margin: 0 auto 6px;
 }
 
 .footer-copy {
@@ -126,22 +113,13 @@
   margin: 0;
 }
 
-/* -----------------------------------------------------
-   데스크톱 대응
-   ----------------------------------------------------- */
-@media (min-width: 768px) {
+/* 데스크톱 보정 (레이아웃 유지, 여백만 증가) */
+@media (min-width: 1024px) {
   .footer-inner {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    text-align: left;
+    gap: 22px;
   }
 
-  .footer-sns {
-    align-items: flex-end;
-  }
-
-  .footer-info {
-    justify-content: center;
+  .footer-bottom {
+    margin-top: 26px;
   }
 }
