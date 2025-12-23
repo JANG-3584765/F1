@@ -35,9 +35,7 @@ function initHeaderMenu() {
   });
 }
 
-// 🔹 fetch 완료 후 실행
-const headerContainer = document.getElementById("header-container");
-if (headerContainer) {
-  // index.html에서 fetch로 header 넣은 직후 이 script가 실행되도록
+// 🔹 header fetch 완료 후 실행
+document.addEventListener("headerLoaded", () => {
   initHeaderMenu();
-}
+});
