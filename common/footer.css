@@ -14,20 +14,24 @@
   font-family: "Pretendard", "Noto Sans KR", sans-serif;
 }
 
-/* 푸터 상단 묶음 */
+/* -----------------------------------------------------
+   푸터 상단 묶음 (브랜드 / SNS / 정책)
+   ----------------------------------------------------- */
 .footer-inner {
-  max-width: 960px;            /* 너무 넓어지지 않게 제한 */
+  max-width: 960px;            /* 데스크톱에서도 과도한 확장 방지 */
   margin: 0 auto;
   padding: 0 20px;
 
   display: flex;
-  flex-direction: column;      /* 끝까지 column 유지 */
+  flex-direction: column;      /* 모든 해상도에서 동일 */
   align-items: center;
   gap: 18px;
   text-align: center;
 }
 
-/* 브랜드 */
+/* -----------------------------------------------------
+   브랜드 영역
+   ----------------------------------------------------- */
 .footer-brand {
   display: flex;
   flex-direction: column;
@@ -46,7 +50,9 @@
   margin: 0;
 }
 
-/* SNS */
+/* -----------------------------------------------------
+   SNS 영역
+   ----------------------------------------------------- */
 .footer-sns {
   display: flex;
   flex-direction: column;
@@ -60,9 +66,16 @@
   margin: 0;
 }
 
+.sns-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .sns-img {
   width: 28px;
   height: 28px;
+  object-fit: contain;
   transition: opacity 0.2s ease;
 }
 
@@ -70,7 +83,9 @@
   opacity: 0.7;
 }
 
-/* 이용 안내 */
+/* -----------------------------------------------------
+   이용 안내 링크
+   ----------------------------------------------------- */
 .footer-info {
   display: flex;
   gap: 8px;
@@ -92,7 +107,9 @@
   color: #bbb;
 }
 
-/* 하단 고지 */
+/* -----------------------------------------------------
+   하단 고지 영역
+   ----------------------------------------------------- */
 .footer-bottom {
   margin-top: 22px;
   padding: 0 20px;
@@ -113,7 +130,11 @@
   margin: 0;
 }
 
-/* 데스크톱 보정 (레이아웃 유지, 여백만 증가) */
+/* -----------------------------------------------------
+   데스크톱 보정
+   - 레이아웃 변경 없음
+   - 여백과 밀도만 조정
+   ----------------------------------------------------- */
 @media (min-width: 1024px) {
   .footer-inner {
     gap: 22px;
