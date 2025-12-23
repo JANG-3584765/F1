@@ -4,8 +4,8 @@ function initHeaderMenu() {
   if (!headerContainer) return;
 
   const hamburgerBtn = headerContainer.querySelector(".hamburger-btn");
-  const sideMenu = headerContainer.querySelector("#sideMenu");
-  const closeMenuBtn = headerContainer.querySelector(".close-menu");
+  const sideMenu = document.getElementById("sideMenu");
+  const closeMenuBtn = sideMenu?.querySelector(".close-menu");
 
   if (!hamburgerBtn || !sideMenu || !closeMenuBtn) {
     console.warn("header.js: 필요한 요소를 찾을 수 없습니다.");
@@ -16,11 +16,13 @@ function initHeaderMenu() {
   hamburgerBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     sideMenu.classList.add("open");
+    document.body.style.overflow = "hidden";
   });
 
   // 메뉴 닫기
   closeMenuBtn.addEventListener("click", () => {
     sideMenu.classList.remove("open");
+    document.body.style.overflow = "";
   });
 
   // 메뉴 외부 클릭 시 닫기
@@ -31,6 +33,7 @@ function initHeaderMenu() {
       e.target !== hamburgerBtn
     ) {
       sideMenu.classList.remove("open");
+      document.body.style.overflow = "";
     }
   });
 }
