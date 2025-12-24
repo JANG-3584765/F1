@@ -12,90 +12,134 @@
 
 .main-news-swiper {
   width: 100%;
-  display: flex;
-  justify-content: center;
 }
 
+/* 슬라이드 카드 */
 .swiper-slide {
   position: relative;
-  aspect-ratio: 1 / 1; /* 정사각형 유지 */
+  aspect-ratio: 1 / 1;
+  min-width: 220px;
   border-radius: 14px;
   overflow: hidden;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  background-size: cover;
-  background-position: center;
+
+  /* ❗ 절대 배경색 주지 말 것 */
+  background: transparent;
 }
 
-.news-category-badge {
+/* 전체 클릭 링크 */
+.main-news-link {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 5px 12px;
-  border-radius: 12px;
-  font-size: 0.8rem;
+  inset: 0;
+  z-index: 2;
+  display: block;
+  background: transparent;
+  outline: none;
+}
+
+/* 이미지 */
+.slide-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  top: 44px;
+}
+
+/* 상단 정보 바 */
+.main-news-info-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 12px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+
+  background: #fff;
+  box-sizing: border-box;
+  border-radius: 0;
+  z-index: 3;
+}
+
+/* 제목 */
+.main-news-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #000;
+  text-align: right;
+  flex: 1;
+}
+
+/* 카테고리 배지 */
+.news-category-badge {
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 0.75rem;
   font-weight: 600;
   color: #fff;
-  z-index: 2;
+  white-space: nowrap;
 }
 
-.news-category-badge[data-category="Driver"] { background: rgba(0,102,255,0.8); }
-.news-category-badge[data-category="Team"] { background: rgba(255,40,40,0.85); }
-.news-category-badge[data-category="Tech"] { background: rgba(35,35,35,0.85); }
-.news-category-badge[data-category="Rumor"] { background: rgba(160,0,255,0.8); }
-.news-category-badge[data-category="Regulation"] { background: rgba(255,150,0,0.85); }
+.news-category-badge[data-category="Driver"] { background: #0066ff; }
+.news-category-badge[data-category="Team"] { background: #ff2828; }
+.news-category-badge[data-category="Tech"] { background: #232323; }
+.news-category-badge[data-category="Rumor"] { background: #a000ff; }
+.news-category-badge[data-category="Regulation"] { background: #ff9600; }
 
-.main-news-text {
-  background: rgba(255,255,255,0.9);
-  padding: 10px;
-  box-sizing: border-box;
-  text-align: right;
+/* 링크 기본 스타일 제거 */
+.main-news-section a,
+.main-news-section a:hover,
+.main-news-section a:visited,
+.main-news-section a:active,
+.main-news-section a:focus {
+  text-decoration: none;
+  outline: none;
+  color: inherit;
 }
 
-.main-news-text h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  margin: 0;
+/* Swiper 테두리/포커스 제거 */
+.swiper-slide,
+.swiper-slide * {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* 화살표 */
 .swiper-button-next,
 .swiper-button-prev {
   color: #000;
-  width: 30px;
-  height: 30px;
 }
 
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  font-size: 18px;
+.swiper-pagination {
+  display: none;
 }
 
-/* 점 숨김 */
-.swiper-pagination { display: none; }
-
-/* 버튼 통일 */
+/* 더보기 버튼 */
 .more-news-btn {
   display: inline-block;
   padding: 10px 18px;
   background: #000;
-  color: #fff;
+  color: #fff !important;
   border-radius: 6px;
-  text-decoration: none;
   font-weight: 600;
+  border: none;
+  outline: none;
+  box-shadow: none;
   transition: 0.25s;
 }
 
-.more-news-btn-wrap {
-  margin-top: 40px; /* 기존 20px에서 40px로 늘림 */
-  text-align: left; /* 버튼 왼쪽 정렬 */
+.more-news-btn:hover {
+  background: #222;
 }
 
-.more-news-btn:hover { background: #222; }
-
-/* 모바일 */
-@media (max-width: 1024px) { .swiper-slide { width: 45%; } }
-@media (max-width: 768px) { .swiper-slide { width: 90%; } }
-@media (max-width: 480px) { .swiper-slide { width: 95%; } }
+.more-news-btn-wrap {
+  margin-top: 40px;
+  text-align: left;
+}
