@@ -5,78 +5,130 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WhatisF1</title>
 
-  <!-- 공통 CSS -->
+  <!-- 공통 헤더 / 푸터 CSS -->
   <link rel="stylesheet" href="./common/header.css">
   <link rel="stylesheet" href="./common/footer.css">
 
-  <!-- 페이지 전용 CSS -->
+  <!-- 홈 메인 CSS -->
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./scripts/nextrace/nextrace.css">
   <link rel="stylesheet" href="./scripts/top3/top3.css">
+  <link rel="stylesheet" href="./scripts/mainnews/mainnews.css">
+  <link rel="stylesheet" href="./scripts/highlight/highlight.css">
+  <link rel="stylesheet" href="./scripts/standing/standing.css">
+  <link rel="stylesheet" href="./scripts/guess/guess.css">
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js" defer></script>
 
   <!-- Twemoji -->
-  <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+  <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" defer></script>
 </head>
 <body>
 
-  <!-- 공통 헤더/푸터 컨테이너 -->
+  <!-- 헤더 -->
   <div id="header-container"></div>
+
+  <!-- 메인 -->
   <main>
-    <!-- 1. NEXT RACE SECTION -->
-<section id="next-race" class="next-race-section">
-  <!-- 섹션 제목 대신 국기 표시 -->
-  <h2 class="section-title">
-    <span id="race-flag" class="race-flag"></span>
-  </h2>
+    <!-- 1. NEXT RACE -->
+    <section id="next-race" class="next-race-section">
+      <div id="next-race-box" class="next-race-box">
+        <div class="race-basic">
+          <span class="flag-img">🏁</span>
+          <div class="race-info">
+            <div class="race-title">불러오는 중...</div>
+            <div class="race-countdown"></div>
+          </div>
+          <button class="toggle-details-btn">▼</button>
+        </div>
+        <div class="race-details" style="display: none;">
+          <div class="circuit-img"><img src="" alt="Circuit" /></div>
+          <div class="race-schedule">
+            <ul class="session-list"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="race-btns-wrap">
+        <a href="./schedule/schedule.html" class="full-schedule-btn">전체 일정 보기</a>
+        <a href="./result/result.html" class="past-results-btn">지난 경기 결과 보기</a>
+      </div>
+    </section>
 
-  <!-- JS로 동적 채움 -->
-  <div id="next-race-box" class="next-race-box">
-    <img id="race-img" src="./images/placeholder.jpg" alt="Next Race">
-    <!-- 타이머 -->
-    <div id="race-timer" class="race-timer">불러오는 중...</div>
-  </div>
+    <!-- 2. MAIN NEWS -->
+    <section id="main-news" class="main-news-section">
+      <h2 class="section-title">Main News</h2>
+      <div class="swiper main-news-swiper">
+        <div class="swiper-wrapper" id="main-news-wrapper"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+      <div class="more-news-btn-wrap">
+        <a href="./news/news.html" class="more-news-btn">뉴스 더보기</a>
+      </div>
+    </section>
 
-  <!-- 전체 일정 보기 버튼 -->
-  <div class="full-schedule-btn-wrap">
-    <a href="./schedule/schedule.html" class="full-schedule-btn">전체 일정 보기</a>
-  </div>
-</section>
+    <!-- 3. HIGHLIGHT -->
+    <section id="highlights" class="highlights-section">
+      <h2 class="section-title">Highlights</h2>
+      <div class="swiper highlight-list" id="highlight-list">
+        <div class="swiper-wrapper"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </section>
 
+    <!-- 4. STANDING -->
+    <section id="standing" class="standing-section">
+      <div class="standing-header">
+        <h2 class="section-title">TOP3</h2>
+        <a href="./ranking/ranking.html" class="more-standing-btn">전체 순위 보기</a>
+      </div>
+      <div class="standing-tabs">
+        <button class="tab active" data-type="driver">드라이버</button>
+        <button class="tab" data-type="constructor">컨스트럭터</button>
+      </div>
+      <div class="podium" id="podium-container"></div>
+    </section>
+
+    <!-- 5. 승부예측 Quick Link -->
+    <section id="guess" class="guess-section">
+      <div class="guess-card" id="guess-card">
+        <a href="./prediction/prediction.html" class="guess-btn">승부예측 하러 가기</a>
+      </div>
+    </section>
   </main>
+
+  <!-- 푸터 -->
   <div id="footer-container"></div>
 
-  <!-- 공통 헤더 / 푸터 로드 + JS 실행 -->
-  <script>
-    // 🔹 header 로드
+  <!-- 공통 헤더 / 푸터 로드 -->
+  <script defer>
     fetch("./common/header.html")
       .then(res => res.text())
       .then(html => {
         document.getElementById("header-container").innerHTML = html;
+        document.dispatchEvent(new Event("headerLoaded"));
+      }).catch(err => console.error("Header load error:", err));
 
-        // header HTML 삽입 완료 후 init 실행
-        const headerScript = document.createElement("script");
-        headerScript.src = "./common/header.js"; // <- 절대 경로 → 상대 경로
-        document.body.appendChild(headerScript);
-      })
-      .catch(err => console.error("Header load error:", err));
-
-    // 🔹 footer 로드
     fetch("./common/footer.html")
       .then(res => res.text())
-      .then(html => {
-        document.getElementById("footer-container").innerHTML = html;
-
-        // footer JS 실행
-        const footerScript = document.createElement("script");
-        footerScript.src = "./common/footer.js"; // <- 절대 경로 → 상대 경로
-        document.body.appendChild(footerScript);
-      })
+      .then(html => { document.getElementById("footer-container").innerHTML = html; })
       .catch(err => console.error("Footer load error:", err));
   </script>
 
+  <!-- 공통 JS -->
+  <script defer src="./common/header.js"></script>
+  <script defer src="./common/footer.js"></script>
+
   <!-- 페이지 전용 JS -->
-  <script src="./scripts/nextrace/nextrace.js"></script>
-  <script src="./scripts/top3/top3.js"></script>
+  <script defer src="./scripts/nextrace/nextrace.js"></script>
+  <script defer src="./scripts/top3/top3.js"></script>
+  <script defer src="./scripts/mainnews/mainnews.js"></script>
+  <script defer src="./scripts/highlight/highlight.js"></script>
+  <script defer src="./scripts/standing/standing.js"></script>
+  <script defer src="./scripts/prediction/prediction.js"></script>
 
 </body>
 </html>
