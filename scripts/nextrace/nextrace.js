@@ -1,8 +1,7 @@
+// nextrace.js (깃허브 배포용)
 document.addEventListener("DOMContentLoaded", () => {
   const box = document.getElementById("next-race-box");
-  const flagEl = document.getElementById("race-flag");
-  const timerEl = document.getElementById("race-timer");
-  const imgEl = document.getElementById("race-img");
+
   let scheduleData = [];
   let countdownInterval;
 
@@ -19,24 +18,22 @@ document.addEventListener("DOMContentLoaded", () => {
     "카타르": "🇶🇦", "아부다비": "🇦🇪", "아랍에미리트": "🇦🇪"
   };
 
-  // 시즌별 JSON 불러오기
+  // 시즌별 JSON 불러오기 (깃허브 레포지토리 기준 절대 경로)
   Promise.all([
-    fetch("./data/2025_schedule.json").then(res => res.json()),
-    fetch("./data/2026_schedule.json").then(res => res.json())
+    fetch("/F1/data/2025_schedule.json").then(res => res.json()),
+    fetch("/F1/data/2026_schedule.json").then(res => res.json())
   ])
   .then(([data2025, data2026]) => {
     scheduleData = [...data2025, ...data2026];
-    updateNextRace();
-    setInterval(updateNextRace, 60000); // 1분마다 갱신
+    renderNextRace();
+    setInterval(renderNextRace, 60000); // 1분마다 갱신
   })
   .catch(err => {
     console.error(err);
-    imgEl.src = "./images/placeholder.jpg";
-    flagEl.textContent = "🏁";
-    timerEl.textContent = "데이터를 불러오는 데 실패했습니다.";
+    box.innerHTML = "<p>데이터를 불러오는 데 실패했습니다.</p>";
   });
 
-  function updateNextRace() {
+  function renderNextRace() {
     if (!scheduleData.length) return;
 
     const now = new Date();
@@ -45,10 +42,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 다음 세션 찾기
     for (const race of scheduleData) {
-      for (const session of race.sessions) {
-        if (session.start_date === "TBD") continue;
-        const start = new Date(session.start_date);
-        const end = session.end_date && session.end_date !== "TBD" ? new Date(session.end_date) : start;
+      const sessions = Array.isArray(race.sessions)
+        ? race.sessions
+        : Object.entries(race.sessions).map(([name, info]) => ({ name, ...info }));
+
+      for (const session of sessions) {
+        if (!session.start || session.start === "TBD") continue;
+        const start = new Date(session.start);
+        const end = session.end && session.end !== "TBD" ? new Date(session.end) : start;
         if (now <= end) {
           nextSession = session;
           nextRace = race;
@@ -59,23 +60,61 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (!nextSession) {
-      imgEl.src = "./images/placeholder.jpg";
-      flagEl.textContent = "🏁";
-      timerEl.textContent = "다가오는 세션이 없습니다.";
+      box.innerHTML = "<p>다가오는 세션이 없습니다.</p>";
       clearInterval(countdownInterval);
       return;
     }
 
-    const raceStart = new Date(nextSession.start_date);
-    const raceEnd = nextSession.end_date && nextSession.end_date !== "TBD" ? new Date(nextSession.end_date) : raceStart;
+    const raceStart = new Date(nextSession.start);
+    const raceEnd = nextSession.end && nextSession.end !== "TBD" ? new Date(nextSession.end) : raceStart;
     const flagEmoji = flags[nextRace.location_ko || nextRace.location] || "🏁";
 
-    // 이미지, 국기 업데이트
-    imgEl.src = nextRace.img; // JSON에 img 속성 필요
-    flagEl.textContent = flagEmoji;
+    // HTML 생성
+    box.innerHTML = `
+      <div class="next-race-header">
+        <span class="flag">${flagEmoji}</span>
+        <div class="race-countdown">로딩 중...</div>
+        <button class="toggle-details-btn">▼ 펼치기</button>
+      </div>
 
-    if (window.twemoji) requestAnimationFrame(() => twemoji.parse(flagEl));
+      <div class="next-race-details" style="display: none;">
+        <div class="circuit-img">
+          <img src="${nextRace.circuit_image || ''}" alt="Circuit" />
+          <div class="circuit-name">${nextRace.circuit_ko || nextRace.circuit || '서킷 정보 없음'}</div>
+        </div>
+        <div class="race-info">
+          <h3 class="race-title">${nextRace.race_name_ko || nextRace.race_name}</h3>
+          <h4>이번 라운드 전체 일정</h4>
+          <ul class="session-list">
+            ${nextRace.sessions.map(s => {
+              const start = new Date(s.start);
+              const startStr = start.toLocaleDateString("ko-KR", { month: "2-digit", day: "2-digit" }) +
+                               " " + start.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" });
+              return `<li>${s.name}: ${startStr}</li>`;
+            }).join('')}
+          </ul>
+        </div>
+      </div>
+    `;
 
+    // Twemoji 적용
+    if (window.twemoji) requestAnimationFrame(() => twemoji.parse(box));
+
+    // 펼치기 버튼 이벤트
+    const toggleBtn = box.querySelector(".toggle-details-btn");
+    const details = box.querySelector(".next-race-details");
+    toggleBtn.addEventListener("click", () => {
+      if (details.style.display === "none") {
+        details.style.display = "flex";
+        toggleBtn.textContent = "▲ 접기";
+      } else {
+        details.style.display = "none";
+        toggleBtn.textContent = "▼ 펼치기";
+      }
+    });
+
+    // 카운트다운
+    const countdownEl = box.querySelector(".race-countdown");
     if (countdownInterval) clearInterval(countdownInterval);
 
     countdownInterval = setInterval(() => {
@@ -83,11 +122,11 @@ document.addEventListener("DOMContentLoaded", () => {
       let diff = raceStart - now;
 
       if (diff <= 0 && now <= raceEnd) {
-        timerEl.textContent = "진행 중";
+        countdownEl.textContent = "진행 중";
         return;
       } else if (diff <= 0) {
         clearInterval(countdownInterval);
-        updateNextRace();
+        renderNextRace();
         return;
       }
 
@@ -99,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
       diff -= minutes * 1000 * 60;
       const seconds = Math.floor(diff / 1000);
 
-      timerEl.textContent = `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
+      countdownEl.textContent = `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
     }, 1000);
   }
 });
