@@ -1,0 +1,29 @@
+/* Guess 섹션 스타일 */
+.guess-section {
+  padding: 16px;
+  text-align: center;
+}
+
+/* 카드 스타일 */
+.guess-card {
+  display: inline-block;
+  background: red;
+  border-radius: 12px;
+  padding: 20px 40px;
+  margin-top: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* 버튼 텍스트 스타일 */
+.guess-card a.guess-btn {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* 호버 효과 */
+.guess-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
