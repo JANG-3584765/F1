@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const seasons = [...new Set(scheduleData.map(r => r.season))].sort();
 
     renderSeasonList(seasons);
-    renderSeason(seasons[-1]);   // 기본 최근 시즌 로드
+    renderSeason(seasons.at[-1]);   // 기본 최근 시즌 로드
   })
   .catch(() => {
     seasonContent.textContent = "데이터를 불러오지 못했습니다.";
