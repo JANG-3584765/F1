@@ -15,9 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let roundsData = [];
 
-  /* =========================
-     시즌 선택
-  ========================= */
+  /* 시즌 선택 */
   seasonSelect.addEventListener("change", () => {
     const season = seasonSelect.value;
 
@@ -61,9 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 
-  /* =========================
-     라운드 선택
-  ========================= */
+  /* 라운드 선택 */
   roundSelect.addEventListener("change", () => {
     const selectedRound = parseInt(roundSelect.value, 10);
     const raceData = roundsData.find(r => r.round === selectedRound);
@@ -75,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("race-details").style.display = "block";
 
-    /* --- 기본 레이스 정보 --- */
+    /* 레이스 기본 정보 */
     raceNameEl.textContent = raceData.race.name;
     raceDateEl.textContent = `날짜: ${new Date(raceData.race.dateTime).toLocaleDateString("ko-KR")}`;
     raceLocationEl.textContent = `위치: ${raceData.race.location}`;
@@ -85,9 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
     raceTrackEl.src = raceData.trackImage;
     raceTrackEl.alt = `${raceData.race.shortName} 트랙 이미지`;
 
-    /* =========================
-       포디움 (fullResults 상위 3명)
-    ========================= */
+    /* 포디움 (fullResults 상위 3명) */
     podiumUl.innerHTML = "";
     raceData.fullResults
       .filter(r => r.position <= 3)
@@ -97,9 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         podiumUl.appendChild(li);
       });
 
-    /* =========================
-       전체 결과 테이블
-    ========================= */
+    /* 전체 결과 테이블 */
     fullResultsTbody.innerHTML = "";
 
     raceData.fullResults.forEach(r => {
@@ -117,9 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
       fullResultsTbody.appendChild(tr);
     });
 
-    /* =========================
-       챔피언십 스탠딩 TOP 5
-    ========================= */
+    /* 챔피언십 스탠딩 TOP 5 */
     standingsUpdateEl.innerHTML = "";
 
     const driverTitle = document.createElement("h3");
@@ -129,8 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const driverList = document.createElement("ul");
     raceData.championshipStandings.drivers.top.forEach(d => {
       const li = document.createElement("li");
-      const changeSymbol = d.change > 0 ? `▲${d.change}` : d.change < 0 ? `▼${Math.abs(d.change)}` : "–";
-      li.textContent = `${d.position}. ${d.driver} (${d.team}) - ${d.points}점 ${changeSymbol}`;
+      li.textContent = `${d.position}. ${d.driver} (${d.team}) - ${d.points}점`;
       driverList.appendChild(li);
     });
     standingsUpdateEl.appendChild(driverList);
@@ -142,16 +131,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const teamList = document.createElement("ul");
     raceData.championshipStandings.constructors.top.forEach(t => {
       const li = document.createElement("li");
-      const changeSymbol = t.change > 0 ? `▲${t.change}` : t.change < 0 ? `▼${Math.abs(t.change)}` : "–";
-      li.textContent = `${t.position}. ${t.team} - ${t.points}점 ${changeSymbol}`;
+      li.textContent = `${t.position}. ${t.team} - ${t.points}점`;
       teamList.appendChild(li);
     });
     standingsUpdateEl.appendChild(teamList);
   });
 
-  /* =========================
-     초기 로드 (2025)
-  ========================= */
+  /* 초기 로드 (2025) */
   seasonSelect.value = "2025";
   seasonSelect.dispatchEvent(new Event("change"));
 });

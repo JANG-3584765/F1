@@ -21,20 +21,20 @@
     "championshipStandings": {
       "drivers": {
         "top": [
-          {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","points":25,"change":0},
-          {"position":2,"driver":"막스 베르스타펜","team":"레드불","points":18,"change":0},
-          {"position":3,"driver":"세르히오 페레즈","team":"레드불","points":15,"change":0},
-          {"position":4,"driver":"샤를 르클레르","team":"페라리","points":12,"change":0},
-          {"position":5,"driver":"랜도 노리스","team":"맥라렌","points":10,"change":0}
+          {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","points":25},
+          {"position":2,"driver":"막스 베르스타펜","team":"레드불","points":18},
+          {"position":3,"driver":"세르히오 페레즈","team":"레드불","points":15},
+          {"position":4,"driver":"샤를 르클레르","team":"페라리","points":12},
+          {"position":5,"driver":"랜도 노리스","team":"맥라렌","points":10}
         ]
       },
       "constructors": {
         "top": [
-          {"position":1,"team":"레드불","points":33,"change":0},
-          {"position":2,"team":"메르세데스","points":25,"change":0},
-          {"position":3,"team":"페라리","points":12,"change":0},
-          {"position":4,"team":"맥라렌","points":10,"change":0},
-          {"position":5,"team":"애스턴 마틴","points":6,"change":0}
+          {"position":1,"team":"레드불","points":33},
+          {"position":2,"team":"메르세데스","points":25},
+          {"position":3,"team":"페라리","points":120},
+          {"position":4,"team":"맥라렌","points":10},
+          {"position":5,"team":"애스턴 마틴","points":6}
         ]
       }
     }
@@ -61,20 +61,20 @@
     "championshipStandings": {
       "drivers": {
         "top": [
-          {"position":1,"driver":"막스 베르스타펜","team":"레드불","points":43,"change":1},
-          {"position":2,"driver":"루이스 해밀턴","team":"메르세데스","points":43,"change":-1},
-          {"position":3,"driver":"세르히오 페레즈","team":"레드불","points":15,"change":0},
-          {"position":4,"driver":"페르난도 알론소","team":"애스턴 마틴","points":15,"change":2},
-          {"position":5,"driver":"샤를 르클레르","team":"페라리","points":12,"change":-1}
+          {"position":1,"driver":"막스 베르스타펜","team":"레드불","points":43},
+          {"position":2,"driver":"루이스 해밀턴","team":"메르세데스","points":43},
+          {"position":3,"driver":"세르히오 페레즈","team":"레드불","points":15},
+          {"position":4,"driver":"페르난도 알론소","team":"애스턴 마틴","points":15},
+          {"position":5,"driver":"샤를 르클레르","team":"페라리","points":12}
         ]
       },
       "constructors": {
         "top": [
-          {"position":1,"team":"레드불","points":58,"change":0},
-          {"position":2,"team":"메르세데스","points":43,"change":0},
-          {"position":3,"team":"애스턴 마틴","points":21,"change":2},
-          {"position":4,"team":"페라리","points":12,"change":-1},
-          {"position":5,"team":"맥라렌","points":10,"change":-1}
+          {"position":1,"team":"레드불","points":58},
+          {"position":2,"team":"메르세데스","points":43},
+          {"position":3,"team":"애스턴 마틴","points":21},
+          {"position":4,"team":"페라리","points":12},
+          {"position":5,"team":"맥라렌","points":10}
         ]
       }
     }
@@ -99,20 +99,20 @@
     "championshipStandings": {
       "drivers": {
         "top": [
-          {"position":1,"driver":"막스 베르스타펜","team":"레드불","points":68,"change":0},
-          {"position":2,"driver":"루이스 해밀턴","team":"메르세데스","points":43,"change":0},
-          {"position":3,"driver":"세르히오 페레즈","team":"레드불","points":33,"change":1},
-          {"position":4,"driver":"페르난도 알론소","team":"애스턴 마틴","points":26,"change":0},
-          {"position":5,"driver":"샤를 르클레르","team":"페라리","points":22,"change":0}
+          {"position":1,"driver":"막스 베르스타펜","team":"레드불","points":68},
+          {"position":2,"driver":"루이스 해밀턴","team":"메르세데스","points":43},
+          {"position":3,"driver":"세르히오 페레즈","team":"레드불","points":33},
+          {"position":4,"driver":"페르난도 알론소","team":"애스턴 마틴","points":26},
+          {"position":5,"driver":"샤를 르클레르","team":"페라리","points":22}
         ]
       },
       "constructors": {
         "top": [
-          {"position":1,"team":"레드불","points":101,"change":0},
-          {"position":2,"team":"메르세데스","points":43,"change":0},
-          {"position":3,"team":"애스턴 마틴","points":34,"change":0},
-          {"position":4,"team":"페라리","points":28,"change":0},
-          {"position":5,"team":"맥라렌","points":18,"change":0}
+          {"position":1,"team":"레드불","points":101},
+          {"position":2,"team":"메르세데스","points":43},
+          {"position":3,"team":"애스턴 마틴","points":34},
+          {"position":4,"team":"페라리","points":28},
+          {"position":5,"team":"맥라렌","points":18}
         ]
       }
     }
