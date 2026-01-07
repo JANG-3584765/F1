@@ -10,7 +10,7 @@
       "location": "멜버른",
       "dateTime": "2025-03-16T13:00:00+09:00"
     },
-    "trackImage": "../images/result/circuit/australia.png",
+    "trackImage": "./images/result/circuit/australia.png",
     "extraInfo": "랩 58 | 서킷 길이: 5.278km | 비",
     "fullResults": [
       {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","gap":null,"points":25,"status":"Finished"},
@@ -51,7 +51,7 @@
       "location": "상하이",
       "dateTime": "2025-03-23T16:00:00+09:00"
     },
-    "trackImage": "../images/result/circuit/china.png",
+    "trackImage": "./images/result/circuit/china.png",
     "extraInfo": "랩 56 | 총 305.066km",
     "fullResults": [
       {"position":1,"driver":"막스 베르스타펜","team":"레드불","laps":56,"time":"1:31:12","gap":null,"points":25,"status":"Finished"},
@@ -91,7 +91,7 @@
       "location": "스즈카",
       "dateTime": "2025-04-06T14:00:00+09:00"
     },
-    "trackImage": "../images/result/circuit/스즈카 서킷.png",
+    "trackImage": "./images/result/circuit/스즈카 서킷.png",
     "extraInfo": "랩 53 | 건조",
     "fullResults": [
       {"position":1,"driver":"막스 베르스타펜","team":"레드불","laps":53,"time":"1:28:01","gap":null,"points":25,"status":"Finished"}

@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    fetch(`${season}_result.json`)
+    fetch(`./${season}_result.json`)
       .then(res => res.json())
       .then(data => {
         roundsData = data;
