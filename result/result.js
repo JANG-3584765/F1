@@ -1,46 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
   const seasonSelect = document.getElementById("season-select");
   const roundSelect = document.getElementById("round-select");
+
   const raceNameEl = document.getElementById("race-name");
   const raceDateEl = document.getElementById("race-date");
   const raceLocationEl = document.getElementById("race-location");
+  const raceExtraEl = document.getElementById("race-extra");
+  const raceFlagEl = document.getElementById("race-flag");
   const raceTrackEl = document.getElementById("race-track");
+
   const podiumUl = document.querySelector("#podium ul");
   const fullResultsTbody = document.querySelector("#full-results tbody");
   const standingsUpdateEl = document.getElementById("standings-update");
 
   let roundsData = [];
 
-  // 시즌 선택 이벤트
+  /* =========================
+     시즌 선택
+  ========================= */
   seasonSelect.addEventListener("change", () => {
     const season = seasonSelect.value;
+
     if (!season) {
-      roundSelect.innerHTML = '<option value="">라운드를 선택하세요</option>';
+      roundSelect.innerHTML = `<option value="">라운드를 선택하세요</option>`;
       document.getElementById("race-details").style.display = "none";
       return;
     }
 
-    // 해당 시즌 JSON 불러오기
     fetch(`${season}_result.json`)
       .then(res => res.json())
       .then(data => {
-        roundsData = data.rounds;
+        roundsData = data;
 
-        // 라운드 드롭다운 초기화
-        roundSelect.innerHTML = '<option value="">라운드를 선택하세요</option>';
+        roundSelect.innerHTML = `<option value="">라운드를 선택하세요</option>`;
 
         roundsData.forEach(round => {
           const option = document.createElement("option");
           option.value = round.round;
-          option.textContent = `Round ${round.round} - ${round.raceName}`;
+          option.textContent = `Round ${round.round} - ${round.race.shortName}`;
           roundSelect.appendChild(option);
         });
 
-        // 오늘 날짜 기준 가장 최근/다음 라운드 선택
+        // 오늘 날짜 기준 가장 최근 라운드 자동 선택
         const today = new Date();
         let defaultRound = roundsData[0].round;
+
         for (let i = roundsData.length - 1; i >= 0; i--) {
-          const raceDate = new Date(roundsData[i].dateTime);
+          const raceDate = new Date(roundsData[i].race.dateTime);
           if (raceDate <= today) {
             defaultRound = roundsData[i].round;
             break;
@@ -49,38 +55,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
         roundSelect.value = defaultRound;
         roundSelect.dispatchEvent(new Event("change"));
+      })
+      .catch(err => {
+        console.error("결과 JSON 로드 실패", err);
       });
   });
 
-  // 라운드 선택 이벤트
+  /* =========================
+     라운드 선택
+  ========================= */
   roundSelect.addEventListener("change", () => {
-    const selectedRound = parseInt(roundSelect.value);
-    const race = roundsData.find(r => r.round === selectedRound);
+    const selectedRound = parseInt(roundSelect.value, 10);
+    const raceData = roundsData.find(r => r.round === selectedRound);
 
-    if (!race) {
+    if (!raceData) {
       document.getElementById("race-details").style.display = "none";
       return;
     }
 
     document.getElementById("race-details").style.display = "block";
 
-    raceNameEl.textContent = race.raceName;
-    raceDateEl.textContent = `날짜: ${race.date}`;
-    raceLocationEl.textContent = `위치: ${race.location}`;
-    raceTrackEl.src = race.trackImage;
-    raceTrackEl.alt = `${race.raceName} 트랙 이미지`;
+    /* --- 기본 레이스 정보 --- */
+    raceNameEl.textContent = raceData.race.name;
+    raceDateEl.textContent = `날짜: ${new Date(raceData.race.dateTime).toLocaleDateString("ko-KR")}`;
+    raceLocationEl.textContent = `위치: ${raceData.race.location}`;
+    raceExtraEl.textContent = raceData.extraInfo;
+    raceFlagEl.textContent = raceData.race.flag;
 
-    // 포디움 채우기
+    raceTrackEl.src = raceData.trackImage;
+    raceTrackEl.alt = `${raceData.race.shortName} 트랙 이미지`;
+
+    /* =========================
+       포디움 (fullResults 상위 3명)
+    ========================= */
     podiumUl.innerHTML = "";
-    race.podium.forEach(p => {
-      const li = document.createElement("li");
-      li.textContent = `${p.position}. ${p.driver} (${p.team}) - ${p.time} / ${p.points}점`;
-      podiumUl.appendChild(li);
-    });
+    raceData.fullResults
+      .filter(r => r.position <= 3)
+      .forEach(p => {
+        const li = document.createElement("li");
+        li.textContent = `${p.position}. ${p.driver} (${p.team}) - ${p.time}`;
+        podiumUl.appendChild(li);
+      });
 
-    // 전체 결과 채우기
+    /* =========================
+       전체 결과 테이블
+    ========================= */
     fullResultsTbody.innerHTML = "";
-    race.fullResults.forEach(r => {
+
+    raceData.fullResults.forEach(r => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${r.position}</td>
@@ -88,22 +110,48 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${r.team}</td>
         <td>${r.laps}</td>
         <td>${r.time}</td>
+        <td>${r.gap ?? "-"}</td>
         <td>${r.points}</td>
+        <td>${r.status}</td>
       `;
       fullResultsTbody.appendChild(tr);
     });
 
-    // 스탠딩 업데이트
-    standingsUpdateEl.innerHTML = "<h3>스탠딩 업데이트</h3>";
-    const driversUpdate = document.createElement("p");
-    driversUpdate.textContent = "드라이버: " + race.standingsUpdate.drivers.map(d => `${d.driver}(${d.position}, ${d.change >=0 ? "+"+d.change : d.change})`).join(", ");
-    const teamsUpdate = document.createElement("p");
-    teamsUpdate.textContent = "팀: " + race.standingsUpdate.teams.map(t => `${t.team}(${t.position}, ${t.change >=0 ? "+"+t.change : t.change})`).join(", ");
-    standingsUpdateEl.appendChild(driversUpdate);
-    standingsUpdateEl.appendChild(teamsUpdate);
+    /* =========================
+       챔피언십 스탠딩 TOP 5
+    ========================= */
+    standingsUpdateEl.innerHTML = "";
+
+    const driverTitle = document.createElement("h3");
+    driverTitle.textContent = "드라이버 챔피언십 TOP 5";
+    standingsUpdateEl.appendChild(driverTitle);
+
+    const driverList = document.createElement("ul");
+    raceData.championshipStandings.drivers.top.forEach(d => {
+      const li = document.createElement("li");
+      const changeSymbol = d.change > 0 ? `▲${d.change}` : d.change < 0 ? `▼${Math.abs(d.change)}` : "–";
+      li.textContent = `${d.position}. ${d.driver} (${d.team}) - ${d.points}점 ${changeSymbol}`;
+      driverList.appendChild(li);
+    });
+    standingsUpdateEl.appendChild(driverList);
+
+    const teamTitle = document.createElement("h3");
+    teamTitle.textContent = "컨스트럭터 챔피언십 TOP 5";
+    standingsUpdateEl.appendChild(teamTitle);
+
+    const teamList = document.createElement("ul");
+    raceData.championshipStandings.constructors.top.forEach(t => {
+      const li = document.createElement("li");
+      const changeSymbol = t.change > 0 ? `▲${t.change}` : t.change < 0 ? `▼${Math.abs(t.change)}` : "–";
+      li.textContent = `${t.position}. ${t.team} - ${t.points}점 ${changeSymbol}`;
+      teamList.appendChild(li);
+    });
+    standingsUpdateEl.appendChild(teamList);
   });
 
-  // 페이지 로드 시 기본 시즌 선택 (2025)
+  /* =========================
+     초기 로드 (2025)
+  ========================= */
   seasonSelect.value = "2025";
   seasonSelect.dispatchEvent(new Event("change"));
 });

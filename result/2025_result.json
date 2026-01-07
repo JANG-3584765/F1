@@ -1,630 +1,121 @@
-{
-  "season": "2025",
-  "rounds": [
-    {
-      "round": 1,
-      "raceName": "포뮬러1 루이 비통 호주 그랑프리(호주 GP)",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "./images/result/circuit/앨버트 파크 서킷.png",
-      "extraInfo": "랩 57 | 서킷 길이: 5.278km | 비",
+[
+  {
+    "season": 2025,
+    "round": 1,
+    "race": {
+      "name": "포뮬러1 루이 비통 호주 그랑프리",
+      "shortName": "호주 GP",
       "country": "호주",
       "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 2,
-      "raceName": "중국 GP",
-      "date": "2025-03-23",
-      "dateTime": "2025-03-23T16:00:00+09:00",
-      "location": "상하이",
-      "trackImage": "tracks/china.jpg",
-      "extraInfo": "랩 56 | 총 305.066km | 스프린트",
-      "country": "중국",
-      "flag": "🇨🇳",
-      "podium":[
-        {"position":1,"driver":"막스 베르스타펜","team":"레드불","time":"1:31:12","points":25},
-        {"position":2,"driver":"루이스 해밀턴","team":"메르세데스","time":"+1.8s","points":18},
-        {"position":3,"driver":"페르난도 알론소","team":"알파로메오","time":"+4.5s","points":15}
-      ],
-      "fullResults":[
-        {"position":1,"driver":"막스 베르스타펜","team":"레드불","laps":56,"time":"1:31:12","points":25},
-        {"position":2,"driver":"루이스 해밀턴","team":"메르세데스","laps":56,"time":"+1.8s","points":18},
-        {"position":3,"driver":"페르난도 알론소","team":"알파로메오","laps":56,"time":"+4.5s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":56,"time":"+6.2s","points":12}
-      ],
-      "standingsUpdate":{
-        "drivers":[{"driver":"막스 베르스타펜","position":1,"change":1},{"driver":"루이스 해밀턴","position":2,"change":0},{"driver":"페르난도 알론소","position":3,"change":2}],
-        "teams":[{"team":"레드불","position":1,"change":1},{"team":"메르세데스","position":2,"change":0},{"team":"페라리","position":3,"change":-1}]
-      }
-    },
-    {
-      "round": 3,
-      "raceName": "일본 GP",
-      "date": "2025-04-06",
-      "dateTime": "2025-04-06T14:00:00+09:00",
-      "location": "스즈카",
-      "trackImage": "tracks/japan.jpg",
-      "extraInfo": "랩 53 | 총 308.706km",
-      "country": "일본",
-      "flag": "🇯🇵",
-      "podium":[
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:28:30","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.0s","points":18},
-        {"position":3,"driver":"조지 러셀","team":"메르세데스","time":"+4.5s","points":15}
-      ],
-      "fullResults":[
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":53,"time":"1:28:30","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":53,"time":"+2.0s","points":18},
-        {"position":3,"driver":"조지 러셀","team":"메르세데스","laps":53,"time":"+4.5s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":53,"time":"+6.8s","points":12}
-      ],
-      "standingsUpdate":{
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"조지 러셀","position":3,"change":1}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":-1}]
-      }
-    },
-    {
-      "round": 8,
-      "raceName": "모나코 GP",
-      "date": "2025-05-25",
-      "dateTime": "2025-05-25T22:00:00+09:00",
-      "location": "모나코",
-      "trackImage": "tracks/monaco.jpg",
-      "extraInfo": "랩 78 | 총 260.286km | 시가지",
-      "country": "모나코",
-      "flag": "🇲🇨",
-      "podium":[
-        {"position":1,"driver":"막스 베르스타펜","team":"레드불","time":"1:42:15","points":25},
-        {"position":2,"driver":"루이스 해밀턴","team":"메르세데스","time":"+1.8s","points":18},
-        {"position":3,"driver":"샤를 르클레르","team":"페라리","time":"+3.4s","points":15}
-      ],
-      "fullResults":[
-        {"position":1,"driver":"막스 베르스타펜","team":"레드불","laps":78,"time":"1:42:15","points":25},
-        {"position":2,"driver":"루이스 해밀턴","team":"메르세데스","laps":78,"time":"+1.8s","points":18},
-        {"position":3,"driver":"샤를 르클레르","team":"페라리","laps":78,"time":"+3.4s","points":15},
-        {"position":4,"driver":"세르히오 페레즈","team":"레드불","laps":78,"time":"+5.2s","points":12},
-        {"position":5,"driver":"조지 러셀","team":"메르세데스","laps":78,"time":"+7.6s","points":10}
-      ],
-      "standingsUpdate":{
-        "drivers":[{"driver":"막스 베르스타펜","position":1,"change":1},{"driver":"루이스 해밀턴","position":2,"change":0},{"driver":"샤를 르클레르","position":3,"change":-1}],
-        "teams":[{"team":"레드불","position":1,"change":1},{"team":"메르세데스","position":2,"change":0},{"team":"페라리","position":3,"change":-1}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
       "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
+      "dateTime": "2025-03-16T13:00:00+09:00"
     },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
-      }
-    },
-    {
-      "round": 1,
-      "raceName": "호주 GP",
-      "date": "2025-03-16",
-      "dateTime": "2025-03-16T13:00:00+09:00",
-      "location": "멜버른",
-      "trackImage": "tracks/australia.jpg",
-      "extraInfo": "랩 58 | 총 307.574km | 맑음",
-      "country": "호주",
-      "flag": "🇦🇺",
-      "podium": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","time":"+5.1s","points":15}
-      ],
-      "fullResults": [
-        {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","points":25},
-        {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","points":18},
-        {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","points":15},
-        {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","points":12}
-      ],
-      "standingsUpdate": {
-        "drivers":[{"driver":"루이스 해밀턴","position":1,"change":0},{"driver":"막스 베르스타펜","position":2,"change":0},{"driver":"세르히오 페레즈","position":3,"change":0}],
-        "teams":[{"team":"메르세데스","position":1,"change":0},{"team":"레드불","position":2,"change":0},{"team":"페라리","position":3,"change":0}]
+    "trackImage": "../images/result/circuit/australia.png",
+    "extraInfo": "랩 58 | 서킷 길이: 5.278km | 비",
+    "fullResults": [
+      {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","laps":58,"time":"1:30:45","gap":null,"points":25,"status":"Finished"},
+      {"position":2,"driver":"막스 베르스타펜","team":"레드불","laps":58,"time":"+2.3s","gap":"+2.3s","points":18,"status":"Finished"},
+      {"position":3,"driver":"세르히오 페레즈","team":"레드불","laps":58,"time":"+5.1s","gap":"+5.1s","points":15,"status":"Finished"},
+      {"position":4,"driver":"샤를 르클레르","team":"페라리","laps":58,"time":"+8.2s","gap":"+8.2s","points":12,"status":"Finished"}
+    ],
+    "championshipStandings": {
+      "drivers": {
+        "top": [
+          {"position":1,"driver":"루이스 해밀턴","team":"메르세데스","points":25,"change":0},
+          {"position":2,"driver":"막스 베르스타펜","team":"레드불","points":18,"change":0},
+          {"position":3,"driver":"세르히오 페레즈","team":"레드불","points":15,"change":0},
+          {"position":4,"driver":"샤를 르클레르","team":"페라리","points":12,"change":0},
+          {"position":5,"driver":"랜도 노리스","team":"맥라렌","points":10,"change":0}
+        ]
+      },
+      "constructors": {
+        "top": [
+          {"position":1,"team":"레드불","points":33,"change":0},
+          {"position":2,"team":"메르세데스","points":25,"change":0},
+          {"position":3,"team":"페라리","points":12,"change":0},
+          {"position":4,"team":"맥라렌","points":10,"change":0},
+          {"position":5,"team":"애스턴 마틴","points":6,"change":0}
+        ]
       }
     }
-  ]
-}
+  },
+
+  {
+    "season": 2025,
+    "round": 2,
+    "race": {
+      "name": "포뮬러1 중국 그랑프리",
+      "shortName": "중국 GP",
+      "country": "중국",
+      "flag": "🇨🇳",
+      "location": "상하이",
+      "dateTime": "2025-03-23T16:00:00+09:00"
+    },
+    "trackImage": "../images/result/circuit/china.png",
+    "extraInfo": "랩 56 | 총 305.066km",
+    "fullResults": [
+      {"position":1,"driver":"막스 베르스타펜","team":"레드불","laps":56,"time":"1:31:12","gap":null,"points":25,"status":"Finished"},
+      {"position":2,"driver":"루이스 해밀턴","team":"메르세데스","laps":56,"time":"+1.8s","gap":"+1.8s","points":18,"status":"Finished"},
+      {"position":3,"driver":"페르난도 알론소","team":"애스턴 마틴","laps":56,"time":"+4.5s","gap":"+4.5s","points":15,"status":"Finished"}
+    ],
+    "championshipStandings": {
+      "drivers": {
+        "top": [
+          {"position":1,"driver":"막스 베르스타펜","team":"레드불","points":43,"change":1},
+          {"position":2,"driver":"루이스 해밀턴","team":"메르세데스","points":43,"change":-1},
+          {"position":3,"driver":"세르히오 페레즈","team":"레드불","points":15,"change":0},
+          {"position":4,"driver":"페르난도 알론소","team":"애스턴 마틴","points":15,"change":2},
+          {"position":5,"driver":"샤를 르클레르","team":"페라리","points":12,"change":-1}
+        ]
+      },
+      "constructors": {
+        "top": [
+          {"position":1,"team":"레드불","points":58,"change":0},
+          {"position":2,"team":"메르세데스","points":43,"change":0},
+          {"position":3,"team":"애스턴 마틴","points":21,"change":2},
+          {"position":4,"team":"페라리","points":12,"change":-1},
+          {"position":5,"team":"맥라렌","points":10,"change":-1}
+        ]
+      }
+    }
+  },
+
+  {
+    "season": 2025,
+    "round": 3,
+    "race": {
+      "name": "포뮬러1 일본 그랑프리",
+      "shortName": "일본 GP",
+      "country": "일본",
+      "flag": "🇯🇵",
+      "location": "스즈카",
+      "dateTime": "2025-04-06T14:00:00+09:00"
+    },
+    "trackImage": "../images/result/circuit/japan.png",
+    "extraInfo": "랩 53 | 건조",
+    "fullResults": [
+      {"position":1,"driver":"막스 베르스타펜","team":"레드불","laps":53,"time":"1:28:01","gap":null,"points":25,"status":"Finished"}
+    ],
+    "championshipStandings": {
+      "drivers": {
+        "top": [
+          {"position":1,"driver":"막스 베르스타펜","team":"레드불","points":68,"change":0},
+          {"position":2,"driver":"루이스 해밀턴","team":"메르세데스","points":43,"change":0},
+          {"position":3,"driver":"세르히오 페레즈","team":"레드불","points":33,"change":1},
+          {"position":4,"driver":"페르난도 알론소","team":"애스턴 마틴","points":26,"change":0},
+          {"position":5,"driver":"샤를 르클레르","team":"페라리","points":22,"change":0}
+        ]
+      },
+      "constructors": {
+        "top": [
+          {"position":1,"team":"레드불","points":101,"change":0},
+          {"position":2,"team":"메르세데스","points":43,"change":0},
+          {"position":3,"team":"애스턴 마틴","points":34,"change":0},
+          {"position":4,"team":"페라리","points":28,"change":0},
+          {"position":5,"team":"맥라렌","points":18,"change":0}
+        ]
+      }
+    }
+  }
+
+]
