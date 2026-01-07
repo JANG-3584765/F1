@@ -55,17 +55,31 @@
     </section>
 
     <!-- 2. MAIN NEWS -->
-    <section id="main-news" class="main-news-section">
-      <h2 class="section-title">Main News</h2>
-      <div class="swiper main-news-swiper">
-        <div class="swiper-wrapper" id="main-news-wrapper"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+<section id="main-news" class="main-news-section">
+  <h2 class="section-title">Main News</h2>
+
+  <div class="swiper main-news-swiper">
+    <div class="swiper-wrapper" id="main-news-wrapper">
+      <!-- JS 로딩 전 기본 플레이스홀더 -->
+      <div class="swiper-slide main-news-card">
+        <img src="./images/home/mainnews/placeholder.jpg" alt="Loading" class="slide-img" />
+        <div class="main-news-info-bar">
+          <span class="news-category-badge" data-category="Tech">Tech</span>
+          <h3 class="main-news-title">Loading...</h3>
+        </div>
       </div>
-      <div class="more-news-btn-wrap">
-        <a href="./news/news.html" class="more-news-btn">뉴스 더보기</a>
-      </div>
-    </section>
+    </div>
+
+    <!-- 화살표 -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+
+  <div class="more-news-btn-wrap">
+    <a href="./news/news.html" class="more-news-btn">뉴스 더보기</a>
+  </div>
+</section>
+
 
     <!-- 3. HIGHLIGHT -->
     <section id="highlights" class="highlights-section">
