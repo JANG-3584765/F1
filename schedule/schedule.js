@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("/F1/data/2026_schedule.json").then(r => r.json())
   ])
   .then(([data2025, data2026]) => {
-    scheduleData = [data2025, data2026];
+    scheduleData = [...data2025, ...data2026];
 
     const seasons = [...new Set(scheduleData.map(r => r.season))].sort();
 
@@ -68,13 +68,13 @@ document.addEventListener("DOMContentLoaded", () => {
         left.className = "race-left";
 
         const start =
-          race.sessions[0].start !== "TBD"
-            ? new Date(race.sessions[0].start)
+          race.sessions[0].start_date !== "TBD"
+            ? new Date(race.sessions[0].start_date)
             : null;
 
         const end =
-          race.sessions.at(-1).end !== "TBD"
-            ? new Date(race.sessions.at(-1).end)
+          race.sessions.at(-1).end_date !== "TBD"
+            ? new Date(race.sessions.at(-1).end_date)
             : null;
 
         const roundDate = document.createElement("div");
