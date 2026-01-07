@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   .then(([data2025, data2026]) => {
     scheduleData = [...data2025, ...data2026];
     renderNextRace();
-    setInterval(renderNextRace, 60000); // 1분마다 갱신
+    setInterval(renderNextRace, 600000); // 1분마다 갱신
   })
   .catch(err => {
     console.error(err);
