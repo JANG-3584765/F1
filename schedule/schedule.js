@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
           sDiv.className = "session-item";
 
           sDiv.textContent = `${s.name}: ${
-            s.start_date !== "TBD"
+            s.start && s.start !== "TBD"
               ? new Date(s.start).toLocaleString()
               : "TBD"
           }`;
