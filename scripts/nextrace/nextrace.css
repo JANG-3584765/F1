@@ -153,12 +153,13 @@
 /* 모바일 대응 */
 @media (max-width: 767px) {
 
+  /* 전체 박스 */
   #next-race-box {
     margin: 12px;
     border-radius: 10px;
   }
 
-  /* 헤더 세로 정렬 */
+  /* ===== 헤더 영역 ===== */
   .next-race-header {
     flex-direction: column;
     align-items: center;
@@ -166,49 +167,78 @@
     text-align: center;
   }
 
+  /* 국기 + 타이머 가로 유지 */
+  .next-race-header .flag,
+  .next-race-header .race-countdown {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .next-race-header > :first-child {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* 카운트다운 크기 조정 */
   .next-race-header .race-countdown span {
     font-size: 1rem;
     padding: 6px 8px;
     min-width: 26px;
   }
 
-  /* 세부 영역 세로 스택 */
+  /* ===== 펼친 영역 ===== */
   .next-race-details {
     flex-direction: column;
+    align-items: center;
     gap: 20px;
     padding: 16px;
   }
 
-  /* 서킷 이미지 중앙 + 확대 */
+  /* ===== 서킷 이미지 ===== */
+  .circuit-img {
+    width: 100%;
+    align-items: center;
+  }
+
   .circuit-img img {
+    width: 100%;
     max-width: 360px;
     margin: 0 auto;
     display: block;
   }
 
-  /* 레이스 제목 */
+  /* ===== 레이스 정보 ===== */
+  .race-info {
+    width: 100%;
+  }
+
+  /* 그랑프리 이름 중앙 */
   .race-title {
     font-size: 1.15rem;
     text-align: center;
+    margin-bottom: 14px;
   }
 
-  /* 세션 리스트 모바일 최적화 */
+  /* ===== 세션 일정 ===== */
   .session-list li {
     display: flex;
-    justify-content: space-between;
-    gap: 8px;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
     font-size: 0.95rem;
-    white-space: nowrap;
-    overflow-x: auto;
+    text-align: center;
+    white-space: normal;
   }
 
-  /* 버튼 세로 */
+  /* ===== 버튼 영역 ===== */
   .race-btns-wrap {
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
   }
 
   .race-btns-wrap a {
-    width: 100%;
+    flex: 1;
+    text-align: center;
   }
 }
