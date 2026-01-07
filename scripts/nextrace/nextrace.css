@@ -58,7 +58,6 @@
 /* 펼친 후 세부 영역 */
 .next-race-details {
   display: flex;
-  flex-wrap: nowrap;
   padding: 20px;
   gap: 30px;
   align-items: flex-start;
@@ -154,7 +153,6 @@
 /* 모바일 대응 */
 @media (max-width: 767px) {
 
-  /* 전체 박스 여백 줄이기 */
   #next-race-box {
     margin: 12px;
     border-radius: 10px;
@@ -168,37 +166,43 @@
     text-align: center;
   }
 
-  /* 카운트다운 크기 축소 */
   .next-race-header .race-countdown span {
     font-size: 1rem;
     padding: 6px 8px;
     min-width: 26px;
   }
 
-  /* 펼친 영역: 세로 스택 */
+  /* 세부 영역 세로 스택 */
   .next-race-details {
     flex-direction: column;
     gap: 20px;
     padding: 16px;
   }
 
-  /* 서킷 이미지 */
+  /* 서킷 이미지 중앙 + 확대 */
   .circuit-img img {
-    max-width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    display: block;
   }
 
-  /* 레이스 정보 */
+  /* 레이스 제목 */
   .race-title {
     font-size: 1.15rem;
     text-align: center;
   }
 
-  /* 세션 리스트 글씨 줄이기 */
+  /* 세션 리스트 모바일 최적화 */
   .session-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
     font-size: 0.95rem;
+    white-space: nowrap;
+    overflow-x: auto;
   }
 
-  /* 버튼 영역 세로 정렬 */
+  /* 버튼 세로 */
   .race-btns-wrap {
     flex-direction: column;
     gap: 10px;

@@ -84,7 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <div class="race-info">
           <h3 class="race-title">${nextRace.race_name_ko || nextRace.race_name}</h3>
-          <h4>이번 라운드 전체 일정</h4>
           <ul class="session-list">
             ${nextRace.sessions.map(s => {
               const start = new Date(s.start);
