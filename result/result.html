@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>결과 | WhatisF1</title>
+
+  <!-- 공통 스타일 -->
+  <link rel="stylesheet" href="/common/header.css">
+  <link rel="stylesheet" href="/common/footer.css">
+
+  <!-- 결과 페이지 전용 스타일 -->
+  <link rel="stylesheet" href="result.css">
+
+  <!-- Twemoji -->
+  <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <div id="header-container"></div>
+
+  <main>
+    <section class="result-section">
+      <h1>레이스 결과</h1>
+
+      <!-- 시즌 드롭다운 -->
+      <div class="dropdowns">
+        <label for="season-select">시즌 선택:</label>
+        <select id="season-select">
+          <option value="">시즌을 선택하세요</option>
+          <option value="2025">2025 시즌</option>
+          <option value="2026">2026 시즌</option>
+        </select>
+      </div>
+
+      <!-- 라운드 드롭다운 -->
+      <div class="dropdowns">
+        <label for="round-select">라운드 선택:</label>
+        <select id="round-select">
+          <option value="">라운드를 선택하세요</option>
+        </select>
+      </div>
+
+      <!-- 상세 정보 -->
+      <div id="race-details" class="race-details">
+        <h2 id="race-name"></h2>
+        <p id="race-date"></p>
+        <p id="race-location"></p>
+        <img id="race-track" src="" alt="트랙 이미지">
+
+        <!-- 포디움 -->
+        <div id="podium" class="podium">
+          <h3>포디움</h3>
+          <ul></ul>
+        </div>
+
+        <!-- 전체 결과 -->
+        <div id="full-results" class="full-results">
+          <h3>전체 결과</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>순위</th>
+                <th>드라이버</th>
+                <th>팀</th>
+                <th>랩</th>
+                <th>시간</th>
+                <th>포인트</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- 스탠딩 업데이트 -->
+        <div id="standings-update" class="standings-update">
+          <h3>스탠딩 업데이트</h3>
+          <p>드라이버/팀 순위 변동 정보 표시</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 푸터 -->
+  <div id="footer-container"></div>
+
+  <!-- 공통 헤더 / 푸터 로드 (index 기준) -->
+  <script>
+    fetch("/common/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-container").innerHTML = html;
+        document.dispatchEvent(new Event("headerLoaded"));
+      })
+      .catch(err => console.error("Header load error:", err));
+
+    fetch("/common/footer.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("footer-container").innerHTML = html;
+      })
+      .catch(err => console.error("Footer load error:", err));
+  </script>
+
+  <!-- 공통 JS -->
+  <script src="/common/header.js"></script>
+  <script src="/common/footer.js"></script>
+
+  <!-- 결과 JS -->
+  <script src="result.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시즌 전 승부예측 | WhatisF1</title>
+
+  <!-- 공통 헤더 / 푸터 CSS -->
+  <link rel="stylesheet" href="/common/header.css">
+  <link rel="stylesheet" href="/common/footer.css">
+
+  <!-- 승부예측 전용 CSS -->
+  <link rel="stylesheet" href="prediction.css">
+
+  <!-- Twemoji -->
+  <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+</head>
+<body>
+
+<div id="header-container"></div>
+
+<main class="prediction-page">
+
+  <section class="prediction-intro">
+    <h1>시즌 전 승부예측</h1>
+    <p>
+      시즌이 시작되기 전, 당신의 예측을 남겨보세요.<br>
+      모든 예측은 시즌 종료 후 결과와 비교됩니다.<br> <br>
+
+      *한 번 선택시 변경할 수 없습니다.
+    </p>
+    <button id="reset-prediction" type="button">예측 초기화</button>
+  </section>
+
+  <!-- ======================
+       Week 1
+  ====================== -->
+  <section class="prediction-card">
+    <div class="prediction-week"><span>Week 1</span></div>
+    <h2 class="prediction-title">드라이버 챔피언십 Top 3</h2>
+    <p class="prediction-subtitle">상위 3명을 순서대로 선택하세요.</p>
+
+    <div class="prediction-options rank-options" data-week="1">
+      <div class="option-card" data-value="verstappen">Max Verstappen</div>
+      <div class="option-card" data-value="hamilton">Lewis Hamilton</div>
+      <div class="option-card" data-value="leclerc">Charles Leclerc</div>
+      <div class="option-card" data-value="norris">Lando Norris</div>
+      <div class="option-card" data-value="piastri">Oscar Piastri</div>
+    </div>
+
+    <div class="prediction-actions">
+      <button class="btn-submit" disabled>선택 완료</button>
+    </div>
+  </section>
+
+  <!-- ======================
+       Week 2
+  ====================== -->
+  <section class="prediction-card">
+    <div class="prediction-week"><span>Week 2</span></div>
+    <h2 class="prediction-title">컨스트럭터 챔피언십 Top 3</h2>
+
+    <div class="prediction-options rank-options" data-week="2">
+      <div class="option-card" data-value="redbull">Red Bull Racing</div>
+      <div class="option-card" data-value="ferrari">Ferrari</div>
+      <div class="option-card" data-value="mercedes">Mercedes</div>
+      <div class="option-card" data-value="mclaren">McLaren</div>
+      <div class="option-card" data-value="astonmartin">Aston Martin</div>
+    </div>
+
+    <div class="prediction-actions">
+      <button class="btn-submit" disabled>선택 완료</button>
+    </div>
+  </section>
+
+  <!-- ======================
+       Week 3
+  ====================== -->
+  <section class="prediction-card">
+    <div class="prediction-week"><span>Week 3</span></div>
+    <h2 class="prediction-title">시즌 최다 우승 드라이버</h2>
+
+    <div class="prediction-options single-options" data-week="3">
+      <div class="option-card" data-value="verstappen">Max Verstappen</div>
+      <div class="option-card" data-value="leclerc">Charles Leclerc</div>
+      <div class="option-card" data-value="norris">Lando Norris</div>
+      <div class="option-card" data-value="piastri">Oscar Piastri</div>
+    </div>
+
+    <div class="prediction-actions">
+      <button class="btn-submit" disabled>선택 완료</button>
+    </div>
+  </section>
+
+ <!-- ======================
+     Week 4
+====================== -->
+<section class="prediction-card">
+
+  <!-- 주차 표시 -->
+  <div class="prediction-week">
+    <span>Week 4</span>
+  </div>
+
+  <!-- 질문 제목 -->
+  <h2 class="prediction-title">
+    시즌 포인트 Top 10 진입
+  </h2>
+
+  <!-- 질문 설명 -->
+  <p class="prediction-subtitle">
+    2026 시즌 드라이버 챔피언십 Top 10에 진입할 것으로 예상되는 드라이버를<br>
+    <strong>최대 5명까지 선택</strong>하세요.
+  </p>
+
+  <!-- 선택 영역 (복수 선택 + 최대 개수 제한) -->
+  <div
+    class="prediction-options multi-options"
+    data-week="4"
+    data-max="5"
+  >
+    <div class="option-card" data-value="alonso">Fernando Alonso</div>
+    <div class="option-card" data-value="russell">George Russell</div>
+    <div class="option-card" data-value="sainz">Carlos Sainz</div>
+    <div class="option-card" data-value="perez">Sergio Perez</div>
+    <div class="option-card" data-value="ocon">Esteban Ocon</div>
+    <div class="option-card" data-value="gasly">Pierre Gasly</div>
+    <div class="option-card" data-value="tsunoda">Yuki Tsunoda</div>
+  </div>
+
+  <!-- 액션 버튼 -->
+  <div class="prediction-actions">
+    <button class="btn-submit" disabled>
+      선택 완료
+    </button>
+  </div>
+
+</section>
+
+  <!-- ======================
+       Week 5
+  ====================== -->
+  <section class="prediction-card">
+    <div class="prediction-week"><span>Week 5</span></div>
+    <h2 class="prediction-title">루키 중 최고 순위</h2>
+
+    <div class="prediction-options single-options" data-week="5">
+      <div class="option-card" data-value="antonelli">Andrea Kimi Antonelli</div>
+      <div class="option-card" data-value="bearman">Oliver Bearman</div>
+      <div class="option-card" data-value="other">Other Rookie</div>
+    </div>
+
+    <div class="prediction-actions">
+      <button class="btn-submit" disabled>선택 완료</button>
+    </div>
+  </section>
+
+  <!-- ======================
+       Week 6
+  ====================== -->
+  <section class="prediction-card">
+    <div class="prediction-week"><span>Week 6</span></div>
+    <h2 class="prediction-title">시즌 폴 포지션 최다</h2>
+
+    <div class="prediction-options single-options" data-week="6">
+      <div class="option-card" data-value="leclerc">Charles Leclerc</div>
+      <div class="option-card" data-value="verstappen">Max Verstappen</div>
+      <div class="option-card" data-value="norris">Lando Norris</div>
+    </div>
+
+    <div class="prediction-actions">
+      <button class="btn-submit" disabled>선택 완료</button>
+    </div>
+  </section>
+
+  <!-- ======================
+       Week 7
+  ====================== -->
+  <section class="prediction-card">
+    <div class="prediction-week"><span>Week 7</span></div>
+    <h2 class="prediction-title">퀄리파잉 최강 팀</h2>
+
+    <div class="prediction-options single-options" data-week="7">
+      <div class="option-card" data-value="ferrari">Ferrari</div>
+      <div class="option-card" data-value="redbull">Red Bull Racing</div>
+      <div class="option-card" data-value="mclaren">McLaren</div>
+    </div>
+
+    <div class="prediction-actions">
+      <button class="btn-submit" disabled>선택 완료</button>
+    </div>
+  </section>
+
+  <!-- ======================
+       Week 8
+  ====================== -->
+  <section class="prediction-card">
+    <div class="prediction-week"><span>Week 8</span></div>
+    <h2 class="prediction-title">가장 기대되는 루키</h2>
+
+    <div class="prediction-options single-options" data-week="8">
+      <div class="option-card" data-value="antonelli">Andrea Kimi Antonelli</div>
+      <div class="option-card" data-value="bearman">Oliver Bearman</div>
+    </div>
+
+    <div class="prediction-actions">
+      <button class="btn-submit" disabled>선택 완료</button>
+    </div>
+  </section>
+
+  <!-- ======================
+       Week 9
+  ====================== -->
+  <section class="prediction-card">
+    <div class="prediction-week"><span>Week 9</span></div>
+    <h2 class="prediction-title">가장 기대되는 팀</h2>
+
+    <div class="prediction-options single-options" data-week="9">
+      <div class="option-card" data-value="ferrari">Ferrari</div>
+      <div class="option-card" data-value="mclaren">McLaren</div>
+      <div class="option-card" data-value="mercedes">Mercedes</div>
+    </div>
+
+    <div class="prediction-actions">
+      <button class="btn-submit" disabled>선택 완료</button>
+    </div>
+  </section>
+
+  <!-- ======================
+       Week 10
+  ====================== -->
+  <section class="prediction-card">
+    <div class="prediction-week"><span>Week 10</span></div>
+    <h2 class="prediction-title">시즌 최고의 레이스</h2>
+
+    <div class="prediction-options single-options" data-week="10">
+      <div class="option-card" data-value="monaco">Monaco GP</div>
+      <div class="option-card" data-value="british">British GP</div>
+      <div class="option-card" data-value="japanese">Japanese GP</div>
+    </div>
+
+    <div class="prediction-actions">
+      <button class="btn-submit" disabled>선택 완료</button>
+    </div>
+  </section>
+
+  <!-- ======================
+       Week 11
+  ====================== -->
+  <section class="prediction-card">
+    <div class="prediction-week"><span>Week 11</span></div>
+    <h2 class="prediction-title">내가 가장 응원하는 팀</h2>
+
+    <div class="prediction-options single-options" data-week="11">
+      <div class="option-card" data-value="ferrari">Ferrari</div>
+      <div class="option-card" data-value="mclaren">McLaren</div>
+      <div class="option-card" data-value="redbull">Red Bull Racing</div>
+    </div>
+
+    <div class="prediction-actions">
+      <button class="btn-submit" disabled>선택 완료</button>
+    </div>
+  </section>
+
+  <!-- ======================
+       Week 12
+  ====================== -->
+  <section class="prediction-card">
+    <div class="prediction-week"><span>Week 12</span></div>
+    <h2 class="prediction-title">내가 가장 응원할 드라이버</h2>
+
+    <div class="prediction-options single-options" data-week="12">
+      <div class="option-card" data-value="norris">Lando Norris</div>
+      <div class="option-card" data-value="leclerc">Charles Leclerc</div>
+      <div class="option-card" data-value="piastri">Oscar Piastri</div>
+    </div>
+
+    <div class="prediction-actions">
+      <button class="btn-submit" disabled>선택 완료</button>
+    </div>
+  </section>
+
+</main>
+
+ <!-- 푸터 -->
+  <div id="footer-container"></div>
+
+  <!-- 공통 헤더 / 푸터 로드 (표준 구조) -->
+  <script>
+    fetch("/common/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-container").innerHTML = html;
+        document.dispatchEvent(new Event("headerLoaded"));
+      })
+      .catch(err => console.error("Header load error:", err));
+
+    fetch("/common/footer.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("footer-container").innerHTML = html;
+      })
+      .catch(err => console.error("Footer load error:", err));
+  </script>
+
+  <!-- 공통 JS -->
+  <script src="/common/header.js"></script>
+  <script src="/common/footer.js"></script>
+
+  <!-- 일정 JS -->
+  <script src="prediction.js"></script>
+</body>
+</html>

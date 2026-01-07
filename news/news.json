@@ -1,0 +1,534 @@
+[
+  {
+    "id": 1,
+    "sourceClass": "official",
+    "source": "Formula1.com",
+    "title": "FIA, 2026 시즌 파워유닛 규정 최종 승인",
+    "image": "https://picsum.photos/800/450?random=1",
+    "summary": "FIA는 2026년 파워유닛 규정 개편안을 공식 확정하며 하이브리드 출력 비중을 확대한다고 발표했다.",
+    "tags": ["reg", "team"],
+    "pubDate": "2025-01-04T10:00:00+09:00"
+  },
+  {
+    "id": 2,
+    "sourceClass": "media",
+    "source": "Autosport",
+    "title": "메르세데스, 새로운 플로어 디자인 스파 테스트 예정",
+    "image": "https://picsum.photos/800/450?random=2",
+    "summary": "메르세데스는 후미 다운포스 향상을 위한 수정된 플로어를 스파 금요일 연습에서 시험할 계획이다.",
+    "tags": ["team", "tech"],
+    "pubDate": "2025-01-04T11:30:00+09:00"
+  },
+  {
+    "id": 3,
+    "sourceClass": "reporter",
+    "source": "Albert Fabrega",
+    "title": "패독 내부 정보: 레드불이 비공개 공력 테스트 진행 중",
+    "image": "https://picsum.photos/800/450?random=3",
+    "summary": "Fabrega는 레드불이 새로운 저항 감소형 윙 요소를 비공개 촬영세션에서 시험 중이라고 전했다.",
+    "tags": ["team", "tech"],
+    "pubDate": "2025-01-04T12:10:00+09:00"
+  },
+  {
+    "id": 4,
+    "sourceClass": "rumor",
+    "source": "F1 Gossip X",
+    "title": "드라이버 A, 팀 B와 비밀 계약 근접? (미확정)",
+    "image": "https://picsum.photos/800/450?random=4",
+    "summary": "SNS 루머에 따르면 드라이버 A가 팀 B와 장기 계약 체결 직전이라는 소문이 돌고 있다.",
+    "tags": ["driver", "rumor"],
+    "pubDate": "2025-01-04T12:50:00+09:00"
+  },
+  {
+    "id": 5,
+    "sourceClass": "media",
+    "source": "Motorsport.com",
+    "title": "페라리, 프런트 윙 미세 조정으로 코너 안정성 확보",
+    "image": "https://picsum.photos/800/450?random=5",
+    "summary": "페라리는 고속 코너링 안정성을 강화하기 위해 프런트 윙 끝단 설계를 소폭 수정했다고 밝혔다.",
+    "tags": ["team", "tech"],
+    "pubDate": "2025-01-04T13:40:00+09:00"
+  },
+  {
+    "id": 6,
+    "sourceClass": "official",
+    "source": "FIA",
+    "title": "FIA, 안전 기준 업데이트: 충돌 테스트 강화",
+    "image": "https://picsum.photos/800/450?random=6",
+    "summary": "차량 충돌 안전 규정이 2026년부터 강화되며 팀들은 섀시 보강 기준을 재검토해야 한다.",
+    "tags": ["reg", "team"],
+    "pubDate": "2025-01-05T09:00:00+09:00"
+  },
+  {
+    "id": 7,
+    "sourceClass": "reporter",
+    "source": "AMuS",
+    "title": "맥라렌, 올해 가장 공격적인 업그레이드 패키지 준비",
+    "image": "https://picsum.photos/800/450?random=7",
+    "summary": "AMuS는 맥라렌이 시즌 초반부터 대규모 공력 업그레이드를 투입한다고 보도했다.",
+    "tags": ["team", "tech"],
+    "pubDate": "2025-01-05T10:20:00+09:00"
+  },
+  {
+    "id": 8,
+    "sourceClass": "rumor",
+    "source": "F1 Insider",
+    "title": "새로운 팀이 2027년 엔트리 신청? (루머)",
+    "image": "https://picsum.photos/800/450?random=8",
+    "summary": "한 투자 그룹이 F1 진입을 타진 중이라는 소식이 패독에서 흘러나왔다.",
+    "tags": ["team", "rumor"],
+    "pubDate": "2025-01-05T11:15:00+09:00"
+  },
+  {
+    "id": 9,
+    "sourceClass": "media",
+    "source": "The Race",
+    "title": "아스톤 마틴, 새로운 서스펜션 철학 도입",
+    "image": "https://picsum.photos/800/450?random=9",
+    "summary": "아스톤 마틴은 코너 트랙션 향상을 위해 리어 서스펜션의 구조적 변경을 계획 중이다.",
+    "tags": ["team", "tech"],
+    "pubDate": "2025-01-05T11:50:00+09:00"
+  },
+  {
+    "id": 10,
+    "sourceClass": "official",
+    "source": "Formula1.com",
+    "title": "2025 시즌 개막식 일정 및 세레모니 공개",
+    "image": "httpsum.photos/800/450?random=10",
+    "summary": "2025 시즌 개막식에서 전례 없는 3단계 공연이 예정되어 있다고 공식 발표되었다.",
+    "tags": ["team"],
+    "pubDate": "2025-01-05T12:45:00+09:00"
+  },
+  {
+    "id": 11,
+    "sourceClass": "media",
+    "source": "Autosport",
+    "title": "알핀, 파워유닛 냉각 성능 개선 위한 대규모 변경",
+    "image": "https://picsum.photos/800/450?random=11",
+    "summary": "알핀은 엔진 냉각 효율을 높이기 위해 사이드포드 내부 구조를 개편했다고 전했다.",
+    "tags": ["team", "tech"],
+    "pubDate": "2025-01-06T08:40:00+09:00"
+  },
+  {
+    "id": 12,
+    "sourceClass": "reporter",
+    "source": "ScarbsF1",
+    "title": "테크 분석: RB의 새로운 노즈 설계가 가져올 효과",
+    "image": "https://picsum.photos/800/450?random=12",
+    "summary": "ScarbsF1은 RB의 신형 노즈가 코너 진입 안정성을 크게 향상시킬 것이라 분석했다.",
+    "tags": ["tech"],
+    "pubDate": "2025-01-06T09:20:00+09:00"
+  },
+  {
+    "id": 13,
+    "sourceClass": "rumor",
+    "source": "F1 Talk",
+    "title": "드라이버 C, 팀 훈련장에서 목격… 이적설 재점화",
+    "image": "https://picsum.photos/800/450?random=13",
+    "summary": "비공식 영상에 드라이버 C가 다른 팀의 시뮬레이터 시설을 방문했다는 소문이 돌고 있다.",
+    "tags": ["driver", "rumor"],
+    "pubDate": "2025-01-06T10:40:00+09:00"
+  },
+  {
+    "id": 14,
+    "sourceClass": "media",
+    "source": "Motorsport.com",
+    "title": "윌리엄스, 올해 초반 업데이트 일정 앞당겨",
+    "image": "https://picsum.photos/800/450?random=14",
+    "summary": "윌리엄스는 CFD 성능 향상이 기대 이상으로 나타나면서 업그레이드 일정을 조정했다.",
+    "tags": ["team", "tech"],
+    "pubDate": "2025-01-06T11:10:00+09:00"
+  },
+  {
+    "id": 15,
+    "sourceClass": "official",
+    "source": "FIA",
+    "title": "FIA, 페널티 시스템 개편 논의 착수",
+    "image": "https://picsum.photos/800/450?random=15",
+    "summary": "스튜어드 판정의 일관성을 확보하기 위한 새로운 규정 개편 논의가 진행 중이다.",
+    "tags": ["reg"],
+    "pubDate": "2025-01-06T12:00:00+09:00"
+  },
+  {
+    "id": 16,
+    "sourceClass": "media",
+    "source": "The Race",
+    "title": "사인츠, 프리시즌 시뮬레이터에서 강력한 초기 페이스 기록",
+    "image": "https://picsum.photos/800/450?random=16",
+    "summary": "팀 내부 소식에 따르면 사인츠는 새로운 패키지에 빠르게 적응하며 일관된 랩타임을 기록하고 있다.",
+    "tags": ["driver", "team"],
+    "pubDate": "2025-01-06T13:00:00+09:00"
+  },
+
+  {
+    "id": 17,
+    "sourceClass": "reporter",
+    "source": "AMuS",
+    "title": "하스, 예산 효율화 위해 파트 구조 변경",
+    "image": "https://picsum.photos/800/450?random=17",
+    "summary": "하스는 시즌 중반 업그레이드를 대비해 부품 생산 및 물류 체계를 재정비했다고 전했다.",
+    "tags": ["team"],
+    "pubDate": "2025-01-06T14:40:00+09:00"
+  },
+
+  {
+    "id": 18,
+    "sourceClass": "rumor",
+    "source": "F1 Insider",
+    "title": "새로운 드라이버 아카데미 창설 논의 중?",
+    "image": "https://picsum.photos/800/450?random=18",
+    "summary": "몇몇 팀들이 공동 드라이버 아카데미 프로젝트를 논의 중이라는 소문이 나왔다.",
+    "tags": ["driver", "rumor"],
+    "pubDate": "2025-01-06T15:20:00+09:00"
+  },
+
+  {
+    "id": 19,
+    "sourceClass": "media",
+    "source": "Autosport",
+    "title": "페라리, 브레이크 냉각 개선 위한 신규 덕트 테스트",
+    "image": "https://picsum.photos/800/450?random=19",
+    "summary": "신규 브레이크 덕트는 장기 러닝에서의 타이어 온도 관리 개선에 초점을 맞췄다.",
+    "tags": ["team", "tech"],
+    "pubDate": "2025-01-06T16:10:00+09:00"
+  },
+
+  {
+    "id": 20,
+    "sourceClass": "official",
+    "source": "Formula1.com",
+    "title": "F1, 2025 ‘드라이버 소개 세레모니’ 새 포맷 발표",
+    "image": "https://picsum.photos/800/450?random=20",
+    "summary": "새 포맷은 경기 전 드라이버 소개 시간을 늘리고 팬 참여 요소를 강화한다.",
+    "tags": ["team"],
+    "pubDate": "2025-01-06T17:00:00+09:00"
+  },
+{
+    "id": 21,
+    "sourceClass": "media",
+    "source": "Motorsport.com",
+    "title": "레드불, 새 파워유닛 테스트 주기 단축",
+    "image": "https://picsum.photos/800/450?random=21",
+    "summary": "엔진 개발 일정 조율을 위해 다단계 테스트 프로세스를 단축했다고 알려졌다.",
+    "tags": ["team", "tech"],
+    "pubDate": "2025-01-07T08:00:00+09:00"
+  },
+
+  {
+    "id": 22,
+    "sourceClass": "reporter",
+    "source": "ScarbsF1",
+    "title": "테크 분석: 페라리의 신형 디퓨저가 가진 이점",
+    "image": "https://picsum.photos/800/450?random=22",
+    "summary": "새로운 디퓨저 구조가 고속 코너에서 더 강한 접지력을 제공할 것이라 분석했다.",
+    "tags": ["tech"],
+    "pubDate": "2025-01-07T09:20:00+09:00"
+  },
+
+  {
+    "id": 23,
+    "sourceClass": "rumor",
+    "source": "F1 Gossip X",
+    "title": "두 팀, 동일 드라이버 영입 경쟁 중? (미확정)",
+    "image": "https://picsum.photos/800/450?random=23",
+    "summary": "두 팀이 같은 드라이버를 노린다는 루머가 팬 커뮤니티에서 빠르게 퍼지고 있다.",
+    "tags": ["driver", "rumor"],
+    "pubDate": "2025-01-07T10:50:00+09:00"
+  },
+
+  {
+    "id": 24,
+    "sourceClass": "media",
+    "source": "The Race",
+    "title": "알파로메오, 시뮬레이터 업그레이드 완료",
+    "image": "https://picsum.photos/800/450?random=24",
+    "summary": "새로운 소프트웨어 업데이트로 시뮬레이터 정확도가 대폭 향상됐다고 한다.",
+    "tags": ["team", "tech"],
+    "pubDate": "2025-01-07T11:30:00+09:00"
+  },
+
+  {
+    "id": 25,
+    "sourceClass": "official",
+    "source": "FIA",
+    "title": "FIA, 피트레인 안전 규정 보완안 발표",
+    "image": "https://picsum.photos/800/450?random=25",
+    "summary": "피트레인 속도 단속 강화와 신규 안전 구역 설정이 포함됐다.",
+    "tags": ["reg"],
+    "pubDate": "2025-01-07T12:10:00+09:00"
+  },
+
+  {
+    "id": 26,
+    "sourceClass": "media",
+    "source": "Autosport",
+    "title": "메르세데스, 초경량 부품 패키지 공개",
+    "image": "https://picsum.photos/800/450?random=26",
+    "summary": "새로운 경량 패키지는 코너 진입 반응성을 높이기 위한 조치로 알려졌다.",
+    "tags": ["tech", "team"],
+    "pubDate": "2025-01-07T14:00:00+09:00"
+  },
+
+  {
+    "id": 27,
+    "sourceClass": "reporter",
+    "source": "AMuS",
+    "title": "패독 분위기: 각 팀, 2025 차세대 공력전 준비 중",
+    "image": "https://picsum.photos/800/450?random=27",
+    "summary": "AMuS는 팀들이 올해 초부터 극단적 공력 패키지를 준비 중이라고 분석했다.",
+    "tags": ["team", "tech"],
+    "pubDate": "2025-01-07T15:00:00+09:00"
+  },
+
+  {
+    "id": 28,
+    "sourceClass": "rumor",
+    "source": "TrackTalk",
+    "title": "2026 규정에 맞춘 팀 간 엔진 공유 논의?",
+    "image": "https://picsum.photos/800/450?random=28",
+    "summary": "페라리와 고객팀 간 엔진 공급 관련 새로운 협력안이 검토 중이라는 루머가 제기되었다.",
+    "tags": ["team", "rumor"],
+    "pubDate": "2025-01-07T16:00:00+09:00"
+  },
+
+  {
+    "id": 29,
+    "sourceClass": "media",
+    "source": "Motorsport.com",
+    "title": "애스턴 마틴, 올해 차량 ‘가장 단단한 베이스’ 확보",
+    "image": "https://picsum.photos/800/450?random=29",
+    "summary": "엔지니어링 팀은 새 섀시가 ‘예측 가능한 반응성’을 제공한다고 평가했다.",
+    "tags": ["team", "tech"],
+    "pubDate": "2025-01-07T17:10:00+09:00"
+  },
+
+  {
+    "id": 30,
+    "sourceClass": "official",
+    "source": "Formula1.com",
+    "title": "2025 스프린트 경기 일정 최종 확정",
+    "image": "https://picsum.photos/800/450?random=30",
+    "summary": "총 6개의 스프린트 경기가 확정되었으며 일부 서킷 구성도 조정되었다.",
+    "tags": ["team"],
+    "pubDate": "2025-01-08T09:00:00+09:00"
+  },
+  {
+    "id": 31,
+    "sourceClass": "media",
+    "source": "The Race",
+    "title": "테크 분석: RB, 리어윙 각도 변경으로 스피드 향상",
+    "image": "https://picsum.photos/800/450?random=31",
+    "summary": "중속 코너 출력을 강화하기 위한 리어윙 각도 조정이 효과를 보였다는 분석이다.",
+    "tags": ["tech", "team"],
+    "pubDate": "2025-01-08T10:20:00+09:00"
+  },
+
+  {
+    "id": 32,
+    "sourceClass": "reporter",
+    "source": "ScarbsF1",
+    "title": "페라리 신형 사이드포드의 영향력에 대한 분석",
+    "image": "https://picsum.photos/800/450?random=32",
+    "summary": "사이드포드의 공기 흐름 개선이 전체 다운포스 구조에 긍정적 효과를 준다고 분석했다.",
+    "tags": ["tech", "team"],
+    "pubDate": "2025-01-08T11:40:00+09:00"
+  },
+
+  {
+    "id": 33,
+    "sourceClass": "rumor",
+    "source": "F1 Gossip X",
+    "title": "올해 첫 대형 이적설 등장… 사실일까?",
+    "image": "https://picsum.photos/800/450?random=33",
+    "summary": "드라이버 D가 계약 만료를 앞두고 새로운 옵션을 검토 중이라는 주장.",
+    "tags": ["driver", "rumor"],
+    "pubDate": "2025-01-08T13:00:00+09:00"
+  },
+
+  {
+    "id": 34,
+    "sourceClass": "media",
+    "source": "Autosport",
+    "title": "알핀, 테스트 시뮬레이션 결과 ‘긍정적’ 발표",
+    "image": "https://picsum.photos/800/450?random=34",
+    "summary": "테스트 시뮬레이션에서 지난해 대비 랩타임 개선이 확인됐다고 밝혔다.",
+    "tags": ["team"],
+    "pubDate": "2025-01-08T14:20:00+09:00"
+  },
+
+  {
+    "id": 35,
+    "sourceClass": "official",
+    "source": "FIA",
+    "title": "FIA, 전기 시스템 안전 규정 강화안 공개",
+    "image": "https://picsum.photos/800/450?random=35",
+    "summary": "2026 시즌부터 고전압 시스템 보호 기준이 강화될 예정이다.",
+    "tags": ["reg"],
+    "pubDate": "2025-01-08T15:30:00+09:00"
+  },
+
+  {
+    "id": 36,
+    "sourceClass": "media",
+    "source": "Motorsport.com",
+    "title": "메르세데스, 타이어 관리 향상 위해 새 파츠 도입",
+    "image": "https://picsum.photos/800/450?random=36",
+    "summary": "장거리 주행에서의 타이어 손상을 줄이는 것을 목표로 한다.",
+    "tags": ["tech", "team"],
+    "pubDate": "2025-01-09T09:30:00+09:00"
+  },
+
+  {
+    "id": 37,
+    "sourceClass": "reporter",
+    "source": "AMuS",
+    "title": "패독 분석: 팀 간 0.3초 내 접전 예상",
+    "image": "https://picsum.photos/800/450?random=37",
+    "summary": "AMuS는 상위 5팀의 성능 격차가 올해 극도로 좁아질 것이라 전망했다.",
+    "tags": ["team"],
+    "pubDate": "2025-01-09T10:50:00+09:00"
+  },
+
+  {
+    "id": 38,
+    "sourceClass": "rumor",
+    "source": "TrackTalk",
+    "title": "서킷 Z, F1 캘린더 복귀 논의 중?",
+    "image": "https://picsum.photos/800/450?random=38",
+    "summary": "서킷 Z가 F1과 예비 일정 관련 미팅을 가졌다는 소문이 있다.",
+    "tags": ["rumor"],
+    "pubDate": "2025-01-09T11:40:00+09:00"
+  },
+
+  {
+    "id": 39,
+    "sourceClass": "media",
+    "source": "The Race",
+    "title": "레드불, 2025 모델 ‘초기 페이스 기대 이상’",
+    "image": "https://picsum.photos/800/450?random=39",
+    "summary": "팀 내부 소식에 따르면 데이터 상에서 상위권 예상 성능을 기록했다고 한다.",
+    "tags": ["team"],
+    "pubDate": "2025-01-09T12:30:00+09:00"
+  },
+
+  {
+    "id": 40,
+    "sourceClass": "official",
+    "source": "Formula1.com",
+    "title": "2025 테스트 일정 확정",
+    "image": "https://picsum.photos/800/450?random=40",
+    "summary": "바레인에서 3일간 테스트가 진행될 예정이다.",
+    "tags": ["team"],
+    "pubDate": "2025-01-09T13:00:00+09:00"
+  },
+
+  {
+    "id": 41,
+    "sourceClass": "media",
+    "source": "Autosport",
+    "title": "아스톤 마틴, 다운포스 균형 개선 위한 새 파츠 공개",
+    "image": "https://picsum.photos/800/450?random=41",
+    "summary": "새로운 바지보드 디자인이 공기 흐름 개선에 도움을 준다고 한다.",
+    "tags": ["tech", "team"],
+    "pubDate": "2025-01-09T14:00:00+09:00"
+  },
+
+  {
+    "id": 42,
+    "sourceClass": "reporter",
+    "source": "ScarbsF1",
+    "title": "테크 분석: 맥라렌의 신형 플로우 컨트롤 요소",
+    "image": "https://picsum.photos/800/450?random=42",
+    "summary": "플로우 컨트롤 장치가 고속 안정성에 큰 역할을 할 것이라 전망했다.",
+    "tags": ["tech"],
+    "pubDate": "2025-01-09T14:50:00+09:00"
+  },
+
+  {
+    "id": 43,
+    "sourceClass": "rumor",
+    "source": "F1 Gossip X",
+    "title": "팀 H, 드라이버 계약 조기 종료 검토?",
+    "image": "https://picsum.photos/800/450?random=43",
+    "summary": "관계자에 따르면 팀 H가 드라이버 재계약 옵션을 재검토 중이라는 소문이 있다.",
+    "tags": ["driver", "rumor"],
+    "pubDate": "2025-01-09T15:10:00+09:00"
+  },
+
+  {
+    "id": 44,
+    "sourceClass": "media",
+    "source": "Motorsport.com",
+    "title": "RB, 시뮬레이션 상에서 직선속도 개선 확인",
+    "image": "https://picsum.photos/800/450?random=44",
+    "summary": "새로운 공력 패키지가 직선 구간에서 0.1초 가량 이득을 주는 것으로 나타났다.",
+    "tags": ["tech", "team"],
+    "pubDate": "2025-01-09T16:30:00+09:00"
+  },
+
+  {
+    "id": 45,
+    "sourceClass": "official",
+    "source": "FIA",
+    "title": "FIA, 주행 제한 관련 규정 업데이트",
+    "image": "https://picsum.photos/800/450?random=45",
+    "summary": "연습 세션 중 타이어 사용 제한 규정이 소폭 조정됐다.",
+    "tags": ["reg"],
+    "pubDate": "2025-01-10T09:00:00+09:00"
+  },
+
+  {
+    "id": 46,
+    "sourceClass": "media",
+    "source": "The Race",
+    "title": "페라리, 올해 가장 공격적인 기술 로드맵 공개",
+    "image": "https://picsum.photos/800/450?random=46",
+    "summary": "공격적 공력 철학을 기반으로 한 새로운 로드맵이 소개되었다.",
+    "tags": ["team", "tech"],
+    "pubDate": "2025-01-10T10:00:00+09:00"
+  },
+
+  {
+    "id": 47,
+    "sourceClass": "reporter",
+    "source": "AMuS",
+    "title": "패독 전망: 팀 간 장기전 대비한 전략 변화",
+    "image": "https://picsum.photos/800/450?random=47",
+    "summary": "올해는 장기 레이스 페이스 중심의 개발 경쟁이 치열해질 것으로 보인다.",
+    "tags": ["team"],
+    "pubDate": "2025-01-10T11:00:00+09:00"
+  },
+
+  {
+    "id": 48,
+    "sourceClass": "rumor",
+    "source": "TrackTalk",
+    "title": "팀 S, 새로운 스폰서 계약 체결 임박?",
+    "image": "https://picsum.photos/800/450?random=48",
+    "summary": "협상 중인 글로벌 기업과의 스폰서 계약이 조만간 발표될 것이라는 소문이 있다.",
+    "tags": ["rumor"],
+    "pubDate": "2025-01-10T12:00:00+09:00"
+  },
+
+  {
+    "id": 49,
+    "sourceClass": "media",
+    "source": "Autosport",
+    "title": "아스톤 마틴, 리어 안정성 개선 위한 테스트 진행",
+    "image": "https://picsum.photos/800/450?random=49",
+    "summary": "리어 다운포스 구조를 수정하여 안정성 향상을 목표로 한다.",
+    "tags": ["tech", "team"],
+    "pubDate": "2025-01-10T13:00:00+09:00"
+  },
+
+  {
+    "id": 50,
+    "sourceClass": "official",
+    "source": "Formula1.com",
+    "title": "F1, 팬 투표 기반의 새로운 인터랙티브 기능 발표",
+    "image": "https://picsum.photos/800/450?random=50",
+    "summary": "실시간 팬 투표 시스템을 도입하여 경기 중 다양한 통계를 제공할 예정이다.",
+    "tags": ["team"],
+    "pubDate": "2025-01-10T14:00:00+09:00"
+  }
+]

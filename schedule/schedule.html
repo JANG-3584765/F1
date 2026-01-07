@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>경기 일정 | WhatisF1</title>
+
+  <!-- 공통 스타일 -->
+  <link rel="stylesheet" href="/common/header.css">
+  <link rel="stylesheet" href="/common/footer.css">
+
+  <!-- 일정 페이지 전용 -->
+  <link rel="stylesheet" href="schedule.css">
+
+  <!-- Twemoji -->
+  <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <div id="header-container"></div>
+
+  <main>
+
+    <!-- 시즌 선택 드롭다운 -->
+    <div class="season-dropdown">
+      <button id="season-button">2025 시즌 ▼</button>
+      <ul id="season-list" class="dropdown-list"></ul>
+    </div>
+
+    <!-- 시즌별 일정 콘텐츠 -->
+    <div id="season-content"></div>
+
+  </main>
+
+  <!-- 푸터 -->
+  <div id="footer-container"></div>
+
+  <!-- 공통 헤더 / 푸터 로드 (표준 구조) -->
+  <script>
+    fetch("/common/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-container").innerHTML = html;
+        document.dispatchEvent(new Event("headerLoaded"));
+      })
+      .catch(err => console.error("Header load error:", err));
+
+    fetch("/common/footer.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("footer-container").innerHTML = html;
+      })
+      .catch(err => console.error("Footer load error:", err));
+  </script>
+
+  <!-- 공통 JS -->
+  <script src="/common/header.js"></script>
+  <script src="/common/footer.js"></script>
+
+  <!-- 일정 JS -->
+  <script src="schedule.js"></script>
+
+</body>
+</html>

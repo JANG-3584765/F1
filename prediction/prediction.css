@@ -1,0 +1,120 @@
+/* =========================
+   prediction.css
+========================= */
+
+/* 전체 카드 */
+.prediction-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: all 0.3s;
+  position: relative;
+}
+
+/* 잠금 카드 */
+.prediction-card.locked {
+  opacity: 0.7;
+}
+
+/* 주차 표시 */
+.prediction-week {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* 질문 제목 */
+.prediction-title {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+/* 질문 부제 */
+.prediction-subtitle {
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  color: #555;
+}
+
+/* 옵션 박스 */
+.prediction-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+/* 옵션 카드 */
+.option-card {
+  flex: 1 1 calc(25% - 10px);
+  min-width: 120px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+/* 옵션 카드 hover */
+.option-card:hover {
+  background-color: #e0e0e0;
+}
+
+/* 선택 상태 */
+.option-card.selected {
+  border-color: #007bff;
+  background-color: #cce5ff;
+}
+
+/* 잠금 상태 */
+.option-card.locked {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* 액션 버튼 */
+.btn-submit {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* 버튼 비활성화 */
+.btn-submit:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* 예측 초기화 버튼 숨기기 */
+#reset-prediction {
+  display: none !important;
+}
+
+/* 카드 섹션 잠금 */
+.prediction-card.locked .btn-submit {
+  background-color: #28a745;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .option-card {
+    flex: 1 1 calc(50% - 10px);
+  }
+}
+
+@media (max-width: 480px) {
+  .option-card {
+    flex: 1 1 100%;
+  }
+}

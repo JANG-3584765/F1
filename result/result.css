@@ -1,0 +1,112 @@
+/* 전체 섹션 */
+.result-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.result-section h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* 드롭다운 */
+.dropdowns {
+  margin-bottom: 15px;
+}
+
+.dropdowns label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.dropdowns select {
+  padding: 5px 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* 상세 정보 영역 */
+#race-details {
+  display: none; /* 처음엔 접힘 */
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease-in-out;
+  margin-top: 20px;
+}
+
+/* 트랙 이미지 */
+#race-details img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+/* 포디움 */
+.podium h3 {
+  margin-bottom: 5px;
+}
+
+.podium ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.podium li {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* 전체 결과 테이블 */
+.full-results h3 {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.full-results table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.full-results th, .full-results td {
+  border: 1px solid #ccc;
+  padding: 6px 8px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.full-results th {
+  background-color: #eee;
+}
+
+/* 스탠딩 업데이트 */
+.standings-update h3 {
+  margin-top: 15px;
+}
+
+.standings-update p {
+  margin: 5px 0;
+}
+
+/* 드롭다운과 상세정보 계층 구분 */
+.dropdowns select {
+  width: 200px;
+}
+
+/* 모바일 대응 */
+@media (max-width: 600px) {
+  .dropdowns select {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .full-results table, .full-results th, .full-results td {
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,34 @@
+.standings-section {
+  margin: 2rem 0;
+}
+
+.standings-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.standings-tabs .tab {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  border-radius: 5px;
+}
+
+.standings-tabs .tab.active {
+  background: #0070f3;
+  color: #fff;
+  border-color: #0070f3;
+}
+
+.standings-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.standings-table th, .standings-table td {
+  padding: 0.5rem;
+  text-align: center;
+  border: 1px solid #ddd;
+}
