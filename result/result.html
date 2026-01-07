@@ -47,6 +47,9 @@
         <h2 id="race-name"></h2>
         <p id="race-date"></p>
         <p id="race-location"></p>
+        <!-- 누락된 요소 추가 -->
+        <p id="race-flag"></p>
+        <p id="race-extra"></p>
         <img id="race-track" src="" alt="트랙 이미지">
 
         <!-- 포디움 -->
@@ -85,7 +88,7 @@
   <!-- 푸터 -->
   <div id="footer-container"></div>
 
-  <!-- 공통 헤더 / 푸터 로드 (index 기준) -->
+  <!-- 공통 헤더 / 푸터 로드 -->
   <script>
     fetch("../common/header.html")
       .then(res => res.text())
