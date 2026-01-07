@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let roundsData = [];
 
-  /* 시즌 선택 */
+  /* 시즌 선택, 라운드 드롭다운 생성 */
   seasonSelect.addEventListener("change", () => {
     const season = seasonSelect.value;
 
