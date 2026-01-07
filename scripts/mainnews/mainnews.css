@@ -23,7 +23,7 @@
   overflow: hidden;
   cursor: pointer;
 
-  /* ❗ 절대 배경색 주지 말 것 */
+  /* 절대 배경색 주지 말 것 */
   background: transparent;
 }
 
@@ -142,4 +142,45 @@
 .more-news-btn-wrap {
   margin-top: 40px;
   text-align: left;
+}
+
+/* 모바일 스타일 (767px 이하) */
+@media (max-width: 767px) {
+  .main-news-section {
+    padding: 20px 10px 40px;
+  }
+
+  .section-title {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  .swiper-slide {
+    min-width: 160px;
+    aspect-ratio: 4 / 5;
+  }
+
+  .slide-img {
+    top: 36px;
+  }
+
+  .main-news-info-bar {
+    padding: 6px 8px;
+    gap: 6px;
+  }
+
+  .main-news-title {
+    font-size: 0.85rem;
+    text-align: left;
+  }
+
+  .more-news-btn-wrap {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  /* Swiper 슬라이드 간격 줄이기 */
+  .main-news-swiper .swiper-slide {
+    margin-right: 10px;
+  }
 }
