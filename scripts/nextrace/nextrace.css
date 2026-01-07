@@ -58,9 +58,9 @@
 /* 펼친 후 세부 영역 */
 .next-race-details {
   display: flex;
-  padding: 20px;
-  gap: 30px;
-  align-items: flex-start;
+  padding: 24px;
+  gap: 40px;
+  align-items: center;
 }
 
 /* 서킷: 이름 위, 사진 아래 */
@@ -69,16 +69,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
+
 .circuit-name {
   font-weight: bold;
   font-size: 1.2rem;
   margin-bottom: 12px;
   text-align: center;
 }
+
 .circuit-img img {
   width: 100%;
-  max-width: 300px;
+  max-width: 340px;
   border-radius: 10px;
   object-fit: cover;
 }
@@ -86,29 +89,45 @@
 /* 그랑프리 이름: 펼치기 버튼 아래로 이동 */
 .race-info {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
 .race-title {
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   font-weight: bold;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  text-align: center; /* ⭐ 중앙 */
 }
 
 /* 세션 일정 리스트 */
-.session-list-wrap h4 {
-  margin: 0 0 12px 0;
-  font-size: 1.1rem;
-  font-weight: bold;
-}
 .session-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;              /* 가운데 블록 */
+  width: 100%;
+  max-width: 320px;
 }
+
 .session-list li {
+  display: flex;
+  justify-content: space-between; /* 왼쪽 / 오른쪽 */
+  align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid #e0e0e0;
   font-size: 1rem;
-  letter-spacing: 0.5px;
+}
+
+/* 왼쪽 세션명 */
+.session-list li span:first-child {
+  font-weight: 600;
+}
+
+/* 오른쪽 시간 */
+.session-list li span:last-child {
+  font-family: 'Courier New', monospace;
+  white-space: nowrap;
 }
 
 /* 전체 일정 / 지난 결과 버튼 */
