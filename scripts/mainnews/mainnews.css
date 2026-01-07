@@ -145,9 +145,6 @@
 }
 
 /* 모바일 스타일 (767px 이하) */
-/* ==============================
-   모바일 스타일 수정 (767px 이하)
-   ============================== */
 @media (max-width: 767px) {
   .main-news-section {
     padding: 20px 10px 40px;
@@ -161,19 +158,28 @@
   /* 슬라이드 하나씩 보이도록 조정 */
   .swiper-slide {
     min-width: 90%;        /* 한 번에 거의 전체 너비 */
-    aspect-ratio: 3 / 4;   /* 세로로 더 길게 */
-    margin-right: 0;       /* 슬라이드 간격 제거 */
+    max-width: 90%;        /* 너무 커지지 않도록 제한 */
+    aspect-ratio: 3 / 4;   /* 세로로 길게 */
+    margin: 0 auto;        /* 슬라이드 가운데 정렬 */
+  }
+
+  /* 슬라이퍼 내부 중앙 정렬 */
+  .swiper-wrapper {
+    justify-content: center !important;
   }
 
   /* 이미지 위치 조정: 제목바 아래로 밀림 방지 */
   .slide-img {
-    top: 0;                /* 상단 정보바와 겹치지 않도록 0으로 */
-    height: calc(100% - 44px); /* 상단 정보바 높이만큼 제외 */
+    top: 0;                     /* 상단 정보바와 겹치지 않도록 */
+    height: calc(100% - 44px);  /* 상단 정보바 높이만큼 제외 */
   }
 
+  /* 상단 정보 바 */
   .main-news-info-bar {
     padding: 8px 10px;
     gap: 6px;
+    flex-direction: column;      /* 제목/카테고리 수직 정렬 */
+    align-items: flex-start;     /* 왼쪽 정렬 */
   }
 
   .main-news-title {
@@ -181,10 +187,29 @@
     text-align: left;
     overflow-wrap: break-word; /* 긴 제목 줄바꿈 */
     white-space: normal;
+    margin-top: 4px;
   }
 
+  .news-category-badge {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+
+  /* Swiper 버튼 크기 줄이기 */
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* 더보기 버튼 중앙 정렬 */
   .more-news-btn-wrap {
     text-align: center;
     margin-top: 20px;
+  }
+
+  .more-news-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
   }
 }
