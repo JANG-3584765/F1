@@ -10,27 +10,27 @@ document.addEventListener("DOMContentLoaded", () => {
     "마이애미":"🇺🇸","캐나다":"🇨🇦","모나코":"🇲🇨","스페인":"🇪🇸","오스트리아":"🇦🇹",
     "영국":"🇬🇧","벨기에":"🇧🇪","헝가리":"🇭🇺","네덜란드":"🇳🇱","이탈리아":"🇮🇹",
     "아제르바이잔":"🇦🇿","싱가포르":"🇸🇬","미국":"🇺🇸","멕시코":"🇲🇽","브라질":"🇧🇷",
-    "라스베이거스":"🇺🇸","카타르":"🇶🇦","아랍에미리트": "🇦🇪", "아부다비":"🇦🇪"
+    "라스베이거스":"🇺🇸","카타르":"🇶🇦","아랍에미리트":"🇦🇪","아부다비":"🇦🇪"
   };
 
-  // --- 데이터 로드 ---
+  /* ---------------- 데이터 로드 ---------------- */
   Promise.all([
     fetch("/F1/data/2025_schedule.json").then(r => r.json()),
     fetch("/F1/data/2026_schedule.json").then(r => r.json())
   ])
-  .then(([data2025, data2026]) => {
-    scheduleData = [...data2025, ...data2026];
+    .then(([data2025, data2026]) => {
+      scheduleData = [...data2025, ...data2026];
 
-    const seasons = [...new Set(scheduleData.map(r => r.season))].sort();
+      const seasons = [...new Set(scheduleData.map(r => r.season))].sort();
+      renderSeasonList(seasons);
+      renderSeason(seasons[0]);
+    })
+    .catch(err => {
+      console.error(err);
+      seasonContent.textContent = "데이터를 불러오지 못했습니다.";
+    });
 
-    renderSeasonList(seasons);
-    renderSeason(seasons[0]);   // 기본 첫 시즌 로드
-  })
-  .catch(() => {
-    seasonContent.textContent = "데이터를 불러오지 못했습니다.";
-  });
-
-  // --- 시즌 드롭다운 렌더 ---
+  /* ---------------- 시즌 드롭다운 ---------------- */
   function renderSeasonList(seasons) {
     seasonList.innerHTML = "";
 
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // --- 시즌별 레이스 렌더 ---
+  /* ---------------- 시즌별 렌더 ---------------- */
   function renderSeason(season) {
     seasonContent.innerHTML = "";
 
@@ -63,52 +63,47 @@ document.addEventListener("DOMContentLoaded", () => {
         const raceBar = document.createElement("div");
         raceBar.className = "race-bar";
 
-        // ----- 왼쪽 정보 -----
+        /* ---------- 날짜 계산 (핵심 수정 부분) ---------- */
+        const startStr =
+          race.sessions?.[0]?.start || race.sessions?.[0]?.start_date;
+        const endStr =
+          race.sessions?.at(-1)?.end || race.sessions?.at(-1)?.end_date;
+
+        const start = startStr ? new Date(startStr) : null;
+        const end = endStr ? new Date(endStr) : null;
+
+        /* ---------- 왼쪽 ---------- */
         const left = document.createElement("div");
         left.className = "race-left";
-
-        const start =
-          race.sessions[0].start_date !== "TBD"
-            ? new Date(race.sessions[0].start_date)
-            : null;
-
-        const end =
-          race.sessions.at(-1).end_date !== "TBD"
-            ? new Date(race.sessions.at(-1).end_date)
-            : null;
 
         const roundDate = document.createElement("div");
         roundDate.className = "round-date";
         roundDate.textContent = `Round ${race.round} (${
-          start && end
-            ? `${start.getMonth() + 1}/${start.getDate()}~${
-                end.getMonth() + 1
-              }/${end.getDate()}`
+          start && end && !isNaN(start) && !isNaN(end)
+            ? `${start.getMonth() + 1}/${start.getDate()}~${end.getMonth() + 1}/${end.getDate()}`
             : "TBD"
         })`;
 
         const flagDiv = document.createElement("div");
         flagDiv.className = "flag";
-        const countryFlag = flags[race.location_ko || race.location] || "🏁";
+        const countryFlag = flags[race.location] || "🏁";
         flagDiv.innerHTML = window.twemoji
           ? twemoji.parse(countryFlag)
           : countryFlag;
 
         const locationDiv = document.createElement("div");
         locationDiv.className = "location";
-        locationDiv.textContent = `${race.location_ko || race.location}, ${
-          race.city || ""
-        }`;
+        locationDiv.textContent = `${race.location}, ${race.city || ""}`;
 
         left.append(roundDate, flagDiv, locationDiv);
 
-        // ----- 오른쪽 정보 -----
+        /* ---------- 오른쪽 ---------- */
         const right = document.createElement("div");
         right.className = "race-right";
 
         const raceName = document.createElement("div");
         raceName.className = "race-name";
-        raceName.textContent = race.race_name_ko || race.race_name;
+        raceName.textContent = race.race_name;
 
         const circuit = document.createElement("div");
         circuit.className = "circuit";
@@ -116,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         right.append(raceName, circuit);
 
-        // ----- 세션 리스트 -----
+        /* ---------- 세션 ---------- */
         const sessionList = document.createElement("div");
         sessionList.className = "session-list";
 
@@ -124,9 +119,10 @@ document.addEventListener("DOMContentLoaded", () => {
           const sDiv = document.createElement("div");
           sDiv.className = "session-item";
 
+          const sessionStart = s.start || s.start_date;
           sDiv.textContent = `${s.name}: ${
-            s.start_date !== "TBD"
-              ? new Date(s.start_date).toLocaleString()
+            sessionStart && !isNaN(new Date(sessionStart))
+              ? new Date(sessionStart).toLocaleString()
               : "TBD"
           }`;
 
