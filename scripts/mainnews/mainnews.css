@@ -145,6 +145,9 @@
 }
 
 /* 모바일 스타일 (767px 이하) */
+/* ==============================
+   모바일 스타일 수정 (767px 이하)
+   ============================== */
 @media (max-width: 767px) {
   .main-news-section {
     padding: 20px 10px 40px;
@@ -155,32 +158,33 @@
     margin-bottom: 15px;
   }
 
+  /* 슬라이드 하나씩 보이도록 조정 */
   .swiper-slide {
-    min-width: 160px;
-    aspect-ratio: 4 / 5;
+    min-width: 90%;        /* 한 번에 거의 전체 너비 */
+    aspect-ratio: 3 / 4;   /* 세로로 더 길게 */
+    margin-right: 0;       /* 슬라이드 간격 제거 */
   }
 
+  /* 이미지 위치 조정: 제목바 아래로 밀림 방지 */
   .slide-img {
-    top: 36px;
+    top: 0;                /* 상단 정보바와 겹치지 않도록 0으로 */
+    height: calc(100% - 44px); /* 상단 정보바 높이만큼 제외 */
   }
 
   .main-news-info-bar {
-    padding: 6px 8px;
+    padding: 8px 10px;
     gap: 6px;
   }
 
   .main-news-title {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     text-align: left;
+    overflow-wrap: break-word; /* 긴 제목 줄바꿈 */
+    white-space: normal;
   }
 
   .more-news-btn-wrap {
     text-align: center;
     margin-top: 20px;
-  }
-
-  /* Swiper 슬라이드 간격 줄이기 */
-  .main-news-swiper .swiper-slide {
-    margin-right: 10px;
   }
 }
