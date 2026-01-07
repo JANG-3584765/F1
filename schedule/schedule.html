@@ -38,7 +38,7 @@
 
   <!-- 공통 헤더 / 푸터 로드 (표준 구조) -->
   <script>
-    fetch("../common/header.html")
+    fetch("/F1/common/header.html")
       .then(res => res.text())
       .then(html => {
         document.getElementById("header-container").innerHTML = html;
@@ -46,7 +46,7 @@
       })
       .catch(err => console.error("Header load error:", err));
 
-    fetch("../common/footer.html")
+    fetch("/F1/common/footer.html")
       .then(res => res.text())
       .then(html => {
         document.getElementById("footer-container").innerHTML = html;
