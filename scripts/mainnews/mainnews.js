@@ -1,4 +1,4 @@
-// mainnews.js (최적화 & 리팩토링)
+// mainnews.js (최적화 + 자동 슬라이드 3초)
 document.addEventListener("DOMContentLoaded", () => {
   const wrapper = document.getElementById("main-news-wrapper");
   if (!wrapper) return;
@@ -6,10 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("/F1/scripts/mainnews/mainnews.json")
     .then(res => res.json())
     .then(data => {
-      // 날짜 기준 최신순 정렬
+      // 최신순 정렬
       const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      // 카테고리별 최신 1개 추출
+      // 카테고리별 최신 1개
       const categories = ["Driver", "Team", "Tech", "Rumor", "Regulation"];
       const topByCategory = categories.map(cat => sorted.find(item => item.category === cat)).filter(Boolean);
 
@@ -27,21 +27,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Swiper 초기화
       new Swiper(".main-news-swiper", {
-        loop: false,             // 모바일 자연스러운 스크롤 위해 루프 해제
-        centeredSlides: false,   // 중앙 정렬 해제
+        loop: false,
+        centeredSlides: false,
         spaceBetween: 20,
         slidesPerView: 3,
+        autoplay: {
+          delay: 3000,      // 3초마다 자동 이동
+          disableOnInteraction: false, // 사용자가 스크롤해도 자동 슬라이드 유지
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        },
         breakpoints: {
           0: { slidesPerView: 1, spaceBetween: 10 },
           480: { slidesPerView: 1.1, spaceBetween: 12 },
           768: { slidesPerView: 2, spaceBetween: 15 },
           1024: { slidesPerView: 3, spaceBetween: 20 }
         },
-        observer: true,           // DOM 변화 감지
-        observeParents: true,     // 부모 변화 감지
+        observer: true,
+        observeParents: true,
         on: {
           imagesReady(swiper) {
-            swiper.update();      // 이미지 로딩 후 크기 재계산
+            swiper.update();
           }
         }
       });
