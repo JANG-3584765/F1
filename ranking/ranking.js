@@ -1,5 +1,3 @@
-// ranking.js
-
 document.addEventListener("DOMContentLoaded", () => {
   initTabs();
   initSeasonSelector();
@@ -24,13 +22,11 @@ function setActiveTab(tabId) {
     btn.classList.toggle("active", btn.dataset.tab === tabId);
   });
 
-  // 컨텐츠 active
+  // 컨텐츠 active + 표시 제어
   document.querySelectorAll(".tab-contents .tab-content").forEach((section) => {
-    section.classList.toggle("active", section.id === tabId);
-
-    // CSS가 active로 제어한다면 display 조작은 없어도 되지만,
-    // 혹시 CSS가 아직 미완이면 확실히 숨김 처리까지 같이 해줌
-    section.style.display = section.id === tabId ? "block" : "none";
+    const isActive = section.id === tabId;
+    section.classList.toggle("active", isActive);
+    section.style.display = isActive ? "block" : "none";
   });
 }
 
@@ -43,14 +39,15 @@ function initTabs() {
 
   tabButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      const tabId = btn.dataset.tab; // "driversTab" / "constructorsTab"
+      const tabId = btn.dataset.tab;
       if (!tabId) return;
       setActiveTab(tabId);
     });
   });
 
-  // 초기 탭 상태 보정(HTML에 active가 있어도 JS에서 확정)
-  const initialActive = document.querySelector(".tabs .tab-button.active")?.dataset.tab || "driversTab";
+  // 초기 탭 확정
+  const initialActive =
+    document.querySelector(".tabs .tab-button.active")?.dataset.tab || "driversTab";
   setActiveTab(initialActive);
 }
 
@@ -81,9 +78,8 @@ async function loadSeasonAndRender(season) {
     renderDriversTable(data?.drivers || []);
     renderConstructorsTable(data?.teams || []);
 
-    // 이모지(국기) 트위모지 변환 (있는 경우만)
+    // Twemoji 적용
     if (window.twemoji) {
-      // 페이지 전체를 매번 파싱해도 되지만, 범위 줄이고 싶으면 main만 파싱
       window.twemoji.parse(document.body);
     }
   } catch (err) {
@@ -94,31 +90,22 @@ async function loadSeasonAndRender(season) {
 }
 
 /** =========================
- *  테이블 렌더 함수들
+ *  테이블 렌더
  *  ========================= */
 function renderDriversTable(drivers, isError = false) {
   const tbody = document.getElementById("drivers-table-body");
   if (!tbody) return;
 
+  // 드라이버 테이블은 이제 6컬럼
+  const colCount = 6;
+
   if (isError) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="7" style="text-align:center; padding:16px;">
-          데이터를 불러오지 못했습니다.
-        </td>
-      </tr>
-    `;
+    tbody.innerHTML = emptyRow(colCount, "데이터를 불러오지 못했습니다.");
     return;
   }
 
   if (!drivers.length) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="7" style="text-align:center; padding:16px;">
-          표시할 데이터가 없습니다.
-        </td>
-      </tr>
-    `;
+    tbody.innerHTML = emptyRow(colCount, "표시할 데이터가 없습니다.");
     return;
   }
 
@@ -136,8 +123,10 @@ function renderDriversTable(drivers, isError = false) {
         <tr>
           <td>${pos}</td>
           <td class="flag-cell">${flag}</td>
-          <td class="name-cell">${name}</td>
-          <td>${team}</td>
+          <td class="name-cell">
+            <div class="driver-name">${name}</div>
+            <div class="driver-team">${team}</div>
+          </td>
           <td>${points}</td>
           <td>${wins}</td>
           <td>${podiums}</td>
@@ -151,25 +140,16 @@ function renderConstructorsTable(teams, isError = false) {
   const tbody = document.getElementById("constructors-table-body");
   if (!tbody) return;
 
+  // 컨스트럭터 테이블은 5컬럼
+  const colCount = 5;
+
   if (isError) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="5" style="text-align:center; padding:16px;">
-          데이터를 불러오지 못했습니다.
-        </td>
-      </tr>
-    `;
+    tbody.innerHTML = emptyRow(colCount, "데이터를 불러오지 못했습니다.");
     return;
   }
 
   if (!teams.length) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="5" style="text-align:center; padding:16px;">
-          표시할 데이터가 없습니다.
-        </td>
-      </tr>
-    `;
+    tbody.innerHTML = emptyRow(colCount, "표시할 데이터가 없습니다.");
     return;
   }
 
@@ -192,6 +172,20 @@ function renderConstructorsTable(teams, isError = false) {
       `;
     })
     .join("");
+}
+
+/** =========================
+ *  공용: 빈 행 템플릿
+ *  ========================= */
+function emptyRow(colspan, message) {
+  const msg = safeText(message);
+  return `
+    <tr>
+      <td colspan="${colspan}" style="text-align:center; padding:16px;">
+        ${msg}
+      </td>
+    </tr>
+  `;
 }
 
 /** =========================
