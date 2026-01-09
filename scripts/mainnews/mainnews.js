@@ -18,7 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      /* STEP 1: id 기준 정렬 */
+      /* =========================
+         STEP 1: id 기준 정렬
+         ========================= */
       const sortedById = [...data].sort((a, b) => a.id - b.id);
 
       console.log("mainnews.json 원본 데이터");
@@ -29,7 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       console.log("총 기사 개수:", sortedById.length);
 
-      /* STEP 2: 카드 렌더링 */
+      /* =========================
+         STEP 2: 카드 렌더링
+         ========================= */
 
       // 기존 플레이스홀더 제거
       wrapper.innerHTML = "";
@@ -69,13 +73,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       console.log("STEP 2: 메인 뉴스 카드 렌더링 완료");
 
-      /* STEP 3: Swiper 초기화 */
+      /* =========================
+         STEP 3: Swiper 초기화
+         ========================= */
 
       const mainNewsSwiper = new Swiper(".main-news-swiper", {
         slidesPerView: 1,
         spaceBetween: 20,
-        loop: false,              // id1~5에서 멈춤
-        allowTouchMove: true,     // 드래그 가능
+        loop: false,          // 무한 루프 X
+        allowTouchMove: true, // 스와이프 허용
 
         navigation: {
           nextEl: ".swiper-button-next",
@@ -94,12 +100,43 @@ document.addEventListener("DOMContentLoaded", () => {
         on: {
           init() {
             console.log("STEP 3: Swiper 초기화 완료");
+            updateNavState(this);
           },
           slideChange() {
             console.log("현재 슬라이드 index:", this.activeIndex);
+            updateNavState(this);
           }
         }
       });
+
+      /* =========================
+         STEP 4: 양 끝 이동 제한
+         ========================= */
+
+      function updateNavState(swiper) {
+        const prevBtn = document.querySelector(".swiper-button-prev");
+        const nextBtn = document.querySelector(".swiper-button-next");
+
+        if (!prevBtn || !nextBtn) return;
+
+        // 첫 슬라이드(id 1)
+        if (swiper.isBeginning) {
+          prevBtn.style.opacity = "0.3";
+          prevBtn.style.pointerEvents = "none";
+        } else {
+          prevBtn.style.opacity = "1";
+          prevBtn.style.pointerEvents = "auto";
+        }
+
+        // 마지막 슬라이드(id 5)
+        if (swiper.isEnd) {
+          nextBtn.style.opacity = "0.3";
+          nextBtn.style.pointerEvents = "none";
+        } else {
+          nextBtn.style.opacity = "1";
+          nextBtn.style.pointerEvents = "auto";
+        }
+      }
     })
     .catch(err => {
       console.error("메인 뉴스 오류:", err);
