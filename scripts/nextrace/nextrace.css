@@ -1,3 +1,13 @@
+/* ================================
+   SPORT FONT (숫자용)
+================================ */
+:root {
+  --sport-font: 'Orbitron', 'Oswald', 'Arial Black', sans-serif;
+}
+
+/* ================================
+   BASE
+================================ */
 #next-race-box {
   max-width: 800px;
   margin: 20px auto;
@@ -9,9 +19,7 @@
 }
 
 /* ================================
-   HEADER (1줄)
-   - index.html: .race-basic / .flag-img
-   - js(innerHTML): .next-race-header / .flag
+   HEADER (DESKTOP / TABLET)
 ================================ */
 .race-basic,
 .next-race-header {
@@ -32,10 +40,7 @@
   flex: 0 0 auto;
 }
 
-/* 가운데 영역
-   - index.html: .race-info(타이틀+카운트다운)
-   - js(innerHTML): 가운데가 그냥 .race-countdown 하나뿐이라 별도 처리는 불필요하지만,
-     호환 위해 .next-race-header에서 countdown 가운데 정렬 */
+/* 가운데 영역 (index.html 구조 대응) */
 .race-info {
   display: flex;
   flex-direction: column;
@@ -43,31 +48,30 @@
   justify-content: center;
   gap: 6px;
   flex: 1;
-  min-width: 0;
 }
 
-/* js(innerHTML) 헤더는 race-info가 없으니 countdown 자체를 가운데로 */
+/* js innerHTML 구조 대응 */
 .next-race-header .race-countdown {
   margin: 0 auto;
 }
 
-/* 헤더의 레이스 타이틀
-   - 스샷 형태는 타이틀 없이 타이머만 보여서 기본 숨김 */
+/* 헤더 레이스명 숨김 */
 .race-basic .race-title {
   display: none;
 }
 
-/* 카운트다운 */
+/* ================================
+   COUNTDOWN (NO BOX + SPORTY)
+================================ */
 .race-countdown {
-  font-family: 'Courier New', monospace;
-  background: #fff;
-  color: #000;
-  font-weight: bold;
-  font-size: 1.1rem;
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  text-align: center;
+  font-family: var(--sport-font);
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #111;
   white-space: nowrap;
 }
 
@@ -82,7 +86,6 @@
   cursor: pointer;
   font-weight: bold;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  flex: 0 0 auto;
   transition: all 0.2s ease;
 }
 
@@ -93,9 +96,7 @@
 }
 
 /* ================================
-   DETAILS (펼친 영역)
-   - index.html: .race-details
-   - js(innerHTML): .next-race-details
+   DETAILS
 ================================ */
 .race-details,
 .next-race-details {
@@ -105,13 +106,12 @@
   align-items: center;
 }
 
-/* 서킷 이미지 영역 (건드리지 않음) */
+/* 서킷 (변경 없음) */
 .circuit-img {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .circuit-img img {
@@ -122,30 +122,23 @@
 }
 
 /* ================================
-   RIGHT SIDE (레이스명 + 세션)
+   RIGHT SIDE
 ================================ */
-/* 오른쪽 래퍼
-   - index.html: .race-schedule
-   - js(innerHTML): .race-info 안에 title+ul이 있음
-     → .next-race-details .race-info를 오른쪽 영역으로 취급 */
 .race-schedule,
 .next-race-details .race-info {
   flex: 1;
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  align-items: center;
 }
 
-/* 레이스명: 오른쪽 상단 가운데 정렬 */
-.race-schedule .race-title,
+/* 레이스명 */
 .race-details .race-title,
 .next-race-details .race-title {
-  display: block;
   font-size: 1.1rem;
   font-weight: 700;
   text-align: center;
-  margin: 0 0 14px 0;
-  padding: 0 8px;
+  margin-bottom: 14px;
 }
 
 /* 세션 리스트 */
@@ -157,31 +150,29 @@
   max-width: 320px;
 }
 
-/* 세션 한 줄: 좌(이름) / 우(시간) */
 .session-list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
   padding: 10px 0;
   border-bottom: 1px solid #e0e0e0;
   font-size: 0.95rem;
 }
 
-/* 세션명 / 시간 (JS가 span으로 만들어줘야 적용됨) */
+/* 세션명 */
 .session-list .session-name {
   font-weight: 600;
-  text-align: left;
 }
 
+/* 세션 시간 (SPORT FONT) */
 .session-list .session-time {
-  font-family: 'Courier New', monospace;
+  font-family: var(--sport-font);
+  letter-spacing: 0.04em;
   white-space: nowrap;
-  text-align: right;
 }
 
 /* ================================
-   BUTTONS BELOW BOX
+   BUTTONS BELOW
 ================================ */
 .race-btns-wrap {
   display: flex;
@@ -195,119 +186,63 @@
   padding: 10px 18px;
   border-radius: 8px;
   font-weight: bold;
-  font-size: 1rem;
-  text-align: center;
-  transition: all 0.2s;
 }
 
 .full-schedule-btn {
-  background-color: #1d3557;
+  background: #1d3557;
   color: #fff;
-}
-
-.full-schedule-btn:hover {
-  background-color: #457b9d;
 }
 
 .past-results-btn {
-  background-color: #e63946;
+  background: #e63946;
   color: #fff;
 }
 
-.past-results-btn:hover {
-  background-color: #d62839;
-}
-
 /* ================================
-   TABLET
-================================ */
-@media (max-width: 1024px) {
-  #next-race-box,
-  .race-details,
-  .next-race-details {
-    max-width: 100%;
-  }
-
-  .race-details,
-  .next-race-details {
-    flex-wrap: nowrap;
-  }
-
-  .circuit-img,
-  .race-schedule,
-  .next-race-details .race-info {
-    flex: 1;
-  }
-
-  .circuit-img img {
-    max-width: 100%;
-  }
-}
-
-/* ================================
-   MOBILE
+   MOBILE (핵심 수정)
 ================================ */
 @media (max-width: 767px) {
-  #next-race-box {
-    margin: 12px;
-    border-radius: 10px;
-  }
 
+  /* 헤더를 세로 스택 */
   .race-basic,
   .next-race-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* 국기 + 타이머 한 줄 */
+  .race-info,
+  .next-race-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
-    padding: 12px 14px;
   }
 
-  .race-basic .flag-img,
-  .next-race-header .flag {
-    font-size: 1.8rem;
+  /* 펼치기 버튼은 그 아래 중앙 */
+  .toggle-details-btn {
+    margin-top: 4px;
   }
 
+  /* 타이머 크기 조정 */
   .race-countdown {
-    font-size: 1rem;
-    padding: 6px 10px;
+    font-size: 1.05rem;
   }
 
+  /* 펼친 영역 */
   .race-details,
   .next-race-details {
     flex-direction: column;
-    align-items: center;
     gap: 20px;
     padding: 16px;
   }
 
-  .circuit-img {
-    width: 100%;
-  }
-
-  .circuit-img img {
-    width: 100%;
-    max-width: 360px;
-    margin: 0 auto;
-    display: block;
-  }
-
-  /* 모바일에서는 세션 세로 배치 */
+  /* 모바일 세션은 세로 */
   .session-list li {
     flex-direction: column;
-    align-items: center;
     gap: 4px;
-    font-size: 0.95rem;
-    text-align: center;
-  }
-
-  .session-list .session-time {
-    text-align: center;
-  }
-
-  .race-btns-wrap {
-    flex-direction: row;
-    gap: 10px;
-  }
-
-  .race-btns-wrap a {
-    flex: 1;
     text-align: center;
   }
 }
