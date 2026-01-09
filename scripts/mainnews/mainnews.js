@@ -68,8 +68,40 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       console.log("STEP 2: 메인 뉴스 카드 렌더링 완료");
+
+      /* STEP 3: Swiper 초기화 */
+
+      const mainNewsSwiper = new Swiper(".main-news-swiper", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: false,              // id1~5에서 멈춤
+        allowTouchMove: true,     // 드래그 가능
+
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        },
+
+        breakpoints: {
+          768: {
+            slidesPerView: 2
+          },
+          1024: {
+            slidesPerView: 3
+          }
+        },
+
+        on: {
+          init() {
+            console.log("STEP 3: Swiper 초기화 완료");
+          },
+          slideChange() {
+            console.log("현재 슬라이드 index:", this.activeIndex);
+          }
+        }
+      });
     })
     .catch(err => {
-      console.error(" 메인 뉴스 오류:", err);
+      console.error("메인 뉴스 오류:", err);
     });
 });
