@@ -195,7 +195,7 @@ main {
   }
 
   .team-cell::before {
-    left: 10px;
+    left: 4px;
     width: 10px;
     height: 10px;
   }
