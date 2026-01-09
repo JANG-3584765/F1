@@ -26,25 +26,22 @@ main {
   font-weight: 900;
 }
 
-/* ===== 시즌 드롭다운 =====
-   변경점:
-   - select의 박스는 유지하되,
-   - 화살표를 '박스 안'이 아니라 'select 옆'에 두어서 시각적으로 정확히 맞춤
-*/
+/* ===== 시즌 선택 ===== */
 .season-selector {
-  display: inline-flex;     /* ✅ 덩어리 자체를 가운데 정렬하기 쉬움 */
+  display: inline-flex;     /* 덩어리 자체를 중앙에 두기 쉬움 */
   align-items: center;
   justify-content: center;
-  gap: 6px;                 /* ✅ label/select/arrow 간격 */
-  margin: 6px auto 18px;    /* ✅ 중앙 정렬 */
+  gap: 6px;                 /* label / select 간격 */
+  margin: 6px auto 18px;    /* 화면 중앙 정렬 */
 }
 
+/* 시즌 라벨 */
 .season-selector label {
   font-size: 15px;
   font-weight: 800;
 }
 
-/* select 자체 오른쪽 여백(화살표 공간) 제거 */
+/* 시즌 드롭다운 */
 .season-selector select {
   appearance: none;
   -webkit-appearance: none;
@@ -52,28 +49,22 @@ main {
 
   font-size: 15px;
   font-weight: 800;
+  line-height: 1;
 
-  padding: 6px 10px;        /* ✅ 오른쪽 padding 줄임 (화살표를 밖으로 뺐으니까) */
+  padding: 6px 10px;        /* 박스 크기 */
   border: 1px solid #ddd;
   border-radius: 10px;
   background: #fff;
 
   cursor: pointer;
   outline: none;
-  line-height: 1;
 }
 
+/* 포커스 상태 */
 .season-selector select:focus {
   border-color: #111;
 }
 
-/* ✅ 화살표를 select 옆에 (텍스트 흐름에 포함) */
-.season-selector::after {
-  content: "▾";
-  font-size: 12px;
-  color: #666;
-  pointer-events: none;
-}
 
 /* ===== 탭 디자인 + 중앙 정렬 ===== */
 .tabs {
