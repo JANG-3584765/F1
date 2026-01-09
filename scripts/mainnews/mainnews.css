@@ -1,3 +1,5 @@
+/* MAIN NEWS SECTION */
+
 .main-news-section {
   padding: 40px 20px 60px;
   background: #fff;
@@ -10,20 +12,24 @@
   margin-bottom: 25px;
 }
 
+/* Swiper 컨테이너 */
 .main-news-swiper {
   width: 100%;
+  position: relative;
+  overflow: hidden; /* 🔴 중요: 흰 화면 방지 */
 }
 
-/* 슬라이드 카드 */
+/* ===============================
+   SLIDE CARD
+================================ */
+
 .swiper-slide {
   position: relative;
   aspect-ratio: 1 / 1;
-  min-width: 220px;
+  width: 100%;              /* 🔴 min-width 제거 */
   border-radius: 14px;
   overflow: hidden;
   cursor: pointer;
-
-  /* 절대 배경색 주지 말 것 */
   background: transparent;
 }
 
@@ -45,10 +51,12 @@
   height: 100%;
   object-fit: cover;
   z-index: 1;
-  top: 44px;
 }
 
-/* 상단 정보 바 */
+/* ===============================
+   INFO BAR
+================================ */
+
 .main-news-info-bar {
   position: absolute;
   top: 0;
@@ -63,7 +71,6 @@
 
   background: #fff;
   box-sizing: border-box;
-  border-radius: 0;
   z-index: 3;
 }
 
@@ -93,7 +100,10 @@
 .news-category-badge[data-category="Rumor"] { background: #a000ff; }
 .news-category-badge[data-category="Regulation"] { background: #ff9600; }
 
-/* 링크 기본 스타일 제거 */
+/* ===============================
+   LINK / FOCUS RESET
+================================ */
+
 .main-news-section a,
 .main-news-section a:hover,
 .main-news-section a:visited,
@@ -104,24 +114,31 @@
   color: inherit;
 }
 
-/* Swiper 테두리/포커스 제거 */
 .swiper-slide,
 .swiper-slide * {
   outline: none !important;
   box-shadow: none !important;
 }
 
-/* 화살표 */
+/* ===============================
+   SWIPER NAVIGATION
+================================ */
+
 .swiper-button-next,
 .swiper-button-prev {
   color: #000;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .swiper-pagination {
   display: none;
 }
 
-/* 더보기 버튼 */
+/* ===============================
+   MORE BUTTON
+================================ */
+
 .more-news-btn {
   display: inline-block;
   padding: 10px 18px;
@@ -130,8 +147,6 @@
   border-radius: 6px;
   font-weight: 600;
   border: none;
-  outline: none;
-  box-shadow: none;
   transition: 0.25s;
 }
 
@@ -144,8 +159,12 @@
   text-align: left;
 }
 
-/* 모바일 스타일 (767px 이하) */
+/* ===============================
+   MOBILE (≤ 767px)
+================================ */
+
 @media (max-width: 767px) {
+
   .main-news-section {
     padding: 20px 10px 40px;
   }
@@ -155,39 +174,36 @@
     margin-bottom: 15px;
   }
 
-  /* 슬라이드 하나씩 보이도록 조정 */
-  .swiper-slide {
-    min-width: 90%;        /* 한 번에 거의 전체 너비 */
-    max-width: 90%;        /* 너무 커지지 않도록 제한 */
-    aspect-ratio: 3 / 4;   /* 세로로 길게 */
-    margin: 0 auto;        /* 슬라이드 가운데 정렬 */
-  }
-
-  /* 슬라이퍼 내부 중앙 정렬 */
+  /* 🔴 핵심: swiper-wrapper 강제 정렬 제거 */
   .swiper-wrapper {
-    justify-content: center !important;
+    justify-content: flex-start !important;
   }
 
-  /* 이미지 위치 조정: 제목바 아래로 밀림 방지 */
+  /* 모바일 슬라이드 크기 */
+  .swiper-slide {
+    width: 100% !important;     /* 🔴 한 장씩 정확히 */
+    aspect-ratio: 3 / 4;
+  }
+
+  /* 이미지 높이 조정 */
   .slide-img {
-    top: 0;                     /* 상단 정보바와 겹치지 않도록 */
-    height: calc(100% - 44px);  /* 상단 정보바 높이만큼 제외 */
+    top: 44px;
+    height: calc(100% - 44px);
   }
 
-  /* 상단 정보 바 */
+  /* 정보 바 모바일 */
   .main-news-info-bar {
     padding: 8px 10px;
     gap: 6px;
-    flex-direction: column;      /* 제목/카테고리 수직 정렬 */
-    align-items: flex-start;     /* 왼쪽 정렬 */
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .main-news-title {
     font-size: 0.9rem;
     text-align: left;
-    overflow-wrap: break-word; /* 긴 제목 줄바꿈 */
     white-space: normal;
-    margin-top: 4px;
+    word-break: break-word;
   }
 
   .news-category-badge {
@@ -195,16 +211,24 @@
     padding: 3px 8px;
   }
 
-  /* Swiper 버튼 크기 줄이기 */
-  .swiper-button-next,
-  .swiper-button-prev {
-    width: 20px;
-    height: 20px;
+  /* 화살표 카드 밖으로 */
+  .swiper-button-next {
+    right: 4px;
   }
 
-  /* 더보기 버튼 중앙 정렬 */
+  .swiper-button-prev {
+    left: 4px;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* 더보기 버튼 */
   .more-news-btn-wrap {
-    text-align: center;
+    text-align: left;
     margin-top: 20px;
   }
 
