@@ -21,7 +21,7 @@
   font-weight: 700;
 }
 
-/* 전체 순위 보기 버튼: 섹션 하단 왼쪽 고정 */
+/* 전체 순위 보기 버튼: 섹션 왼쪽 고정 */
 .more-standing-btn {
   display: inline-block;
   background: black;
@@ -32,8 +32,8 @@
   font-weight: 600;
   transition: background 0.2s;
 
-  position: absolute;   /* ✅ 포디움 아래 왼쪽으로 내림 */
-  left: 16px;           /* standing-section padding과 맞춤 */
+  position: absolute;   /* 포디움 아래 왼쪽으로 내림 */
+  right: 16px;           /* standing-section padding과 맞춤 */
   bottom: 16px;
 }
 
