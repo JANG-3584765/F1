@@ -82,14 +82,24 @@
 
 
     <!-- 3. HIGHLIGHT -->
-    <section id="highlights" class="highlights-section">
-      <h2 class="section-title">Highlights</h2>
-      <div class="swiper highlight-list" id="highlight-list">
-        <div class="swiper-wrapper"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+<section id="highlights" class="highlights-section">
+  <h2 class="section-title">Highlights</h2>
+
+  <div class="swiper highlights-swiper">
+    <div class="swiper-wrapper" id="highlight-wrapper">
+      <!-- JS 로딩 전 플레이스홀더 -->
+      <div class="swiper-slide highlight-card">
+        <div class="highlight-thumb">
+          <span class="play-icon">▶</span>
+        </div>
       </div>
-    </section>
+    </div>
+
+    <!-- 화살표 -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</section>
 
     <!-- 4. STANDING -->
     <section id="standing" class="standing-section">
