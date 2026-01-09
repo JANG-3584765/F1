@@ -65,9 +65,12 @@ function initHighlightSwiper() {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev"
     },
+
+    slidesPerGroup: 1,
+
     breakpoints: {
+      0: {slidesPerView: 2},
       768: { slidesPerView: 3 },
-      1024: { slidesPerView: 3 }
     }
   });
 }

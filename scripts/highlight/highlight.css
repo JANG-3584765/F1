@@ -79,6 +79,6 @@
 /* 반응형 예시 */
 @media (max-width: 720px) {
   .highlight-card {
-    width: 220px;
+    width: auto;
   }
 }
