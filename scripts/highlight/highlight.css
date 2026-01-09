@@ -75,10 +75,3 @@
 .highlights-section .swiper-button-prev {
   color: #e10600;
 }
-
-/* 반응형 예시 */
-@media (max-width: 720px) {
-  .highlight-card {
-    width: auto;
-  }
-}

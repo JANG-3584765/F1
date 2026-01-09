@@ -15,38 +15,41 @@ const highlightData = [
   "https://youtu.be/wZ5D4a-EgZI?si=xbhmss9w0UUqGT0u"
 ];
 
-// 유튜브 링크 → 썸네일 URL 생성
+// 유튜브 링크 → 썸네일 URL 생성 (youtu.be / youtube.com 둘 다 대응)
 function getYoutubeThumbnail(url) {
-  const match = url.match(/youtu\.be\/([0-9A-Za-z_-]{11})/);
-  if (match && match[1]) {
-    return `https://img.youtube.com/vi/${match[1]}/hqdefault.jpg`;
-  }
+  // youtu.be/VIDEO_ID
+  let m = url.match(/youtu\.be\/([0-9A-Za-z_-]{11})/);
+  if (m && m[1]) return `https://img.youtube.com/vi/${m[1]}/hqdefault.jpg`;
+
+  // youtube.com/watch?v=VIDEO_ID
+  m = url.match(/[?&]v=([0-9A-Za-z_-]{11})/);
+  if (m && m[1]) return `https://img.youtube.com/vi/${m[1]}/hqdefault.jpg`;
+
   return "";
 }
 
 function renderHighlights() {
-  const wrapper = document.getElementById("highlight-list");
-  if (!wrapper) return;
+  // ✅ HTML의 wrapper id에 맞춤
+  const swiperWrapper = document.getElementById("highlight-wrapper");
+  if (!swiperWrapper) {
+    console.error("highlight-wrapper 없음");
+    return;
+  }
 
-  const swiperWrapper = wrapper.querySelector(".swiper-wrapper");
-  if (!swiperWrapper) return;
-
-  // 카드 생성
   const slides = highlightData.map(link => `
     <div class="swiper-slide highlight-card">
-      <a href="${link}" target="_blank">
+      <a href="${link}" target="_blank" rel="noopener noreferrer">
         <div class="highlight-thumb">
-          <img src="${getYoutubeThumbnail(link)}" alt="Highlight Video">
+          <img src="${getYoutubeThumbnail(link)}" alt="Highlight Video" class="slide-img">
           <span class="play-icon">▶</span>
         </div>
       </a>
     </div>
   `).join("");
 
-  // 마지막 슬라이드: 더보기
   const moreSlide = `
     <div class="swiper-slide highlight-card more-card">
-      <a href="./video/video.html">
+      <a href="./video/video.html" class="more-highlight-link" aria-label="하이라이트 더보기">
         <div class="highlight-thumb">
           <span class="more-icon">+ 더보기</span>
         </div>
@@ -58,16 +61,25 @@ function renderHighlights() {
 }
 
 function initHighlightSwiper() {
-  new Swiper(".highlights-section .swiper", {
-    slidesPerView: 2,       // 처음에 3개 카드
+  const section = document.querySelector(".highlights-section");
+  const nextBtn = section?.querySelector(".swiper-button-next");
+  const prevBtn = section?.querySelector(".swiper-button-prev");
+
+  new Swiper(".highlights-swiper", {
+    slidesPerView: 2,          // 모바일: 2개
     spaceBetween: 16,
     slidesPerGroup: 1,
+    loop: false,
+    allowTouchMove: true,
+
     navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
+      nextEl: nextBtn,
+      prevEl: prevBtn
     },
+
     breakpoints: {
-      768: { slidesPerView: 3 },
+      768: { slidesPerView: 3 },   // 태블릿/데스크톱
+      1024: { slidesPerView: 3 }
     }
   });
 }
