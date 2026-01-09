@@ -7,7 +7,7 @@
 }
 
 .standing-section {
-  margin-top: 60px; /* 원하는 간격으로 조절 */
+  margin-top: 60px;
   padding: 16px;
 }
 
@@ -37,7 +37,7 @@
 .podium {
   display: flex;
   justify-content: center;
-  align-items: flex-end; /* 바닥 기준 정렬 */
+  align-items: flex-end;
   gap: 24px;
   margin-top: 24px;
   position: relative;
@@ -51,23 +51,23 @@
 
 /* 카드 이미지 */
 .podium-card img {
-  width: 200px;   /* 이미지 가로 확대 */
-  height: 200px;  /* 정사각형 유지 */
+  width: 200px;
+  height: 200px;
   border-radius: 8px;
   object-fit: cover;
 }
 
 /* 포디움 높이 조절 */
 .podium-card.rank-1 {
-  transform: translateY(20px); /* 가운데 1위 높이 */
+  transform: translateY(20px);
 }
 
 .podium-card.rank-2 {
-  transform: translateY(0px);   /* 왼쪽 2위 */
+  transform: translateY(0px);
 }
 
 .podium-card.rank-3 {
-  transform: translateY(40px);  /* 오른쪽 3위 */
+  transform: translateY(40px);
 }
 
 /* 이름, 포인트 텍스트 */
@@ -102,4 +102,18 @@
 .standing-tabs .tab.active {
   background: #e10600;
   color: #fff;
+}
+
+/* 모바일 대응 (깨짐 방지 전용) */
+@media (max-width: 767px) {
+
+  .podium {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .podium-card img {
+    width: 120px;
+    height: 120px;
+  }
 }

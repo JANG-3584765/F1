@@ -76,13 +76,11 @@
   color: #e10600;
 }
 
-  /* 더보기 버튼 */
-  .more-highlights-btn-wrap {
-    text-align: left;
-    margin-top: 20px;
-  }
+.more-highlight-btn:hover {
+  background: #222;
+}
 
-  .more-highlights-btn {
-    padding: 8px 16px;
-    font-size: 0.85rem;
-  }
+.more-highlight-btn-wrap {
+  margin-top: 40px;
+  text-align: left;
+}
