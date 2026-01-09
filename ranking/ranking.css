@@ -1,34 +1,189 @@
-.standings-section {
-  margin: 2rem 0;
+/* ===== 공통 레이아웃 ===== */
+main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 24px 16px;
 }
 
-.standings-tabs {
+.tab-contents {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  justify-content: center; /* 섹션 자체도 중앙 느낌 */
 }
 
-.standings-tabs .tab {
-  padding: 0.5rem 1rem;
+/* 기본: JS에서 display도 제어하지만, CSS로도 안전하게 */
+.tab-content {
+  width: 100%;
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+
+.tab-content h2 {
+  text-align: center;
+  margin: 18px 0 14px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* ===== 시즌 드롭다운 ===== */
+.season-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0 18px;
+}
+
+.season-selector label {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.season-selector select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 38px 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+
   cursor: pointer;
-  border: 1px solid #ccc;
-  background: #f9f9f9;
-  border-radius: 5px;
+  outline: none;
+  line-height: 1;
 }
 
-.standings-tabs .tab.active {
-  background: #0070f3;
+.season-selector select:focus {
+  border-color: #111;
+}
+
+/* 드롭다운 화살표(가벼운 커스텀) */
+.season-selector {
+  position: relative;
+}
+.season-selector::after {
+  content: "▾";
+  font-size: 12px;
+  position: relative;
+  left: -28px;
+  pointer-events: none;
+  color: #666;
+}
+
+/* ===== 탭 디자인 + 중앙 정렬 ===== */
+.tabs {
+  display: flex;
+  justify-content: center; /* 탭 묶음 중앙 */
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 18px;
+}
+
+.tab-button {
+  border: 1px solid #ddd;
+  background: #f7f7f7;
+  color: #111;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  cursor: pointer;
+  transition: transform 0.12s, background 0.12s, border-color 0.12s;
+}
+
+.tab-button:hover {
+  transform: translateY(-1px);
+  border-color: #bbb;
+}
+
+.tab-button.active {
+  background: #111;
   color: #fff;
-  border-color: #0070f3;
+  border-color: #111;
 }
 
-.standings-table table {
+/* ===== 테이블 ===== */
+.ranking-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed; /* 줄바꿈 예측 가능 */
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #eee;
 }
 
-.standings-table th, .standings-table td {
-  padding: 0.5rem;
+.ranking-table thead th {
+  background: #fafafa;
+  font-size: 12px;     /* 헤더 폰트 작게 */
+  font-weight: 800;
+  padding: 12px 8px;
   text-align: center;
-  border: 1px solid #ddd;
+  border-bottom: 1px solid #eee;
+  white-space: nowrap;
+}
+
+.ranking-table td {
+  font-size: 12px;     /* 내용 폰트 작게 */
+  padding: 10px 8px;
+  text-align: center;  /* 내용 중앙 */
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+  white-space: nowrap; /* 두 줄 방지 */
+}
+
+.ranking-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===== 국기(이모지) 크기 줄이기 + 줄바꿈 방지 ===== */
+/* Twemoji가 적용되면 <img class="emoji">로 바뀜 */
+.ranking-table td.flag-cell {
+  white-space: nowrap;
+}
+
+.ranking-table td.flag-cell .emoji {
+  width: 14px;
+  height: 14px;
+  vertical-align: -2px;
+}
+
+/* Twemoji 적용 전(텍스트 이모지 상태)도 최대한 줄바꿈 방지 */
+.ranking-table td.flag-cell {
+  font-size: 13px;
+  line-height: 1;
+}
+
+/* ===== 이름/팀도 줄바꿈 최소화 ===== */
+.ranking-table td.name-cell,
+.ranking-table td.team-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== 모바일 대응(가독성) ===== */
+@media (max-width: 520px) {
+  .tab-button {
+    font-size: 12px;
+    padding: 9px 12px;
+  }
+
+  .ranking-table thead th,
+  .ranking-table td {
+    font-size: 11px;
+    padding: 9px 6px;
+  }
+
+  .ranking-table td.flag-cell .emoji {
+    width: 13px;
+    height: 13px;
+  }
 }
