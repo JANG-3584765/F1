@@ -1,4 +1,6 @@
-/* MAIN NEWS SECTION */
+/* ================================
+   MAIN NEWS SECTION
+================================ */
 
 .main-news-section {
   padding: 40px 20px 60px;
@@ -16,17 +18,17 @@
 .main-news-swiper {
   width: 100%;
   position: relative;
-  overflow: hidden; /* 🔴 중요: 흰 화면 방지 */
+  overflow: hidden; /* 흰 화면 방지 */
 }
 
-/* ===============================
+/* ================================
    SLIDE CARD
 ================================ */
 
 .swiper-slide {
   position: relative;
   aspect-ratio: 1 / 1;
-  width: 100%;              /* 🔴 min-width 제거 */
+  width: 100%;
   border-radius: 14px;
   overflow: hidden;
   cursor: pointer;
@@ -53,7 +55,7 @@
   z-index: 1;
 }
 
-/* ===============================
+/* ================================
    INFO BAR
 ================================ */
 
@@ -100,7 +102,7 @@
 .news-category-badge[data-category="Rumor"] { background: #a000ff; }
 .news-category-badge[data-category="Regulation"] { background: #ff9600; }
 
-/* ===============================
+/* ================================
    LINK / FOCUS RESET
 ================================ */
 
@@ -120,7 +122,7 @@
   box-shadow: none !important;
 }
 
-/* ===============================
+/* ================================
    SWIPER NAVIGATION
 ================================ */
 
@@ -135,7 +137,7 @@
   display: none;
 }
 
-/* ===============================
+/* ================================
    MORE BUTTON
 ================================ */
 
@@ -159,7 +161,7 @@
   text-align: left;
 }
 
-/* ===============================
+/* ================================
    MOBILE (≤ 767px)
 ================================ */
 
@@ -174,36 +176,39 @@
     margin-bottom: 15px;
   }
 
-  /* 🔴 핵심: swiper-wrapper 강제 정렬 제거 */
+  /* swiper-wrapper 정렬 강제 제거 */
   .swiper-wrapper {
     justify-content: flex-start !important;
   }
 
-  /* 모바일 슬라이드 크기 */
+  /* 📌 카드 크기 살짝 축소 (화살표 공간 확보) */
   .swiper-slide {
-    width: 100% !important;     /* 🔴 한 장씩 정확히 */
-    aspect-ratio: 3 / 4;
+    width: 100% !important;
+    aspect-ratio: 4 / 5;   /* 🔽 기존 3/4 → 약간 줄임 */
   }
 
-  /* 이미지 높이 조정 */
+  /* 이미지 영역 (정보바 높이만큼 제외) */
   .slide-img {
-    top: 44px;
-    height: calc(100% - 44px);
+    top: 38px; /* 🔽 기존 44px */
+    height: calc(100% - 38px);
   }
 
-  /* 정보 바 모바일 */
+  /* 정보 바 높이 축소 */
   .main-news-info-bar {
-    padding: 8px 10px;
-    gap: 6px;
+    padding: 6px 8px; /* 🔽 핵심 */
+    gap: 4px;
     flex-direction: column;
     align-items: flex-start;
   }
 
   .main-news-title {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    line-height: 1.2;
     text-align: left;
     white-space: normal;
     word-break: break-word;
+    max-height: 2.4em; /* 2줄 제한 */
+    overflow: hidden;
   }
 
   .news-category-badge {
@@ -211,7 +216,7 @@
     padding: 3px 8px;
   }
 
-  /* 화살표 카드 밖으로 */
+  /* 화살표 위치 유지 */
   .swiper-button-next {
     right: 4px;
   }
