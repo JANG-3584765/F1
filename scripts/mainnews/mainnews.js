@@ -7,9 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetch("/F1/scripts/mainnews/mainnews.json")
     .then(res => {
-      if (!res.ok) {
-        throw new Error("JSON fetch 실패");
-      }
+      if (!res.ok) throw new Error("JSON fetch 실패");
       return res.json();
     })
     .then(data => {
@@ -18,116 +16,66 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      /*STEP 1: id 기준 정렬 */
+      // STEP 1: id 기준 정렬
       const sortedById = [...data].sort((a, b) => a.id - b.id);
 
-      console.log("mainnews.json 원본 데이터");
-      console.table(data);
-
-      console.log("id 기준 정렬 데이터 (1 → 5)");
-      console.table(sortedById);
-
-      console.log("총 기사 개수:", sortedById.length);
-
-      /* STEP 2: 카드 렌더링 */
-
-      // 기존 플레이스홀더 제거
+      // STEP 2: 카드 렌더링
       wrapper.innerHTML = "";
-
       sortedById.forEach(item => {
         const slide = document.createElement("div");
         slide.className = "swiper-slide main-news-card";
 
         slide.innerHTML = `
-          <img
-            src="${item.image}"
-            alt="${item.title}"
-            class="slide-img"
-          />
-
+          <img src="${item.image}" alt="${item.title}" class="slide-img" />
           <div class="main-news-info-bar">
-            <span
-              class="news-category-badge"
-              data-category="${item.category}"
-            >
+            <span class="news-category-badge" data-category="${item.category}">
               ${item.category}
             </span>
-            <h3 class="main-news-title">
-              ${item.title}
-            </h3>
+            <h3 class="main-news-title">${item.title}</h3>
           </div>
-
-          <a
-            href="/F1/news/news_detail.html?id=${item.id}"
-            class="main-news-link"
-            aria-label="${item.title}"
-          ></a>
+          <a href="/F1/news/news_detail.html?id=${item.id}" class="main-news-link" aria-label="${item.title}"></a>
         `;
 
         wrapper.appendChild(slide);
       });
 
-      console.log("STEP 2: 메인 뉴스 카드 렌더링 완료");
-
-      /* =========================
-         STEP 3: Swiper 초기화
-         ========================= */
-
+      // STEP 3: Swiper 초기화
       const mainNewsSwiper = new Swiper(".main-news-swiper", {
-        slidesPerView: 1,
+        slidesPerView: 1,          // 기본 1장
         spaceBetween: 20,
-        loop: false,          // 무한 루프 X
-        allowTouchMove: true, // 스와이프 허용
+        loop: false,
+        allowTouchMove: true,
 
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev"
         },
 
+        // 모바일부터 데스크톱까지 브레이크포인트
         breakpoints: {
-          0: { slidesPerView: 1, slidesPerGroup: 1 },      // 모바일 초소형 화면
-  480: { slidesPerView: 2, slidesPerGroup: 1 },    // 작은 모바일
-  768: { slidesPerView: 2, slidesPerGroup: 1 },    // 일반 모바일
-  1024: { slidesPerView: 3, slidesPerGroup: 1 }    // 데스크톱
+          0: { slidesPerView: 1, slidesPerGroup: 1 },      // 초소형 화면
+          480: { slidesPerView: 2, slidesPerGroup: 1 },    // 작은 모바일 → 2장 보임, 1장씩 이동
+          768: { slidesPerView: 2, slidesPerGroup: 1 },    // 일반 모바일 → 2장 보임, 1장씩 이동
+          1024: { slidesPerView: 3, slidesPerGroup: 1 }    // 데스크톱 → 3장 보임, 1장씩 이동
         },
 
         on: {
-          init() {
-            console.log("STEP 3: Swiper 초기화 완료");
-            updateNavState(this);
-          },
-          slideChange() {
-            console.log("현재 슬라이드 index:", this.activeIndex);
-            updateNavState(this);
-          }
+          init() { updateNavState(this); },
+          slideChange() { updateNavState(this); }
         }
       });
 
-      /* STEP 4: 양 끝 이동 제한 */
-
+      // STEP 4: 양 끝 이동 제한
       function updateNavState(swiper) {
         const prevBtn = document.querySelector(".swiper-button-prev");
         const nextBtn = document.querySelector(".swiper-button-next");
-
         if (!prevBtn || !nextBtn) return;
 
-        // 첫 슬라이드(id 1)
-        if (swiper.isBeginning) {
-          prevBtn.style.opacity = "0.3";
-          prevBtn.style.pointerEvents = "none";
-        } else {
-          prevBtn.style.opacity = "1";
-          prevBtn.style.pointerEvents = "auto";
-        }
+        prevBtn.style.opacity = swiper.isBeginning ? "0.3" : "1";
+        prevBtn.style.pointerEvents = swiper.isBeginning ? "none" : "auto";
 
-        // 마지막 슬라이드(id 5)
-        if (swiper.isEnd) {
-          nextBtn.style.opacity = "0.3";
-          nextBtn.style.pointerEvents = "none";
-        } else {
-          nextBtn.style.opacity = "1";
-          nextBtn.style.pointerEvents = "auto";
-        }
+        nextBtn.style.opacity = swiper.isEnd ? "0.3" : "1";
+        nextBtn.style.pointerEvents = swiper.isEnd ? "none" : "auto";
       }
     })
     .catch(err => {
