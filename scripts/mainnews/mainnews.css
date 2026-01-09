@@ -18,17 +18,13 @@
 .main-news-swiper {
   width: 100%;
   position: relative;
-  overflow: hidden; /* 흰 화면 방지 */
+  overflow: hidden;
 }
 
-/* ================================
-   SLIDE CARD
-================================ */
-
+/* 슬라이드 카드 */
 .swiper-slide {
   position: relative;
   aspect-ratio: 1 / 1;
-  width: 100%;
   border-radius: 14px;
   overflow: hidden;
   cursor: pointer;
@@ -42,7 +38,6 @@
   z-index: 2;
   display: block;
   background: transparent;
-  outline: none;
 }
 
 /* 이미지 */
@@ -55,22 +50,17 @@
   z-index: 1;
 }
 
-/* ================================
-   INFO BAR
-================================ */
-
+/* 정보 바 */
 .main-news-info-bar {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   padding: 10px 12px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-
   background: #fff;
   box-sizing: border-box;
   z-index: 3;
@@ -102,30 +92,18 @@
 .news-category-badge[data-category="Rumor"] { background: #a000ff; }
 .news-category-badge[data-category="Regulation"] { background: #ff9600; }
 
-/* ================================
-   LINK / FOCUS RESET
-================================ */
-
-.main-news-section a,
-.main-news-section a:hover,
-.main-news-section a:visited,
-.main-news-section a:active,
-.main-news-section a:focus {
+/* 링크 스타일 제거 */
+.main-news-section a {
   text-decoration: none;
-  outline: none;
   color: inherit;
 }
 
-.swiper-slide,
-.swiper-slide * {
+.swiper-slide, .swiper-slide * {
   outline: none !important;
   box-shadow: none !important;
 }
 
-/* ================================
-   SWIPER NAVIGATION
-================================ */
-
+/* Swiper 화살표 */
 .swiper-button-next,
 .swiper-button-prev {
   color: #000;
@@ -137,10 +115,7 @@
   display: none;
 }
 
-/* ================================
-   MORE BUTTON
-================================ */
-
+/* 더보기 버튼 */
 .more-news-btn {
   display: inline-block;
   padding: 10px 18px;
@@ -161,10 +136,7 @@
   text-align: left;
 }
 
-/* ================================
-   MOBILE (≤ 767px)
-================================ */
-
+/* 모바일 (≤ 767px) */
 @media (max-width: 767px) {
 
   .main-news-section {
@@ -176,26 +148,19 @@
     margin-bottom: 15px;
   }
 
-  /* swiper-wrapper 정렬 강제 제거 */
-  .swiper-wrapper {
-    justify-content: flex-start !important;
-  }
-
-  /* 📌 카드 크기 살짝 축소 (화살표 공간 확보) */
+  /* 카드 크기 조정: 두 장씩 보이게 */
   .swiper-slide {
-    width: 100% !important;
-    aspect-ratio: 4 / 5;   /* 🔽 기존 3/4 → 약간 줄임 */
+    width: auto !important;
+    aspect-ratio: 4 / 5;
   }
 
-  /* 이미지 영역 (정보바 높이만큼 제외) */
   .slide-img {
-    top: 38px; /* 🔽 기존 44px */
+    top: 38px;
     height: calc(100% - 38px);
   }
 
-  /* 정보 바 높이 축소 */
   .main-news-info-bar {
-    padding: 6px 8px; /* 🔽 핵심 */
+    padding: 6px 8px;
     gap: 4px;
     flex-direction: column;
     align-items: flex-start;
@@ -207,7 +172,7 @@
     text-align: left;
     white-space: normal;
     word-break: break-word;
-    max-height: 2.4em; /* 2줄 제한 */
+    max-height: 2.4em;
     overflow: hidden;
   }
 
@@ -216,7 +181,7 @@
     padding: 3px 8px;
   }
 
-  /* 화살표 위치 유지 */
+  /* 화살표 크기/위치 */
   .swiper-button-next {
     right: 4px;
   }
