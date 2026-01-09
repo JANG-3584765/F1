@@ -75,12 +75,3 @@
 .highlights-section .swiper-button-prev {
   color: #e10600;
 }
-
-.more-highlight-btn:hover {
-  background: #222;
-}
-
-.more-highlight-btn-wrap {
-  margin-top: 40px;
-  text-align: left;
-}
