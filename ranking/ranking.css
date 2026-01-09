@@ -143,20 +143,20 @@ main {
 .driver-info {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 2px;
 }
 
 .driver-flag {
   line-height: 1;
-  font-size: 11px;
-  width: 14px;
+  font-size: 5px;
+  width: 7px;
   text-align: center;
-  flex: 0 0 14px;
+  flex: 0 0 5px;
 }
 
 .driver-flag .emoji {
-  width: 11px;
-  height: 11px;
+  width: 5px;
+  height: 5px;
   vertical-align: -1px;
 }
 
