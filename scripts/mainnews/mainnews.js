@@ -51,13 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
           prevEl: ".swiper-button-prev"
         },
 
-        // 모바일부터 데스크톱까지 브레이크포인트
         breakpoints: {
-          0: { slidesPerView: 1, slidesPerGroup: 1 },      // 초소형 화면
-          480: { slidesPerView: 2, slidesPerGroup: 1 },    // 작은 모바일 → 2장 보임, 1장씩 이동
-          768: { slidesPerView: 2, slidesPerGroup: 1 },    // 일반 모바일 → 2장 보임, 1장씩 이동
-          1024: { slidesPerView: 3, slidesPerGroup: 1 }    // 데스크톱 → 3장 보임, 1장씩 이동
-        },
+  0:    { slidesPerView: 2 },
+  768:  { slidesPerView: 3 }
+},
 
         on: {
           init() { updateNavState(this); },
