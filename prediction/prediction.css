@@ -1,105 +1,74 @@
 /* =========================
-   Rank Picked (Top3 슬롯 표시)
+   Week Toggle (카드 접기/펼치기)
 ========================= */
-.rank-picked {
-  display: flex;
-  gap: 10px;
-  margin: 12px 0 16px;
-  padding: 12px;
-  background: #fafafa;
-  border: 1px solid #eee;
-  border-radius: 10px;
+.week-toggle {
+  width: 100%;
 }
 
-.picked-slot {
-  flex: 1;
-  min-width: 0;
-  padding: 10px 12px;
-  border-radius: 8px;
-  background: #fff;
-  border: 1px solid #e9e9e9;
-  font-size: 0.9rem;
-  color: #333;
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.picked-name {
-  font-weight: 700;
-  color: #111;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* 잠금 시 슬롯도 살짝 정리 */
-.prediction-card.locked .rank-picked {
-  opacity: 0.9;
-}
-
-/* =========================
-   More Options (details/summary)
-========================= */
-.prediction-more {
-  margin-bottom: 15px;
-}
-
-/* 기본 summary 스타일 제거 + 버튼처럼 보이게 */
-.prediction-more-btn {
+/* summary 기본 마커 제거 + 헤더처럼 보이게 */
+.week-summary {
   list-style: none;
   cursor: pointer;
   user-select: none;
-  display: inline-flex;
+
+  display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 
   padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+  border-radius: 10px;
   background: #fff;
-  color: #333;
-  font-weight: 600;
+  border: 1px solid #eee;
 }
 
-/* 크롬/사파리 기본 화살표 제거(대신 우리가 표시) */
-.prediction-more-btn::-webkit-details-marker {
+.week-summary::-webkit-details-marker {
   display: none;
 }
 
-/* 열림/닫힘 표시 */
-.prediction-more-btn::after {
-  content: "▼";
-  font-size: 0.85rem;
-  opacity: 0.8;
+/* Week 라벨 */
+.week-badge {
+  font-weight: 800;
+  color: #111;
+  white-space: nowrap;
 }
 
-.prediction-more[open] .prediction-more-btn::after {
+/* 제목 */
+.week-title {
+  font-weight: 700;
+  color: #333;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 오른쪽 접기/펼치기 아이콘 */
+.week-state {
+  margin-left: auto;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+/* open 상태에 따라 아이콘 표시 */
+.week-toggle:not([open]) .week-state::after {
+  content: "▼";
+}
+
+.week-toggle[open] .week-state::after {
   content: "▲";
 }
 
-/* 더보기 안쪽 옵션박스는 위 여백 조금 */
-.prediction-more .prediction-options {
-  margin-top: 12px;
+/* 내용 영역 */
+.week-body {
+  padding-top: 12px;
 }
 
-/* 잠금되면 더보기도 조작 못하게 */
-.prediction-card.locked .prediction-more-btn {
-  cursor: not-allowed;
-  opacity: 0.7;
+/* summary hover */
+.week-summary:hover {
+  background: #fafafa;
 }
 
-/* =========================
-   Responsive for rank-picked
-========================= */
-@media (max-width: 768px) {
-  .rank-picked {
-    flex-direction: column;
-  }
-  .picked-slot {
-    justify-content: flex-start;
-  }
+/* 잠금 상태일 때 week-summary 톤 */
+.prediction-card.locked .week-summary {
+  opacity: 0.9;
 }
