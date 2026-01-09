@@ -61,4 +61,4 @@ sortedById.forEach(item => {
   wrapper.appendChild(slide);
 });
 
-console.log("✅ STEP 2: 메인 뉴스 카드 렌더링 완료");
+console.log("STEP 2: 메인 뉴스 카드 렌더링 완료");
