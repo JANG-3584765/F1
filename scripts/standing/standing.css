@@ -13,8 +13,7 @@
 
 /* 타이틀 */
 .standing-header .section-title {
-  font-size: 1.4rem;
-  font-weight: 700;
+  text-align: center;
 }
 
 /* 전체 순위 보기 버튼 */
@@ -27,6 +26,9 @@
   text-decoration: none;
   font-weight: 600;
   transition: background 0.2s;
+
+  align-self: flex-start;
+  margin-top: 8px;
 }
 
 .more-standing-btn:hover {
