@@ -85,8 +85,10 @@ document.addEventListener("DOMContentLoaded", () => {
         },
 
         breakpoints: {
-          768: {slidesPerView: 2, slidesPerGroup: 2},
-          1024: {slidesPerView: 3, slidesPerGroup: 3}
+          0: { slidesPerView: 1, slidesPerGroup: 1 },      // 모바일 초소형 화면
+  480: { slidesPerView: 2, slidesPerGroup: 1 },    // 작은 모바일
+  768: { slidesPerView: 2, slidesPerGroup: 1 },    // 일반 모바일
+  1024: { slidesPerView: 3, slidesPerGroup: 1 }    // 데스크톱
         },
 
         on: {
