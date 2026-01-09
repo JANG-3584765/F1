@@ -1,3 +1,11 @@
+/* ranking.css (풀코드/최적화)
+   요구사항 반영:
+   - 전체 글자 크기 전반적으로 키움
+   - 드라이버: 국기 더 작게 + 이름과 더 바짝 붙임
+   - 드라이버 셀(국기+이름/팀 2줄) 때문에 숫자 컬럼(포인트/우승/포디움) 정렬이 어긋나 보이는 문제 보정
+   - 드롭다운/탭/테이블은 현재 톤 유지(과한 스타일 변경 없음)
+*/
+
 /* ===== 공통 레이아웃 ===== */
 main {
   max-width: 980px;
@@ -22,8 +30,8 @@ main {
 .tab-content h2 {
   text-align: center;
   margin: 18px 0 14px;
-  font-size: 18px;
-  font-weight: 800;
+  font-size: 20px;     /* ⬆️ */
+  font-weight: 900;    /* ⬆️ */
 }
 
 /* ===== 시즌 드롭다운 ===== */
@@ -37,8 +45,8 @@ main {
 }
 
 .season-selector label {
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 15px;     /* ⬆️ */
+  font-weight: 800;    /* ⬆️ */
 }
 
 .season-selector select {
@@ -46,9 +54,9 @@ main {
   -webkit-appearance: none;
   -moz-appearance: none;
 
-  font-size: 14px;
-  font-weight: 700;
-  padding: 10px 38px 10px 12px;
+  font-size: 15px;     /* ⬆️ */
+  font-weight: 800;    /* ⬆️ */
+  padding: 11px 40px 11px 12px; /* ⬆️ */
   border: 1px solid #ddd;
   border-radius: 10px;
   background: #fff;
@@ -85,11 +93,11 @@ main {
   background: #f7f7f7;
   color: #111;
 
-  padding: 10px 14px;
+  padding: 11px 16px;   /* ⬆️ */
   border-radius: 999px;
 
-  font-size: 13px;
-  font-weight: 800;
+  font-size: 14px;      /* ⬆️ */
+  font-weight: 900;     /* ⬆️ */
 
   cursor: pointer;
   transition: transform 0.12s, background 0.12s, border-color 0.12s;
@@ -118,17 +126,17 @@ main {
 
 .ranking-table thead th {
   background: #fafafa;
-  font-size: 13px;
-  font-weight: 800;
-  padding: 12px 8px;
+  font-size: 14px;       /* ⬆️ */
+  font-weight: 900;      /* ⬆️ */
+  padding: 13px 10px;    /* ⬆️ */
   text-align: center;
   border-bottom: 1px solid #eee;
   white-space: nowrap;
 }
 
 .ranking-table td {
-  font-size: 14px;         /* ✅ 폰트 키움 */
-  padding: 12px 8px;       /* ✅ 여백도 살짝 키움 */
+  font-size: 15px;       /* ⬆️ */
+  padding: 13px 10px;    /* ⬆️ */
   text-align: center;
   border-bottom: 1px solid #f0f0f0;
   vertical-align: middle;
@@ -140,8 +148,7 @@ main {
 }
 
 /* ===== 드라이버 정보 셀 (국기 + 이름/팀 2줄) =====
-   ⚠️ 이 CSS는 "국기가 name-cell 안에 들어오는 구조"를 전제로 가장 깔끔하게 동작함.
-   즉 name-cell 내부에 아래 구조가 있어야 함:
+   전제: name-cell 내부 구조
    <div class="driver-info">
      <span class="driver-flag">🇬🇧</span>
      <div class="driver-text">
@@ -152,52 +159,73 @@ main {
 */
 .name-cell {
   white-space: normal;
-  text-align: left;
+  text-align: left; /* 가독성 */
 }
 
+/* ✅ 국기-이름 간격 좁힘 */
 .driver-info {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px; /* ⬅️ 더 바짝 */
 }
 
+/* ✅ 국기 크기 더 줄이고 폭도 줄임 */
 .driver-flag {
   line-height: 1;
-  font-size: 12px;        /* ✅ 국기 크기 줄임(텍스트 이모지 기준) */
-  width: 18px;            /* 폭 고정해서 정렬 깔끔 */
+  font-size: 11px;  /* ⬇️ */
+  width: 14px;      /* ⬇️ */
   text-align: center;
-  flex: 0 0 18px;
+  flex: 0 0 14px;
 }
 
-/* Twemoji 적용 시 flag가 img.emoji로 바뀌면 크기 고정 */
+/* Twemoji 적용 시 */
 .driver-flag .emoji {
-  width: 12px;
-  height: 12px;
-  vertical-align: -2px;
+  width: 11px;      /* ⬇️ */
+  height: 11px;     /* ⬇️ */
+  vertical-align: -1px;
 }
 
 .driver-text {
-  min-width: 0; /* 말줄임/줄바꿈 안정 */
+  min-width: 0;
 }
 
+/* ✅ 이름/팀 폰트 키움(전체 폰트 업과 균형) */
 .driver-name {
-  font-weight: 800;
-  font-size: 14px;
-  line-height: 1.2;
+  font-weight: 900;
+  font-size: 15px;  /* ⬆️ */
+  line-height: 1.15;
 }
 
 .driver-team {
-  font-weight: 600;
-  font-size: 12px;
+  font-weight: 700;
+  font-size: 13px;  /* ⬆️ */
   color: #666;
-  margin-top: 2px;
-  line-height: 1.2;
+  margin-top: 1px;  /* ⬅️ 더 붙임 */
+  line-height: 1.1;
 }
 
-/* 컨스트럭터 팀명 가독성 */
+/* ===== 숫자 컬럼 정렬 보정 (드라이버 탭에서만) =====
+   드라이버 셀이 2줄이라 행 높이가 커질 때
+   포인트/우승/포디움이 '딱 맞게' 보이도록 중앙 고정
+*/
+#driversTab .ranking-table td:nth-child(3),
+#driversTab .ranking-table td:nth-child(4),
+#driversTab .ranking-table td:nth-child(5) {
+  vertical-align: middle;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-weight: 800;
+}
+
+/* (선택) 행 높이를 균일하게 해서 더 "딱 맞게" 보이게 */
+#driversTab .ranking-table tbody tr {
+  height: 58px;
+}
+
+/* ===== 컨스트럭터 팀명 가독성 ===== */
 .team-cell {
   text-align: left;
-  font-weight: 700;
+  font-weight: 800;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -206,39 +234,52 @@ main {
 /* ===== 모바일 대응 ===== */
 @media (max-width: 520px) {
   .tab-button {
-    font-size: 12px;
-    padding: 9px 12px;
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+
+  .tab-content h2 {
+    font-size: 18px;
   }
 
   .ranking-table thead th {
-    font-size: 11px;
-    padding: 10px 6px;
+    font-size: 12px;
+    padding: 11px 8px;
   }
 
   .ranking-table td {
-    font-size: 12px;
-    padding: 10px 6px;
+    font-size: 13px;
+    padding: 11px 8px;
+  }
+
+  .driver-info {
+    gap: 6px;
   }
 
   .driver-flag {
-    font-size: 11px;
-    width: 16px;
-    flex: 0 0 16px;
+    font-size: 10px;
+    width: 13px;
+    flex: 0 0 13px;
   }
 
   .driver-flag .emoji {
-    width: 11px;
-    height: 11px;
+    width: 10px;
+    height: 10px;
   }
 
   .driver-name {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .driver-team {
-    font-size: 11px;
+    font-size: 12px;
+  }
+
+  #driversTab .ranking-table tbody tr {
+    height: 54px;
   }
 }
+
 @media (max-width: 360px) {
   .season-selector {
     flex-direction: column;
