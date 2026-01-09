@@ -3,7 +3,7 @@
   margin-top: 60px;
   padding: 16px;
   position: relative;     /* 버튼 absolute 기준 */
-  padding-bottom: 56px;   /* ✅ 하단 버튼 자리 확보 */
+  padding-bottom: 72px;   /* 하단 버튼 자리 확보 */
 }
 
 /* 섹션 헤더: TOP3만 가운데 */
