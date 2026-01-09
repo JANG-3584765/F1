@@ -1,120 +1,105 @@
 /* =========================
-   prediction.css
+   Rank Picked (Top3 슬롯 표시)
 ========================= */
-
-/* 전체 카드 */
-.prediction-card {
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 20px 0;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  transition: all 0.3s;
-  position: relative;
+.rank-picked {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0 16px;
+  padding: 12px;
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 10px;
 }
 
-/* 잠금 카드 */
-.prediction-card.locked {
+.picked-slot {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #e9e9e9;
+  font-size: 0.9rem;
+  color: #333;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.picked-name {
+  font-weight: 700;
+  color: #111;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 잠금 시 슬롯도 살짝 정리 */
+.prediction-card.locked .rank-picked {
+  opacity: 0.9;
+}
+
+/* =========================
+   More Options (details/summary)
+========================= */
+.prediction-more {
+  margin-bottom: 15px;
+}
+
+/* 기본 summary 스타일 제거 + 버튼처럼 보이게 */
+.prediction-more-btn {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #333;
+  font-weight: 600;
+}
+
+/* 크롬/사파리 기본 화살표 제거(대신 우리가 표시) */
+.prediction-more-btn::-webkit-details-marker {
+  display: none;
+}
+
+/* 열림/닫힘 표시 */
+.prediction-more-btn::after {
+  content: "▼";
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.prediction-more[open] .prediction-more-btn::after {
+  content: "▲";
+}
+
+/* 더보기 안쪽 옵션박스는 위 여백 조금 */
+.prediction-more .prediction-options {
+  margin-top: 12px;
+}
+
+/* 잠금되면 더보기도 조작 못하게 */
+.prediction-card.locked .prediction-more-btn {
+  cursor: not-allowed;
   opacity: 0.7;
 }
 
-/* 주차 표시 */
-.prediction-week {
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-/* 질문 제목 */
-.prediction-title {
-  font-size: 1.3rem;
-  margin-bottom: 10px;
-}
-
-/* 질문 부제 */
-.prediction-subtitle {
-  font-size: 0.9rem;
-  margin-bottom: 15px;
-  color: #555;
-}
-
-/* 옵션 박스 */
-.prediction-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-/* 옵션 카드 */
-.option-card {
-  flex: 1 1 calc(25% - 10px);
-  min-width: 120px;
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  padding: 12px;
-  text-align: center;
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.2s;
-  border: 2px solid transparent;
-}
-
-/* 옵션 카드 hover */
-.option-card:hover {
-  background-color: #e0e0e0;
-}
-
-/* 선택 상태 */
-.option-card.selected {
-  border-color: #007bff;
-  background-color: #cce5ff;
-}
-
-/* 잠금 상태 */
-.option-card.locked {
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-/* 액션 버튼 */
-.btn-submit {
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: none;
-  background-color: #007bff;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-/* 버튼 비활성화 */
-.btn-submit:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-/* 예측 초기화 버튼 숨기기 */
-#reset-prediction {
-  display: none !important;
-}
-
-/* 카드 섹션 잠금 */
-.prediction-card.locked .btn-submit {
-  background-color: #28a745;
-}
-
-/* 반응형 */
+/* =========================
+   Responsive for rank-picked
+========================= */
 @media (max-width: 768px) {
-  .option-card {
-    flex: 1 1 calc(50% - 10px);
+  .rank-picked {
+    flex-direction: column;
   }
-}
-
-@media (max-width: 480px) {
-  .option-card {
-    flex: 1 1 100%;
+  .picked-slot {
+    justify-content: flex-start;
   }
 }
