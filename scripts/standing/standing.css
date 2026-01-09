@@ -3,7 +3,7 @@
   margin-top: 60px;
   padding: 16px;
   position: relative;     /* 버튼 absolute 기준 */
-  padding-bottom: 72px;   /* 하단 버튼 자리 확보 */
+  padding-bottom: 100px;   /* 하단 버튼 자리 확보 */
 }
 
 /* 섹션 헤더: TOP3만 가운데 */
@@ -33,7 +33,7 @@
   transition: background 0.2s;
 
   position: absolute;   /* 포디움 아래 오른쪽으로 내림 */
-  right: 16px;           /* standing-section padding과 맞춤 */
+  left: 16px;           /* standing-section padding과 맞춤 */
   bottom: 16px;
 }
 
