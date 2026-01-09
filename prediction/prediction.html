@@ -32,62 +32,48 @@
     <button id="reset-prediction" type="button">예측 초기화</button>
   </section>
 
-  <!-- Week 1 -->
+  <!-- ======================
+     Week 1
+====================== -->
 <section class="prediction-card">
   <details class="week-toggle" data-week="1" open>
     <summary class="week-summary">
       <span class="week-badge">Week 1</span>
-      <span class="week-title">드라이버 챔피언십 Top 3</span>
+      <span class="week-title">지난 시즌 최고의 드라이버</span>
       <span class="week-state" aria-hidden="true"></span>
     </summary>
 
     <div class="week-body">
-      <p class="prediction-subtitle">상위 3명을 순서대로 선택하세요.</p>
+      <p class="prediction-subtitle">지난 시즌 기준, 최고의 드라이버를 한 명 선택하세요.</p>
 
-      <!-- 선택된 순위 표시 -->
-      <div class="rank-picked" data-week="1">
-        <div class="picked-slot" data-rank="1">1위: <span class="picked-name">-</span></div>
-        <div class="picked-slot" data-rank="2">2위: <span class="picked-name">-</span></div>
-        <div class="picked-slot" data-rank="3">3위: <span class="picked-name">-</span></div>
-      </div>
-
-      <!-- 기본 노출 5명 -->
-      <div class="prediction-options rank-options" data-week="1" data-group="top">
+      <!-- 기본 노출 -->
+      <div class="prediction-options single-options" data-week="1" data-group="top">
         <div class="option-card" data-value="norris">랜도 노리스</div>
-        <div class="option-card" data-value="piastri">오스카 피아스트리</div>
         <div class="option-card" data-value="verstappen">막스 베르스타펜</div>
         <div class="option-card" data-value="leclerc">샤를 르클레르</div>
         <div class="option-card" data-value="hamilton">루이스 해밀턴</div>
+        <div class="option-card" data-value="piastri">오스카 피아스트리</div>
       </div>
 
       <!-- 더보기 -->
       <details class="prediction-more" data-week="1">
         <summary class="prediction-more-btn">후보 더보기</summary>
-
-        <div class="prediction-options rank-options" data-week="1" data-group="more">
+        <div class="prediction-options single-options" data-week="1" data-group="more">
           <div class="option-card" data-value="russell">조지 러셀</div>
           <div class="option-card" data-value="antonelli">키미 안토넬리</div>
-
           <div class="option-card" data-value="hadjar">아이작 하자르</div>
-
           <div class="option-card" data-value="albon">알렉산더 알본</div>
           <div class="option-card" data-value="sainz">카를로스 사인츠</div>
-
           <div class="option-card" data-value="lindblad">아비드 린드블라드</div>
           <div class="option-card" data-value="lawson">리암 로슨</div>
-
           <div class="option-card" data-value="stroll">랜스 스트롤</div>
           <div class="option-card" data-value="alonso">페르난도 알론소</div>
-
           <div class="option-card" data-value="ocon">에스테반 오콘</div>
           <div class="option-card" data-value="bearman">올리버 베어먼</div>
-
           <div class="option-card" data-value="hulkenberg">니코 휠켄베르크</div>
           <div class="option-card" data-value="bortoleto">가브리에우 보르툴레투</div>
-
           <div class="option-card" data-value="gasly">피에르 가슬리</div>
           <div class="option-card" data-value="colapinto">프랑코 콜라핀토</div>
-
           <div class="option-card" data-value="perez">세르히오 페레스</div>
           <div class="option-card" data-value="bottas">발테리 보타스</div>
         </div>
@@ -100,39 +86,176 @@
   </details>
 </section>
 
-<!-- Week 2 -->
+<!-- ======================
+     Week 2
+====================== -->
 <section class="prediction-card">
   <details class="week-toggle" data-week="2" open>
     <summary class="week-summary">
       <span class="week-badge">Week 2</span>
-      <span class="week-title">컨스트럭터 챔피언십 Top 3</span>
+      <span class="week-title">지난 시즌 깜짝 활약 드라이버</span>
       <span class="week-state" aria-hidden="true"></span>
     </summary>
 
     <div class="week-body">
-      <p class="prediction-subtitle">상위 3팀을 순서대로 선택하세요.</p>
+      <p class="prediction-subtitle">지난 시즌 기준, 깜짝 활약한 드라이버를 한 명 선택하세요.</p>
 
-      <!-- 선택된 순위 표시 -->
-      <div class="rank-picked" data-week="2">
-        <div class="picked-slot" data-rank="1">1위: <span class="picked-name">-</span></div>
-        <div class="picked-slot" data-rank="2">2위: <span class="picked-name">-</span></div>
-        <div class="picked-slot" data-rank="3">3위: <span class="picked-name">-</span></div>
+      <div class="prediction-options single-options" data-week="2" data-group="top">
+        <div class="option-card" data-value="piastri">오스카 피아스트리</div>
+        <div class="option-card" data-value="russell">조지 러셀</div>
+        <div class="option-card" data-value="albon">알렉산더 알본</div>
+        <div class="option-card" data-value="gasly">피에르 가슬리</div>
+        <div class="option-card" data-value="alonso">페르난도 알론소</div>
       </div>
 
-      <!-- 기본 노출 4팀 -->
-      <div class="prediction-options rank-options" data-week="2" data-group="top">
-        <div class="option-card" data-value="redbull">레드불 레이싱</div>
-        <div class="option-card" data-value="ferrari">페라리</div>
-        <div class="option-card" data-value="mercedes">메르세데스</div>
-        <div class="option-card" data-value="mclaren">맥라렌</div>
-      </div>
-
-      <!-- 더보기 -->
       <details class="prediction-more" data-week="2">
         <summary class="prediction-more-btn">후보 더보기</summary>
+        <div class="prediction-options single-options" data-week="2" data-group="more">
+          <div class="option-card" data-value="norris">랜도 노리스</div>
+          <div class="option-card" data-value="verstappen">막스 베르스타펜</div>
+          <div class="option-card" data-value="leclerc">샤를 르클레르</div>
+          <div class="option-card" data-value="hamilton">루이스 해밀턴</div>
+          <div class="option-card" data-value="antonelli">키미 안토넬리</div>
+          <div class="option-card" data-value="hadjar">아이작 하자르</div>
+          <div class="option-card" data-value="sainz">카를로스 사인츠</div>
+          <div class="option-card" data-value="lindblad">아비드 린드블라드</div>
+          <div class="option-card" data-value="lawson">리암 로슨</div>
+          <div class="option-card" data-value="stroll">랜스 스트롤</div>
+          <div class="option-card" data-value="ocon">에스테반 오콘</div>
+          <div class="option-card" data-value="bearman">올리버 베어먼</div>
+          <div class="option-card" data-value="hulkenberg">니코 휠켄베르크</div>
+          <div class="option-card" data-value="bortoleto">가브리에우 보르툴레투</div>
+          <div class="option-card" data-value="colapinto">프랑코 콜라핀토</div>
+          <div class="option-card" data-value="perez">세르히오 페레스</div>
+          <div class="option-card" data-value="bottas">발테리 보타스</div>
+        </div>
+      </details>
 
-        <div class="prediction-options rank-options" data-week="2" data-group="more">
-          <div class="option-card" data-value="astonmartin">애스턴 마틴</div>
+      <div class="prediction-actions">
+        <button class="btn-submit" disabled>선택 완료</button>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ======================
+     Week 3
+====================== -->
+<section class="prediction-card">
+  <details class="week-toggle" data-week="3" open>
+    <summary class="week-summary">
+      <span class="week-badge">Week 3</span>
+      <span class="week-title">지난 시즌 깜짝 활약 팀</span>
+      <span class="week-state" aria-hidden="true"></span>
+    </summary>
+
+    <div class="week-body">
+      <p class="prediction-subtitle">지난 시즌 기준, 깜짝 활약한 팀을 한 팀 선택하세요.</p>
+
+      <div class="prediction-options single-options" data-week="3" data-group="top">
+        <div class="option-card" data-value="mclaren">맥라렌</div>
+        <div class="option-card" data-value="mercedes">메르세데스</div>
+        <div class="option-card" data-value="ferrari">페라리</div>
+        <div class="option-card" data-value="astonmartin">애스턴 마틴</div>
+        <div class="option-card" data-value="williams">윌리엄스</div>
+      </div>
+
+      <details class="prediction-more" data-week="3">
+        <summary class="prediction-more-btn">후보 더보기</summary>
+        <div class="prediction-options single-options" data-week="3" data-group="more">
+          <div class="option-card" data-value="redbull">레드불 레이싱</div>
+          <div class="option-card" data-value="racingbulls">레이싱 불스</div>
+          <div class="option-card" data-value="haas">하스</div>
+          <div class="option-card" data-value="audi">아우디</div>
+          <div class="option-card" data-value="alpine">알핀</div>
+          <div class="option-card" data-value="cadillac">캐딜락</div>
+        </div>
+      </details>
+
+      <div class="prediction-actions">
+        <button class="btn-submit" disabled>선택 완료</button>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ======================
+     Week 4
+====================== -->
+<section class="prediction-card">
+  <details class="week-toggle" data-week="4" open>
+    <summary class="week-summary">
+      <span class="week-badge">Week 4</span>
+      <span class="week-title">내가 응원하는 드라이버</span>
+      <span class="week-state" aria-hidden="true"></span>
+    </summary>
+
+    <div class="week-body">
+      <p class="prediction-subtitle">내가 가장 응원하는 드라이버를 한 명 선택하세요.</p>
+
+      <div class="prediction-options single-options" data-week="4" data-group="top">
+        <div class="option-card" data-value="norris">랜도 노리스</div>
+        <div class="option-card" data-value="leclerc">샤를 르클레르</div>
+        <div class="option-card" data-value="piastri">오스카 피아스트리</div>
+        <div class="option-card" data-value="hamilton">루이스 해밀턴</div>
+        <div class="option-card" data-value="alonso">페르난도 알론소</div>
+      </div>
+
+      <details class="prediction-more" data-week="4">
+        <summary class="prediction-more-btn">후보 더보기</summary>
+        <div class="prediction-options single-options" data-week="4" data-group="more">
+          <div class="option-card" data-value="verstappen">막스 베르스타펜</div>
+          <div class="option-card" data-value="russell">조지 러셀</div>
+          <div class="option-card" data-value="antonelli">키미 안토넬리</div>
+          <div class="option-card" data-value="hadjar">아이작 하자르</div>
+          <div class="option-card" data-value="albon">알렉산더 알본</div>
+          <div class="option-card" data-value="sainz">카를로스 사인츠</div>
+          <div class="option-card" data-value="lindblad">아비드 린드블라드</div>
+          <div class="option-card" data-value="lawson">리암 로슨</div>
+          <div class="option-card" data-value="stroll">랜스 스트롤</div>
+          <div class="option-card" data-value="ocon">에스테반 오콘</div>
+          <div class="option-card" data-value="bearman">올리버 베어먼</div>
+          <div class="option-card" data-value="hulkenberg">니코 휠켄베르크</div>
+          <div class="option-card" data-value="bortoleto">가브리에우 보르툴레투</div>
+          <div class="option-card" data-value="gasly">피에르 가슬리</div>
+          <div class="option-card" data-value="colapinto">프랑코 콜라핀토</div>
+          <div class="option-card" data-value="perez">세르히오 페레스</div>
+          <div class="option-card" data-value="bottas">발테리 보타스</div>
+        </div>
+      </details>
+
+      <div class="prediction-actions">
+        <button class="btn-submit" disabled>선택 완료</button>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ======================
+     Week 5
+====================== -->
+<section class="prediction-card">
+  <details class="week-toggle" data-week="5" open>
+    <summary class="week-summary">
+      <span class="week-badge">Week 5</span>
+      <span class="week-title">내가 응원하는 팀</span>
+      <span class="week-state" aria-hidden="true"></span>
+    </summary>
+
+    <div class="week-body">
+      <p class="prediction-subtitle">내가 가장 응원하는 팀을 한 팀 선택하세요.</p>
+
+      <div class="prediction-options single-options" data-week="5" data-group="top">
+        <div class="option-card" data-value="ferrari">페라리</div>
+        <div class="option-card" data-value="mclaren">맥라렌</div>
+        <div class="option-card" data-value="redbull">레드불 레이싱</div>
+        <div class="option-card" data-value="mercedes">메르세데스</div>
+        <div class="option-card" data-value="astonmartin">애스턴 마틴</div>
+      </div>
+
+      <details class="prediction-more" data-week="5">
+        <summary class="prediction-more-btn">후보 더보기</summary>
+        <div class="prediction-options single-options" data-week="5" data-group="more">
           <div class="option-card" data-value="williams">윌리엄스</div>
           <div class="option-card" data-value="racingbulls">레이싱 불스</div>
           <div class="option-card" data-value="haas">하스</div>
@@ -149,212 +272,389 @@
   </details>
 </section>
 
-  <!-- ======================
-       Week 3
-  ====================== -->
-  <section class="prediction-card">
-    <div class="prediction-week"><span>Week 3</span></div>
-    <h2 class="prediction-title">시즌 최다 우승 드라이버</h2>
-
-    <div class="prediction-options single-options" data-week="3">
-      <div class="option-card" data-value="verstappen">Max Verstappen</div>
-      <div class="option-card" data-value="leclerc">Charles Leclerc</div>
-      <div class="option-card" data-value="norris">Lando Norris</div>
-      <div class="option-card" data-value="piastri">Oscar Piastri</div>
-    </div>
-
-    <div class="prediction-actions">
-      <button class="btn-submit" disabled>선택 완료</button>
-    </div>
-  </section>
-
- <!-- ======================
-     Week 4
+<!-- ======================
+     Week 6
 ====================== -->
 <section class="prediction-card">
+  <details class="week-toggle" data-week="6" open>
+    <summary class="week-summary">
+      <span class="week-badge">Week 6</span>
+      <span class="week-title">가장 기대되는 드라이버</span>
+      <span class="week-state" aria-hidden="true"></span>
+    </summary>
 
-  <!-- 주차 표시 -->
-  <div class="prediction-week">
-    <span>Week 4</span>
-  </div>
+    <div class="week-body">
+      <p class="prediction-subtitle">올 시즌 가장 기대되는 드라이버를 한 명 선택하세요.</p>
 
-  <!-- 질문 제목 -->
-  <h2 class="prediction-title">
-    시즌 포인트 Top 10 진입
-  </h2>
+      <div class="prediction-options single-options" data-week="6" data-group="top">
+        <div class="option-card" data-value="antonelli">키미 안토넬리</div>
+        <div class="option-card" data-value="piastri">오스카 피아스트리</div>
+        <div class="option-card" data-value="norris">랜도 노리스</div>
+        <div class="option-card" data-value="leclerc">샤를 르클레르</div>
+        <div class="option-card" data-value="verstappen">막스 베르스타펜</div>
+      </div>
 
-  <!-- 질문 설명 -->
-  <p class="prediction-subtitle">
-    2026 시즌 드라이버 챔피언십 Top 10에 진입할 것으로 예상되는 드라이버를<br>
-    <strong>최대 5명까지 선택</strong>하세요.
-  </p>
+      <details class="prediction-more" data-week="6">
+        <summary class="prediction-more-btn">후보 더보기</summary>
+        <div class="prediction-options single-options" data-week="6" data-group="more">
+          <div class="option-card" data-value="hamilton">루이스 해밀턴</div>
+          <div class="option-card" data-value="russell">조지 러셀</div>
+          <div class="option-card" data-value="hadjar">아이작 하자르</div>
+          <div class="option-card" data-value="albon">알렉산더 알본</div>
+          <div class="option-card" data-value="sainz">카를로스 사인츠</div>
+          <div class="option-card" data-value="lindblad">아비드 린드블라드</div>
+          <div class="option-card" data-value="lawson">리암 로슨</div>
+          <div class="option-card" data-value="stroll">랜스 스트롤</div>
+          <div class="option-card" data-value="alonso">페르난도 알론소</div>
+          <div class="option-card" data-value="ocon">에스테반 오콘</div>
+          <div class="option-card" data-value="bearman">올리버 베어먼</div>
+          <div class="option-card" data-value="hulkenberg">니코 휠켄베르크</div>
+          <div class="option-card" data-value="bortoleto">가브리에우 보르툴레투</div>
+          <div class="option-card" data-value="gasly">피에르 가슬리</div>
+          <div class="option-card" data-value="colapinto">프랑코 콜라핀토</div>
+          <div class="option-card" data-value="perez">세르히오 페레스</div>
+          <div class="option-card" data-value="bottas">발테리 보타스</div>
+        </div>
+      </details>
 
-  <!-- 선택 영역 (복수 선택 + 최대 개수 제한) -->
-  <div
-    class="prediction-options multi-options"
-    data-week="4"
-    data-max="5"
-  >
-    <div class="option-card" data-value="alonso">Fernando Alonso</div>
-    <div class="option-card" data-value="russell">George Russell</div>
-    <div class="option-card" data-value="sainz">Carlos Sainz</div>
-    <div class="option-card" data-value="perez">Sergio Perez</div>
-    <div class="option-card" data-value="ocon">Esteban Ocon</div>
-    <div class="option-card" data-value="gasly">Pierre Gasly</div>
-    <div class="option-card" data-value="tsunoda">Yuki Tsunoda</div>
-  </div>
-
-  <!-- 액션 버튼 -->
-  <div class="prediction-actions">
-    <button class="btn-submit" disabled>
-      선택 완료
-    </button>
-  </div>
-
+      <div class="prediction-actions">
+        <button class="btn-submit" disabled>선택 완료</button>
+      </div>
+    </div>
+  </details>
 </section>
 
-  <!-- ======================
-       Week 5
-  ====================== -->
-  <section class="prediction-card">
-    <div class="prediction-week"><span>Week 5</span></div>
-    <h2 class="prediction-title">루키 중 최고 순위</h2>
+<!-- ======================
+     Week 7
+====================== -->
+<section class="prediction-card">
+  <details class="week-toggle" data-week="7" open>
+    <summary class="week-summary">
+      <span class="week-badge">Week 7</span>
+      <span class="week-title">가장 기대되는 팀</span>
+      <span class="week-state" aria-hidden="true"></span>
+    </summary>
 
-    <div class="prediction-options single-options" data-week="5">
-      <div class="option-card" data-value="antonelli">Andrea Kimi Antonelli</div>
-      <div class="option-card" data-value="bearman">Oliver Bearman</div>
-      <div class="option-card" data-value="other">Other Rookie</div>
+    <div class="week-body">
+      <p class="prediction-subtitle">올 시즌 가장 기대되는 팀을 한 팀 선택하세요.</p>
+
+      <div class="prediction-options single-options" data-week="7" data-group="top">
+        <div class="option-card" data-value="mclaren">맥라렌</div>
+        <div class="option-card" data-value="ferrari">페라리</div>
+        <div class="option-card" data-value="mercedes">메르세데스</div>
+        <div class="option-card" data-value="redbull">레드불 레이싱</div>
+        <div class="option-card" data-value="audi">아우디</div>
+      </div>
+
+      <details class="prediction-more" data-week="7">
+        <summary class="prediction-more-btn">후보 더보기</summary>
+        <div class="prediction-options single-options" data-week="7" data-group="more">
+          <div class="option-card" data-value="astonmartin">애스턴 마틴</div>
+          <div class="option-card" data-value="williams">윌리엄스</div>
+          <div class="option-card" data-value="racingbulls">레이싱 불스</div>
+          <div class="option-card" data-value="haas">하스</div>
+          <div class="option-card" data-value="alpine">알핀</div>
+          <div class="option-card" data-value="cadillac">캐딜락</div>
+        </div>
+      </details>
+
+      <div class="prediction-actions">
+        <button class="btn-submit" disabled>선택 완료</button>
+      </div>
     </div>
+  </details>
+</section>
 
-    <div class="prediction-actions">
-      <button class="btn-submit" disabled>선택 완료</button>
+<!-- ======================
+     Week 8
+====================== -->
+<section class="prediction-card">
+  <details class="week-toggle" data-week="8" open>
+    <summary class="week-summary">
+      <span class="week-badge">Week 8</span>
+      <span class="week-title">퀄리파잉 최강 드라이버</span>
+      <span class="week-state" aria-hidden="true"></span>
+    </summary>
+
+    <div class="week-body">
+      <p class="prediction-subtitle">올 시즌 퀄리파잉에서 가장 강할 드라이버를 한 명 선택하세요.</p>
+
+      <div class="prediction-options single-options" data-week="8" data-group="top">
+        <div class="option-card" data-value="leclerc">샤를 르클레르</div>
+        <div class="option-card" data-value="verstappen">막스 베르스타펜</div>
+        <div class="option-card" data-value="norris">랜도 노리스</div>
+        <div class="option-card" data-value="piastri">오스카 피아스트리</div>
+        <div class="option-card" data-value="hamilton">루이스 해밀턴</div>
+      </div>
+
+      <details class="prediction-more" data-week="8">
+        <summary class="prediction-more-btn">후보 더보기</summary>
+        <div class="prediction-options single-options" data-week="8" data-group="more">
+          <div class="option-card" data-value="russell">조지 러셀</div>
+          <div class="option-card" data-value="antonelli">키미 안토넬리</div>
+          <div class="option-card" data-value="hadjar">아이작 하자르</div>
+          <div class="option-card" data-value="albon">알렉산더 알본</div>
+          <div class="option-card" data-value="sainz">카를로스 사인츠</div>
+          <div class="option-card" data-value="lindblad">아비드 린드블라드</div>
+          <div class="option-card" data-value="lawson">리암 로슨</div>
+          <div class="option-card" data-value="stroll">랜스 스트롤</div>
+          <div class="option-card" data-value="alonso">페르난도 알론소</div>
+          <div class="option-card" data-value="ocon">에스테반 오콘</div>
+          <div class="option-card" data-value="bearman">올리버 베어먼</div>
+          <div class="option-card" data-value="hulkenberg">니코 휠켄베르크</div>
+          <div class="option-card" data-value="bortoleto">가브리에우 보르툴레투</div>
+          <div class="option-card" data-value="gasly">피에르 가슬리</div>
+          <div class="option-card" data-value="colapinto">프랑코 콜라핀토</div>
+          <div class="option-card" data-value="perez">세르히오 페레스</div>
+          <div class="option-card" data-value="bottas">발테리 보타스</div>
+        </div>
+      </details>
+
+      <div class="prediction-actions">
+        <button class="btn-submit" disabled>선택 완료</button>
+      </div>
     </div>
-  </section>
+  </details>
+</section>
 
-  <!-- ======================
-       Week 6
-  ====================== -->
-  <section class="prediction-card">
-    <div class="prediction-week"><span>Week 6</span></div>
-    <h2 class="prediction-title">시즌 폴 포지션 최다</h2>
+<!-- ======================
+     Week 9
+====================== -->
+<section class="prediction-card">
+  <details class="week-toggle" data-week="9" open>
+    <summary class="week-summary">
+      <span class="week-badge">Week 9</span>
+      <span class="week-title">퀄리파잉 최강 팀</span>
+      <span class="week-state" aria-hidden="true"></span>
+    </summary>
 
-    <div class="prediction-options single-options" data-week="6">
-      <div class="option-card" data-value="leclerc">Charles Leclerc</div>
-      <div class="option-card" data-value="verstappen">Max Verstappen</div>
-      <div class="option-card" data-value="norris">Lando Norris</div>
+    <div class="week-body">
+      <p class="prediction-subtitle">올 시즌 퀄리파잉에서 가장 강할 팀을 한 팀 선택하세요.</p>
+
+      <div class="prediction-options single-options" data-week="9" data-group="top">
+        <div class="option-card" data-value="ferrari">페라리</div>
+        <div class="option-card" data-value="mclaren">맥라렌</div>
+        <div class="option-card" data-value="redbull">레드불 레이싱</div>
+        <div class="option-card" data-value="mercedes">메르세데스</div>
+        <div class="option-card" data-value="astonmartin">애스턴 마틴</div>
+      </div>
+
+      <details class="prediction-more" data-week="9">
+        <summary class="prediction-more-btn">후보 더보기</summary>
+        <div class="prediction-options single-options" data-week="9" data-group="more">
+          <div class="option-card" data-value="williams">윌리엄스</div>
+          <div class="option-card" data-value="racingbulls">레이싱 불스</div>
+          <div class="option-card" data-value="haas">하스</div>
+          <div class="option-card" data-value="audi">아우디</div>
+          <div class="option-card" data-value="alpine">알핀</div>
+          <div class="option-card" data-value="cadillac">캐딜락</div>
+        </div>
+      </details>
+
+      <div class="prediction-actions">
+        <button class="btn-submit" disabled>선택 완료</button>
+      </div>
     </div>
+  </details>
+</section>
 
-    <div class="prediction-actions">
-      <button class="btn-submit" disabled>선택 완료</button>
+<!-- ======================
+     Week 10
+====================== -->
+<section class="prediction-card">
+  <details class="week-toggle" data-week="10" open>
+    <summary class="week-summary">
+      <span class="week-badge">Week 10</span>
+      <span class="week-title">시즌 최다 포디움 달성 드라이버</span>
+      <span class="week-state" aria-hidden="true"></span>
+    </summary>
+
+    <div class="week-body">
+      <p class="prediction-subtitle">올 시즌 포디움(Top3) 횟수가 가장 많을 드라이버를 한 명 선택하세요.</p>
+
+      <div class="prediction-options single-options" data-week="10" data-group="top">
+        <div class="option-card" data-value="norris">랜도 노리스</div>
+        <div class="option-card" data-value="verstappen">막스 베르스타펜</div>
+        <div class="option-card" data-value="leclerc">샤를 르클레르</div>
+        <div class="option-card" data-value="piastri">오스카 피아스트리</div>
+        <div class="option-card" data-value="hamilton">루이스 해밀턴</div>
+      </div>
+
+      <details class="prediction-more" data-week="10">
+        <summary class="prediction-more-btn">후보 더보기</summary>
+        <div class="prediction-options single-options" data-week="10" data-group="more">
+          <div class="option-card" data-value="russell">조지 러셀</div>
+          <div class="option-card" data-value="antonelli">키미 안토넬리</div>
+          <div class="option-card" data-value="hadjar">아이작 하자르</div>
+          <div class="option-card" data-value="albon">알렉산더 알본</div>
+          <div class="option-card" data-value="sainz">카를로스 사인츠</div>
+          <div class="option-card" data-value="lindblad">아비드 린드블라드</div>
+          <div class="option-card" data-value="lawson">리암 로슨</div>
+          <div class="option-card" data-value="stroll">랜스 스트롤</div>
+          <div class="option-card" data-value="alonso">페르난도 알론소</div>
+          <div class="option-card" data-value="ocon">에스테반 오콘</div>
+          <div class="option-card" data-value="bearman">올리버 베어먼</div>
+          <div class="option-card" data-value="hulkenberg">니코 휠켄베르크</div>
+          <div class="option-card" data-value="bortoleto">가브리에우 보르툴레투</div>
+          <div class="option-card" data-value="gasly">피에르 가슬리</div>
+          <div class="option-card" data-value="colapinto">프랑코 콜라핀토</div>
+          <div class="option-card" data-value="perez">세르히오 페레스</div>
+          <div class="option-card" data-value="bottas">발테리 보타스</div>
+        </div>
+      </details>
+
+      <div class="prediction-actions">
+        <button class="btn-submit" disabled>선택 완료</button>
+      </div>
     </div>
-  </section>
+  </details>
+</section>
 
-  <!-- ======================
-       Week 7
-  ====================== -->
-  <section class="prediction-card">
-    <div class="prediction-week"><span>Week 7</span></div>
-    <h2 class="prediction-title">퀄리파잉 최강 팀</h2>
+<!-- ======================
+     Week 11
+====================== -->
+<section class="prediction-card">
+  <details class="week-toggle" data-week="11" open>
+    <summary class="week-summary">
+      <span class="week-badge">Week 11</span>
+      <span class="week-title">시즌 최다 포디움 달성 팀</span>
+      <span class="week-state" aria-hidden="true"></span>
+    </summary>
 
-    <div class="prediction-options single-options" data-week="7">
-      <div class="option-card" data-value="ferrari">Ferrari</div>
-      <div class="option-card" data-value="redbull">Red Bull Racing</div>
-      <div class="option-card" data-value="mclaren">McLaren</div>
+    <div class="week-body">
+      <p class="prediction-subtitle">올 시즌 포디움(Top3) 횟수가 가장 많을 팀을 한 팀 선택하세요.</p>
+
+      <div class="prediction-options single-options" data-week="11" data-group="top">
+        <div class="option-card" data-value="mclaren">맥라렌</div>
+        <div class="option-card" data-value="ferrari">페라리</div>
+        <div class="option-card" data-value="redbull">레드불 레이싱</div>
+        <div class="option-card" data-value="mercedes">메르세데스</div>
+        <div class="option-card" data-value="astonmartin">애스턴 마틴</div>
+      </div>
+
+      <details class="prediction-more" data-week="11">
+        <summary class="prediction-more-btn">후보 더보기</summary>
+        <div class="prediction-options single-options" data-week="11" data-group="more">
+          <div class="option-card" data-value="williams">윌리엄스</div>
+          <div class="option-card" data-value="racingbulls">레이싱 불스</div>
+          <div class="option-card" data-value="haas">하스</div>
+          <div class="option-card" data-value="audi">아우디</div>
+          <div class="option-card" data-value="alpine">알핀</div>
+          <div class="option-card" data-value="cadillac">캐딜락</div>
+        </div>
+      </details>
+
+      <div class="prediction-actions">
+        <button class="btn-submit" disabled>선택 완료</button>
+      </div>
     </div>
+  </details>
+</section>
 
-    <div class="prediction-actions">
-      <button class="btn-submit" disabled>선택 완료</button>
+<!-- ======================
+     Week 12
+====================== -->
+<section class="prediction-card">
+  <details class="week-toggle" data-week="12" open>
+    <summary class="week-summary">
+      <span class="week-badge">Week 12</span>
+      <span class="week-title">드라이버 포인트 Top 3</span>
+      <span class="week-state" aria-hidden="true"></span>
+    </summary>
+
+    <div class="week-body">
+      <p class="prediction-subtitle">드라이버 챔피언십 포인트 Top 3를 순서대로 선택하세요.</p>
+
+      <div class="rank-picked" data-week="12">
+        <div class="picked-slot" data-rank="1">1위: <span class="picked-name">-</span></div>
+        <div class="picked-slot" data-rank="2">2위: <span class="picked-name">-</span></div>
+        <div class="picked-slot" data-rank="3">3위: <span class="picked-name">-</span></div>
+      </div>
+
+      <div class="prediction-options rank-options" data-week="12" data-group="top">
+        <div class="option-card" data-value="norris">랜도 노리스</div>
+        <div class="option-card" data-value="piastri">오스카 피아스트리</div>
+        <div class="option-card" data-value="verstappen">막스 베르스타펜</div>
+        <div class="option-card" data-value="leclerc">샤를 르클레르</div>
+        <div class="option-card" data-value="hamilton">루이스 해밀턴</div>
+      </div>
+
+      <details class="prediction-more" data-week="12">
+        <summary class="prediction-more-btn">후보 더보기</summary>
+        <div class="prediction-options rank-options" data-week="12" data-group="more">
+          <div class="option-card" data-value="russell">조지 러셀</div>
+          <div class="option-card" data-value="antonelli">키미 안토넬리</div>
+          <div class="option-card" data-value="hadjar">아이작 하자르</div>
+          <div class="option-card" data-value="albon">알렉산더 알본</div>
+          <div class="option-card" data-value="sainz">카를로스 사인츠</div>
+          <div class="option-card" data-value="lindblad">아비드 린드블라드</div>
+          <div class="option-card" data-value="lawson">리암 로슨</div>
+          <div class="option-card" data-value="stroll">랜스 스트롤</div>
+          <div class="option-card" data-value="alonso">페르난도 알론소</div>
+          <div class="option-card" data-value="ocon">에스테반 오콘</div>
+          <div class="option-card" data-value="bearman">올리버 베어먼</div>
+          <div class="option-card" data-value="hulkenberg">니코 휠켄베르크</div>
+          <div class="option-card" data-value="bortoleto">가브리에우 보르툴레투</div>
+          <div class="option-card" data-value="gasly">피에르 가슬리</div>
+          <div class="option-card" data-value="colapinto">프랑코 콜라핀토</div>
+          <div class="option-card" data-value="perez">세르히오 페레스</div>
+          <div class="option-card" data-value="bottas">발테리 보타스</div>
+        </div>
+      </details>
+
+      <div class="prediction-actions">
+        <button class="btn-submit" disabled>선택 완료</button>
+      </div>
     </div>
-  </section>
+  </details>
+</section>
 
-  <!-- ======================
-       Week 8
-  ====================== -->
-  <section class="prediction-card">
-    <div class="prediction-week"><span>Week 8</span></div>
-    <h2 class="prediction-title">가장 기대되는 루키</h2>
+<!-- ======================
+     Week 13
+====================== -->
+<section class="prediction-card">
+  <details class="week-toggle" data-week="13" open>
+    <summary class="week-summary">
+      <span class="week-badge">Week 13</span>
+      <span class="week-title">컨스트럭터 포인트 Top 3</span>
+      <span class="week-state" aria-hidden="true"></span>
+    </summary>
 
-    <div class="prediction-options single-options" data-week="8">
-      <div class="option-card" data-value="antonelli">Andrea Kimi Antonelli</div>
-      <div class="option-card" data-value="bearman">Oliver Bearman</div>
+    <div class="week-body">
+      <p class="prediction-subtitle">컨스트럭터 챔피언십 포인트 Top 3를 순서대로 선택하세요.</p>
+
+      <div class="rank-picked" data-week="13">
+        <div class="picked-slot" data-rank="1">1위: <span class="picked-name">-</span></div>
+        <div class="picked-slot" data-rank="2">2위: <span class="picked-name">-</span></div>
+        <div class="picked-slot" data-rank="3">3위: <span class="picked-name">-</span></div>
+      </div>
+
+      <div class="prediction-options rank-options" data-week="13" data-group="top">
+        <div class="option-card" data-value="redbull">레드불 레이싱</div>
+        <div class="option-card" data-value="ferrari">페라리</div>
+        <div class="option-card" data-value="mercedes">메르세데스</div>
+        <div class="option-card" data-value="mclaren">맥라렌</div>
+      </div>
+
+      <details class="prediction-more" data-week="13">
+        <summary class="prediction-more-btn">후보 더보기</summary>
+        <div class="prediction-options rank-options" data-week="13" data-group="more">
+          <div class="option-card" data-value="astonmartin">애스턴 마틴</div>
+          <div class="option-card" data-value="williams">윌리엄스</div>
+          <div class="option-card" data-value="racingbulls">레이싱 불스</div>
+          <div class="option-card" data-value="haas">하스</div>
+          <div class="option-card" data-value="audi">아우디</div>
+          <div class="option-card" data-value="alpine">알핀</div>
+          <div class="option-card" data-value="cadillac">캐딜락</div>
+        </div>
+      </details>
+
+      <div class="prediction-actions">
+        <button class="btn-submit" disabled>선택 완료</button>
+      </div>
     </div>
-
-    <div class="prediction-actions">
-      <button class="btn-submit" disabled>선택 완료</button>
-    </div>
-  </section>
-
-  <!-- ======================
-       Week 9
-  ====================== -->
-  <section class="prediction-card">
-    <div class="prediction-week"><span>Week 9</span></div>
-    <h2 class="prediction-title">가장 기대되는 팀</h2>
-
-    <div class="prediction-options single-options" data-week="9">
-      <div class="option-card" data-value="ferrari">Ferrari</div>
-      <div class="option-card" data-value="mclaren">McLaren</div>
-      <div class="option-card" data-value="mercedes">Mercedes</div>
-    </div>
-
-    <div class="prediction-actions">
-      <button class="btn-submit" disabled>선택 완료</button>
-    </div>
-  </section>
-
-  <!-- ======================
-       Week 10
-  ====================== -->
-  <section class="prediction-card">
-    <div class="prediction-week"><span>Week 10</span></div>
-    <h2 class="prediction-title">시즌 최고의 레이스</h2>
-
-    <div class="prediction-options single-options" data-week="10">
-      <div class="option-card" data-value="monaco">Monaco GP</div>
-      <div class="option-card" data-value="british">British GP</div>
-      <div class="option-card" data-value="japanese">Japanese GP</div>
-    </div>
-
-    <div class="prediction-actions">
-      <button class="btn-submit" disabled>선택 완료</button>
-    </div>
-  </section>
-
-  <!-- ======================
-       Week 11
-  ====================== -->
-  <section class="prediction-card">
-    <div class="prediction-week"><span>Week 11</span></div>
-    <h2 class="prediction-title">내가 가장 응원하는 팀</h2>
-
-    <div class="prediction-options single-options" data-week="11">
-      <div class="option-card" data-value="ferrari">Ferrari</div>
-      <div class="option-card" data-value="mclaren">McLaren</div>
-      <div class="option-card" data-value="redbull">Red Bull Racing</div>
-    </div>
-
-    <div class="prediction-actions">
-      <button class="btn-submit" disabled>선택 완료</button>
-    </div>
-  </section>
-
-  <!-- ======================
-       Week 12
-  ====================== -->
-  <section class="prediction-card">
-    <div class="prediction-week"><span>Week 12</span></div>
-    <h2 class="prediction-title">내가 가장 응원할 드라이버</h2>
-
-    <div class="prediction-options single-options" data-week="12">
-      <div class="option-card" data-value="norris">Lando Norris</div>
-      <div class="option-card" data-value="leclerc">Charles Leclerc</div>
-      <div class="option-card" data-value="piastri">Oscar Piastri</div>
-    </div>
-
-    <div class="prediction-actions">
-      <button class="btn-submit" disabled>선택 완료</button>
-    </div>
-  </section>
+  </details>
+</section>
 
 </main>
 
