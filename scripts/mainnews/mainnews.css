@@ -150,7 +150,6 @@
 
   /* 카드 크기 조정: 두 장씩 보이게 */
   .swiper-slide {
-    width: auto;
     aspect-ratio: 4 / 5;
   }
 
