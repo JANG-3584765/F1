@@ -11,9 +11,6 @@
 
   <!-- 순위 페이지 전용 스타일 -->
   <link rel="stylesheet" href="./ranking.css">
-
-  <!-- Twemoji -->
-  <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
 </head>
 <body>
 
@@ -46,6 +43,7 @@
           <thead>
             <tr>
               <th>순위</th>
+              <th>팀</th>
               <th>드라이버</th>
               <th>포인트</th>
               <th>우승</th>
@@ -79,7 +77,7 @@
   <!-- 푸터 -->
   <div id="footer-container"></div>
 
-  <!-- 공통 헤더 / 푸터 로드 (index 기준) -->
+  <!-- 공통 헤더 / 푸터 로드 -->
   <script>
     fetch("../common/header.html")
       .then(res => res.text())

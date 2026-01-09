@@ -26,22 +26,15 @@ main {
   font-weight: 900;
 }
 
-/* ===== 시즌 선택 ===== */
+/* ===== 시즌 드롭다운 ===== */
 .season-selector {
-  display: inline-flex;     /* 덩어리 자체를 중앙에 두기 쉬움 */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;                 /* label / select 간격 */
-  margin: 6px auto 18px;    /* 화면 중앙 정렬 */
+  gap: 6px;
+  margin: 6px auto 18px;
 }
 
-/* 시즌 라벨 */
-.season-selector label {
-  font-size: 15px;
-  font-weight: 800;
-}
-
-/* 시즌 드롭다운 */
 .season-selector select {
   appearance: none;
   -webkit-appearance: none;
@@ -49,24 +42,22 @@ main {
 
   font-size: 15px;
   font-weight: 800;
-  line-height: 1;
+  padding: 6px 10px;
 
-  padding: 6px 10px;        /* 박스 크기 */
   border: 1px solid #ddd;
   border-radius: 10px;
   background: #fff;
 
   cursor: pointer;
   outline: none;
+  line-height: 1;
 }
 
-/* 포커스 상태 */
 .season-selector select:focus {
   border-color: #111;
 }
 
-
-/* ===== 탭 디자인 + 중앙 정렬 ===== */
+/* ===== 탭 ===== */
 .tabs {
   display: flex;
   justify-content: center;
@@ -134,66 +125,43 @@ main {
   border-bottom: none;
 }
 
-/* ===== 드라이버 정보 셀 (국기 + 이름/팀 2줄) ===== */
-.name-cell {
-  white-space: normal;
-  text-align: left;
-}
-
-.driver-info {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
-
-.driver-flag {
-  line-height: 1;
-  font-size: 5px;
-  width: 7px;
-  text-align: center;
-  flex: 0 0 5px;
-}
-
-.driver-flag .emoji {
-  width: 5px;
-  height: 5px;
-  vertical-align: -1px;
-}
-
-.driver-text {
-  min-width: 0;
-}
-
-.driver-name {
-  font-weight: 900;
-  font-size: 15px;
-  line-height: 1.15;
-}
-
-.driver-team {
-  font-weight: 700;
-  font-size: 13px;
-  color: #666;
-  margin-top: 1px;
-  line-height: 1.1;
-}
-
-/* ===== 숫자 컬럼 정렬 보정 (드라이버 탭에서만) ===== */
-#driversTab .ranking-table td:nth-child(3),
-#driversTab .ranking-table td:nth-child(4),
-#driversTab .ranking-table td:nth-child(5) {
-  vertical-align: middle;
-  padding-top: 0;
-  padding-bottom: 0;
-  font-weight: 800;
-}
-
-#driversTab .ranking-table tbody tr {
-  height: 58px;
-}
-
-/* ===== 컨스트럭터 팀명 가독성 ===== */
+/* ===== 팀 컬러: 작은 점(dot) ===== */
 .team-cell {
+  text-align: left;
+  font-weight: 800;
+  position: relative;
+  padding-left: 22px; /* 점 들어갈 공간 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.team-cell::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+  background: #bbb; /* 기본값 */
+}
+
+/* 팀별 색상 매핑 (data-team 기준) */
+.team-cell[data-team="mclaren"]::before { background: #ff8700; }
+.team-cell[data-team="mercedes"]::before { background: #00d2be; }
+.team-cell[data-team="redbull"]::before { background: #1e41ff; }
+.team-cell[data-team="ferrari"]::before { background: #dc0000; }
+.team-cell[data-team="williams"]::before { background: #005aff; }
+.team-cell[data-team="rb"]::before { background: #2b4562; }
+.team-cell[data-team="astonmartin"]::before { background: #006f62; }
+.team-cell[data-team="haas"]::before { background: #b6babd; }
+.team-cell[data-team="sauber"]::before { background: #00e701; }
+.team-cell[data-team="alpine"]::before { background: #ff4fd8; }
+
+/* 드라이버 이름은 가독성 위해 왼쪽 정렬 */
+.name-cell {
   text-align: left;
   font-weight: 800;
   white-space: nowrap;
@@ -222,27 +190,14 @@ main {
     padding: 11px 8px;
   }
 
-  .driver-flag {
-    font-size: 10px;
-    width: 13px;
-    flex: 0 0 13px;
+  .team-cell {
+    padding-left: 20px;
   }
 
-  .driver-flag .emoji {
-    width: 10px;
-    height: 10px;
-  }
-
-  .driver-name {
-    font-size: 14px;
-  }
-
-  .driver-team {
-    font-size: 12px;
-  }
-
-  #driversTab .ranking-table tbody tr {
-    height: 54px;
+  .team-cell::before {
+    left: 8px;
+    width: 9px;
+    height: 9px;
   }
 }
 

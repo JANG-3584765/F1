@@ -17,12 +17,10 @@ function getJsonPathBySeason(season) {
 }
 
 function setActiveTab(tabId) {
-  // 버튼 active
   document.querySelectorAll(".tabs .tab-button").forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.tab === tabId);
   });
 
-  // 컨텐츠 active + 표시 제어
   document.querySelectorAll(".tab-contents .tab-content").forEach((section) => {
     const isActive = section.id === tabId;
     section.classList.toggle("active", isActive);
@@ -45,7 +43,6 @@ function initTabs() {
     });
   });
 
-  // 초기 탭 확정
   const initialActive =
     document.querySelector(".tabs .tab-button.active")?.dataset.tab || "driversTab";
   setActiveTab(initialActive);
@@ -77,16 +74,34 @@ async function loadSeasonAndRender(season) {
 
     renderDriversTable(data?.drivers || []);
     renderConstructorsTable(data?.teams || []);
-
-    // Twemoji 적용
-    if (window.twemoji) {
-      window.twemoji.parse(document.body);
-    }
   } catch (err) {
     console.error("ranking.js:", err);
     renderDriversTable([], true);
     renderConstructorsTable([], true);
   }
+}
+
+/** =========================
+ *  팀 키 변환 (CSS 매핑용)
+ *  ========================= */
+function teamKey(teamName) {
+  const t = String(teamName || "").replace(/\s+/g, "").toLowerCase();
+
+  // JSON에 들어오는 한글 팀명 기준 매핑
+  if (t.includes("맥라렌")) return "mclaren";
+  if (t.includes("메르세데스")) return "mercedes";
+  if (t.includes("레드불")) return "redbull";
+  if (t.includes("페라리")) return "ferrari";
+  if (t.includes("윌리엄스")) return "williams";
+  if (t.includes("레이싱불스") || t.includes("레이싱")) return "rb";
+  if (t.includes("애스턴마틴")) return "astonmartin";
+  if (t.includes("하스")) return "haas";
+  if (t.includes("자우버") || t.includes("자우버")) return "sauber";
+  if (t.includes("알핀")) return "alpine";
+  if (t.includes("아우디")) return "audi";
+  if (t.includes("캐딜락")) return "cadillac";
+
+  return "unknown";
 }
 
 /** =========================
@@ -96,7 +111,7 @@ function renderDriversTable(drivers, isError = false) {
   const tbody = document.getElementById("drivers-table-body");
   if (!tbody) return;
 
-  // 드라이버 테이블은 이제 6컬럼
+  // 드라이버: 6컬럼(순위/팀/드라이버/포인트/우승/포디움)
   const colCount = 6;
 
   if (isError) {
@@ -112,21 +127,19 @@ function renderDriversTable(drivers, isError = false) {
   tbody.innerHTML = drivers
     .map((d) => {
       const pos = safeText(d.pos);
-      const flag = safeText(d.flag);
-      const name = safeText(d.name);
       const team = safeText(d.team);
+      const name = safeText(d.name);
       const points = safeText(d.points);
       const wins = safeText(d.wins);
       const podiums = safeText(d.podiums);
 
+      const tKey = teamKey(d.team);
+
       return `
         <tr>
           <td>${pos}</td>
-          <td class="flag-cell">${flag}</td>
-          <td class="name-cell">
-            <div class="driver-name">${name}</div>
-            <div class="driver-team">${team}</div>
-          </td>
+          <td class="team-cell" data-team="${tKey}">${team}</td>
+          <td class="name-cell">${name}</td>
           <td>${points}</td>
           <td>${wins}</td>
           <td>${podiums}</td>
@@ -140,7 +153,7 @@ function renderConstructorsTable(teams, isError = false) {
   const tbody = document.getElementById("constructors-table-body");
   if (!tbody) return;
 
-  // 컨스트럭터 테이블은 5컬럼
+  // 컨스트럭터: 5컬럼
   const colCount = 5;
 
   if (isError) {
@@ -161,10 +174,12 @@ function renderConstructorsTable(teams, isError = false) {
       const wins = safeText(t.wins);
       const podiums = safeText(t.podiums);
 
+      const tKey = teamKey(t.team);
+
       return `
         <tr>
           <td>${pos}</td>
-          <td class="team-cell">${team}</td>
+          <td class="team-cell" data-team="${tKey}">${team}</td>
           <td>${points}</td>
           <td>${wins}</td>
           <td>${podiums}</td>
