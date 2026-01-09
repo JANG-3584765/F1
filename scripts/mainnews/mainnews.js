@@ -18,9 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      /* =========================
-         STEP 1: id 기준 정렬
-         ========================= */
+      /*STEP 1: id 기준 정렬 */
       const sortedById = [...data].sort((a, b) => a.id - b.id);
 
       console.log("mainnews.json 원본 데이터");
@@ -31,9 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       console.log("총 기사 개수:", sortedById.length);
 
-      /* =========================
-         STEP 2: 카드 렌더링
-         ========================= */
+      /* STEP 2: 카드 렌더링 */
 
       // 기존 플레이스홀더 제거
       wrapper.innerHTML = "";
@@ -89,12 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
         },
 
         breakpoints: {
-          768: {
-            slidesPerView: 2
-          },
-          1024: {
-            slidesPerView: 3
-          }
+          768: {slidesPerView: 2, slidesPerGroup: 2},
+          1024: {slidesPerView: 3, slidesPerGroup: 3}
         },
 
         on: {
@@ -109,9 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
-      /* =========================
-         STEP 4: 양 끝 이동 제한
-         ========================= */
+      /* STEP 4: 양 끝 이동 제한 */
 
       function updateNavState(swiper) {
         const prevBtn = document.querySelector(".swiper-button-prev");
