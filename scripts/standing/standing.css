@@ -1,9 +1,8 @@
 /* 섹션 헤더: 타이틀 + 버튼 한 줄에 배치 */
 .standing-header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 12px;
 }
 
 .standing-section {
