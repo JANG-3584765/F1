@@ -1,4 +1,4 @@
-// mainnews.js (최적화 + 자동 슬라이드 3초)
+// mainnews.js (id 기준 정렬 + 자동 슬라이드)
 document.addEventListener("DOMContentLoaded", () => {
   const wrapper = document.getElementById("main-news-wrapper");
   if (!wrapper) return;
@@ -6,53 +6,77 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("/F1/scripts/mainnews/mainnews.json")
     .then(res => res.json())
     .then(data => {
-      // 최신순 정렬
-      const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+      if (!Array.isArray(data) || data.length === 0) return;
 
-      // 카테고리별 최신 1개
-      const categories = ["Driver", "Team", "Tech", "Rumor", "Regulation"];
-      const topByCategory = categories.map(cat => sorted.find(item => item.category === cat)).filter(Boolean);
+      /* id 기준 오름차순 정렬 (1 → 5) */
+      const sortedById = [...data].sort((a, b) => a.id - b.id);
 
-      // HTML 생성
-      wrapper.innerHTML = topByCategory.map(item => `
+      /* 슬라이드 HTML 생성 */
+      wrapper.innerHTML = sortedById.map(item => `
         <div class="swiper-slide main-news-card">
-          <img src="${item.image}" alt="${item.title}" class="slide-img" />
+          <img
+            src="${item.image}"
+            alt="${item.title}"
+            class="slide-img"
+            loading="lazy"
+          />
+
           <div class="main-news-info-bar">
-            <span class="news-category-badge" data-category="${item.category}">${item.category}</span>
+            <span
+              class="news-category-badge"
+              data-category="${item.category}"
+            >
+              ${item.category}
+            </span>
             <h3 class="main-news-title">${item.title}</h3>
           </div>
-          <a href="/F1/news/news_detail.html?id=${item.id}" class="main-news-link" aria-label="${item.title}"></a>
+
+          <a
+            href="/F1/news/news_detail.html?id=${item.id}"
+            class="main-news-link"
+            aria-label="${item.title}"
+          ></a>
         </div>
       `).join("");
 
-      // Swiper 초기화
+      /* Swiper 초기화 */
       new Swiper(".main-news-swiper", {
-        loop: false,
+        loop: false,                 // 끝에서 멈춤 (빈 슬라이드 방지)
+        slidesPerView: 1,
+        spaceBetween: 16,
         centeredSlides: false,
-        spaceBetween: 20,
-        slidesPerView: 3,
+        watchOverflow: true,         // 슬라이드 부족 시 자동 비활성화
+        speed: 500,
+
         autoplay: {
-          delay: 3000,      // 3초마다 자동 이동
-          disableOnInteraction: false, // 사용자가 스크롤해도 자동 슬라이드 유지
+          delay: 3000,
+          disableOnInteraction: false
         },
+
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev"
         },
+
         breakpoints: {
-          0: { slidesPerView: 1, spaceBetween: 10 },
-          480: { slidesPerView: 1.1, spaceBetween: 12 },
-          768: { slidesPerView: 2, spaceBetween: 15 },
-          1024: { slidesPerView: 3, spaceBetween: 20 }
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 18
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 20
+          }
         },
-        observer: true,
-        observeParents: true,
+
         on: {
-          imagesReady(swiper) {
-            swiper.update();
+          init() {
+            this.update();
           }
         }
       });
     })
-    .catch(err => console.error("메인 뉴스 로딩 오류:", err));
+    .catch(err => {
+      console.error("메인 뉴스 로딩 오류:", err);
+    });
 });
