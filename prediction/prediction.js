@@ -6,19 +6,30 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!savedData || typeof savedData !== "object") savedData = {};
 
   // =====================
-  // 카드 초기화 및 클릭 이벤트
+  // week(카드) 단위로 초기화
   // =====================
-  document.querySelectorAll(".prediction-options").forEach(optionsBox => {
-    const week = optionsBox.dataset.week;
+  document.querySelectorAll(".prediction-card").forEach(cardSection => {
+    // 이 카드가 담당하는 week 찾기 (카드 내부 첫 prediction-options 기준)
+    const firstOptions = cardSection.querySelector(".prediction-options");
+    if (!firstOptions) return;
 
-    const isRank = optionsBox.classList.contains("rank-options");
-    const isMulti = optionsBox.classList.contains("multi-options");
-    const maxSelect = Number(optionsBox.dataset.max) || 1;
+    const week = firstOptions.dataset.week;
 
-    const cardSection = optionsBox.closest(".prediction-card");
+    // 같은 week의 options 박스(= top + more 등) 전부 수집
+    const optionsBoxes = Array.from(cardSection.querySelectorAll(`.prediction-options[data-week="${week}"]`));
+    if (optionsBoxes.length === 0) return;
+
+    // 타입 판별 (같은 week 안에서는 동일 타입이어야 정상)
+    const isRank = optionsBoxes.some(b => b.classList.contains("rank-options"));
+    const isMulti = optionsBoxes.some(b => b.classList.contains("multi-options"));
+
+    // multi-options의 max는 보통 1개 박스에만 있으니, 첫 박스에서 가져옴
+    const maxSelect = Number(optionsBoxes.find(b => b.dataset.max)?.dataset.max) || 1;
+
     const submitBtn = cardSection.querySelector(".btn-submit");
+    if (!submitBtn) return;
 
-    // 안전하게 weekData 초기화
+    // weekData 초기화
     const weekDataRaw = savedData[week];
     const weekData = (weekDataRaw && typeof weekDataRaw === "object" && "values" in weekDataRaw)
       ? weekDataRaw
@@ -27,29 +38,35 @@ document.addEventListener("DOMContentLoaded", () => {
     let selected = Array.isArray(weekData.values) ? [...weekData.values] : [];
     let locked = !!weekData.locked;
 
-    // 초기 선택 복원
-    selected.forEach(value => {
-      const card = optionsBox.querySelector(`.option-card[data-value="${value}"]`);
-      if (card) card.classList.add("selected");
-    });
+    // 초기 선택 복원(모든 optionsBoxes에 동기화)
+    syncSelectedUI();
+    syncRankPickedUI();
 
     if (locked) applyLockUI();
     updateSubmitState();
 
-    // 카드 클릭 이벤트
-    optionsBox.querySelectorAll(".option-card").forEach(card => {
-      card.addEventListener("click", () => {
-        if (locked) return;
+    // =====================
+    // 이벤트: 카드 내부에서 위임 처리
+    // =====================
+    cardSection.addEventListener("click", (e) => {
+      const card = e.target.closest(".option-card");
+      if (!card) return;
+      // 이 카드가 이 week의 옵션인지 확인
+      const box = card.closest(`.prediction-options[data-week="${week}"]`);
+      if (!box) return;
 
-        const value = card.dataset.value;
+      if (locked) return;
 
-        if (isRank) handleRank(value, card);
-        else if (isMulti) handleMulti(value, card);
-        else handleSingle(value, card);
+      const value = card.dataset.value;
 
-        updateSubmitState();
-        save();
-      });
+      if (isRank) handleRank(value);
+      else if (isMulti) handleMulti(value);
+      else handleSingle(value);
+
+      syncSelectedUI();
+      syncRankPickedUI();
+      updateSubmitState();
+      save();
     });
 
     // 선택 완료 버튼
@@ -62,38 +79,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // =====================
-    // 선택 로직
+    // 선택 로직 (UI는 따로 syncSelectedUI에서)
     // =====================
-    function handleRank(value, card) {
+    function handleRank(value) {
       if (selected.includes(value)) {
         selected = selected.filter(v => v !== value);
-        card.classList.remove("selected");
         return;
       }
       if (selected.length >= 3) return;
       selected.push(value);
-      card.classList.add("selected");
     }
 
-    function handleSingle(value, card) {
+    function handleSingle(value) {
       selected = [value];
-      optionsBox.querySelectorAll(".option-card").forEach(c => c.classList.remove("selected"));
-      card.classList.add("selected");
     }
 
-    function handleMulti(value, card) {
+    function handleMulti(value) {
       if (selected.includes(value)) {
         selected = selected.filter(v => v !== value);
-        card.classList.remove("selected");
         return;
       }
       if (selected.length >= maxSelect) return;
       selected.push(value);
-      card.classList.add("selected");
     }
 
     // =====================
-    // 버튼 상태 업데이트
+    // 완료 조건 / 버튼 상태
     // =====================
     function isSelectionComplete() {
       if (isRank) return selected.length === 3;
@@ -106,24 +117,58 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =====================
-    // 잠금 UI
+    // UI 동기화 (top/more 모두 반영)
+    // =====================
+    function syncSelectedUI() {
+      optionsBoxes.forEach(box => {
+        box.querySelectorAll(".option-card").forEach(c => {
+          const v = c.dataset.value;
+          c.classList.toggle("selected", selected.includes(v));
+        });
+      });
+    }
+
+    // rank-picked 슬롯(있으면) 업데이트
+    function syncRankPickedUI() {
+      const picked = cardSection.querySelector(`.rank-picked[data-week="${week}"]`);
+      if (!picked) return;
+      if (!isRank) return;
+
+      const slots = picked.querySelectorAll(".picked-slot");
+      slots.forEach((slot, idx) => {
+        const nameEl = slot.querySelector(".picked-name");
+        if (!nameEl) return;
+
+        const v = selected[idx];
+        if (!v) {
+          nameEl.textContent = "-";
+          return;
+        }
+
+        // 현재 선택된 value에 해당하는 카드의 텍스트를 찾아 표시(어느 박스든 상관없음)
+        const cardEl = cardSection.querySelector(`.option-card[data-value="${v}"]`);
+        nameEl.textContent = cardEl ? cardEl.textContent.trim() : v;
+      });
+    }
+
+    // =====================
+    // 잠금 UI (week 전체 적용)
     // =====================
     function applyLockUI() {
       cardSection.classList.add("locked");
       submitBtn.textContent = "확정됨";
       submitBtn.disabled = true;
 
-      optionsBox.querySelectorAll(".option-card").forEach(c => c.classList.add("locked"));
+      optionsBoxes.forEach(box => {
+        box.querySelectorAll(".option-card").forEach(c => c.classList.add("locked"));
+      });
     }
 
     // =====================
     // 저장
     // =====================
     function save() {
-      savedData[week] = {
-        values: selected,
-        locked
-      };
+      savedData[week] = { values: selected, locked };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(savedData));
     }
   });
@@ -138,9 +183,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       localStorage.removeItem(STORAGE_KEY);
 
-      // 카드 선택 초기화
+      // 선택/잠금 UI 초기화
       document.querySelectorAll(".prediction-options .option-card").forEach(card => {
         card.classList.remove("selected", "locked");
+      });
+
+      // rank-picked 초기화
+      document.querySelectorAll(".rank-picked .picked-name").forEach(el => {
+        el.textContent = "-";
       });
 
       // 버튼 초기화
