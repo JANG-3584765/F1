@@ -75,3 +75,14 @@
 .highlights-section .swiper-button-prev {
   color: #e10600;
 }
+
+  /* 더보기 버튼 */
+  .more-highlights-btn-wrap {
+    text-align: left;
+    margin-top: 20px;
+  }
+
+  .more-highlights-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
