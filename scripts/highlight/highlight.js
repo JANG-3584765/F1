@@ -59,17 +59,14 @@ function renderHighlights() {
 
 function initHighlightSwiper() {
   new Swiper(".highlights-section .swiper", {
-    slidesPerView: 3,       // 처음에 3개 카드
+    slidesPerView: 2,       // 처음에 3개 카드
     spaceBetween: 16,
+    slidesPerGroup: 1,
     navigation: {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev"
     },
-
-    slidesPerGroup: 1,
-
     breakpoints: {
-      0: {slidesPerView: 2},
       768: { slidesPerView: 3 },
     }
   });
