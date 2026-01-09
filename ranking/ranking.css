@@ -130,7 +130,7 @@ main {
   text-align: left;
   font-weight: 800;
   position: relative;
-  padding-left: 22px; /* 점 들어갈 공간 */
+  padding-left: 30px; /* 점 들어갈 공간 */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
