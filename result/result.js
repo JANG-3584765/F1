@@ -1,422 +1,55 @@
-/**
- * results-page.js (FULL)
- * - 2025_round_result.json / 2026_round_result.json
- * - 2025_schedule.json / 2026_schedule.json
- * 을 불러와서 시즌/라운드 드롭다운 + Top5 + 전체(접기/펼치기) 렌더까지 한 번에 처리.
- *
- * ✅ 전제
- * 1) schedule 파일 구조: Array
- *    [{season, round, flag, city, race_name, circuit, sessions:[{name,start,end}, ...]}, ...]
- * 2) round_result 파일 구조: Object
- *    { season: 2025, rounds: { "1":[{code,name,position,status},...], ... } }
- * 3) circuitImage 규칙: ./images/home/nextrace/${circuit}.png
- * 4) location은 안 씀
- *
- * ✅ 필요한 HTML id
- * - select#seasonSelect
- * - select#roundSelect
- * - div#raceHeader
- * - div#topResults
- * - button#toggleFullBtn
- * - div#fullResults
- * - div#pageError (선택)
- */
-
-const DATA_PATHS = {
-  2025: {
-    schedule: "./data/2025_schedule.json",
-    results: "./data/2025_round_result.json",
-  },
-  2026: {
-    schedule: "./data/2026_schedule.json",
-    results: "./data/2026_round_result.json",
-  },
-};
-
-const RACE_SESSION_NAME = "레이스";
-const CIRCUIT_IMAGE = (circuit) => `./images/home/nextrace/${circuit}.png`;
-
-const state = {
-  loaded: false,
-  seasons: {}, // { [season]: { scheduleByRound: Map, resultsByRound: Map } }
-  currentSeason: null,
-  currentRound: null,
-  fullOpen: false,
-};
-
-document.addEventListener("DOMContentLoaded", () => {
-  initUI();
-  bootstrap().catch((e) => {
-    console.error(e);
-    renderError("데이터 로드 실패 (콘솔 확인)");
-  });
-});
+// result.js (type="module")
 
 /* =========================
- * UI
- * ========================= */
-function initUI() {
-  const seasonSelect = document.getElementById("seasonSelect");
-  const roundSelect = document.getElementById("roundSelect");
-  const toggleBtn = document.getElementById("toggleFullBtn");
+   DOM
+========================= */
+const $season = document.querySelector("#season-select");
+const $round = document.querySelector("#round-select");
+const $msg = document.querySelector("#result-message");
 
-  if (seasonSelect) {
-    seasonSelect.addEventListener("change", () => {
-      const season = Number(seasonSelect.value);
-      if (!Number.isFinite(season)) return;
-      setSeason(season);
-    });
-  }
+const $raceInfo = document.querySelector("#race-info");
+const $raceFullname = document.querySelector("#race-fullname");
+const $raceSubinfo = document.querySelector("#race-subinfo");
 
-  if (roundSelect) {
-    roundSelect.addEventListener("change", () => {
-      const round = Number(roundSelect.value);
-      if (!Number.isFinite(round)) return;
-      setRound(round);
-    });
-  }
+const $metaDate = document.querySelector("#meta-date");
+const $metaLaps = document.querySelector("#meta-laps");
+const $metaLength = document.querySelector("#meta-length");
+const $metaWeather = document.querySelector("#meta-weather");
 
-  if (toggleBtn) {
-    toggleBtn.addEventListener("click", () => {
-      state.fullOpen = !state.fullOpen;
-      renderCurrent();
-    });
-  }
-}
+const $circuitImg = document.querySelector("#circuit-image");
+const $circuitCaption = document.querySelector("#circuit-caption");
+
+const $raceResult = document.querySelector("#race-result");
+const $tbody = document.querySelector("#result-tbody");
+
+const $badgesWrap = document.querySelector("#result-badges");
+const $badgeDotd = document.querySelector("#badge-dotd");
+const $badgeFastest = document.querySelector("#badge-fastestlap");
 
 /* =========================
- * Bootstrap
- * ========================= */
-async function bootstrap() {
-  // 1) 로드할 시즌(파일이 있는 시즌만)
-  const seasonsToLoad = Object.keys(DATA_PATHS).map(Number);
-
-  // 2) 병렬 로드
-  const loaded = await Promise.all(
-    seasonsToLoad.map(async (season) => {
-      const { schedule, results } = DATA_PATHS[season];
-      const [scheduleArr, resultsObj] = await Promise.all([
-        fetchJson(schedule),
-        fetchJson(results),
-      ]);
-
-      return [
-        season,
-        {
-          scheduleByRound: indexScheduleByRound(scheduleArr),
-          resultsByRound: indexResultsByRound(resultsObj),
-        },
-      ];
-    })
-  );
-
-  // 3) 상태 저장
-  loaded.forEach(([season, data]) => {
-    state.seasons[season] = data;
-  });
-  state.loaded = true;
-
-  // 4) 시즌 드롭다운 채우기
-  const availableSeasons = Object.keys(state.seasons)
-    .map(Number)
-    .sort((a, b) => a - b);
-
-  if (availableSeasons.length === 0) {
-    renderError("사용 가능한 시즌 데이터가 없습니다.");
-    return;
-  }
-
-  populateSeasonSelect(availableSeasons);
-
-  // 5) 기본 시즌 선택
-  setSeason(availableSeasons[0]);
-}
-
-async function fetchJson(url) {
-  const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok) throw new Error(`fetch 실패: ${url} (${res.status})`);
-  return res.json();
-}
-
-function indexScheduleByRound(scheduleArr) {
-  const map = new Map();
-  (scheduleArr || []).forEach((item) => {
-    if (!item) return;
-    const r = Number(item.round);
-    if (!Number.isFinite(r)) return;
-    map.set(r, item);
-  });
-  return map;
-}
-
-function indexResultsByRound(resultsObj) {
-  const map = new Map();
-  const rounds = resultsObj?.rounds || {};
-  for (const [roundStr, arr] of Object.entries(rounds)) {
-    const r = Number(roundStr);
-    if (!Number.isFinite(r)) continue;
-    map.set(r, Array.isArray(arr) ? arr : []);
-  }
-  return map;
-}
+   Paths (필요시 수정)
+========================= */
+const SCHEDULE_PATH = (season) => `./data/${season}_schedule.json`;
+const ROUND_RESULT_PATH = (season) => `./data/${season}_round_result.json`;
 
 /* =========================
- * Season / Round selection
- * ========================= */
-function setSeason(season) {
-  if (!state.seasons[season]) return;
-
-  state.currentSeason = season;
-
-  // 라운드 옵션: schedule + results 합집합
-  const sRounds = [...state.seasons[season].scheduleByRound.keys()];
-  const rRounds = [...state.seasons[season].resultsByRound.keys()];
-  const rounds = uniqueSorted([...sRounds, ...rRounds]);
-
-  populateRoundSelect(rounds);
-
-  // 기본 라운드
-  setRound(rounds[0] ?? 1);
-}
-
-function setRound(round) {
-  state.currentRound = round;
-  renderCurrent();
-}
-
-function populateSeasonSelect(seasons) {
-  const el = document.getElementById("seasonSelect");
-  if (!el) return;
-  el.innerHTML = seasons
-    .map((s) => `<option value="${s}">${s} 시즌</option>`)
-    .join("");
-  el.value = String(seasons[0]);
-}
-
-function populateRoundSelect(rounds) {
-  const el = document.getElementById("roundSelect");
-  if (!el) return;
-  el.innerHTML = rounds.map((r) => `<option value="${r}">${r}R</option>`).join(
-    ""
-  );
-  el.value = String(rounds[0] ?? 1);
-}
+   Cache
+========================= */
+const scheduleCache = new Map();     // season -> array
+const roundResultCache = new Map();  // season -> object
 
 /* =========================
- * Build view-model
- * ========================= */
-function buildViewModel(season, round) {
-  const seasonData = state.seasons[season];
-  const scheduleItem = seasonData.scheduleByRound.get(round) || null;
-  const results = seasonData.resultsByRound.get(round) || [];
-
-  const raceSession = scheduleItem?.sessions?.find(
-    (s) => s?.name === RACE_SESSION_NAME
-  );
-
-  return {
-    season,
-    round,
-    race: scheduleItem
-      ? {
-          flag: scheduleItem.flag ?? "",
-          raceName: scheduleItem.race_name ?? "",
-          city: scheduleItem.city ?? "",
-          dateTime: raceSession?.start ?? null,
-          circuit: scheduleItem.circuit ?? "",
-          circuitImage: scheduleItem.circuit
-            ? CIRCUIT_IMAGE(scheduleItem.circuit)
-            : null,
-        }
-      : {
-          flag: "",
-          raceName: "",
-          city: "",
-          dateTime: null,
-          circuit: "",
-          circuitImage: null,
-        },
-    // round_result.json 기반
-    results: Array.isArray(results) ? results : [],
-
-    // 아직 없는 상세 데이터(시간/포인트 등)는 빈 상태
-    fullResults: [],
-
-    // meta도 나중에 채움
-    meta: {
-      lapsTotal: null,
-      circuitLengthKm: null,
-      weather: null,
-      temperatureC: null,
-    },
-  };
+   Helpers
+========================= */
+function showMessage(text, type = "info") {
+  if (!$msg) return;
+  $msg.hidden = !text;
+  $msg.textContent = text || "";
+  $msg.dataset.type = type;
 }
 
-/* =========================
- * Render
- * ========================= */
-function renderCurrent() {
-  if (!state.loaded) return;
-  const season = state.currentSeason;
-  const round = state.currentRound;
-  if (!season || !round) return;
-
-  const vm = buildViewModel(season, round);
-
-  renderRaceHeader(vm);
-  renderTopResults(vm);
-  renderFullResults(vm);
-  renderToggle(vm);
-  clearError();
-}
-
-function renderRaceHeader(vm) {
-  const el = document.getElementById("raceHeader");
-  if (!el) return;
-
-  const dateText = vm.race.dateTime ? formatDateTime(vm.race.dateTime) : "-";
-
-  const metaParts = [];
-  if (vm.meta.lapsTotal != null) metaParts.push(`랩 ${vm.meta.lapsTotal}`);
-  if (vm.meta.circuitLengthKm != null)
-    metaParts.push(`서킷 길이 ${vm.meta.circuitLengthKm}km`);
-  if (vm.meta.weather) metaParts.push(vm.meta.weather);
-  if (vm.meta.temperatureC != null) metaParts.push(`${vm.meta.temperatureC}°C`);
-
-  const metaLine = metaParts.length ? metaParts.join(" | ") : "";
-
-  el.innerHTML = `
-    <div class="race-title-row">
-      <span class="race-flag">${escapeHtml(vm.race.flag)}</span>
-      <span class="race-name">${escapeHtml(vm.race.raceName || `${vm.round}R`)}</span>
-      <span class="race-city">${vm.race.city ? `(${escapeHtml(vm.race.city)})` : ""}</span>
-    </div>
-    <div class="race-date-row">${escapeHtml(dateText)}</div>
-    ${metaLine ? `<div class="race-meta-row">${escapeHtml(metaLine)}</div>` : ""}
-    ${
-      vm.race.circuitImage
-        ? `<div class="race-circuit-wrap">
-             <img class="race-circuit-img" src="${vm.race.circuitImage}" alt="${escapeHtml(
-            vm.race.circuit
-          )}">
-           </div>`
-        : ""
-    }
-  `;
-}
-
-function renderTopResults(vm) {
-  const el = document.getElementById("topResults");
-  if (!el) return;
-
-  const top5 = (vm.results || [])
-    .filter((r) => typeof r.position === "number")
-    .sort((a, b) => a.position - b.position)
-    .slice(0, 5);
-
-  if (top5.length === 0) {
-    el.innerHTML = `<div class="empty">Top 5 결과가 없습니다.</div>`;
-    return;
-  }
-
-  el.innerHTML = `
-    <div class="results-list top">
-      ${top5.map(renderResultRow).join("")}
-    </div>
-  `;
-}
-
-function renderFullResults(vm) {
-  const el = document.getElementById("fullResults");
-  if (!el) return;
-
-  if (!state.fullOpen) {
-    el.innerHTML = "";
-    el.style.display = "none";
-    return;
-  }
-
-  el.style.display = "";
-
-  // 지금은 round_result만으로 전체(=20명 내외)를 보여줌
-  const rows = (vm.results || []).slice();
-
-  if (rows.length === 0) {
-    el.innerHTML = `<div class="empty">전체 결과가 없습니다.</div>`;
-    return;
-  }
-
-  // position 있는 애들 먼저, 그 다음 DNF/DNS/DSQ
-  rows.sort((a, b) => {
-    const ap = typeof a.position === "number" ? a.position : 9999;
-    const bp = typeof b.position === "number" ? b.position : 9999;
-    if (ap !== bp) return ap - bp;
-
-    const order = { Finished: 0, DSQ: 1, DNF: 2, DNS: 3 };
-    const as = order[a.status] ?? 9;
-    const bs = order[b.status] ?? 9;
-    if (as !== bs) return as - bs;
-
-    return String(a.code).localeCompare(String(b.code));
-  });
-
-  el.innerHTML = `
-    <div class="results-list full">
-      ${rows.map(renderResultRow).join("")}
-    </div>
-  `;
-}
-
-function renderToggle(vm) {
-  const btn = document.getElementById("toggleFullBtn");
-  if (!btn) return;
-
-  // 결과가 없으면 버튼 숨김
-  const hasAny = (vm.results || []).length > 0;
-  btn.style.display = hasAny ? "" : "none";
-  btn.textContent = state.fullOpen ? "전체 결과 접기" : "전체 결과 펼치기";
-}
-
-function renderResultRow(r) {
-  const pos =
-    typeof r.position === "number" ? String(r.position).padStart(2, " ") : "—";
-  const status = r.status || "";
-  return `
-    <div class="result-row">
-      <div class="result-pos">${escapeHtml(pos)}</div>
-      <div class="result-name">${escapeHtml(r.name || "")}</div>
-      <div class="result-code">${escapeHtml(r.code || "")}</div>
-      <div class="result-status">${escapeHtml(status)}</div>
-    </div>
-  `;
-}
-
-/* =========================
- * Utils
- * ========================= */
-function uniqueSorted(arr) {
-  return [...new Set(arr.filter((n) => Number.isFinite(n)))].sort((a, b) => a - b);
-}
-
-function formatDateTime(iso) {
-  // "2025-03-16T13:00:00+09:00" -> "2025.03.16 13:00"
-  // (원하면 더 이쁘게 커스터마이즈 가능)
-  try {
-    const d = new Date(iso);
-    if (Number.isNaN(d.getTime())) return iso;
-    const yyyy = d.getFullYear();
-    const mm = String(d.getMonth() + 1).padStart(2, "0");
-    const dd = String(d.getDate()).padStart(2, "0");
-    const hh = String(d.getHours()).padStart(2, "0");
-    const mi = String(d.getMinutes()).padStart(2, "0");
-    return `${yyyy}.${mm}.${dd} ${hh}:${mi}`;
-  } catch {
-    return iso;
-  }
-}
-
-function escapeHtml(s) {
-  return String(s)
+function escapeHTML(s) {
+  return String(s ?? "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
@@ -424,23 +57,329 @@ function escapeHtml(s) {
     .replaceAll("'", "&#039;");
 }
 
+function formatDateFromISODateTime(iso) {
+  // "2025-03-16T13:00:00+09:00" -> "2025.03.16"
+  if (!iso) return "-";
+  const datePart = String(iso).slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(datePart)) return "-";
+  return datePart.replaceAll("-", ".");
+}
+
+function findRaceSession(scheduleRound) {
+  return scheduleRound?.sessions?.find((s) => s?.name === "레이스") ?? null;
+}
+
+function buildRoundOptions(total = 24) {
+  const frag = document.createDocumentFragment();
+
+  const opt0 = document.createElement("option");
+  opt0.value = "";
+  opt0.textContent = "라운드를 선택하세요";
+  frag.appendChild(opt0);
+
+  for (let i = 1; i <= total; i++) {
+    const opt = document.createElement("option");
+    opt.value = String(i);
+    opt.textContent = `${i}R`;
+    frag.appendChild(opt);
+  }
+
+  $round.innerHTML = "";
+  $round.appendChild(frag);
+}
+
+function getAvailableSeasons() {
+  return Array.from($season.querySelectorAll("option"))
+    .map((o) => o.value)
+    .filter(Boolean)
+    .map(Number)
+    .filter((n) => Number.isFinite(n))
+    .sort((a, b) => a - b);
+}
+
 /* =========================
- * Error
- * ========================= */
-function renderError(msg) {
-  const el = document.getElementById("pageError");
-  if (el) {
-    el.textContent = msg;
-    el.style.display = "";
+   Loaders
+========================= */
+async function loadSchedule(season) {
+  if (scheduleCache.has(season)) return scheduleCache.get(season);
+
+  const res = await fetch(SCHEDULE_PATH(season));
+  if (!res.ok) throw new Error(`schedule load fail: ${season}`);
+
+  const raw = await res.json();
+
+  // 네 구조: "라운드 객체 배열"이 정상.
+  // 혹시 { rounds: [...] } 형태로 바뀌어도 대응.
+  const list = Array.isArray(raw) ? raw : (Array.isArray(raw?.rounds) ? raw.rounds : []);
+
+  scheduleCache.set(season, list);
+  return list;
+}
+
+async function loadRoundResult(season) {
+  if (roundResultCache.has(season)) return roundResultCache.get(season);
+
+  const res = await fetch(ROUND_RESULT_PATH(season));
+  if (!res.ok) throw new Error(`round_result load fail: ${season}`);
+
+  const raw = await res.json();
+
+  // 네 구조: { season, rounds: { "1": { dotd, fastest_lap_driver, results:[...] } } }
+  roundResultCache.set(season, raw);
+  return raw;
+}
+
+/* =========================
+   Latest finished round
+========================= */
+function getLatestFinishedRound(scheduleList) {
+  const now = new Date();
+  let latestRoundNum = 1;
+
+  for (const r of scheduleList) {
+    const race = findRaceSession(r);
+    const endISO = race?.end ?? race?.start;
+    if (!endISO) continue;
+
+    const end = new Date(endISO);
+    if (Number.isNaN(end.getTime())) continue;
+
+    if (end <= now) {
+      const rn = Number(r.round);
+      if (Number.isFinite(rn) && rn > latestRoundNum) latestRoundNum = rn;
+    }
+  }
+  return latestRoundNum;
+}
+
+/* =========================
+   Render - Step 2 (Schedule)
+========================= */
+function renderRaceInfo(scheduleRound) {
+  if (!scheduleRound) {
+    $raceInfo.hidden = true;
+    return;
+  }
+
+  const raceName = scheduleRound.race_name ?? `${scheduleRound.round}R`;
+  const location = scheduleRound.location ?? "-";
+  const city = scheduleRound.city ?? "-";
+  const flag = scheduleRound.flag ?? "";
+  const circuit = scheduleRound.circuit ?? "-";
+
+  // 풀네임(위치)
+  $raceFullname.textContent = `${raceName} (${city})`;
+
+  // 서브정보: 국기 + 국가/도시 + 서킷
+  $raceSubinfo.textContent = `${flag} ${location} · ${city}  |  ${circuit}`;
+
+  // 날짜: 레이스 세션 start에서
+  const raceSession = findRaceSession(scheduleRound);
+  $metaDate.textContent = formatDateFromISODateTime(raceSession?.start);
+
+  // laps / length / weather
+  $metaLaps.textContent = scheduleRound.laps ?? "-";
+  $metaLength.textContent =
+    scheduleRound.circuit_length_km == null ? "-" : `${scheduleRound.circuit_length_km} km`;
+
+  const cond = scheduleRound.weather?.condition;
+  const temp = scheduleRound.weather?.temperature_c;
+  if (cond == null && temp == null) {
+    $metaWeather.textContent = "-";
+  } else if (cond != null && temp == null) {
+    $metaWeather.textContent = String(cond);
+  } else if (cond == null && temp != null) {
+    $metaWeather.textContent = `${temp} ℃`;
   } else {
-    // fallback
-    console.warn(msg);
+    $metaWeather.textContent = `${cond} / ${temp} ℃`;
+  }
+
+  // 서킷 이미지
+  const img = scheduleRound.circuit_image ?? "";
+  $circuitImg.src = img;
+  $circuitImg.hidden = !img;
+
+  $circuitCaption.textContent = circuit;
+
+  $raceInfo.hidden = false;
+}
+
+/* =========================
+   Render - Step 3 (Round Result)
+========================= */
+function getTimeOrStatus(row) {
+  const status = String(row.status ?? "").toUpperCase();
+
+  // 완주
+  if (status === "FINISHED") {
+    // 1위는 time, 나머지는 gap 우선
+    if (row.position === 1 && row.time) return row.time;
+    if (row.gap) return row.gap;
+    if (row.time) return row.time;
+    return "-";
+  }
+
+  // DNF/DNS/DSQ 등
+  return status || "-";
+}
+
+function renderRoundResult(roundData) {
+  if (!roundData) {
+    $raceResult.hidden = true;
+    return;
+  }
+
+  const dotdCode = roundData.dotd ?? null;
+  const flCode = roundData.fastest_lap_driver ?? null;
+
+  // 배지
+  if (dotdCode || flCode) {
+    $badgesWrap.hidden = false;
+
+    if (dotdCode) {
+      $badgeDotd.hidden = false;
+      $badgeDotd.textContent = `오늘의 드라이버: ${dotdCode}`;
+    } else {
+      $badgeDotd.hidden = true;
+    }
+
+    if (flCode) {
+      $badgeFastest.hidden = false;
+      $badgeFastest.textContent = `패스티스트랩: ${flCode}`;
+    } else {
+      $badgeFastest.hidden = true;
+    }
+  } else {
+    $badgesWrap.hidden = true;
+  }
+
+  const results = Array.isArray(roundData.results) ? roundData.results : [];
+
+  // 정렬: position 있는 것(1~20) 먼저 오름차순, 그 다음 미분류(status) 유지
+  const classified = results
+    .filter(r => Number.isFinite(Number(r.position)))
+    .sort((a, b) => Number(a.position) - Number(b.position));
+
+  const unclassified = results.filter(r => !Number.isFinite(Number(r.position)));
+
+  const merged = [...classified, ...unclassified].slice(0, 20);
+
+  const rowsHTML = merged.map((r) => {
+    const pos = r.position == null ? "-" : r.position;
+    const driver = escapeHTML(r.name);
+    const team = escapeHTML(r.team ?? "");
+    const points = r.points ?? 0;
+
+    const timeOrStatus = escapeHTML(getTimeOrStatus(r));
+
+    const podiumClass =
+      r.position === 1 ? "podium podium-1" :
+      r.position === 2 ? "podium podium-2" :
+      r.position === 3 ? "podium podium-3" : "";
+
+    const dotdClass = (dotdCode && r.code === dotdCode) ? "dotd" : "";
+    const flClass = (flCode && r.code === flCode) ? "fastestlap" : "";
+
+    return `
+      <tr class="${podiumClass} ${dotdClass} ${flClass}">
+        <td class="col-pos">${escapeHTML(pos)}</td>
+        <td class="col-driver">
+          <span class="driver-name">${driver}</span>
+          ${team ? `<span class="driver-team">${team}</span>` : ""}
+          <span class="driver-code">${escapeHTML(r.code ?? "")}</span>
+        </td>
+        <td class="col-time">${timeOrStatus}</td>
+        <td class="col-points">${escapeHTML(points)}</td>
+      </tr>
+    `;
+  }).join("");
+
+  $tbody.innerHTML = rowsHTML || `
+    <tr><td colspan="4" class="empty">결과 데이터가 없습니다.</td></tr>
+  `;
+
+  $raceResult.hidden = false;
+}
+
+/* =========================
+   Main render pipeline
+========================= */
+async function renderAll(season, round) {
+  showMessage("");
+
+  // 2단계
+  const schedule = await loadSchedule(season);
+  const scheduleRound = schedule.find(r => String(r.round) === String(round));
+  renderRaceInfo(scheduleRound);
+
+  // 3단계
+  // 2026은 아직 없을 수 있으니(파일 없거나 rounds 없음) 안전 처리
+  try {
+    const rr = await loadRoundResult(season);
+    const roundData = rr?.rounds?.[String(round)] ?? null;
+    renderRoundResult(roundData);
+  } catch (e) {
+    // round_result 파일이 없으면 결과 영역 숨기고 메시지만 표시
+    $raceResult.hidden = true;
+    showMessage("해당 시즌의 결과 데이터 파일이 아직 없습니다.", "info");
   }
 }
-function clearError() {
-  const el = document.getElementById("pageError");
-  if (el) {
-    el.textContent = "";
-    el.style.display = "none";
-  }
+
+/* =========================
+   Init
+========================= */
+async function init() {
+  const seasons = getAvailableSeasons();
+  const defaultSeason = seasons.at(-1); // 가장 최신 시즌
+  if (!defaultSeason) return;
+
+  $season.value = String(defaultSeason);
+
+  // 라운드 옵션 생성
+  buildRoundOptions(24);
+  $round.disabled = false;
+
+  const schedule = await loadSchedule(String(defaultSeason));
+  const latestRound = getLatestFinishedRound(schedule);
+  $round.value = String(latestRound);
+
+  await renderAll(String(defaultSeason), String(latestRound));
 }
+
+/* =========================
+   Events
+========================= */
+$season.addEventListener("change", async () => {
+  const season = $season.value;
+
+  $raceInfo.hidden = true;
+  $raceResult.hidden = true;
+  showMessage("");
+
+  if (!season) {
+    $round.disabled = true;
+    $round.innerHTML = `<option value="">라운드를 선택하세요</option>`;
+    return;
+  }
+
+  buildRoundOptions(24);
+  $round.disabled = false;
+
+  const schedule = await loadSchedule(season);
+  const latestRound = getLatestFinishedRound(schedule);
+  $round.value = String(latestRound);
+
+  await renderAll(season, String(latestRound));
+});
+
+$round.addEventListener("change", async () => {
+  const season = $season.value;
+  const round = $round.value;
+  if (!season || !round) return;
+  await renderAll(season, round);
+});
+
+init().catch((e) => {
+  console.error(e);
+  showMessage("데이터 로딩 중 오류가 발생했습니다. 콘솔을 확인하세요.", "error");
+});
