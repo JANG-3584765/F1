@@ -191,13 +191,13 @@ main {
   }
 
   .team-cell {
-    padding-left: 30px;
+    padding-left: 34px;
   }
 
   .team-cell::before {
-    left: 4px;
-    width: 10px;
-    height: 10px;
+    left: 8px;
+    width: 8px;
+    height: 8px;
   }
 }
 
