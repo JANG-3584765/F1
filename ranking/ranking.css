@@ -125,18 +125,22 @@ main {
   border-bottom: none;
 }
 
-/* ===== 팀 컬러: 작은 점(dot) ===== */
-.team-cell {
+/* ===== 팀 컬러: 작은 점(dot) =====
+   ✅ 핵심 수정: .ranking-table td.team-cell로 우선순위 올려서
+   td padding 규칙에 덮어씌워지지 않게 함
+*/
+.ranking-table td.team-cell {
   text-align: left;
   font-weight: 800;
   position: relative;
+
   padding-left: 30px; /* 점 들어갈 공간 */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.team-cell::before {
+.ranking-table td.team-cell::before {
   content: "";
   position: absolute;
   left: 10px;
@@ -149,19 +153,21 @@ main {
 }
 
 /* 팀별 색상 매핑 (data-team 기준) */
-.team-cell[data-team="mclaren"]::before { background: #ff8700; }
-.team-cell[data-team="mercedes"]::before { background: #00d2be; }
-.team-cell[data-team="redbull"]::before { background: #1e41ff; }
-.team-cell[data-team="ferrari"]::before { background: #dc0000; }
-.team-cell[data-team="williams"]::before { background: #005aff; }
-.team-cell[data-team="rb"]::before { background: #2b4562; }
-.team-cell[data-team="astonmartin"]::before { background: #006f62; }
-.team-cell[data-team="haas"]::before { background: #b6babd; }
-.team-cell[data-team="sauber"]::before { background: #00e701; }
-.team-cell[data-team="alpine"]::before { background: #ff4fd8; }
+.ranking-table td.team-cell[data-team="mclaren"]::before { background: #ff8700; }
+.ranking-table td.team-cell[data-team="mercedes"]::before { background: #00d2be; }
+.ranking-table td.team-cell[data-team="redbull"]::before { background: #1e41ff; }
+.ranking-table td.team-cell[data-team="ferrari"]::before { background: #dc0000; }
+.ranking-table td.team-cell[data-team="williams"]::before { background: #005aff; }
+.ranking-table td.team-cell[data-team="rb"]::before { background: #2b4562; }
+.ranking-table td.team-cell[data-team="astonmartin"]::before { background: #006f62; }
+.ranking-table td.team-cell[data-team="haas"]::before { background: #b6babd; }
+.ranking-table td.team-cell[data-team="sauber"]::before { background: #00e701; }
+.ranking-table td.team-cell[data-team="alpine"]::before { background: #ff4fd8; }
+.ranking-table td.team-cell[data-team="audi"]::before { background: #000000; }      /* (선택) 2026 */
+.ranking-table td.team-cell[data-team="cadillac"]::before { background: #0b2a6f; }  /* (선택) 2026 */
 
 /* 드라이버 이름은 가독성 위해 왼쪽 정렬 */
-.name-cell {
+.ranking-table td.name-cell {
   text-align: left;
   font-weight: 800;
   white-space: nowrap;
@@ -190,11 +196,12 @@ main {
     padding: 11px 8px;
   }
 
-  .team-cell {
+  /* ✅ team-cell도 td 규칙으로 확실히 덮어쓰기 */
+  .ranking-table td.team-cell {
     padding-left: 34px;
   }
 
-  .team-cell::before {
+  .ranking-table td.team-cell::before {
     left: 8px;
     width: 8px;
     height: 8px;
