@@ -33,8 +33,8 @@ const $badgeFastest = document.querySelector("#badge-fastestlap");
 /* =========================
    Paths (필요시 수정)
 ========================= */
-const SCHEDULE_PATH = (season) => `./data/${season}_schedule.json`;
-const ROUND_RESULT_PATH = (season) => `./data/${season}_round_result.json`;
+const SCHEDULE_PATH = (season) => `../data/${season}_schedule.json`;
+const ROUND_RESULT_PATH = (season) => `./season/${season}.json`;
 
 /* =========================
    Cache
