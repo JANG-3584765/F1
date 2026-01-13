@@ -1,4 +1,8 @@
 // result.js (type="module")
+// ✅ 수정 포인트: 초기 라운드/시즌 선택을 "결과가 있는 가장 최근 라운드" 우선으로 결정
+// - schedule은 최신 완료 판단에 사용
+// - round_result는 실제 결과 존재 여부 판단에 사용
+// - 2026 결과 파일이 없더라도 안전하게 동작
 
 /* =========================
    DOM
@@ -108,8 +112,7 @@ async function loadSchedule(season) {
 
   const raw = await res.json();
 
-  // 네 구조: "라운드 객체 배열"이 정상.
-  // 혹시 { rounds: [...] } 형태로 바뀌어도 대응.
+  // schedule: 배열 또는 { rounds: [...] } 모두 대응
   const list = Array.isArray(raw) ? raw : (Array.isArray(raw?.rounds) ? raw.rounds : []);
 
   scheduleCache.set(season, list);
@@ -123,14 +126,12 @@ async function loadRoundResult(season) {
   if (!res.ok) throw new Error(`round_result load fail: ${season}`);
 
   const raw = await res.json();
-
-  // 네 구조: { season, rounds: { "1": { dotd, fastest_lap_driver, results:[...] } } }
   roundResultCache.set(season, raw);
   return raw;
 }
 
 /* =========================
-   Latest finished round
+   Latest finished round (schedule 기준)
 ========================= */
 function getLatestFinishedRound(scheduleList) {
   const now = new Date();
@@ -153,6 +154,26 @@ function getLatestFinishedRound(scheduleList) {
 }
 
 /* =========================
+   ✅ 결과가 있는 "가장 최근 라운드" 찾기
+========================= */
+function getLatestRoundWithResult(roundResultObj) {
+  const rounds = roundResultObj?.rounds;
+  if (!rounds || typeof rounds !== "object") return null;
+
+  const keys = Object.keys(rounds)
+    .map((k) => Number(k))
+    .filter((n) => Number.isFinite(n))
+    .sort((a, b) => a - b);
+
+  // results 배열이 실제로 존재하는 마지막 라운드
+  for (let i = keys.length - 1; i >= 0; i--) {
+    const r = rounds[String(keys[i])];
+    if (Array.isArray(r?.results) && r.results.length > 0) return keys[i];
+  }
+  return null;
+}
+
+/* =========================
    Render - Step 2 (Schedule)
 ========================= */
 function renderRaceInfo(scheduleRound) {
@@ -167,17 +188,12 @@ function renderRaceInfo(scheduleRound) {
   const flag = scheduleRound.flag ?? "";
   const circuit = scheduleRound.circuit ?? "-";
 
-  // 풀네임(위치)
   $raceFullname.textContent = `${raceName} (${city})`;
-
-  // 서브정보: 국기 + 국가/도시 + 서킷
   $raceSubinfo.textContent = `${flag} ${location} · ${city}  |  ${circuit}`;
 
-  // 날짜: 레이스 세션 start에서
   const raceSession = findRaceSession(scheduleRound);
   $metaDate.textContent = formatDateFromISODateTime(raceSession?.start);
 
-  // laps / length / weather
   $metaLaps.textContent = scheduleRound.laps ?? "-";
   $metaLength.textContent =
     scheduleRound.circuit_length_km == null ? "-" : `${scheduleRound.circuit_length_km} km`;
@@ -194,13 +210,11 @@ function renderRaceInfo(scheduleRound) {
     $metaWeather.textContent = `${cond} / ${temp} ℃`;
   }
 
-  // 서킷 이미지
   const img = scheduleRound.circuit_image ?? "";
   $circuitImg.src = img;
   $circuitImg.hidden = !img;
 
   $circuitCaption.textContent = circuit;
-
   $raceInfo.hidden = false;
 }
 
@@ -210,16 +224,12 @@ function renderRaceInfo(scheduleRound) {
 function getTimeOrStatus(row) {
   const status = String(row.status ?? "").toUpperCase();
 
-  // 완주
   if (status === "FINISHED") {
-    // 1위는 time, 나머지는 gap 우선
     if (row.position === 1 && row.time) return row.time;
     if (row.gap) return row.gap;
     if (row.time) return row.time;
     return "-";
   }
-
-  // DNF/DNS/DSQ 등
   return status || "-";
 }
 
@@ -255,48 +265,52 @@ function renderRoundResult(roundData) {
 
   const results = Array.isArray(roundData.results) ? roundData.results : [];
 
-  // 정렬: position 있는 것(1~20) 먼저 오름차순, 그 다음 미분류(status) 유지
   const classified = results
-    .filter(r => Number.isFinite(Number(r.position)))
+    .filter((r) => Number.isFinite(Number(r.position)))
     .sort((a, b) => Number(a.position) - Number(b.position));
 
-  const unclassified = results.filter(r => !Number.isFinite(Number(r.position)));
+  const unclassified = results.filter((r) => !Number.isFinite(Number(r.position)));
 
   const merged = [...classified, ...unclassified].slice(0, 20);
 
-  const rowsHTML = merged.map((r) => {
-    const pos = r.position == null ? "-" : r.position;
-    const driver = escapeHTML(r.name);
-    const team = escapeHTML(r.team ?? "");
-    const points = r.points ?? 0;
+  const rowsHTML = merged
+    .map((r) => {
+      const pos = r.position == null ? "-" : r.position;
+      const driver = escapeHTML(r.name);
+      const team = escapeHTML(r.team ?? "");
+      const points = r.points ?? 0;
+      const timeOrStatus = escapeHTML(getTimeOrStatus(r));
 
-    const timeOrStatus = escapeHTML(getTimeOrStatus(r));
+      const podiumClass =
+        r.position === 1
+          ? "podium podium-1"
+          : r.position === 2
+          ? "podium podium-2"
+          : r.position === 3
+          ? "podium podium-3"
+          : "";
 
-    const podiumClass =
-      r.position === 1 ? "podium podium-1" :
-      r.position === 2 ? "podium podium-2" :
-      r.position === 3 ? "podium podium-3" : "";
+      const dotdClass = dotdCode && r.code === dotdCode ? "dotd" : "";
+      const flClass = flCode && r.code === flCode ? "fastestlap" : "";
 
-    const dotdClass = (dotdCode && r.code === dotdCode) ? "dotd" : "";
-    const flClass = (flCode && r.code === flCode) ? "fastestlap" : "";
+      return `
+        <tr class="${podiumClass} ${dotdClass} ${flClass}">
+          <td class="col-pos">${escapeHTML(pos)}</td>
+          <td class="col-driver">
+            <span class="driver-name">${driver}</span>
+            ${team ? `<span class="driver-team">${team}</span>` : ""}
+            <span class="driver-code">${escapeHTML(r.code ?? "")}</span>
+          </td>
+          <td class="col-time">${timeOrStatus}</td>
+          <td class="col-points">${escapeHTML(points)}</td>
+        </tr>
+      `;
+    })
+    .join("");
 
-    return `
-      <tr class="${podiumClass} ${dotdClass} ${flClass}">
-        <td class="col-pos">${escapeHTML(pos)}</td>
-        <td class="col-driver">
-          <span class="driver-name">${driver}</span>
-          ${team ? `<span class="driver-team">${team}</span>` : ""}
-          <span class="driver-code">${escapeHTML(r.code ?? "")}</span>
-        </td>
-        <td class="col-time">${timeOrStatus}</td>
-        <td class="col-points">${escapeHTML(points)}</td>
-      </tr>
-    `;
-  }).join("");
-
-  $tbody.innerHTML = rowsHTML || `
-    <tr><td colspan="4" class="empty">결과 데이터가 없습니다.</td></tr>
-  `;
+  $tbody.innerHTML =
+    rowsHTML ||
+    `<tr><td colspan="4" class="empty">결과 데이터가 없습니다.</td></tr>`;
 
   $raceResult.hidden = false;
 }
@@ -307,43 +321,78 @@ function renderRoundResult(roundData) {
 async function renderAll(season, round) {
   showMessage("");
 
-  // 2단계
   const schedule = await loadSchedule(season);
-  const scheduleRound = schedule.find(r => String(r.round) === String(round));
+  const scheduleRound = schedule.find((r) => String(r.round) === String(round));
   renderRaceInfo(scheduleRound);
 
-  // 3단계
-  // 2026은 아직 없을 수 있으니(파일 없거나 rounds 없음) 안전 처리
   try {
     const rr = await loadRoundResult(season);
     const roundData = rr?.rounds?.[String(round)] ?? null;
     renderRoundResult(roundData);
   } catch (e) {
-    // round_result 파일이 없으면 결과 영역 숨기고 메시지만 표시
     $raceResult.hidden = true;
     showMessage("해당 시즌의 결과 데이터 파일이 아직 없습니다.", "info");
   }
 }
 
 /* =========================
+   ✅ 초기 선택 로직(개선)
+   1) 최신 시즌부터 검사
+   2) 해당 시즌에 round_result가 존재하면 "결과 있는 마지막 라운드" 선택
+   3) round_result가 없으면 schedule 기준 latestFinishedRound 선택
+========================= */
+async function pickInitialSeasonAndRound() {
+  const seasons = getAvailableSeasons();
+  if (seasons.length === 0) return { season: null, round: null };
+
+  // 최신 시즌부터
+  for (let i = seasons.length - 1; i >= 0; i--) {
+    const season = String(seasons[i]);
+
+    // schedule은 필수(드롭다운/상단정보)
+    let schedule = [];
+    try {
+      schedule = await loadSchedule(season);
+    } catch {
+      continue;
+    }
+
+    // 결과 파일이 있으면 결과 기반으로 라운드 결정
+    try {
+      const rr = await loadRoundResult(season);
+      const latestWithResult = getLatestRoundWithResult(rr);
+
+      if (latestWithResult != null) {
+        return { season, round: String(latestWithResult) };
+      }
+    } catch {
+      // 결과 파일 없음 → schedule 기반으로 fallback
+    }
+
+    const latestFinished = getLatestFinishedRound(schedule);
+    return { season, round: String(latestFinished) };
+  }
+
+  return { season: null, round: null };
+}
+
+/* =========================
    Init
 ========================= */
 async function init() {
-  const seasons = getAvailableSeasons();
-  const defaultSeason = seasons.at(-1); // 가장 최신 시즌
-  if (!defaultSeason) return;
-
-  $season.value = String(defaultSeason);
-
-  // 라운드 옵션 생성
   buildRoundOptions(24);
   $round.disabled = false;
 
-  const schedule = await loadSchedule(String(defaultSeason));
-  const latestRound = getLatestFinishedRound(schedule);
-  $round.value = String(latestRound);
+  const picked = await pickInitialSeasonAndRound();
+  if (!picked.season || !picked.round) {
+    showMessage("시즌/라운드 데이터를 불러올 수 없습니다.", "error");
+    return;
+  }
 
-  await renderAll(String(defaultSeason), String(latestRound));
+  $season.value = picked.season;
+  $round.value = picked.round;
+
+  await renderAll(picked.season, picked.round);
 }
 
 /* =========================
@@ -365,11 +414,25 @@ $season.addEventListener("change", async () => {
   buildRoundOptions(24);
   $round.disabled = false;
 
-  const schedule = await loadSchedule(season);
-  const latestRound = getLatestFinishedRound(schedule);
-  $round.value = String(latestRound);
+  // ✅ 시즌 변경 시: 해당 시즌에서 "결과 있는 마지막 라운드" 우선
+  try {
+    const rr = await loadRoundResult(season);
+    const latestWithResult = getLatestRoundWithResult(rr);
+    if (latestWithResult != null) {
+      $round.value = String(latestWithResult);
+      await renderAll(season, String(latestWithResult));
+      return;
+    }
+  } catch {
+    // ignore
+  }
 
-  await renderAll(season, String(latestRound));
+  // fallback: schedule 기준
+  const schedule = await loadSchedule(season);
+  const latestFinished = getLatestFinishedRound(schedule);
+  $round.value = String(latestFinished);
+
+  await renderAll(season, String(latestFinished));
 });
 
 $round.addEventListener("change", async () => {
