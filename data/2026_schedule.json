@@ -8,8 +8,8 @@
     "race_name": "포뮬러 1 호주 그랑프리",
     "circuit": "앨버트 파크 서킷",
     "circuit_image": "./images/home/nextrace/앨버트 파크 서킷.png",
-    "laps": null,
-    "circuit_length_km": null,
+    "laps": 58,
+    "circuit_length_km": 5.278,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -31,8 +31,8 @@
     "race_name": "포뮬러 1 중국 그랑프리",
     "circuit": "상하이 인터내셔널 서킷",
     "circuit_image": "./images/home/nextrace/상하이 인터내셔널 서킷.png",
-    "laps": null,
-    "circuit_length_km": null,
+    "laps": 56,
+    "circuit_length_km": 5.451,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -54,8 +54,8 @@
     "race_name": "포뮬러 1 일본 그랑프리",
     "circuit": "스즈카 서킷",
     "circuit_image": "./images/home/nextrace/스즈카 서킷.png",
-    "laps": null,
-    "circuit_length_km": null,
+    "laps": 53,
+    "circuit_length_km": 5.807,
     "weather": {
       "condition": null,
       "temperature_c": null
