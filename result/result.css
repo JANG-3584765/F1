@@ -294,22 +294,61 @@
 
 /* ===== Mobile Fine-tune ===== */
 @media (max-width: 760px) {
+  /* 전체 폰트/패딩 살짝 축소 */
   .results-table thead th {
     font-size: 12px;
-    padding: 9px 8px;
+    padding: 9px 6px;
   }
 
   .results-table tbody td {
     font-size: 12px;
-    padding: 10px 8px;
+    padding: 10px 6px;
   }
 
-  /* 드라이버 폭 최우선 */
-  .col-driver {
-    width: 60%;
+  /* ✅ 순위 + 드라이버: 최대한 왼쪽으로 몰기 */
+  .results-table th.col-rank,
+  .results-table td.col-rank,
+  .results-table th.col-driver,
+  .results-table td.col-driver {
+    text-align: left;
+    padding-left: 6px;
+    padding-right: 6px;
   }
 
-  .col-time { width: 22%; }
+  /* ✅ 기록 / 랩 / 포인트: 공간 확보 + 왼쪽 정렬 */
+  .results-table th.col-time,
+  .results-table td.col-time,
+  .results-table th.col-laps,
+  .results-table td.col-laps,
+  .results-table th.col-points,
+  .results-table td.col-points {
+    text-align: left;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  /* ✅ 컬럼 비율 재분배 (핵심) */
+  .col-rank   { width: 44px; }
+  .col-driver { width: 64%; }   /* 드라이버 최우선 */
+  .col-time   { width: 20%; }
   .col-laps,
-  .col-points { width: 9%; }
+  .col-points { width: 8%; }
+
+  /* 드라이버 셀 내부(이름/팀) 안정화 */
+  .driver-name,
+  .team-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .driver-team {
+    font-size: 11px;
+  }
+
+  .team-dot {
+    width: 9px;
+    height: 9px;
+  }
 }
+
