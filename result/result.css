@@ -1,12 +1,8 @@
 /* =========================
-   result.css
-   - 드롭다운 상단 고정(페이지 내)
-   - 타이틀(국기 + race_name (city))
-   - 레이스 정보 2열(이미지 왼쪽 / 서킷 정보 오른쪽)
-   - Top5 / 전체 결과 테이블
-   - DOTD / Fastest Lap 배지
-   - 펼치기/접기 버튼
-   - 반응형
+   result.css (UPDATED)
+   - 타이틀: 국기(위) / 레이스명(중앙) / 도시(아래) 중앙 정렬
+   - 모바일: 드롭다운/배지 세로 스택
+   - 테이블: 컬럼 정렬 싱크 + 모바일 줄바꿈/ellipsis
 ========================= */
 
 /* ===== Base Layout ===== */
@@ -41,12 +37,14 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  position: relative;
 }
 
 .dropdowns label {
   font-size: 14px;
   font-weight: 800;
   color: #222;
+  white-space: nowrap;
 }
 
 .dropdowns select {
@@ -63,7 +61,6 @@
   font-size: 14px;
   font-weight: 700;
   color: #111;
-
   outline: none;
 }
 
@@ -72,10 +69,7 @@
   cursor: not-allowed;
 }
 
-/* 간단한 셀렉트 화살표 느낌(배경 이미지 없이) */
-.dropdowns {
-  position: relative;
-}
+/* 셀렉트 화살표 */
 .dropdowns::after {
   content: "▾";
   position: absolute;
@@ -109,34 +103,37 @@
   padding: 16px 14px;
 }
 
-/* ----- Header Row ----- */
+/* ----- Header (stacked center) ----- */
 .race-header {
   padding: 6px 6px 12px;
 }
 
+/* 기존 한 줄 flex 대신 세로 스택 */
 .race-title-row {
   display: flex;
-  align-items: baseline;
-  gap: 8px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 6px;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  text-align: center;
 }
 
+/* 국기 맨 위 중앙 */
 .race-flag {
-  font-size: 22px;
+  font-size: 26px;
   line-height: 1;
 }
 
+/* 레이스명 중앙 */
 .race-name {
   margin: 0;
   font-size: 18px;
   font-weight: 900;
-  text-align: center;
   letter-spacing: -0.2px;
   color: #111;
 }
 
+/* 도시명 중앙 (레이스명 아래) */
 .race-city {
   font-size: 14px;
   font-weight: 800;
@@ -202,6 +199,7 @@
   padding: 6px 6px 2px;
 }
 
+/* 기본은 가로, 모바일에서 세로로 바꿀 것 */
 .badge-row {
   display: flex;
   flex-wrap: wrap;
@@ -250,6 +248,7 @@
   border: 1px solid #eee;
   border-radius: 14px;
   overflow: hidden;
+  table-layout: fixed; /* ✅ 모바일 줄바꿈/싱크 개선 핵심 */
 }
 
 .results-table thead th {
@@ -259,7 +258,8 @@
   font-weight: 900;
   padding: 10px 10px;
   border-bottom: 1px solid #eee;
-  text-align: left;
+  text-align: center; /* ✅ 헤더 중앙 정렬로 싱크 통일 */
+  white-space: nowrap; /* ✅ "드라이버" 줄바꿈 방지 */
 }
 
 .results-table tbody td {
@@ -269,21 +269,47 @@
   font-weight: 700;
   color: #222;
   vertical-align: middle;
+  text-align: center; /* ✅ 바디도 중앙 정렬로 싱크 통일 */
+  white-space: nowrap; /* ✅ 기본 줄바꿈 방지 */
+  overflow: hidden;
+  text-overflow: ellipsis; /* ✅ 길면 ... 처리 */
 }
 
 .results-table tbody tr:last-child td {
   border-bottom: none;
 }
 
-.results-table tbody td:first-child {
-  width: 70px;
-  text-align: center;
-  font-weight: 900;
+/* 컬럼 폭(5열 기준) */
+.results-table th:nth-child(1),
+.results-table td:nth-child(1) {
+  width: 64px; /* 순위 */
 }
 
-.results-table tbody td:nth-child(3) {
-  color: #444;
-  font-weight: 800;
+.results-table th:nth-child(2),
+.results-table td:nth-child(2) {
+  width: 44%; /* 드라이버 (가장 넓게) */
+  text-align: left; /* 드라이버 내용은 왼쪽이 읽기 좋음 */
+}
+
+.results-table th:nth-child(3),
+.results-table td:nth-child(3) {
+  width: 26%; /* 기록 */
+}
+
+.results-table th:nth-child(4),
+.results-table td:nth-child(4) {
+  width: 64px; /* 랩 */
+}
+
+.results-table th:nth-child(5),
+.results-table td:nth-child(5) {
+  width: 76px; /* 포인트 */
+}
+
+/* 드라이버 셀만 말줄임 강하게 */
+.results-table tbody td:nth-child(2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ===== Toggle Button ===== */
@@ -323,35 +349,66 @@
 /* ===== Responsive ===== */
 @media (max-width: 760px) {
   .result-controls {
-    padding: 12px 10px;
-    gap: 10px;
+   .result-controls {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
   }
 
-  .dropdowns select {
-    min-width: 160px;
-  }
-
-  .race-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .race-name {
-    font-size: 17px;
-  }
-}
-
-@media (max-width: 420px) {
   .dropdowns {
     width: 100%;
     justify-content: space-between;
   }
 
-  .dropdowns label {
-    white-space: nowrap;
-  }
-
   .dropdowns select {
     width: 100%;
     min-width: 0;
+  }
+
+.badge-row {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    justify-content: center;
+  }
+
+  /* 레이스 2열 → 1열 */
+  .race-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* 테이블 폰트/패딩 조금 줄이기 */
+  .results-table thead th,
+  .results-table tbody td {
+    padding: 9px 8px;
+    font-size: 13px;
+  }
+
+  /* 모바일에서 드라이버 폭을 더 확보 */
+  .results-table th:nth-child(2),
+  .results-table td:nth-child(2) {
+    width: 52%;
+  }
+}
+
+@media (max-width: 420px) {
+  /* 더 작은 화면에서 폭 재조정 */
+  .results-table th:nth-child(1),
+  .results-table td:nth-child(1) {
+    width: 56px;
+  }
+
+  .results-table th:nth-child(4),
+  .results-table td:nth-child(4) {
+    width: 56px;
+  }
+
+  .results-table th:nth-child(5),
+  .results-table td:nth-child(5) {
+    width: 68px;
   }
 }

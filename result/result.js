@@ -205,8 +205,8 @@ function injectBadges({ dotd, fastest }, driverNameByCode) {
   wrap.className = "race-badges";
 
   const items = [];
-  if (dotdName) items.push(`<span class="badge badge-dotd">🏆 DOTD: <strong>${escapeHtml(dotdName)}</strong></span>`);
-  if (fastName) items.push(`<span class="badge badge-fast">⚡ Fastest Lap: <strong>${escapeHtml(fastName)}</strong></span>`);
+  if (dotdName) items.push(`<span class="badge badge-dotd"> DOTD: <strong>${escapeHtml(dotdName)}</strong></span>`);
+  if (fastName) items.push(`<span class="badge badge-fast"> Fastest Lap: <strong>${escapeHtml(fastName)}</strong></span>`);
 
   wrap.innerHTML = `
     <div class="badge-row">
