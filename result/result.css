@@ -1,9 +1,11 @@
 /* =========================
-   result.css (SIMPLE)
-   - 드롭다운: 모바일에서도 양옆(가능하면 2열, 너무 좁으면 줄바꿈)
+   result.css (SIMPLE+)
+   - 모바일에서도 표 공간 최대 확보(섹션 좌우 패딩 축소)
+   - 드롭다운: 가능한 한 양옆 유지(2열), 너무 좁으면 줄바꿈
    - 타이틀: 국기/레이스명/도시 중앙 세로 정렬
    - 레이스 정보: 데스크톱 2열, 모바일 1열
    - 테이블: 가독성 + 드라이버(2줄) + 팀 dot
+   - ✅ 드라이버/팀: 한 줄 유지 + 말줄임(...)
 ========================= */
 
 /* ===== Page ===== */
@@ -211,10 +213,6 @@
   color: #222;
 }
 
-.race-meta-text strong {
-  font-weight: 900;
-}
-
 /* ===== Tables ===== */
 .top-results,
 .full-results {
@@ -227,6 +225,7 @@
   border: 1px solid #eee;
   border-radius: 14px;
   overflow: hidden;
+  table-layout: fixed; /* ✅ 말줄임/폭 제어 안정화 */
 }
 
 .results-table thead th {
@@ -241,31 +240,35 @@
 }
 
 .results-table tbody td {
-  padding: 12px 10px; /* ✅ 공간 확보 */
+  padding: 12px 10px;
   border-bottom: 1px solid #f0f0f0;
   font-size: 14px;
   font-weight: 800;
   color: #222;
   vertical-align: middle;
   text-align: center;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .results-table tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* 컬럼 폭 (class 기반) */
+/* 컬럼 폭(기본) */
 .col-rank { width: 56px; }
 .col-laps { width: 56px; }
 .col-points { width: 64px; }
 
-/* 드라이버는 좌측 정렬 + 2줄 구조 */
+/* 드라이버는 좌측 정렬 */
 .results-table td.col-driver,
 .results-table th.col-driver {
   text-align: left;
 }
 
-/* 기록은 한 줄 유지(시간/갭) */
+/* 기록은 한 줄 유지 */
 .results-table td.col-time,
 .results-table th.col-time {
   white-space: nowrap;
@@ -275,14 +278,18 @@
 .driver-cell {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  min-width: 0;
+  gap: 3px;
+  min-width: 0; /* ✅ flex ellipsis 핵심 */
 }
 
 .driver-name {
   font-weight: 900;
   color: #111;
   line-height: 1.15;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .driver-team {
@@ -294,13 +301,25 @@
   font-weight: 900;
   color: #666;
   line-height: 1.15;
+
+  min-width: 0; /* ✅ team-name ellipsis를 위해 */
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .team-dot {
   width: 10px;
   height: 10px;
   border-radius: 999px;
+  flex: 0 0 auto;
   display: inline-block;
+}
+
+.team-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* ===== Toggle ===== */
@@ -328,6 +347,11 @@
 
 /* ===== Responsive ===== */
 @media (max-width: 760px) {
+  /* ✅ 모바일에서 표 공간 확보 */
+  .result-section {
+    padding: 16px 8px 40px;
+  }
+
   .race-grid {
     grid-template-columns: 1fr;
   }
@@ -338,10 +362,33 @@
     min-width: 200px;
   }
 
-  .results-table thead th,
+  /* ✅ 모바일 폰트 살짝 줄이기 */
+  .results-table thead th {
+    font-size: 12px;
+    padding: 9px 8px;
+  }
+
   .results-table tbody td {
+    font-size: 12px;
     padding: 10px 8px;
-    font-size: 13px;
+  }
+
+  /* ✅ 컬럼 비율(모바일에서 driver 폭 더 크게) */
+  .results-table th.col-driver,
+  .results-table td.col-driver {
+    width: 60%;
+  }
+
+  .results-table th.col-time,
+  .results-table td.col-time {
+    width: 22%;
+  }
+
+  .results-table th.col-laps,
+  .results-table td.col-laps,
+  .results-table th.col-points,
+  .results-table td.col-points {
+    width: 9%;
   }
 
   .driver-team {
