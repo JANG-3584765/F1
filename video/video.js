@@ -7,7 +7,7 @@
    ========================= */
 
 /** 설정 */
-const DATA_URL = "./videos.json"; // ✅ 여기에 네 JSON 파일 경로를 넣어줘 (예: ./videos_2025.json)
+const DATA_URL = "./video.json"; // ✅ 여기에 네 JSON 파일 경로를 넣어줘 (예: ./videos_2025.json)
 
 /** DOM */
 const $seasonBtn = document.querySelector("#season-button");
