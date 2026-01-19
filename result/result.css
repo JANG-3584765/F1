@@ -274,44 +274,63 @@
   font-weight: 900;
 }
 
-
 /* =========================
-   2) MOBILE (<=760px)
+   MOBILE (<=760px) – FINAL
+   목적:
+   1) 표 전체를 더 왼쪽으로
+   2) 기록/랩/포인트를 바짝 왼쪽으로
+   3) 드라이버 ↔ 기록 사이 공백 최소화
+   4) 모바일 가독성 유지
 ========================= */
 @media (max-width: 760px) {
-  /* Page spacing */
-  .result-section { padding: 16px 8px 40px; }
 
-  /* Race grid -> 1 column */
-  .race-grid { grid-template-columns: 1fr; }
+  /* ===== Page spacing ===== */
+  .result-section {
+    padding: 16px 4px 40px; /* 좌우 여백 최소화 */
+  }
 
-  /* Dropdowns: keep side-by-side if possible */
+  /* ===== Race info grid ===== */
+  .race-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* ===== Dropdowns ===== */
+  /* 가능한 한 양옆 유지, 정말 좁을 때만 줄바꿈 */
   .dropdowns {
     flex: 1 1 220px;
     min-width: 200px;
   }
 
-  /* Table: smaller text + tighter padding */
-  .results-table thead th {
-    font-size: 12px;
-    padding: 9px 6px;
-  }
-  .results-table tbody td {
-    font-size: 12px;
-    padding: 10px 6px;
+  /* ===== Table base ===== */
+  .results-table {
+    table-layout: fixed;
   }
 
-  /* ✅ Rank + Driver: push left */
+  .results-table thead th {
+    font-size: 12px;
+    padding: 8px 4px;
+    white-space: nowrap;
+  }
+
+  .results-table tbody td {
+    font-size: 12px;
+    padding: 9px 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* ===== Rank + Driver (왼쪽 최우선) ===== */
   .results-table th.col-rank,
   .results-table td.col-rank,
   .results-table th.col-driver,
   .results-table td.col-driver {
     text-align: left;
-    padding-left: 6px;
-    padding-right: 6px;
+    padding-left: 4px;
+    padding-right: 2px;
   }
 
-  /* ✅ Record/Laps/Points: more room + left align */
+  /* ===== Record / Laps / Points (바짝 당김) ===== */
   .results-table th.col-time,
   .results-table td.col-time,
   .results-table th.col-laps,
@@ -319,26 +338,58 @@
   .results-table th.col-points,
   .results-table td.col-points {
     text-align: left;
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
   }
 
-  /* ✅ Column widths (mobile) */
-  .col-rank   { width: 44px; }
-  .col-driver { width: 64%; }
-  .col-time   { width: 20%; }
+  /* ===== Column width re-balance (핵심) ===== */
+  .col-rank   { width: 42px; }
+  .col-driver { width: 58%; }   /* 드라이버 비중 ↓ */
+  .col-time   { width: 24%; }   /* 기록 공간 ↑ */
   .col-laps,
-  .col-points { width: 8%; }
+  .col-points { width: 9%; }
 
-  /* Driver/team: keep 1 line each + ellipsis */
-  .driver-team { font-size: 11px; }
-  .team-dot { width: 9px; height: 9px; }
+  /* ===== Driver cell ===== */
+  .driver-cell {
+    gap: 2px;
+  }
+
+  .driver-name {
+    font-size: 12px;
+    font-weight: 900;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .driver-team {
+    font-size: 11px;
+    gap: 4px;
+    overflow: hidden;
+  }
+
+  .team-dot {
+    width: 9px;
+    height: 9px;
+    flex-shrink: 0;
+  }
+
+  .team-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
-/* Optional: super small phones */
+/* =========================
+   EXTRA SMALL (<=380px)
+========================= */
 @media (max-width: 380px) {
-  .dropdowns { min-width: 170px; }
-  .col-rank { width: 40px; }
-  .col-laps { width: 48px; }
-  .col-points { width: 52px; }
+  .dropdowns {
+    min-width: 170px;
+  }
+
+  .col-rank   { width: 38px; }
+  .col-driver { width: 56%; }
+  .col-time   { width: 26%; }
+  .col-laps,
+  .col-points { width: 10%; }
 }
