@@ -1,14 +1,10 @@
-// result.js (type="module")
-// 목표:
 // 1) 시즌/라운드 드롭다운 연동
 // 2) 선택 시 레이스 메타(국기, 레이스명(도시), 서킷 이미지/정보) 렌더
 // 3) 결과 JSON(시즌 통합: {rounds:{...}})에서 Top5 + 전체 토글 렌더
 // 4) DOTD / Fastest Lap 표시
 // 5) 초기 진입 시: 2025 시즌 24라운드가 가장 먼저 보이게
 
-/* =========================
-   DOM
-========================= */
+/* DOM */
 const $season = document.querySelector("#season-select");
 const $round = document.querySelector("#round-select");
 
@@ -29,33 +25,21 @@ const $fullWrap = document.querySelector("#full-results");
 const $fullTbody = document.querySelector("#full-results-tbody");
 const $toggleBtn = document.querySelector("#toggle-full-btn");
 
-/* =========================
-   Config
-========================= */
+/* Config */
 const DEFAULT_SEASON = 2025;
 const DEFAULT_ROUND = 24;
 
 const scheduleUrlBySeason = (season) => `../data/${season}_schedule.json`;
+const RESULT_INDEX_URL = (season) => `./${season}_round_result.json`;
 
-// ✅ 네 결과 JSON 파일(시즌 통합) 경로
-// - 예: /result/result.html 페이지에서
-//   /result/2025_round_result.json을 읽으려면 "./2025_round_result.json"
-//   /result 폴더가 루트 바로 아래가 아니라면 "../result/..."가 맞을 수 있음.
-// 현재는 네가 말한 "result/2025_round_result.json"을 '폴더'로 보고 안전하게 ../result 사용.
-const RESULT_INDEX_URL = (season) => `../result/${season}_round_result.json`;
-
-/* =========================
-   State
-========================= */
+/* State */
 let scheduleCache = new Map(); // season -> array of meta objects
 let resultIndexCache = new Map(); // season -> parsed result index json
 
 let currentSeason = null;
 let currentRound = null;
 
-/* =========================
-   Utils
-========================= */
+/* Utils */
 function showError(message) {
   if (!$error) return;
   $error.textContent = message;
@@ -128,9 +112,7 @@ function escapeHtml(text) {
     .replaceAll("'", "&#39;");
 }
 
-/* =========================
-   Data Fetch
-========================= */
+/* Data Fetch */
 async function fetchJson(url) {
   const res = await fetch(url, { cache: "no-cache" });
   if (!res.ok) throw new Error(`Fetch failed: ${url} (HTTP ${res.status})`);
@@ -156,15 +138,11 @@ async function loadResultIndex(season) {
   const url = RESULT_INDEX_URL(season);
   const data = await fetchJson(url);
 
-  // 기대 구조:
-  // { season: 2025, rounds: { "1": { dotd, fastest_lap_driver, results: [...] }, ... } }
   resultIndexCache.set(season, data);
   return data;
 }
 
-/* =========================
-   Render: Race Meta
-========================= */
+/* Render: Race Meta */
 function renderRaceMeta(meta) {
   $flag.textContent = meta.flag ?? "";
   $name.textContent = meta.race_name ?? "";
@@ -210,12 +188,9 @@ function renderRaceMeta(meta) {
   setDetailsHidden(false);
 }
 
-/* =========================
-   Render: DOTD / Fastest Lap (보기 좋게)
-========================= */
+/* Render: DOTD / Fastest Lap */
 function injectBadges({ dotd, fastest }, driverNameByCode) {
   // 표 위에 배지 한 줄 삽입
-  // 위치: top-results 섹션 바로 위에 넣으면 자연스럽다.
   const $topSection = document.querySelector("#top-results");
   if (!$topSection) return;
 
@@ -243,9 +218,7 @@ function injectBadges({ dotd, fastest }, driverNameByCode) {
   $topSection.parentNode.insertBefore(wrap, $topSection);
 }
 
-/* =========================
-   Render: Results (네 JSON 구조 대응)
-========================= */
+/* Render: Results */
 function getRoundResultBlock(resultIndex, round) {
   const rounds = resultIndex?.rounds;
   if (!rounds || typeof rounds !== "object") return null;
@@ -257,9 +230,8 @@ function getRoundResultBlock(resultIndex, round) {
 function normalizeResultRowsFromBlock(block) {
   const arr = Array.isArray(block?.results) ? block.results : [];
 
-  // position이 null(DNF/DNS/DSQ)일 수 있으니 정렬은:
-  // - position이 숫자인 애들 먼저 오름차순
-  // - 그 다음 position null인 애들(status 기준, 그 후 입력 순)
+  // - position이 숫자인 경우 먼저 오름차순
+  // - 그 다음 position null
   const finished = [];
   const others = [];
 
@@ -270,7 +242,7 @@ function normalizeResultRowsFromBlock(block) {
 
   finished.sort((a, b) => a.position - b.position);
 
-  // others는 원래 순서 유지(필요하면 status 우선순위 정렬 추가 가능)
+  // others 순서 유지(필요하면 status 우선순위 정렬 추가 가능)
   const merged = [...finished, ...others];
 
   return merged.map((r) => ({
@@ -289,11 +261,11 @@ function normalizeResultRowsFromBlock(block) {
 function formatStatusCell(row) {
   // Top/Full 테이블의 "상태"에 표시할 텍스트:
   // - FINISHED면 time이 있으면 time, 없으면 gap, 그것도 없으면 "FINISHED"
-  // - 그 외(DNF/DNS/DSQ)는 status 그대로 (+ 추가정보 있으면)
+  // - 그 외(DNF/DNS/DSQ)는 status 그대로
   if (row.status === "FINISHED") {
     return row.time ?? row.gap ?? "FINISHED";
   }
-  // 예: DSQ도 time/gap이 있을 수 있는데, 보통은 status가 우선
+  // 예: DSQ도 time/gap이 있을 수 있는데 보통은 status가 우선
   return row.status;
 }
 
@@ -304,7 +276,7 @@ function rowToTrSimple(row) {
   tdPos.textContent = row.position != null ? row.position : "-";
 
   const tdDriver = document.createElement("td");
-  // 보기 좋게: "이름 · 팀" 형태로 붙임(원하면 CSS로 스타일)
+
   tdDriver.textContent = row.team ? `${row.name} · ${row.team}` : row.name;
 
   const tdStatus = document.createElement("td");
@@ -333,7 +305,7 @@ function renderResultsFromBlock(block) {
     map
   );
 
-  // Top5: position 숫자 있는 애들 중 1~5
+  // Top5
   const top5 = rows.filter(r => typeof r.position === "number").slice(0, 5);
   for (const r of top5) $topTbody.appendChild(rowToTrSimple(r));
 
@@ -344,9 +316,7 @@ function renderResultsFromBlock(block) {
   $toggleBtn.disabled = false;
 }
 
-/* =========================
-   Populate: Round Select
-========================= */
+/* Populate: Round Select */
 function populateRounds(scheduleList) {
   $round.innerHTML = `<option value="">라운드를 선택하세요</option>`;
 
@@ -365,9 +335,7 @@ function populateRounds(scheduleList) {
   $round.disabled = false;
 }
 
-/* =========================
-   Main Flow
-========================= */
+/* Main Flow */
 async function onSeasonChange(season, { preferRound = null } = {}) {
   try {
     hideError();
@@ -436,9 +404,6 @@ async function onRoundChange(season, round) {
       }
       renderResultsFromBlock(block);
     } catch (e) {
-      // 결과 파일이 아직 없을 수 있음: 에러로 띄우지 않고 조용히
-      // 원하면 아래 주석 해제
-      // console.warn(e);
     }
   } catch (e) {
     console.error(e);
@@ -448,9 +413,7 @@ async function onRoundChange(season, round) {
   }
 }
 
-/* =========================
-   Toggle Full Results
-========================= */
+/* Toggle Full Results */
 function initToggle() {
   if (!$toggleBtn) return;
 
@@ -466,9 +429,7 @@ function initToggle() {
   });
 }
 
-/* =========================
-   Events
-========================= */
+/* Events */
 function initEvents() {
   $season.addEventListener("change", async () => {
     const season = Number($season.value);
@@ -497,9 +458,7 @@ function initEvents() {
   });
 }
 
-/* =========================
-   Init
-========================= */
+/* Init */
 (async function init() {
   initToggle();
   initEvents();
