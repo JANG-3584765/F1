@@ -2,8 +2,9 @@
 // 목표:
 // 1) 시즌/라운드 드롭다운 연동
 // 2) 선택 시 레이스 메타(국기, 레이스명(도시), 서킷 이미지/정보) 렌더
-// 3) (옵션) 결과 JSON이 있으면 Top5/전체 결과 렌더 + 토글
-// 4) 초기 진입 시: 2025 시즌 24라운드가 가장 먼저 보이게
+// 3) 결과 JSON(시즌 통합: {rounds:{...}})에서 Top5 + 전체 토글 렌더
+// 4) DOTD / Fastest Lap 표시
+// 5) 초기 진입 시: 2025 시즌 24라운드가 가장 먼저 보이게
 
 /* =========================
    DOM
@@ -36,29 +37,19 @@ const DEFAULT_ROUND = 24;
 
 const scheduleUrlBySeason = (season) => `../data/${season}_schedule.json`;
 
-/**
- * 결과 JSON 경로는 프로젝트마다 다를 수 있어서
- * 여러 후보를 순차적으로 시도하도록 해둠.
- * 너의 실제 경로가 확정되어 있으면 후보를 1개로 줄여도 됨.
- */
-function resultUrlCandidates(season, round) {
-  const r2 = String(round).padStart(2, "0");
-  return [
-    `../data/${season}_results_round_${round}.json`,
-    `../data/${season}_results_round_${r2}.json`,
-    `../data/${season}_round_${round}_results.json`,
-    `../data/${season}_round_${r2}_results.json`,
-    `../data/results/${season}/${round}.json`,
-    `../data/results/${season}/${r2}.json`,
-    `../data/results/${season}/round_${round}.json`,
-    `../data/results/${season}/round_${r2}.json`,
-  ];
-}
+// ✅ 네 결과 JSON 파일(시즌 통합) 경로
+// - 예: /result/result.html 페이지에서
+//   /result/2025_round_result.json을 읽으려면 "./2025_round_result.json"
+//   /result 폴더가 루트 바로 아래가 아니라면 "../result/..."가 맞을 수 있음.
+// 현재는 네가 말한 "result/2025_round_result.json"을 '폴더'로 보고 안전하게 ../result 사용.
+const RESULT_INDEX_URL = (season) => `../result/${season}_round_result.json`;
 
 /* =========================
    State
 ========================= */
 let scheduleCache = new Map(); // season -> array of meta objects
+let resultIndexCache = new Map(); // season -> parsed result index json
+
 let currentSeason = null;
 let currentRound = null;
 
@@ -78,9 +69,7 @@ function hideError() {
 }
 
 function setLoadingUI(isLoading) {
-  // 필요하면 로딩 UI를 추가해도 됨. 지금은 최소 처리로 select disabled만 사용.
   $season.disabled = isLoading;
-  // 시즌이 선택되어 있어야 라운드 선택 의미가 있으므로, 로딩 중에는 라운드도 잠깐 잠금
   $round.disabled = isLoading || !$season.value;
 }
 
@@ -101,12 +90,6 @@ function pickRaceStart(meta) {
   return race?.start ?? sessions?.[0]?.start ?? null;
 }
 
-/**
- * schedule JSON이 어떤 형태든 "라운드 메타 배열"로 정규화
- * - 배열: 그대로
- * - { rounds: [...] }: rounds 사용
- * - 단일 객체: [obj]
- */
 function normalizeSchedule(data) {
   if (Array.isArray(data)) return data;
   if (data && Array.isArray(data.rounds)) return data.rounds;
@@ -117,6 +100,10 @@ function normalizeSchedule(data) {
 function resetResultTables() {
   if ($topTbody) $topTbody.innerHTML = "";
   if ($fullTbody) $fullTbody.innerHTML = "";
+
+  // DOTD/FASTEST UI 제거
+  const $badge = document.querySelector("#race-badges");
+  if ($badge) $badge.remove();
 
   if ($fullWrap) $fullWrap.hidden = true;
 
@@ -130,6 +117,15 @@ function resetResultTables() {
 function setDetailsHidden(hidden) {
   if (!$details) return;
   $details.hidden = hidden;
+}
+
+function escapeHtml(text) {
+  return String(text ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }
 
 /* =========================
@@ -148,65 +144,55 @@ async function loadSchedule(season) {
   const raw = await fetchJson(url);
   const list = normalizeSchedule(raw);
 
-  // 기본 정렬 안전장치
   list.sort((a, b) => (a?.round ?? 0) - (b?.round ?? 0));
 
   scheduleCache.set(season, list);
   return list;
 }
 
-async function tryFetchFirstJson(urls) {
-  let lastErr = null;
-  for (const url of urls) {
-    try {
-      const data = await fetchJson(url);
-      return { data, url };
-    } catch (e) {
-      lastErr = e;
-    }
-  }
-  throw lastErr ?? new Error("No result url candidates worked");
+async function loadResultIndex(season) {
+  if (resultIndexCache.has(season)) return resultIndexCache.get(season);
+
+  const url = RESULT_INDEX_URL(season);
+  const data = await fetchJson(url);
+
+  // 기대 구조:
+  // { season: 2025, rounds: { "1": { dotd, fastest_lap_driver, results: [...] }, ... } }
+  resultIndexCache.set(season, data);
+  return data;
 }
 
 /* =========================
    Render: Race Meta
 ========================= */
 function renderRaceMeta(meta) {
-  // 상단 타이틀: 국기 + race_name (city)
   $flag.textContent = meta.flag ?? "";
   $name.textContent = meta.race_name ?? "";
   $city.textContent = meta.city ? `(${meta.city})` : "";
 
-  // 날짜: 레이스 start 우선
   const start = pickRaceStart(meta);
   $date.textContent = start ? formatKSTDate(start) : "";
 
-  // 2열 오른쪽: 서킷 이름 + 스펙
   if ($circuitName) $circuitName.textContent = meta.circuit ?? "";
 
   const parts = [];
-
   if (meta.laps != null) parts.push(`랩 수 ${meta.laps}`);
   if (meta.circuit_length_km != null) parts.push(`서킷 길이 ${meta.circuit_length_km}km`);
 
   const cond = meta.weather?.condition;
   const temp = meta.weather?.temperature_c;
 
-  // 기온(날씨) 표기: "23°C (맑음)" / "맑음" / "23°C"
   if (cond != null || temp != null) {
     const tempStr = temp != null ? `${temp}°C` : "";
     const condStr = cond != null ? `${cond}` : "";
     let weatherStr = "";
-
     if (tempStr && condStr) weatherStr = `${tempStr} (${condStr})`;
     else weatherStr = tempStr || condStr;
-
     parts.push(weatherStr);
   }
 
   $extra.textContent = parts.join(" | ");
 
-  // 왼쪽 이미지
   if (meta.circuit_image) {
     $track.src = meta.circuit_image;
     $track.alt = meta.circuit ? `${meta.circuit} 서킷 이미지` : "서킷 이미지";
@@ -225,77 +211,134 @@ function renderRaceMeta(meta) {
 }
 
 /* =========================
-   Render: Results (옵션)
-   - 결과 JSON 구조는 프로젝트마다 다르므로 유연하게 파싱
+   Render: DOTD / Fastest Lap (보기 좋게)
 ========================= */
-function normalizeResultRows(data) {
-  // 아래 케이스들을 지원:
-  // - { results: [...] }
-  // - { raceResult: [...] }
-  // - [...] (배열 자체)
-  const arr =
-    (data && Array.isArray(data.results) && data.results) ||
-    (data && Array.isArray(data.raceResult) && data.raceResult) ||
-    (Array.isArray(data) && data) ||
-    [];
+function injectBadges({ dotd, fastest }, driverNameByCode) {
+  // 표 위에 배지 한 줄 삽입
+  // 위치: top-results 섹션 바로 위에 넣으면 자연스럽다.
+  const $topSection = document.querySelector("#top-results");
+  if (!$topSection) return;
 
-  // 각 row는 최소 "순위/드라이버/상태"를 만들 수 있게 정규화
-  return arr.map((r, idx) => {
-    const position = r.position ?? r.rank ?? r.pos ?? (idx + 1);
-    const driver =
-      r.driver ??
-      r.driver_name ??
-      r.name ??
-      r.driverName ??
-      r.fullname ??
-      r.full_name ??
-      "-";
+  const dotdName = dotd ? (driverNameByCode.get(dotd) ?? dotd) : null;
+  const fastName = fastest ? (driverNameByCode.get(fastest) ?? fastest) : null;
 
-    // status/시간/갭/완주 여부 등: 프로젝트에 맞춰 여기서 확장 가능
-    const status =
-      r.status ??
-      r.state ??
-      r.result ??
-      r.time ??
-      r.gap ??
-      r.note ??
-      (r.dnf ? "DNF" : null) ??
-      "-";
+  // 둘 다 없으면 삽입 안 함
+  if (!dotdName && !fastName) return;
 
-    return { position, driver, status };
-  });
+  const wrap = document.createElement("div");
+  wrap.id = "race-badges";
+  wrap.className = "race-badges";
+
+  const items = [];
+  if (dotdName) items.push(`<span class="badge badge-dotd">🏆 DOTD: <strong>${escapeHtml(dotdName)}</strong></span>`);
+  if (fastName) items.push(`<span class="badge badge-fast">⚡ Fastest Lap: <strong>${escapeHtml(fastName)}</strong></span>`);
+
+  wrap.innerHTML = `
+    <div class="badge-row">
+      ${items.join("\n")}
+    </div>
+  `;
+
+  // top-results 앞에 삽입
+  $topSection.parentNode.insertBefore(wrap, $topSection);
 }
 
-function rowToTr({ position, driver, status }) {
+/* =========================
+   Render: Results (네 JSON 구조 대응)
+========================= */
+function getRoundResultBlock(resultIndex, round) {
+  const rounds = resultIndex?.rounds;
+  if (!rounds || typeof rounds !== "object") return null;
+
+  // round 키가 "1" 같은 문자열
+  return rounds[String(round)] ?? null;
+}
+
+function normalizeResultRowsFromBlock(block) {
+  const arr = Array.isArray(block?.results) ? block.results : [];
+
+  // position이 null(DNF/DNS/DSQ)일 수 있으니 정렬은:
+  // - position이 숫자인 애들 먼저 오름차순
+  // - 그 다음 position null인 애들(status 기준, 그 후 입력 순)
+  const finished = [];
+  const others = [];
+
+  for (const r of arr) {
+    if (typeof r?.position === "number") finished.push(r);
+    else others.push(r);
+  }
+
+  finished.sort((a, b) => a.position - b.position);
+
+  // others는 원래 순서 유지(필요하면 status 우선순위 정렬 추가 가능)
+  const merged = [...finished, ...others];
+
+  return merged.map((r) => ({
+    code: r.code ?? "",
+    name: r.name ?? "-",
+    team: r.team ?? "",
+    position: r.position, // number | null
+    status: r.status ?? "-",
+    time: r.time,
+    gap: r.gap,
+    laps: r.laps,
+    points: r.points,
+  }));
+}
+
+function formatStatusCell(row) {
+  // Top/Full 테이블의 "상태"에 표시할 텍스트:
+  // - FINISHED면 time이 있으면 time, 없으면 gap, 그것도 없으면 "FINISHED"
+  // - 그 외(DNF/DNS/DSQ)는 status 그대로 (+ 추가정보 있으면)
+  if (row.status === "FINISHED") {
+    return row.time ?? row.gap ?? "FINISHED";
+  }
+  // 예: DSQ도 time/gap이 있을 수 있는데, 보통은 status가 우선
+  return row.status;
+}
+
+function rowToTrSimple(row) {
   const tr = document.createElement("tr");
 
   const tdPos = document.createElement("td");
-  tdPos.textContent = position;
+  tdPos.textContent = row.position != null ? row.position : "-";
 
   const tdDriver = document.createElement("td");
-  tdDriver.textContent = driver;
+  // 보기 좋게: "이름 · 팀" 형태로 붙임(원하면 CSS로 스타일)
+  tdDriver.textContent = row.team ? `${row.name} · ${row.team}` : row.name;
 
   const tdStatus = document.createElement("td");
-  tdStatus.textContent = status;
+  tdStatus.textContent = formatStatusCell(row);
 
   tr.append(tdPos, tdDriver, tdStatus);
   return tr;
 }
 
-function renderResultsTable(rows) {
+function renderResultsFromBlock(block) {
   resetResultTables();
 
-  if (!rows || rows.length === 0) {
-    // 결과가 없으면 토글 비활성 유지
+  const rows = normalizeResultRowsFromBlock(block);
+  if (!rows.length) {
+    // 결과 없음
     return;
   }
 
-  // Top5
-  const top5 = rows.slice(0, 5);
-  for (const r of top5) $topTbody.appendChild(rowToTr(r));
+  // code -> name 매핑(배지 표시용)
+  const map = new Map();
+  for (const r of rows) if (r.code) map.set(r.code, r.name);
 
-  // Full
-  for (const r of rows) $fullTbody.appendChild(rowToTr(r));
+  // DOTD / Fastest Lap 배지 삽입
+  injectBadges(
+    { dotd: block.dotd, fastest: block.fastest_lap_driver },
+    map
+  );
+
+  // Top5: position 숫자 있는 애들 중 1~5
+  const top5 = rows.filter(r => typeof r.position === "number").slice(0, 5);
+  for (const r of top5) $topTbody.appendChild(rowToTrSimple(r));
+
+  // Full: 전체 rows
+  for (const r of rows) $fullTbody.appendChild(rowToTrSimple(r));
 
   // 토글 활성화
   $toggleBtn.disabled = false;
@@ -305,7 +348,6 @@ function renderResultsTable(rows) {
    Populate: Round Select
 ========================= */
 function populateRounds(scheduleList) {
-  // 기존 옵션 초기화
   $round.innerHTML = `<option value="">라운드를 선택하세요</option>`;
 
   for (const item of scheduleList) {
@@ -315,8 +357,6 @@ function populateRounds(scheduleList) {
     const opt = document.createElement("option");
     opt.value = String(round);
 
-    // 라운드 표시 텍스트(원하면 더 꾸밀 수 있음)
-    // 예: "24R - 아부다비(야스 마리나)"
     const city = item?.city ? ` - ${item.city}` : "";
     opt.textContent = `${round}R${city}`;
     $round.appendChild(opt);
@@ -338,7 +378,6 @@ async function onSeasonChange(season, { preferRound = null } = {}) {
     currentSeason = season;
     currentRound = null;
 
-    // 라운드 셀렉트 잠금 + 초기화
     $round.disabled = true;
     $round.innerHTML = `<option value="">라운드를 선택하세요</option>`;
 
@@ -350,7 +389,6 @@ async function onSeasonChange(season, { preferRound = null } = {}) {
 
     populateRounds(scheduleList);
 
-    // preferRound가 있으면 우선 시도, 없으면 아무것도 선택하지 않음
     if (preferRound != null) {
       const exists = scheduleList.some((x) => String(x?.round) === String(preferRound));
       const chosen = exists ? preferRound : scheduleList[scheduleList.length - 1]?.round;
@@ -378,30 +416,29 @@ async function onRoundChange(season, round) {
     currentSeason = season;
     currentRound = round;
 
+    // 1) 레이스 메타 렌더
     const scheduleList = await loadSchedule(season);
     const meta = scheduleList.find((x) => String(x?.round) === String(round));
-
     if (!meta) {
       showError("선택한 라운드의 레이스 정보를 찾지 못했습니다.");
       return;
     }
-
-    // 1) 레이스 메타 렌더
     renderRaceMeta(meta);
 
-    // 2) (옵션) 결과 렌더: 있으면 보여주고, 없으면 조용히 비활성 유지
+    // 2) 결과 렌더(시즌 통합 파일에서 해당 라운드 꺼냄)
     try {
-      const urls = resultUrlCandidates(season, round);
-      const { data } = await tryFetchFirstJson(urls);
-      const rows = normalizeResultRows(data);
+      const idx = await loadResultIndex(season);
+      const block = getRoundResultBlock(idx, round);
 
-      renderResultsTable(rows);
-
-      // 결과가 있다면, Top5는 항상 보이고
-      // 전체는 토글로 노출(초기 숨김 유지)
-    } catch {
-      // 결과 파일이 없을 수 있음: 에러로 띄우지 말고 토글만 비활성 유지
-      // (원하면 안내문을 띄울 수 있지만, 현재는 조용히 처리)
+      if (!block || !Array.isArray(block.results) || block.results.length === 0) {
+        // 결과 없음: 토글 비활성 유지
+        return;
+      }
+      renderResultsFromBlock(block);
+    } catch (e) {
+      // 결과 파일이 아직 없을 수 있음: 에러로 띄우지 않고 조용히
+      // 원하면 아래 주석 해제
+      // console.warn(e);
     }
   } catch (e) {
     console.error(e);
@@ -436,7 +473,6 @@ function initEvents() {
   $season.addEventListener("change", async () => {
     const season = Number($season.value);
     if (!season) {
-      // 시즌 선택 해제
       $round.disabled = true;
       $round.innerHTML = `<option value="">라운드를 선택하세요</option>`;
       setDetailsHidden(true);
@@ -444,9 +480,6 @@ function initEvents() {
       hideError();
       return;
     }
-
-    // 시즌 변경 시에는 기본적으로 라운드 자동 선택하지 않음
-    // (원하면 여기서 최신 라운드 자동선택 가능)
     await onSeasonChange(season);
   });
 
@@ -460,7 +493,6 @@ function initEvents() {
       hideError();
       return;
     }
-
     await onRoundChange(season, round);
   });
 }
@@ -473,8 +505,6 @@ function initEvents() {
   initEvents();
 
   // 초기값: 2025 시즌 24라운드를 먼저 보여주기
-  // (요구사항 그대로 반영)
   $season.value = String(DEFAULT_SEASON);
-
   await onSeasonChange(DEFAULT_SEASON, { preferRound: DEFAULT_ROUND });
 })();
