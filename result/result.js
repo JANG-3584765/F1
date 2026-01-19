@@ -1,6 +1,9 @@
+// result.js (type="module")
 // 1) 시즌/라운드 드롭다운 연동
 // 2) 선택 시 레이스 메타(국기, 레이스명(도시), 서킷 이미지/정보) 렌더
 // 3) 결과 JSON(시즌 통합: {rounds:{...}})에서 Top5 + 전체 토글 렌더
+//    - Top5: 1~5위
+//    - 전체: 6위부터 + DNF/DNS/DSQ 포함 (중복 제거)
 // 4) DOTD / Fastest Lap 표시
 // 5) 초기 진입 시: 2025 시즌 24라운드가 가장 먼저 보이게
 
@@ -181,7 +184,6 @@ function renderRaceMeta(meta) {
     $track.hidden = true;
   }
 
-  // Twemoji(국기)
   if (window.twemoji) window.twemoji.parse($flag);
 
   hideError();
@@ -190,14 +192,12 @@ function renderRaceMeta(meta) {
 
 /* Render: DOTD / Fastest Lap */
 function injectBadges({ dotd, fastest }, driverNameByCode) {
-  // 표 위에 배지 한 줄 삽입
   const $topSection = document.querySelector("#top-results");
   if (!$topSection) return;
 
   const dotdName = dotd ? (driverNameByCode.get(dotd) ?? dotd) : null;
   const fastName = fastest ? (driverNameByCode.get(fastest) ?? fastest) : null;
 
-  // 둘 다 없으면 삽입 안 함
   if (!dotdName && !fastName) return;
 
   const wrap = document.createElement("div");
@@ -214,7 +214,6 @@ function injectBadges({ dotd, fastest }, driverNameByCode) {
     </div>
   `;
 
-  // top-results 앞에 삽입
   $topSection.parentNode.insertBefore(wrap, $topSection);
 }
 
@@ -222,16 +221,12 @@ function injectBadges({ dotd, fastest }, driverNameByCode) {
 function getRoundResultBlock(resultIndex, round) {
   const rounds = resultIndex?.rounds;
   if (!rounds || typeof rounds !== "object") return null;
-
-  // round 키가 "1" 같은 문자열
   return rounds[String(round)] ?? null;
 }
 
 function normalizeResultRowsFromBlock(block) {
   const arr = Array.isArray(block?.results) ? block.results : [];
 
-  // - position이 숫자인 경우 먼저 오름차순
-  // - 그 다음 position null
   const finished = [];
   const others = [];
 
@@ -241,8 +236,6 @@ function normalizeResultRowsFromBlock(block) {
   }
 
   finished.sort((a, b) => a.position - b.position);
-
-  // others 순서 유지(필요하면 status 우선순위 정렬 추가 가능)
   const merged = [...finished, ...others];
 
   return merged.map((r) => ({
@@ -258,61 +251,87 @@ function normalizeResultRowsFromBlock(block) {
   }));
 }
 
-function formatStatusCell(row) {
-  // Top/Full 테이블의 "상태"에 표시할 텍스트:
-  // - FINISHED면 time이 있으면 time, 없으면 gap, 그것도 없으면 "FINISHED"
-  // - 그 외(DNF/DNS/DSQ)는 status 그대로
+/**
+ * "상태" 대신 "기록" 개념으로 표시할 텍스트를 만든다.
+ * - FINISHED: time 있으면 time, 없으면 gap, 없으면 "완주"
+ * - DNF/DNS/DSQ: status 그대로
+ */
+function formatRecordCell(row) {
   if (row.status === "FINISHED") {
-    return row.time ?? row.gap ?? "FINISHED";
+    return row.time ?? row.gap ?? "완주";
   }
-  // 예: DSQ도 time/gap이 있을 수 있는데 보통은 status가 우선
   return row.status;
 }
 
-function rowToTrSimple(row) {
+function formatDriverCell(row) {
+  // 보기 좋게: 이름 (팀) 형태
+  if (row.team) return `${row.name} (${row.team})`;
+  return row.name;
+}
+
+function valueOrDash(v) {
+  return v == null || v === "" ? "-" : String(v);
+}
+
+function rowToTr(row) {
   const tr = document.createElement("tr");
 
   const tdPos = document.createElement("td");
   tdPos.textContent = row.position != null ? row.position : "-";
 
   const tdDriver = document.createElement("td");
+  tdDriver.textContent = formatDriverCell(row);
 
-  tdDriver.textContent = row.team ? `${row.name} · ${row.team}` : row.name;
+  const tdRecord = document.createElement("td");
+  tdRecord.textContent = formatRecordCell(row);
 
-  const tdStatus = document.createElement("td");
-  tdStatus.textContent = formatStatusCell(row);
+  const tdLaps = document.createElement("td");
+  tdLaps.textContent = valueOrDash(row.laps);
 
-  tr.append(tdPos, tdDriver, tdStatus);
+  const tdPts = document.createElement("td");
+  tdPts.textContent = valueOrDash(row.points);
+
+  tr.append(tdPos, tdDriver, tdRecord, tdLaps, tdPts);
   return tr;
+}
+
+function setTableHeadersToRecordLapsPoints() {
+  // HTML을 안 건드렸을 때를 대비해, thead 텍스트를 JS에서 맞춰준다.
+  // (현재 HTML은 3열이라면 이 부분은 5열로 바꾼 상태에서만 제대로 보임)
+  // 사용자가 HTML을 아직 3열 그대로면, 아래 경고처럼 UI가 깨질 수 있다.
+  const topThs = document.querySelectorAll("#top-results .results-table thead th");
+  const fullThs = document.querySelectorAll("#full-results .results-table thead th");
+
+  const labels = ["순위", "드라이버", "기록", "랩", "포인트"];
+  if (topThs.length === 5) topThs.forEach((th, i) => (th.textContent = labels[i]));
+  if (fullThs.length === 5) fullThs.forEach((th, i) => (th.textContent = labels[i]));
 }
 
 function renderResultsFromBlock(block) {
   resetResultTables();
 
   const rows = normalizeResultRowsFromBlock(block);
-  if (!rows.length) {
-    // 결과 없음
-    return;
-  }
+  if (!rows.length) return;
 
-  // code -> name 매핑(배지 표시용)
   const map = new Map();
   for (const r of rows) if (r.code) map.set(r.code, r.name);
 
-  // DOTD / Fastest Lap 배지 삽입
   injectBadges(
     { dotd: block.dotd, fastest: block.fastest_lap_driver },
     map
   );
 
-  // Top5
-  const top5 = rows.filter(r => typeof r.position === "number").slice(0, 5);
-  for (const r of top5) $topTbody.appendChild(rowToTrSimple(r));
+  // ✅ 테이블 헤더(HTML을 5열로 바꿨다면 자동으로 "기록/랩/포인트"로 맞춤)
+  setTableHeadersToRecordLapsPoints();
 
-  // Full: 전체 rows
-  for (const r of rows) $fullTbody.appendChild(rowToTrSimple(r));
+  // Top5: 완주자 중 1~5
+  const top5 = rows.filter((r) => typeof r.position === "number").slice(0, 5);
+  for (const r of top5) $topTbody.appendChild(rowToTr(r));
 
-  // 토글 활성화
+  // Full: ✅ 6위부터 + (position null인 DNF/DNS/DSQ는 전부 포함)
+  const rest = rows.filter((r) => (typeof r.position === "number" ? r.position >= 6 : true));
+  for (const r of rest) $fullTbody.appendChild(rowToTr(r));
+
   $toggleBtn.disabled = false;
 }
 
@@ -393,17 +412,17 @@ async function onRoundChange(season, round) {
     }
     renderRaceMeta(meta);
 
-    // 2) 결과 렌더(시즌 통합 파일에서 해당 라운드 꺼냄)
+    // 2) 결과 렌더
     try {
       const idx = await loadResultIndex(season);
       const block = getRoundResultBlock(idx, round);
 
       if (!block || !Array.isArray(block.results) || block.results.length === 0) {
-        // 결과 없음: 토글 비활성 유지
-        return;
+        return; // 결과 없음
       }
       renderResultsFromBlock(block);
     } catch (e) {
+      // 결과 파일이 없는 시즌(예: 2026)은 조용히 처리
     }
   } catch (e) {
     console.error(e);
