@@ -167,8 +167,8 @@
     "location": "모나코",
     "city": "몬테카를로",
     "race_name": "포뮬러 1 모나코 그랑프리",
-    "circuit": "몬테카를로 서킷",
-    "circuit_image": "../images/result/circuit/몬테카를로 서킷.png",
+    "circuit": "시르퀴 드 모나코",
+    "circuit_image": "../images/result/circuit/시르퀴 드 모나코.png",
     "laps": 78,
     "circuit_length_km": 3.337,
     "weather": {
@@ -191,7 +191,7 @@
     "city": "바르셀로나",
     "race_name": "포뮬러 1 스페인 그랑프리",
     "circuit": "시크루이트 데 바르셀로나",
-    "circuit_image": "../images/result/circuit/시크루이트 데 바르셀로나.png",
+    "circuit_image": "../images/result/circuit/시크쿠이트 데 바르셀로나.png",
     "laps": 66,
     "circuit_length_km": 4.657,
     "weather": {
@@ -214,7 +214,7 @@
     "city": "몬트리올",
     "race_name": "포뮬러 1 캐나다 그랑프리",
     "circuit": "질 빌뇌브 서킷",
-    "circuit_image": "../images/result/circuit/질 빌뇌브 서킷.png",
+    "circuit_image": "../images/result/circuit/시르퀴 질 빌뇌브.png",
     "laps": 70,
     "circuit_length_km": 4.361,
     "weather": {
@@ -237,7 +237,7 @@
     "city": "슈피엘베르크",
     "race_name": "포뮬러 1 오스트리아 그랑프리",
     "circuit": "레드불 링",
-    "circuit_image": "../images/result/circuit/레드불 링.png",
+    "circuit_image": "../images/result/circuit/레드불링.png",
     "laps": 71,
     "circuit_length_km": 4.326,
     "weather": {
@@ -306,7 +306,7 @@
     "city": "부다페스트",
     "race_name": "포뮬러 1 헝가리 그랑프리",
     "circuit": "헌가로링",
-    "circuit_image": "../images/result/circuit/헌가로링.png",
+    "circuit_image": "../images/result/circuit/헝가로링.png",
     "laps": 70,
     "circuit_length_km": 4.381,
     "weather": {
@@ -352,7 +352,7 @@
     "city": "몬차",
     "race_name": "포뮬러 1 이탈리아 그랑프리",
     "circuit": "몬차 서킷",
-    "circuit_image": "../images/result/circuit/몬차 서킷.png",
+    "circuit_image": "../images/result/circuit/몬자서킷.png",
     "laps": 53,
     "circuit_length_km": 5.793,
     "weather": {
@@ -421,7 +421,7 @@
     "city": "오스틴",
     "race_name": "포뮬러 1 미국 그랑프리",
     "circuit": "서킷 오브 더 아메리카스",
-    "circuit_image": "../images/result/circuit/서킷 오브 더 아메리카스.png",
+    "circuit_image": "../images/result/circuit/서킷 오브 디 아메리카스.png",
     "laps": 56,
     "circuit_length_km": 5.513,
     "weather": {
@@ -444,7 +444,7 @@
     "city": "멕시코시티",
     "race_name": "포뮬러 1 멕시코 그랑프리",
     "circuit": "오토드로모 에르마노스 로드리게스",
-    "circuit_image": "../images/result/circuit/오토드로모 에르마노스 로드리게스.png",
+    "circuit_image": "../images/result/circuit/아우토드로모 에르마노스 로드리게스.png",
     "laps": 71,
     "circuit_length_km": 4.304,
     "weather": {
