@@ -20,99 +20,115 @@
   <!-- 헤더 -->
   <div id="header-container"></div>
 
-  <main>
-    <section class="result-section">
-      <h1>레이스 결과</h1>
+<main>
+  <section class="result-section">
+    <h1>레이스 결과</h1>
 
-      <!-- 드롭다운 (시즌 / 라운드) -->
-      <div class="result-controls" role="group" aria-label="시즌 및 라운드 선택">
-        <div class="dropdowns">
-          <label for="season-select">시즌 선택:</label>
-          <select id="season-select">
-            <option value="">시즌을 선택하세요</option>
-            <option value="2025">2025 시즌</option>
-            <option value="2026">2026 시즌</option>
-          </select>
-        </div>
-
-        <div class="dropdowns">
-          <label for="round-select">라운드 선택:</label>
-          <select id="round-select" disabled>
-            <option value="">라운드를 선택하세요</option>
-          </select>
-        </div>
+    <!-- 드롭다운 (시즌 / 라운드) -->
+    <div class="result-controls" role="group" aria-label="시즌 및 라운드 선택">
+      <div class="dropdowns">
+        <label for="season-select">시즌 선택:</label>
+        <select id="season-select">
+          <option value="">시즌을 선택하세요</option>
+          <option value="2025">2025 시즌</option>
+          <option value="2026">2026 시즌</option>
+        </select>
       </div>
 
-      <!-- 상세 정보 (상단 헤더) -->
-      <!-- ✅ 초기에는 숨김: JS가 데이터 로드 후 보여줌 -->
-      <div id="race-details" class="race-details" hidden>
-        <!-- 타이틀/메타 -->
-        <div class="race-header">
-          <div class="race-title-row">
-            <span id="race-flag" class="race-flag"></span>
-            <h2 id="race-name" class="race-name"></h2>
-            <span id="race-city" class="race-city"></span>
-          </div>
+      <div class="dropdowns">
+        <label for="round-select">라운드 선택:</label>
+        <select id="round-select" disabled>
+          <option value="">라운드를 선택하세요</option>
+        </select>
+      </div>
+    </div>
 
-          <p id="race-date" class="race-date"></p>
+    <!-- 에러/안내: race-details가 숨겨져도 보이도록 바깥에 배치 -->
+    <div id="page-error" class="page-error" role="alert" hidden></div>
 
-          <!-- "랩 수 | 서킷 길이 | 날씨 (기온)" -->
-          <p id="race-extra" class="race-extra"></p>
+    <!-- 상세 정보 -->
+    <!-- JS가 데이터 로드 후 보여줌 -->
+    <div id="race-details" class="race-details" hidden>
+      <!-- 타이틀/메타 -->
+      <div class="race-header">
+        <div class="race-title-row">
+          <span id="race-flag" class="race-flag"></span>
+          <h2 id="race-name" class="race-name"></h2>
+          <span id="race-city" class="race-city"></span>
         </div>
 
-        <!-- 서킷 이미지 -->
+        <p id="race-date" class="race-date"></p>
+      </div>
+
+      <!-- 이미지(왼쪽) / 서킷정보(오른쪽) -->
+      <div class="race-grid">
+        <!-- 왼쪽: 서킷 이미지 -->
         <div class="race-circuit">
           <img id="race-track" src="" alt="서킷 이미지" loading="lazy">
         </div>
 
-        <!-- Top 5 미리보기 -->
-        <div id="top-results" class="top-results">
-          <div class="section-head">
-            <h3>상위 5명</h3>
-          </div>
-          <table class="results-table">
-            <thead>
-              <tr>
-                <th>순위</th>
-                <th>드라이버</th>
-                <th>상태</th>
-              </tr>
-            </thead>
-            <!-- ✅ JS 렌더 타깃 안정화 -->
-            <tbody id="top-results-tbody"></tbody>
-          </table>
-        </div>
+        <!-- 오른쪽: 서킷 이름 + 스펙 -->
+        <div class="race-spec">
+          <p id="race-circuit-name" class="race-circuit-name"></p>
 
-        <!-- 펼치기/접기 -->
-        <div class="toggle-wrap">
-          <button id="toggle-full-btn" type="button" class="toggle-full-btn" disabled>
-            전체 결과 펼치기
-          </button>
+          <!-- "랩 수 | 서킷 길이 | 기온(날씨)" -->
+          <p id="race-extra" class="race-extra"></p>
         </div>
-
-        <!-- 전체 결과 (처음엔 숨김) -->
-        <div id="full-results" class="full-results" hidden>
-          <div class="section-head">
-            <h3>전체 결과</h3>
-          </div>
-          <table class="results-table">
-            <thead>
-              <tr>
-                <th>순위</th>
-                <th>드라이버</th>
-                <th>상태</th>
-              </tr>
-            </thead>
-            <!-- ✅ JS 렌더 타깃 안정화 -->
-            <tbody id="full-results-tbody"></tbody>
-          </table>
-        </div>
-
-        <!-- 에러/안내 -->
-        <div id="page-error" class="page-error" role="alert" hidden></div>
       </div>
-    </section>
-  </main>
+
+      <!-- Top 5 미리보기 -->
+      <div id="top-results" class="top-results">
+        <div class="section-head">
+          <h3>상위 5명</h3>
+        </div>
+
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>순위</th>
+              <th>드라이버</th>
+              <th>상태</th>
+            </tr>
+          </thead>
+          <tbody id="top-results-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- 펼치기/접기 -->
+      <div class="toggle-wrap">
+        <button
+          id="toggle-full-btn"
+          type="button"
+          class="toggle-full-btn"
+          disabled
+          aria-controls="full-results"
+          aria-expanded="false"
+        >
+          전체 결과 펼치기
+        </button>
+      </div>
+
+      <!-- 전체 결과 (처음엔 숨김) -->
+      <div id="full-results" class="full-results" hidden>
+        <div class="section-head">
+          <h3>전체 결과</h3>
+        </div>
+
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>순위</th>
+              <th>드라이버</th>
+              <th>상태</th>
+            </tr>
+          </thead>
+          <tbody id="full-results-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
 
   <!-- 푸터 -->
   <div id="footer-container"></div>
@@ -140,7 +156,6 @@
   <script src="../common/footer.js"></script>
 
   <!-- 결과 JS -->
-  <!-- ✅ module 권장 (필수는 아님) -->
   <script type="module" src="./result.js"></script>
 
 </body>
