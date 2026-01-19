@@ -22,9 +22,18 @@
     {"id": "25-R2-6",  "source": "coupang", "title": "타이어가 중요한 이유", "provider": "coupang", "videoUrl": "https://youtu.be/2sjoy8kiNdA?si=mBmg1F1sBbQbVyp9" }   
     ] 
   },
+
     "3":  { "city": "스즈카",       
-    "videos": [ { "id": "25-R3-1",  "source": "official", "title": "일본 GP 공식 하이라이트",        
-    "provider": "F1", "videoUrl": "https://youtu.be/or9ooNWaqKU?si=didV3UEsWLIPg3mV" } ] },
+    "videos": [ 
+      {"id": "25-R3-1",  "source": "official", "title": "일본 GP 공식 하이라이트", "provider": "F1", "videoUrl": "https://youtu.be/or9ooNWaqKU?si=didV3UEsWLIPg3mV" },
+      {"id": "25-R3-2",  "source": "coupang", "title": "사인스를 추월하는 루키, 아이작 하자르", "provider": "coupang", "videoUrl": "https://youtu.be/UT3PeSil0uE?si=MJVTeLzfGb1mHXn4" },
+      {"id": "25-R3-3",  "source": "coupang", "title": "큰 울림을 주었던 윤재수 해설위원의 한마디", "provider": "coupang", "videoUrl": "https://youtu.be/6SzaROkbKK4?si=57R-v4zdFmqYG2G8" },
+      {"id": "25-R3-4",  "source": "coupang", "title": "베르스타펜과 노리스의 끝없는 경쟁", "provider": "coupang", "videoUrl": "https://youtu.be/s2Gj4guDWZU?si=Zg0lgVcQmbKTJXxW" },
+      {"id": "25-R3-5",  "source": "coupang", "title": "모두가 놀란 잭 두한의 대형사고", "provider": "coupang", "videoUrl": "https://youtu.be/Z6BGOb0pu0A?si=swZBoA2Zpl-a4acL" },
+      {"id": "25-R3-6",  "source": "coupang", "title": "완벽한 주행으로 폴 포지션을 차지한 베르스타펜", "provider": "coupang", "videoUrl": "https://youtu.be/NNC2FZYYMrs?si=KyTZ_42TXxMowdaq" }
+      ] 
+    },
+    
     "4":  { "city": "사키르",       
     "videos": [ { "id": "25-R4-1",  "source": "official", "title": "바레인 GP 공식 하이라이트",      
     "provider": "F1", "videoUrl": "https://youtu.be/bFXLP487kXo?si=ieMH2-sQTS_ubO9e" } ] },
