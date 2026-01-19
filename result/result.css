@@ -343,11 +343,11 @@
   }
 
   /* ===== Column width re-balance (핵심) ===== */
-  .col-rank   { width: 42px; }
-  .col-driver { width: 50%; }   /* 드라이버 비중 ↓ */
-  .col-time   { width: 32%; }   /* 기록 공간 ↑ */
-  .col-laps,
-  .col-points { width: 9%; }
+  .col-rank   { width: 40px; }
+  .col-driver { width: 48%; }   /* 드라이버 비중 ↓ */
+  .col-time   { width: 30%; }   /* 기록 공간 ↑ */
+  .col-laps   { width: 11%; }
+  .col-points { width: 11%; }
 
   /* ===== Driver cell ===== */
   .driver-cell {
@@ -389,7 +389,7 @@
 
   .col-rank   { width: 38px; }
   .col-driver { width: 50%; }
-  .col-time   { width: 32%; }
-  .col-laps,
-  .col-points { width: 12%; }
+  .col-time   { width: 30%; }
+  .col-laps   { width: 11%; }
+  .col-points { width: 11%; }
 }
