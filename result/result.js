@@ -204,15 +204,17 @@ function injectBadges({ dotd, fastest }, driverNameByCode) {
   wrap.id = "race-badges";
   wrap.className = "race-badges";
 
-  const items = [];
-  if (dotdName) items.push(`<span class="badge badge-dotd"> DOTD: <strong>${escapeHtml(dotdName)}</strong></span>`);
-  if (fastName) items.push(`<span class="badge badge-fast"> Fastest Lap: <strong>${escapeHtml(fastName)}</strong></span>`);
+const items = [];
+if (dotdName)
+  items.push(`오늘의 드라이버: <strong>${escapeHtml(dotdName)}</strong>`);
+if (fastName)
+  items.push(`패스티스트 랩: <strong>${escapeHtml(fastName)}</strong>`);
 
-  wrap.innerHTML = `
-    <div class="badge-row">
-      ${items.join("\n")}
-    </div>
-  `;
+wrap.innerHTML = `
+  <div class="badge-row">
+    ${items.map(t => `<div class="race-meta-line">${t}</div>`).join("")}
+  </div>
+`;
 
   $topSection.parentNode.insertBefore(wrap, $topSection);
 }
