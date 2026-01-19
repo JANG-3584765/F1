@@ -344,8 +344,8 @@
 
   /* ===== Column width re-balance (핵심) ===== */
   .col-rank   { width: 42px; }
-  .col-driver { width: 58%; }   /* 드라이버 비중 ↓ */
-  .col-time   { width: 24%; }   /* 기록 공간 ↑ */
+  .col-driver { width: 56%; }   /* 드라이버 비중 ↓ */
+  .col-time   { width: 26%; }   /* 기록 공간 ↑ */
   .col-laps,
   .col-points { width: 9%; }
 
