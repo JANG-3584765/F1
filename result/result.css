@@ -1,22 +1,17 @@
+/* 
+- Desktop/Base
+- Mobile(<=760px) override
+ */
+
 /* =========================
-   result.css (FINAL)
-   - 드롭다운: 모바일에서도 최대한 양옆 유지
-   - 타이틀: 국기 / 레이스명 / 도시 중앙 세로
-   - 테이블: 드라이버 2줄 + 팀 dot
-   - 기록/랩/포인트: 왼쪽으로 당김
+   1) BASE (Desktop + common)
 ========================= */
 
-/* ===== Page ===== */
+/* Page */
 .result-section {
   max-width: 980px;
   margin: 0 auto;
   padding: 22px 14px 46px;
-}
-
-@media (max-width: 760px) {
-  .result-section {
-    padding: 16px 8px 40px; /* 모바일 공간 확보 */
-  }
 }
 
 .result-section h1 {
@@ -26,7 +21,7 @@
   font-weight: 900;
 }
 
-/* ===== Controls ===== */
+/* Controls */
 .result-controls {
   display: flex;
   gap: 12px;
@@ -34,13 +29,12 @@
   justify-content: center;
 
   padding: 12px;
+  margin: 10px 0 14px;
   border: 1px solid #eee;
   border-radius: 14px;
   background: #fff;
-  margin: 10px 0 14px;
 }
 
-/* 드롭다운: 반반 + 좁으면 줄바꿈 */
 .dropdowns {
   flex: 1 1 240px;
   min-width: 220px;
@@ -84,7 +78,7 @@
   pointer-events: none;
 }
 
-/* ===== Error ===== */
+/* Error */
 .page-error {
   margin: 0 0 12px;
   padding: 10px 12px;
@@ -96,19 +90,17 @@
   font-size: 14px;
 }
 
-/* ===== Card ===== */
+/* Card */
 .race-details {
   margin-top: 12px;
+  padding: 16px 14px;
   border: 1px solid #eee;
   border-radius: 16px;
   background: #fff;
-  padding: 16px 14px;
 }
 
-/* ===== Title ===== */
-.race-header {
-  padding: 6px 6px 12px;
-}
+/* Title */
+.race-header { padding: 6px 6px 12px; }
 
 .race-title-row {
   display: flex;
@@ -118,14 +110,12 @@
   text-align: center;
 }
 
-.race-flag {
-  font-size: 26px;
-}
+.race-flag { font-size: 26px; }
 
 .race-name {
+  margin: 0;
   font-size: 18px;
   font-weight: 900;
-  margin: 0;
 }
 
 .race-city {
@@ -141,7 +131,7 @@
   color: #444;
 }
 
-/* ===== Grid ===== */
+/* Grid */
 .race-grid {
   display: grid;
   grid-template-columns: 1.25fr 1fr;
@@ -149,16 +139,10 @@
   padding: 6px 6px 10px;
 }
 
-@media (max-width: 760px) {
-  .race-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 .race-circuit {
+  border: 1px solid #eee;
   border-radius: 14px;
   overflow: hidden;
-  border: 1px solid #eee;
 }
 
 .race-circuit img {
@@ -173,18 +157,19 @@
 }
 
 .race-circuit-name {
+  margin: 0 0 8px;
   font-size: 16px;
   font-weight: 900;
-  margin-bottom: 8px;
 }
 
 .race-extra {
+  margin: 0;
   font-size: 14px;
   font-weight: 700;
   color: #444;
 }
 
-/* ===== Tables ===== */
+/* Tables */
 .results-table {
   width: 100%;
   border-collapse: collapse;
@@ -214,17 +199,15 @@
   text-overflow: ellipsis;
 }
 
-/* 컬럼 폭 */
+/* Column widths (desktop baseline) */
 .col-rank { width: 56px; }
 .col-laps { width: 56px; }
 .col-points { width: 64px; }
 
-/* ===== 기록 / 랩 / 포인트 → 왼쪽 당김 ===== */
+/* Record/Laps/Points slightly left (desktop) */
 .col-time,
 .col-laps,
-.col-points {
-  text-align: left;
-}
+.col-points { text-align: left; }
 
 .results-table td.col-time,
 .results-table td.col-laps,
@@ -233,10 +216,8 @@
   padding-right: 8px;
 }
 
-/* ===== Driver Cell ===== */
-.col-driver {
-  text-align: left;
-}
+/* Driver cell (2 lines) */
+.col-driver { text-align: left; }
 
 .driver-cell {
   display: flex;
@@ -275,9 +256,10 @@
 .team-name {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-/* ===== Toggle ===== */
+/* Toggle */
 .toggle-wrap {
   display: flex;
   justify-content: center;
@@ -292,20 +274,34 @@
   font-weight: 900;
 }
 
-/* ===== Mobile Fine-tune ===== */
+
+/* =========================
+   2) MOBILE (<=760px)
+========================= */
 @media (max-width: 760px) {
-  /* 전체 폰트/패딩 살짝 축소 */
+  /* Page spacing */
+  .result-section { padding: 16px 8px 40px; }
+
+  /* Race grid -> 1 column */
+  .race-grid { grid-template-columns: 1fr; }
+
+  /* Dropdowns: keep side-by-side if possible */
+  .dropdowns {
+    flex: 1 1 220px;
+    min-width: 200px;
+  }
+
+  /* Table: smaller text + tighter padding */
   .results-table thead th {
     font-size: 12px;
     padding: 9px 6px;
   }
-
   .results-table tbody td {
     font-size: 12px;
     padding: 10px 6px;
   }
 
-  /* ✅ 순위 + 드라이버: 최대한 왼쪽으로 몰기 */
+  /* ✅ Rank + Driver: push left */
   .results-table th.col-rank,
   .results-table td.col-rank,
   .results-table th.col-driver,
@@ -315,7 +311,7 @@
     padding-right: 6px;
   }
 
-  /* ✅ 기록 / 랩 / 포인트: 공간 확보 + 왼쪽 정렬 */
+  /* ✅ Record/Laps/Points: more room + left align */
   .results-table th.col-time,
   .results-table td.col-time,
   .results-table th.col-laps,
@@ -327,28 +323,22 @@
     padding-right: 4px;
   }
 
-  /* ✅ 컬럼 비율 재분배 (핵심) */
+  /* ✅ Column widths (mobile) */
   .col-rank   { width: 44px; }
-  .col-driver { width: 64%; }   /* 드라이버 최우선 */
+  .col-driver { width: 64%; }
   .col-time   { width: 20%; }
   .col-laps,
   .col-points { width: 8%; }
 
-  /* 드라이버 셀 내부(이름/팀) 안정화 */
-  .driver-name,
-  .team-name {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .driver-team {
-    font-size: 11px;
-  }
-
-  .team-dot {
-    width: 9px;
-    height: 9px;
-  }
+  /* Driver/team: keep 1 line each + ellipsis */
+  .driver-team { font-size: 11px; }
+  .team-dot { width: 9px; height: 9px; }
 }
 
+/* Optional: super small phones */
+@media (max-width: 380px) {
+  .dropdowns { min-width: 170px; }
+  .col-rank { width: 40px; }
+  .col-laps { width: 48px; }
+  .col-points { width: 52px; }
+}
