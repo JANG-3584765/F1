@@ -7,7 +7,7 @@
     "city": "멜버른",
     "race_name": "포뮬러 1 호주 그랑프리",
     "circuit": "앨버트 파크 서킷",
-    "circuit_image": "../images/home/nextrace/앨버트 파크 서킷.png",
+    "circuit_image": "/F1/images/home/nextrace/앨버트 파크 서킷.png",
     "laps": 58,
     "circuit_length_km": 5.278,
     "weather": {
