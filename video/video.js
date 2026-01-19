@@ -325,7 +325,6 @@ function render() {
               ? `<img src="${escapeHtml(thumb)}" alt="${title}" loading="lazy">`
               : `<div class="video-thumb-fallback">썸네일 없음</div>`
           }
-          <span class="play-icon">▶</span>
         </div>
       </a>
       <div class="video-info">
