@@ -53,7 +53,7 @@
     "city": "스즈카",
     "race_name": "포뮬러 1 레노버 일본 그랑프리",
     "circuit": "스즈카 서킷",
-    "circuit_image": "./images/result/circuit/스즈카 서킷.jpg",
+    "circuit_image": "../images/result/circuit/스즈카 서킷.png",
     "laps": 53,
     "circuit_length_km": 5.807,
     "weather": {
@@ -76,9 +76,9 @@
     "city": "사키르",
     "race_name": "포뮬러 1 걸프에어 바레인 그랑프리",
     "circuit": "바레인 인터내셔널 서킷",
-    "circuit_image": "./images/result/circuit/바레인 인터내셔널 서킷.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/바레인 인터내셔널 서킷.png",
+    "laps": 57,
+    "circuit_length_km": 5.412,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -99,9 +99,9 @@
     "city": "제다",
     "race_name": "포뮬러 1 STC 사우디아라비아 그랑프리",
     "circuit": "제다 코니쉬 서킷",
-    "circuit_image": "./images/result/circuit/제다 코니쉬 서킷.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/제다 코니쉬 서킷.png",
+    "laps": 50,
+    "circuit_length_km": 6.174,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -122,9 +122,9 @@
     "city": "마이애미 가든스",
     "race_name": "포뮬러 1 크립토닷컴 마이애미 그랑프리",
     "circuit": "마이애미 인터내셔널 오토드롬",
-    "circuit_image": "./images/result/circuit/마이애미 인터내셔널 오토드롬.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/마이애미 인터내셔널 오토드롬.png",
+    "laps": 57,
+    "circuit_length_km": 5.412,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -145,9 +145,9 @@
     "city": "에밀리아 로마냐",
     "race_name": "포뮬러 1 AWS 그란 프레미오 델 메이드 인 이탈리 에 델'에밀리아-로마냐",
     "circuit": "아우토드로모 디 이몰라",
-    "circuit_image": "./images/result/circuit/이몰라 서킷.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/이몰라 서킷.jpg",
+    "laps": 63,
+    "circuit_length_km": 4.909,
     "weather": {
     "condition": null,
     "temperature_c": null
@@ -168,9 +168,9 @@
     "city": "몬테카를로",
     "race_name": "포뮬러 1 모나코 그랑프리",
     "circuit": "몬테카를로 서킷",
-    "circuit_image": "./images/result/circuit/몬테카를로 서킷.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/몬테카를로 서킷.png",
+    "laps": 78,
+    "circuit_length_km": 3.337,
     "weather": {
     "condition": null,
     "temperature_c": null
@@ -191,9 +191,9 @@
     "city": "바르셀로나",
     "race_name": "포뮬러 1 스페인 그랑프리",
     "circuit": "시크루이트 데 바르셀로나",
-    "circuit_image": "./images/result/circuit/시크루이트 데 바르셀로나.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/시크루이트 데 바르셀로나.png",
+    "laps": 66,
+    "circuit_length_km": 4.657,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -214,9 +214,9 @@
     "city": "몬트리올",
     "race_name": "포뮬러 1 캐나다 그랑프리",
     "circuit": "질 빌뇌브 서킷",
-    "circuit_image": "./images/result/circuit/질 빌뇌브 서킷.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/질 빌뇌브 서킷.png",
+    "laps": 70,
+    "circuit_length_km": 4.361,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -237,9 +237,9 @@
     "city": "슈피엘베르크",
     "race_name": "포뮬러 1 오스트리아 그랑프리",
     "circuit": "레드불 링",
-    "circuit_image": "./images/result/circuit/레드불 링.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/레드불 링.png",
+    "laps": 71,
+    "circuit_length_km": 4.326,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -260,9 +260,9 @@
     "city": "실버스톤",
     "race_name": "포뮬러 1 잉글랜드 그랑프리",
     "circuit": "실버스톤 서킷",
-    "circuit_image": "./images/result/circuit/실버스톤 서킷.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/실버스톤 서킷.png",
+    "laps": 52,
+    "circuit_length_km": 5.891,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -283,9 +283,9 @@
     "city": "스파",
     "race_name": "포뮬러 1 벨기에 그랑프리",
     "circuit": "스파-프랑코샹 서킷",
-    "circuit_image": "./images/result/circuit/스파 프랑코샹 서킷.png",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/스파 프랑코샹 서킷.png",
+    "laps": 44,
+    "circuit_length_km": 7.004,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -306,9 +306,9 @@
     "city": "부다페스트",
     "race_name": "포뮬러 1 헝가리 그랑프리",
     "circuit": "헌가로링",
-    "circuit_image": "./images/result/circuit/헌가로링.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/헌가로링.png",
+    "laps": 70,
+    "circuit_length_km": 4.381,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -329,9 +329,9 @@
     "city": "잔드보르트",
     "race_name": "포뮬러 1 네덜란드 그랑프리",
     "circuit": "잔드보르트 서킷",
-    "circuit_image": "./images/result/circuit/잔드보르트 서킷.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/잔드보르트 서킷.png",
+    "laps": 72,
+    "circuit_length_km": 4.259,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -352,9 +352,9 @@
     "city": "몬차",
     "race_name": "포뮬러 1 이탈리아 그랑프리",
     "circuit": "몬차 서킷",
-    "circuit_image": "./images/result/circuit/몬차 서킷.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/몬차 서킷.png",
+    "laps": 53,
+    "circuit_length_km": 5.793,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -375,9 +375,9 @@
     "city": "바쿠",
     "race_name": "포뮬러 1 아제르바이잔 그랑프리",
     "circuit": "바쿠 시티 서킷",
-    "circuit_image": "./images/result/circuit/바쿠 시티 서킷.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/바쿠 시티 서킷.png",
+    "laps": 51,
+    "circuit_length_km": 6.003,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -398,9 +398,9 @@
     "city": "싱가포르",
     "race_name": "포뮬러 1 싱가포르 그랑프리",
     "circuit": "마리나 베이 시가지 서킷",
-    "circuit_image": "./images/result/circuit/마리나베이 서킷.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/마리나베이 서킷.png",
+    "laps": 62,
+    "circuit_length_km": 4.927,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -421,9 +421,9 @@
     "city": "오스틴",
     "race_name": "포뮬러 1 미국 그랑프리",
     "circuit": "서킷 오브 더 아메리카스",
-    "circuit_image": "./images/result/circuit/서킷 오브 더 아메리카스.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/서킷 오브 더 아메리카스.png",
+    "laps": 56,
+    "circuit_length_km": 5.513,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -444,9 +444,9 @@
     "city": "멕시코시티",
     "race_name": "포뮬러 1 멕시코 그랑프리",
     "circuit": "오토드로모 에르마노스 로드리게스",
-    "circuit_image": "./images/result/circuit/오토드로모 에르마노스 로드리게스.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/오토드로모 에르마노스 로드리게스.png",
+    "laps": 71,
+    "circuit_length_km": 4.304,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -467,9 +467,9 @@
     "city": "상파울루",
     "race_name": "포뮬러 1 브라질 그랑프리",
     "circuit": "인터라고스 서킷",
-    "circuit_image": "./images/result/circuit/인터라고스 서킷.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/인터라고스 서킷.png",
+    "laps": 71,
+    "circuit_length_km": 4.309,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -490,9 +490,9 @@
     "city": "라스베이거스",
     "race_name": "포뮬러 1 라스베이거스 그랑프리",
     "circuit": "라스베이거스 시가지 서킷",
-    "circuit_image": "./images/result/circuit/라스베가스 스트립 서킷.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/라스베가스 스트립 서킷.png",
+    "laps": 50,
+    "circuit_length_km": 6.201,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -513,9 +513,9 @@
     "city": "루사일",
     "race_name": "포뮬러 1 카타르 그랑프리",
     "circuit": "루사일 인터내셔널 서킷",
-    "circuit_image": "./images/result/circuit/루사일 인터내셔널 서킷.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/루사일 인터내셔널 서킷.png",
+    "laps": 57,
+    "circuit_length_km": 5.419,
     "weather": {
       "condition": null,
       "temperature_c": null
@@ -536,9 +536,9 @@
     "city": "아부다비",
     "race_name": "포뮬러 1 아부다비 그랑프리",
     "circuit": "야스 마리나 서킷",
-    "circuit_image": "./images/result/circuit/야스 마리나 서킷.jpg",
-    "laps": null,
-    "circuit_length_km": null,
+    "circuit_image": "../images/result/circuit/야스 마리나 서킷.png",
+    "laps": 58,
+    "circuit_length_km": 5.281,
     "weather": {
       "condition": null,
       "temperature_c": null
