@@ -145,7 +145,7 @@
     "city": "몬트리올",
     "race_name": "포뮬러 1 레노버 그랑프디 드 캐나다 그랑프리",
     "circuit": "시르퀴 질 빌뇌브",
-    "circuit_image": "../images/home/nextrace/시르퀴 질 빌뇌브 서킷.png",
+    "circuit_image": "../images/home/nextrace/시르퀴 질 빌뇌브.png",
     "laps": 70,
     "circuit_length_km": 4.361,
     "weather": {
@@ -168,7 +168,7 @@
     "city": "몬테카를로",
     "race_name": "포뮬러 1 모나코 그랑프리",
     "circuit": "시르퀴 드 모나코",
-    "circuit_image": "../images/home/nextrace/시르퀴 드 모나코.jpg",
+    "circuit_image": "../images/home/nextrace/시르퀴 드 모나코.png",
     "laps": 78,
     "circuit_length_km": 3.337,
     "weather": {
