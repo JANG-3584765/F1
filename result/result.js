@@ -201,8 +201,8 @@ function renderRaceMeta(meta) {
   if ($circuitName) $circuitName.textContent = meta.circuit ?? "";
 
   const parts = [];
-  if (meta.laps != null) parts.push(`랩 수 ${meta.laps}`);
-  if (meta.circuit_length_km != null) parts.push(`서킷 길이 ${meta.circuit_length_km}km`);
+  if (meta.laps != null) parts.push(`랩 수: ${meta.laps}`);
+  if (meta.circuit_length_km != null) parts.push(`서킷 길이: ${meta.circuit_length_km}km`);
 
   const cond = meta.weather?.condition;
   const temp = meta.weather?.temperature_c;
