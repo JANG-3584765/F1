@@ -1,73 +1,63 @@
-/* 
-- Desktop/Base
-- Mobile(<=760px) override
- */
-
 /* =========================
-   1) BASE (Desktop + common)
+   result.css (FINAL - compact)
+   - DOTD/FL: smaller + colored text
+   - Table header corners: less “round” feel
+   - Column alignment fixes (rank/laps/points drift)
+   - Mobile: record/laps/points tighter to left
 ========================= */
 
-/* Page */
-.result-section {
+/* ===== Page ===== */
+.result-section{
   max-width: 980px;
   margin: 0 auto;
   padding: 22px 14px 46px;
 }
-
-.result-section h1 {
+.result-section h1{
   margin: 6px 0 16px;
   text-align: center;
   font-size: 22px;
   font-weight: 900;
 }
 
-/* Controls */
-.result-controls {
+/* ===== Controls ===== */
+.result-controls{
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
   justify-content: center;
-
   padding: 12px;
   margin: 10px 0 14px;
   border: 1px solid #eee;
   border-radius: 14px;
   background: #fff;
 }
-
-.dropdowns {
+.dropdowns{
   flex: 1 1 240px;
   min-width: 220px;
-
   display: inline-flex;
   align-items: center;
   gap: 8px;
   position: relative;
 }
-
-.dropdowns label {
+.dropdowns label{
   font-size: 14px;
   font-weight: 900;
   color: #222;
   white-space: nowrap;
 }
-
-.dropdowns select {
+.dropdowns select{
   width: 100%;
   min-width: 0;
-
   appearance: none;
   padding: 9px 34px 9px 10px;
   border: 1px solid #ddd;
   border-radius: 10px;
   background: #fff;
-
   font-size: 14px;
   font-weight: 800;
   color: #111;
 }
-
-.dropdowns::after {
+.dropdowns::after{
   content: "▾";
   position: absolute;
   right: 12px;
@@ -78,8 +68,8 @@
   pointer-events: none;
 }
 
-/* Error */
-.page-error {
+/* ===== Error ===== */
+.page-error{
   margin: 0 0 12px;
   padding: 10px 12px;
   border: 1px solid #ffd7d7;
@@ -90,87 +80,91 @@
   font-size: 14px;
 }
 
-/* Card */
-.race-details {
+/* ===== Card / Title ===== */
+.race-details{
   margin-top: 12px;
   padding: 16px 14px;
   border: 1px solid #eee;
   border-radius: 16px;
   background: #fff;
 }
-
-/* Title */
-.race-header { padding: 6px 6px 12px; }
-
-.race-title-row {
+.race-header{ padding: 6px 6px 12px; }
+.race-title-row{
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
   text-align: center;
 }
-
-.race-flag { font-size: 26px; }
-
-.race-name {
+.race-flag{ font-size: 26px; }
+.race-name{
   margin: 0;
   font-size: 18px;
   font-weight: 900;
 }
-
-.race-city {
+.race-city{
   font-size: 14px;
   font-weight: 800;
   color: #666;
 }
-
-.race-date {
+.race-date{
   text-align: center;
   font-size: 14px;
   font-weight: 700;
   color: #444;
 }
 
-/* Grid */
-.race-grid {
+/* ===== Race Grid ===== */
+.race-grid{
   display: grid;
   grid-template-columns: 1.25fr 1fr;
   gap: 12px;
   padding: 6px 6px 10px;
 }
-
-.race-circuit {
+.race-circuit{
   border: 1px solid #eee;
   border-radius: 14px;
   overflow: hidden;
 }
-
-.race-circuit img {
+.race-circuit img{
   width: 100%;
   display: block;
 }
-
-.race-spec {
+.race-spec{
   border: 1px solid #eee;
   border-radius: 14px;
   padding: 12px;
 }
-
-.race-circuit-name {
+.race-circuit-name{
   margin: 0 0 8px;
   font-size: 16px;
   font-weight: 900;
 }
-
-.race-extra {
+.race-extra{
   margin: 0;
   font-size: 14px;
   font-weight: 700;
   color: #444;
 }
 
-/* Tables */
-.results-table {
+/* ===== DOTD / Fastest Lap (text badges) ===== */
+.race-badges{ padding: 6px 6px 4px; }
+.badge-row{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.race-meta-text{
+  font-size: 12px;      /* smaller */
+  font-weight: 900;
+  line-height: 1.2;
+}
+.race-meta-text.dotd{ color: #1e66ff; } /* blue */
+.race-meta-text.fast{ color: #7b2cff; } /* purple */
+
+/* ===== Tables ===== */
+.results-table{
   width: 100%;
   border-collapse: collapse;
   border: 1px solid #eee;
@@ -179,94 +173,100 @@
   table-layout: fixed;
 }
 
-.results-table thead th {
+/* header bar corners “less round” feel */
+.results-table thead th{
   background: #fafafa;
   font-size: 13px;
   font-weight: 900;
   padding: 10px 10px;
   text-align: center;
   white-space: nowrap;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
 }
 
-.results-table tbody td {
+.results-table tbody td{
   padding: 12px 10px;
   font-size: 14px;
   font-weight: 800;
   text-align: center;
-
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  border-bottom: 1px solid #f0f0f0;
 }
+.results-table tbody tr:last-child td{ border-bottom: none; }
 
 /* Column widths (desktop baseline) */
-.col-rank { width: 56px; }
-.col-laps { width: 56px; }
-.col-points { width: 64px; }
+.col-rank{ width: 56px; }
+.col-laps{ width: 56px; }
+.col-points{ width: 64px; }
 
-/* Record/Laps/Points slightly left (desktop) */
-.col-time,
-.col-laps,
-.col-points { text-align: left; }
+/* Record left; driver left */
+.col-driver{ text-align: left; }
+.col-time{ text-align: left; }
 
-.results-table td.col-time,
+/* ✅ Fix drift: rank/laps/points centered with equal padding */
+.results-table th.col-rank,
+.results-table td.col-rank,
+.results-table th.col-laps,
 .results-table td.col-laps,
-.results-table td.col-points {
-  padding-left: 6px;
+.results-table th.col-points,
+.results-table td.col-points{
+  text-align: center;
+  padding-left: 8px;
   padding-right: 8px;
 }
 
-/* Driver cell (2 lines) */
-.col-driver { text-align: left; }
+/* record cell slightly tighter */
+.results-table th.col-time,
+.results-table td.col-time{
+  padding-left: 6px;
+  padding-right: 6px;
+}
 
-.driver-cell {
+/* Driver cell (2 lines + team dot) */
+.driver-cell{
   display: flex;
   flex-direction: column;
   gap: 3px;
   min-width: 0;
 }
-
-.driver-name {
+.driver-name{
   font-weight: 900;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-.driver-team {
+.driver-team{
   display: inline-flex;
   align-items: center;
   gap: 6px;
-
   font-size: 12px;
   font-weight: 900;
   color: #666;
-
   white-space: nowrap;
   overflow: hidden;
 }
-
-.team-dot {
+.team-dot{
   width: 9px;
   height: 9px;
   border-radius: 999px;
   flex-shrink: 0;
 }
-
-.team-name {
+.team-name{
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 /* Toggle */
-.toggle-wrap {
+.toggle-wrap{
   display: flex;
   justify-content: center;
   margin: 10px 0;
 }
-
-.toggle-full-btn {
+.toggle-full-btn{
   padding: 10px 14px;
   border-radius: 999px;
   border: 1px solid #ddd;
@@ -275,121 +275,64 @@
 }
 
 /* =========================
-   MOBILE (<=760px) – FINAL
-   목적:
-   1) 표 전체를 더 왼쪽으로
-   2) 기록/랩/포인트를 바짝 왼쪽으로
-   3) 드라이버 ↔ 기록 사이 공백 최소화
-   4) 모바일 가독성 유지
+   MOBILE (<=760px)
+   - more left room
+   - record/laps/points tight left
+   - reduce driver↔record gap by widths
 ========================= */
-@media (max-width: 760px) {
+@media (max-width: 760px){
+  .result-section{ padding: 16px 4px 40px; }
+  .race-grid{ grid-template-columns: 1fr; }
 
-  /* ===== Page spacing ===== */
-  .result-section {
-    padding: 16px 4px 40px; /* 좌우 여백 최소화 */
-  }
+  .dropdowns{ flex: 1 1 220px; min-width: 200px; }
 
-  /* ===== Race info grid ===== */
-  .race-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* ===== Dropdowns ===== */
-  /* 가능한 한 양옆 유지, 정말 좁을 때만 줄바꿈 */
-  .dropdowns {
-    flex: 1 1 220px;
-    min-width: 200px;
-  }
-
-  /* ===== Table base ===== */
-  .results-table {
-    table-layout: fixed;
-  }
-
-  .results-table thead th {
+  .results-table thead th{
     font-size: 12px;
     padding: 8px 4px;
-    white-space: nowrap;
   }
-
-  .results-table tbody td {
+  .results-table tbody td{
     font-size: 12px;
     padding: 9px 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
-  /* ===== Rank + Driver (왼쪽 최우선) ===== */
+  /* Rank + Driver: left */
   .results-table th.col-rank,
   .results-table td.col-rank,
   .results-table th.col-driver,
-  .results-table td.col-driver {
+  .results-table td.col-driver{
     text-align: left;
-    padding-left: 4px;
+    padding-left: 3px;
     padding-right: 2px;
   }
 
-  /* ===== Record / Laps / Points (바짝 당김) ===== */
+  /* Record/Laps/Points: tight left */
   .results-table th.col-time,
   .results-table td.col-time,
   .results-table th.col-laps,
   .results-table td.col-laps,
   .results-table th.col-points,
-  .results-table td.col-points {
+  .results-table td.col-points{
     text-align: left;
-    padding-left: 0px;
-    padding-right: 2px;
+    padding-left: 0;
+    padding-right: 1px;
   }
 
-  /* ===== Column width re-balance (핵심) ===== */
-  .col-rank   { width: 40px; }
-  .col-driver { width: 48%; }   /* 드라이버 비중 ↓ */
-  .col-time   { width: 30%; }   /* 기록 공간 ↑ */
-  .col-laps   { width: 11%; }
-  .col-points { width: 11%; }
+  /* widths: reduce driver, increase record/laps/points */
+  .col-rank{ width: 40px; }
+  .col-driver{ width: 46%; }
+  .col-time{ width: 32%; }
+  .col-laps{ width: 11%; }
+  .col-points{ width: 11%; }
 
-  /* ===== Driver cell ===== */
-  .driver-cell {
-    gap: 2px;
-  }
-
-  .driver-name {
-    font-size: 12px;
-    font-weight: 900;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .driver-team {
-    font-size: 11px;
-    gap: 4px;
-    overflow: hidden;
-  }
-
-  .team-dot {
-    width: 9px;
-    height: 9px;
-    flex-shrink: 0;
-  }
-
-  .team-name {
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+  .driver-team{ font-size: 11px; gap: 4px; }
 }
 
-/* =========================
-   EXTRA SMALL (<=380px)
-========================= */
-@media (max-width: 380px) {
-  .dropdowns {
-    min-width: 170px;
-  }
-
-  .col-rank   { width: 38px; }
-  .col-driver { width: 50%; }
-  .col-time   { width: 30%; }
-  .col-laps   { width: 11%; }
-  .col-points { width: 11%; }
+/* extra small */
+@media (max-width: 380px){
+  .dropdowns{ min-width: 170px; }
+  .col-rank{ width: 38px; }
+  .col-driver{ width: 48%; }
+  .col-time{ width: 30%; }
+  .col-laps{ width: 11%; }
+  .col-points{ width: 11%; }
 }
