@@ -4,10 +4,18 @@
 // 3) 결과 JSON(시즌 통합: {rounds:{...}})에서 Top5 + 전체 토글 렌더
 //    - Top5: 1~5위
 //    - 전체: 6위부터 + DNF/DNS/DSQ 포함 (중복 제거)
-// 4) DOTD / Fastest Lap 표시
+// 4) DOTD / Fastest Lap 표시(텍스트 라인 형태)
 // 5) 초기 진입 시: 2025 시즌 24라운드가 가장 먼저 보이게
+//
+// ✅ 추가 반영(요구사항):
+// - 드라이버 셀: "이름(윗줄) + 팀(아랫줄)" 구조로 렌더
+// - 팀 앞에 색깔 동그라미(team dot) 표시
+// - 기록/랩/포인트 표시 유지
+// - (CSS에서) .driver-cell / .driver-name / .driver-team / .team-dot 스타일링 가능
 
-/* DOM */
+/* =========================
+   DOM
+========================= */
 const $season = document.querySelector("#season-select");
 const $round = document.querySelector("#round-select");
 
@@ -28,21 +36,27 @@ const $fullWrap = document.querySelector("#full-results");
 const $fullTbody = document.querySelector("#full-results-tbody");
 const $toggleBtn = document.querySelector("#toggle-full-btn");
 
-/* Config */
+/* =========================
+   Config
+========================= */
 const DEFAULT_SEASON = 2025;
 const DEFAULT_ROUND = 24;
 
 const scheduleUrlBySeason = (season) => `../data/${season}_schedule.json`;
 const RESULT_INDEX_URL = (season) => `./${season}_round_result.json`;
 
-/* State */
-let scheduleCache = new Map(); // season -> array of meta objects
+/* =========================
+   State
+========================= */
+let scheduleCache = new Map();    // season -> array of meta objects
 let resultIndexCache = new Map(); // season -> parsed result index json
 
 let currentSeason = null;
 let currentRound = null;
 
-/* Utils */
+/* =========================
+   Utils
+========================= */
 function showError(message) {
   if (!$error) return;
   $error.textContent = message;
@@ -115,7 +129,35 @@ function escapeHtml(text) {
     .replaceAll("'", "&#39;");
 }
 
-/* Data Fetch */
+function valueOrDash(v) {
+  return v == null || v === "" ? "-" : String(v);
+}
+
+/* =========================
+   Team color map (dot)
+   - 팀명이 JSON에 들어오는 값과 "완전 동일"해야 매칭됨
+   - 색은 CSS로 빼도 되지만, 지금은 JS에서 inline으로 안전하게 처리
+========================= */
+const TEAM_COLOR = {
+  "레드불": "#3671C6",
+  "맥라렌": "#FF8000",
+  "페라리": "#E8002D",
+  "메르세데스": "#27F4D2",
+  "애스턴 마틴": "#229971",
+  "알핀": "#0093CC",
+  "윌리엄스": "#64C4FF",
+  "하스": "#B6BABD",
+  "레이싱 불스": "#5E8FAA",
+  "킥 자우버": "#00E701",
+};
+
+function teamDotColor(team) {
+  return TEAM_COLOR[team] ?? "#999";
+}
+
+/* =========================
+   Data Fetch
+========================= */
 async function fetchJson(url) {
   const res = await fetch(url, { cache: "no-cache" });
   if (!res.ok) throw new Error(`Fetch failed: ${url} (HTTP ${res.status})`);
@@ -145,11 +187,13 @@ async function loadResultIndex(season) {
   return data;
 }
 
-/* Render: Race Meta */
+/* =========================
+   Render: Race Meta
+========================= */
 function renderRaceMeta(meta) {
   $flag.textContent = meta.flag ?? "";
   $name.textContent = meta.race_name ?? "";
-  $city.textContent = meta.city ? `(${meta.city})` : "";
+  $city.textContent = meta.city ? `${meta.city}` : "";
 
   const start = pickRaceStart(meta);
   $date.textContent = start ? formatKSTDate(start) : "";
@@ -190,7 +234,9 @@ function renderRaceMeta(meta) {
   setDetailsHidden(false);
 }
 
-/* Render: DOTD / Fastest Lap */
+/* =========================
+   Render: DOTD / Fastest Lap (텍스트 라인)
+========================= */
 function injectBadges({ dotd, fastest }, driverNameByCode) {
   const $topSection = document.querySelector("#top-results");
   if (!$topSection) return;
@@ -205,8 +251,8 @@ function injectBadges({ dotd, fastest }, driverNameByCode) {
   wrap.className = "race-badges";
 
   const items = [];
-  if (dotdName) items.push(`<span class="badge badge-dotd"> 오늘의 드라이버: <strong>${escapeHtml(dotdName)}</strong></span>`);
-  if (fastName) items.push(`<span class="badge badge-fast"> 패스티스트 랩: <strong>${escapeHtml(fastName)}</strong></span>`);
+  if (dotdName) items.push(`<span class="race-meta-text">오늘의 드라이버: <strong>${escapeHtml(dotdName)}</strong></span>`);
+  if (fastName) items.push(`<span class="race-meta-text">패스티스트 랩: <strong>${escapeHtml(fastName)}</strong></span>`);
 
   wrap.innerHTML = `
     <div class="badge-row">
@@ -217,7 +263,9 @@ function injectBadges({ dotd, fastest }, driverNameByCode) {
   $topSection.parentNode.insertBefore(wrap, $topSection);
 }
 
-/* Render: Results */
+/* =========================
+   Render: Results
+========================= */
 function getRoundResultBlock(resultIndex, round) {
   const rounds = resultIndex?.rounds;
   if (!rounds || typeof rounds !== "object") return null;
@@ -263,48 +311,68 @@ function formatRecordCell(row) {
   return row.status;
 }
 
-function formatDriverCell(row) {
-  // 보기 좋게: 이름 (팀) 형태
-  if (row.team) return `${row.name} (${row.team})`;
-  return row.name;
-}
+/**
+ * ✅ 드라이버 셀: 이름(윗줄) + 팀(아랫줄, 색 동그라미)
+ */
+function buildDriverCellTd(row) {
+  const td = document.createElement("td");
+  td.className = "col-driver";
 
-function valueOrDash(v) {
-  return v == null || v === "" ? "-" : String(v);
+  const wrap = document.createElement("div");
+  wrap.className = "driver-cell";
+
+  const name = document.createElement("div");
+  name.className = "driver-name";
+  name.textContent = row.name ?? "-";
+
+  const team = document.createElement("div");
+  team.className = "driver-team";
+
+  if (row.team) {
+    const dot = document.createElement("span");
+    dot.className = "team-dot";
+    dot.style.background = teamDotColor(row.team);
+
+    const teamText = document.createElement("span");
+    teamText.className = "team-name";
+    teamText.textContent = row.team;
+
+    team.append(dot, teamText);
+  } else {
+    const teamText = document.createElement("span");
+    teamText.className = "team-name";
+    teamText.textContent = "-";
+    team.append(teamText);
+  }
+
+  wrap.append(name, team);
+  td.appendChild(wrap);
+  return td;
 }
 
 function rowToTr(row) {
   const tr = document.createElement("tr");
 
   const tdPos = document.createElement("td");
+  tdPos.className = "col-rank";
   tdPos.textContent = row.position != null ? row.position : "-";
 
-  const tdDriver = document.createElement("td");
-  tdDriver.textContent = formatDriverCell(row);
+  const tdDriver = buildDriverCellTd(row);
 
   const tdRecord = document.createElement("td");
+  tdRecord.className = "col-time";
   tdRecord.textContent = formatRecordCell(row);
 
   const tdLaps = document.createElement("td");
+  tdLaps.className = "col-laps";
   tdLaps.textContent = valueOrDash(row.laps);
 
   const tdPts = document.createElement("td");
+  tdPts.className = "col-points";
   tdPts.textContent = valueOrDash(row.points);
 
   tr.append(tdPos, tdDriver, tdRecord, tdLaps, tdPts);
   return tr;
-}
-
-function setTableHeadersToRecordLapsPoints() {
-  // HTML을 안 건드렸을 때를 대비해, thead 텍스트를 JS에서 맞춰준다.
-  // (현재 HTML은 3열이라면 이 부분은 5열로 바꾼 상태에서만 제대로 보임)
-  // 사용자가 HTML을 아직 3열 그대로면, 아래 경고처럼 UI가 깨질 수 있다.
-  const topThs = document.querySelectorAll("#top-results .results-table thead th");
-  const fullThs = document.querySelectorAll("#full-results .results-table thead th");
-
-  const labels = ["순위", "드라이버", "기록", "랩", "포인트"];
-  if (topThs.length === 5) topThs.forEach((th, i) => (th.textContent = labels[i]));
-  if (fullThs.length === 5) fullThs.forEach((th, i) => (th.textContent = labels[i]));
 }
 
 function renderResultsFromBlock(block) {
@@ -313,6 +381,7 @@ function renderResultsFromBlock(block) {
   const rows = normalizeResultRowsFromBlock(block);
   if (!rows.length) return;
 
+  // code -> name 매핑(배지 표시용)
   const map = new Map();
   for (const r of rows) if (r.code) map.set(r.code, r.name);
 
@@ -321,21 +390,20 @@ function renderResultsFromBlock(block) {
     map
   );
 
-  // ✅ 테이블 헤더(HTML을 5열로 바꿨다면 자동으로 "기록/랩/포인트"로 맞춤)
-  setTableHeadersToRecordLapsPoints();
-
   // Top5: 완주자 중 1~5
   const top5 = rows.filter((r) => typeof r.position === "number").slice(0, 5);
   for (const r of top5) $topTbody.appendChild(rowToTr(r));
 
-  // Full: ✅ 6위부터 + (position null인 DNF/DNS/DSQ는 전부 포함)
+  // Full: 6위부터 + (position null인 DNF/DNS/DSQ는 전부 포함)
   const rest = rows.filter((r) => (typeof r.position === "number" ? r.position >= 6 : true));
   for (const r of rest) $fullTbody.appendChild(rowToTr(r));
 
   $toggleBtn.disabled = false;
 }
 
-/* Populate: Round Select */
+/* =========================
+   Populate: Round Select
+========================= */
 function populateRounds(scheduleList) {
   $round.innerHTML = `<option value="">라운드를 선택하세요</option>`;
 
@@ -354,7 +422,9 @@ function populateRounds(scheduleList) {
   $round.disabled = false;
 }
 
-/* Main Flow */
+/* =========================
+   Main Flow
+========================= */
 async function onSeasonChange(season, { preferRound = null } = {}) {
   try {
     hideError();
@@ -432,7 +502,9 @@ async function onRoundChange(season, round) {
   }
 }
 
-/* Toggle Full Results */
+/* =========================
+   Toggle Full Results
+========================= */
 function initToggle() {
   if (!$toggleBtn) return;
 
@@ -448,7 +520,9 @@ function initToggle() {
   });
 }
 
-/* Events */
+/* =========================
+   Events
+========================= */
 function initEvents() {
   $season.addEventListener("change", async () => {
     const season = Number($season.value);
@@ -477,7 +551,9 @@ function initEvents() {
   });
 }
 
-/* Init */
+/* =========================
+   Init
+========================= */
 (async function init() {
   initToggle();
   initEvents();
