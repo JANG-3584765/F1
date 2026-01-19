@@ -344,8 +344,8 @@
 
   /* ===== Column width re-balance (핵심) ===== */
   .col-rank   { width: 42px; }
-  .col-driver { width: 56%; }   /* 드라이버 비중 ↓ */
-  .col-time   { width: 26%; }   /* 기록 공간 ↑ */
+  .col-driver { width: 50%; }   /* 드라이버 비중 ↓ */
+  .col-time   { width: 32%; }   /* 기록 공간 ↑ */
   .col-laps,
   .col-points { width: 9%; }
 
@@ -388,8 +388,8 @@
   }
 
   .col-rank   { width: 38px; }
-  .col-driver { width: 56%; }
-  .col-time   { width: 26%; }
+  .col-driver { width: 50%; }
+  .col-time   { width: 32%; }
   .col-laps,
-  .col-points { width: 10%; }
+  .col-points { width: 12%; }
 }
