@@ -177,26 +177,30 @@ main {
 
 /* ===== 모바일 대응 ===== */
 @media (max-width: 520px) {
+  /* 탭 버튼 */
   .tab-button {
     font-size: 13px;
     padding: 10px 14px;
   }
 
+  /* 섹션 제목 */
   .tab-content h2 {
     font-size: 18px;
   }
 
+  /* 테이블 헤더 */
   .ranking-table thead th {
     font-size: 12px;
     padding: 11px 8px;
   }
 
+  /* 테이블 셀 */
   .ranking-table td {
     font-size: 13px;
     padding: 11px 8px;
   }
 
-  /* ✅ team-cell도 td 규칙으로 확실히 덮어쓰기 */
+  /* 팀 컬러 점 + 텍스트 정렬 보정 */
   .ranking-table td.team-cell {
     padding-left: 34px;
   }
@@ -206,8 +210,18 @@ main {
     width: 8px;
     height: 8px;
   }
+
+  .tab-contents {
+    justify-content: flex-start;
+  }
+
+  .ranking-table {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
+/* ===== 초소형 화면 ===== */
 @media (max-width: 360px) {
   .season-selector {
     flex-direction: column;
