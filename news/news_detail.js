@@ -1,3 +1,14 @@
+async function checkAuth() {
+  try {
+    const res = await fetch("http://localhost:5000/api/v1/auth/me", {
+      credentials: "include"
+    });
+    return await res.json();
+  } catch {
+    return { loggedIn: false };
+  }
+}
+
 const DEFAULT_URL = 'http://localhost:5000/api/v1/news';
 const articleEl = document.getElementById('detailArticle');
 
@@ -11,8 +22,7 @@ async function loadDetail() {
     return;
   }
 
-    try {
-    // ✅ 상세는 /api/v1/news/:id 로 직접 요청
+  try {
     const res = await fetch(`${DEFAULT_URL}/${encodeURIComponent(newsId)}`, { cache: 'no-store' });
     if (!res.ok) {
       if (res.status === 404) throw new Error('NOT_FOUND');
@@ -20,7 +30,29 @@ async function loadDetail() {
     }
 
     const item = await res.json();
+
+    // 1. 기사 렌더링
     renderDetail(item);
+
+    // 2. 관리자 권한 확인 및 삭제 버튼 추가
+    const auth = await checkAuth();
+
+    if (auth.loggedIn && auth.role === "admin") {
+      const box = document.getElementById("adminActions");
+      box.innerHTML = `
+        <button id="deleteBtn">삭제</button>
+      `;
+
+      document.getElementById("deleteBtn").onclick = async () => {
+        if (!confirm("삭제하시겠습니까?")) return;
+        await fetch(`${DEFAULT_URL}/${newsId}`, {
+          method: "DELETE",
+          credentials: "include"
+        });
+        alert("삭제 완료");
+        location.href = "news.html";
+      };
+    }
 
   } catch (e) {
     console.error(e);
@@ -31,6 +63,7 @@ async function loadDetail() {
     articleEl.innerHTML = `<p>로드 실패</p>`;
   }
 }
+
 
 function formatDate(iso) {
   try {
@@ -58,6 +91,8 @@ function renderDetail(item) {
     <div class="detail-summary">
       ${item.summary}
     </div>
+
+    <div id="adminActions" style="margin-top:24px;"></div>
   `;
 }
 
