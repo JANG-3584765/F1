@@ -9,7 +9,7 @@
    - 뒤로가기 스크롤 복원
    ===================================================================== */
 
-const DEFAULT_URL = './news.json';
+const DEFAULT_URL = 'http://localhost:5000/api/v1/news';
 const newsContainer = document.getElementById('newsContainer') || document.querySelector('.news-list');
 const tabsEl = document.querySelectorAll('.news-category-tabs button');
 const sourceFilterEl = document.getElementById('newsSourceFilter');

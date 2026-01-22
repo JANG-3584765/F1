@@ -1,6 +1,4 @@
-/* news_detail.js */
-
-const DEFAULT_URL = './news.json';
+const DEFAULT_URL = 'http://localhost:5000/api/v1/news';
 const articleEl = document.getElementById('detailArticle');
 
 // URL 파라미터 읽기 (예: ?id=3)
@@ -13,24 +11,23 @@ async function loadDetail() {
     return;
   }
 
-  try {
-    const res = await fetch(DEFAULT_URL, { cache: 'no-store' });
-    if (!res.ok) throw new Error('불러오기 실패');
-
-    const json = await res.json();
-    const NEWS = Array.isArray(json) ? json : [];
-
-    const item = NEWS.find(x => String(x.id) === String(newsId));
-
-    if (!item) {
-      articleEl.innerHTML = `<p>기사를 찾을 수 없습니다.</p>`;
-      return;
+    try {
+    // ✅ 상세는 /api/v1/news/:id 로 직접 요청
+    const res = await fetch(`${DEFAULT_URL}/${encodeURIComponent(newsId)}`, { cache: 'no-store' });
+    if (!res.ok) {
+      if (res.status === 404) throw new Error('NOT_FOUND');
+      throw new Error('불러오기 실패');
     }
 
+    const item = await res.json();
     renderDetail(item);
 
   } catch (e) {
     console.error(e);
+    if (String(e.message) === 'NOT_FOUND') {
+      articleEl.innerHTML = `<p>기사를 찾을 수 없습니다.</p>`;
+      return;
+    }
     articleEl.innerHTML = `<p>로드 실패</p>`;
   }
 }
