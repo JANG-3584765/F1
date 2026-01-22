@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
       diff -= minutes * 1000 * 60;
       const seconds = Math.floor(diff / 1000);
 
-      countdownEl.textContent = `${days}일 : ${hours} : ${minutes} : ${seconds}`;
+      countdownEl.textContent = `${days}일  ${hours} : ${minutes} : ${seconds}`;
     }, 1000);
   }
 });
