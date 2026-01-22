@@ -2,7 +2,7 @@ function initHeaderMenu() {
   const headerContainer = document.getElementById("header-container");
   if (!headerContainer) return;
 
-  // ✅ 중복 초기화 방지
+  // 중복 초기화 방지
   if (headerContainer.dataset.menuInited === "1") return;
   headerContainer.dataset.menuInited = "1";
 
@@ -50,7 +50,7 @@ function initHeaderMenu() {
 
       if (!clickedInsideMenu && !clickedHamburger) closeMenu();
     },
-    true // ✅ 캡처링으로 충돌 감소
+    true // 캡처링으로 충돌 감소
   );
 }
 
