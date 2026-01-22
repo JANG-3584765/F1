@@ -5,9 +5,9 @@ const driverTop3 = [
 ];
 
 const constructorTop3 = [
-  { name: "메르세데스", points: 469, img: "./images/home/standing/constructor/메르세데스.png" },
-  { name: "맥라렌", points: 833, img: "./images/home/standing/constructor/맥라렌.png" },
-  { name: "레드불", points: 451, img: "./images/home/standing/constructor/레드불 레이싱.png" }
+  { name: "메르세데스", points: 469, img: "./images/home/standing/constructor/메르세데스.jpg" },
+  { name: "맥라렌", points: 833, img: "./images/home/standing/constructor/맥라렌.jpg" },
+  { name: "레드불", points: 451, img: "./images/home/standing/constructor/레드불 레이싱.jpg" }
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
