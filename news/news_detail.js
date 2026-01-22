@@ -9,7 +9,7 @@ async function checkAuth() {
   }
 }
 
-const DEFAULT_URL = 'http://localhost:5000/api/v1/news';
+const DEFAULT_URL = '/api/v1/news';
 const articleEl = document.getElementById('detailArticle');
 
 // URL 파라미터 읽기 (예: ?id=3)
@@ -50,7 +50,7 @@ async function loadDetail() {
           credentials: "include"
         });
         alert("삭제 완료");
-        location.href = "news.html";
+        location.href = "./news.html";
       };
     }
 

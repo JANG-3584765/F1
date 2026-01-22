@@ -1,7 +1,8 @@
 /* =====================================================================
-   news.js (통합 안정 버전)
-   - news.json 로딩
-   - 임시 데이터 지원
+   news.js (통합 안정 버전 - API 우선 + 정적 JSON fallback)
+   - 1순위: Express API (DEFAULT_API_URL)
+   - 2순위: 정적 JSON (STATIC_JSON_URL): GitHub Pages
+   - 3순위: 임시 데이터(50개)
    - 자동 소스 / 태그 / 카드 타입 분류
    - 무한 스크롤
    - 리스트 → 상세 페이지 라우팅
@@ -9,11 +10,23 @@
    - 뒤로가기 스크롤 복원
    ===================================================================== */
 
-const DEFAULT_URL = 'http://localhost:5000/api/v1/news';
-const newsContainer = document.getElementById('newsContainer') || document.querySelector('.news-list');
+/* 환경/경로 설정- */
+// 1) API (Express). 필요하면 배포 URL로 바꾸기
+const DEFAULT_API_URL = 'http://localhost:5000/api/v1/news';
+// 2) 정적 JSON (GitHub Pages)
+const STATIC_JSON_URL = './news/news.json';
+
+// 카드 클릭 시 이동할 상세 페이지
+const DETAIL_PAGE_URL = 'news_detail.html';
+
+// DOM
+const newsContainer =
+  document.getElementById('newsContainer') || document.querySelector('.news-list');
+
 const tabsEl = document.querySelectorAll('.news-category-tabs button');
 const sourceFilterEl = document.getElementById('newsSourceFilter');
 
+// State
 let NEWS = [];
 let activeCategory = 'all';
 
@@ -23,9 +36,14 @@ let page = 0;
 const PAGE_SIZE = 20;
 let isLoading = false;
 
-/* -----------------------------------------------------
-   1) 소스 분류
------------------------------------------------------ */
+/* 공통: fetch JSON */
+async function fetchJson(url) {
+  const res = await fetch(url, { cache: 'no-store' });
+  if (!res.ok) throw new Error(`Fetch failed: ${url} (${res.status})`);
+  return res.json();
+}
+
+/* 1) 소스 분류 */
 function detectSourceClass(source) {
   if (!source) return 'media';
   const s = source.toLowerCase();
@@ -38,11 +56,9 @@ function detectSourceClass(source) {
   return 'media';
 }
 
-/* -----------------------------------------------------
-   2) 태그 분류
------------------------------------------------------ */
+/* 2) 태그 분류 */
 function detectTags(title, summary) {
-  const txt = `${title} ${summary}`.toLowerCase();
+  const txt = `${title || ''} ${summary || ''}`.toLowerCase();
   const tags = [];
 
   if (['team', 'constructor', '업데이트', '팀'].some(k => txt.includes(k))) tags.push('team');
@@ -54,12 +70,10 @@ function detectTags(title, summary) {
   return tags.length ? tags : ['etc'];
 }
 
-/* -----------------------------------------------------
-   3) 카드 타입 분류
------------------------------------------------------ */
+/* 3) 카드 타입 분류 */
 function detectCardType(item) {
   const summary = item.summary || "";
-  const lower = (item.title + " " + item.summary).toLowerCase();
+  const lower = ((item.title || "") + " " + (item.summary || "")).toLowerCase();
   const hasImage = !!item.image;
 
   if (hasImage && summary.length >= 120) return 'analysis';
@@ -68,124 +82,163 @@ function detectCardType(item) {
   return 'short';
 }
 
+/* 4) 뉴스 아이템 정규화(필수 필드 보장 + 자동 분류) */
+function normalizeNewsItem(item) {
+  const safe = { ...item };
+
+  // pubDate 없는 경우 대비
+  if (!safe.pubDate) safe.pubDate = new Date().toISOString();
+
+  // title/summary 기본값
+  if (!safe.title) safe.title = '제목 없음';
+  if (!safe.summary) safe.summary = '';
+
+  // sourceClass/tags/cardType 자동 생성
+  safe.sourceClass = safe.sourceClass || detectSourceClass(safe.source || '');
+  safe.tags = (Array.isArray(safe.tags) && safe.tags.length) ? safe.tags : detectTags(safe.title, safe.summary);
+  safe.cardType = safe.cardType || detectCardType(safe);
+
+  return safe;
+}
+
+/* 5) 임시 데이터 생성 (최후 fallback) */
+function makeTempNews(count = 30) {
+  const base = Date.now();
+  const temp = Array.from({ length: count }).map((_, i) => ({
+    id: `temp-${i}`,
+    title: `임시 뉴스 제목 ${i + 1}`,
+    summary: "이곳은 뉴스 요약 내용입니다.",
+    image: "https://via.placeholder.com/800x450?text=News+Image",
+    source: i % 2 === 0 ? 'F1 공식' : 'RaceFans',
+    pubDate: new Date(base - i * 3600 * 1000).toISOString()
+  }));
+  return temp.map(normalizeNewsItem);
+}
+
 /* -----------------------------------------------------
-   4) 뉴스 데이터 로드 (json + 임시데이터)
+   6) 뉴스 데이터 로드
+   - 1) API 우선
+   - 2) 정적 JSON fallback
+   - 3) 임시 데이터
 ----------------------------------------------------- */
 async function loadNewsData() {
+  // 1) API
   try {
-    const res = await fetch(DEFAULT_URL, { cache: 'no-store' });
-    if (!res.ok) throw new Error('news.json 불러오기 실패');
+    const json = await fetchJson(DEFAULT_API_URL);
 
-    const json = await res.json();
-    NEWS = Array.isArray(json) ? json : [];
+    // 응답 형태 유연하게 처리:
+    // - 배열: [...]
+    // - 객체: { news: [...] }
+    const list = Array.isArray(json) ? json : (json?.news ?? []);
+    if (!Array.isArray(list)) throw new Error('API response is not an array');
 
-    NEWS = NEWS.map(item => ({
-      ...item,
-      sourceClass: item.sourceClass || detectSourceClass(item.source || ''),
-      tags: item.tags?.length ? item.tags : detectTags(item.title, item.summary),
-      cardType: item.cardType || detectCardType(item),
-    }));
-
+    NEWS = list.map(normalizeNewsItem);
+    return;
   } catch (e) {
-    console.warn('❌ news.json 불러오기 실패, 임시 데이터 사용', e);
-    // 임시 데이터 생성
-    NEWS = Array.from({ length: 30 }).map((_, i) => ({
-      id: `temp-${i}`,
-      title: `임시 뉴스 제목 ${i + 1}`,
-      summary: "이곳은 뉴스 요약 내용입니다.",
-      image: "https://via.placeholder.com/400x220?text=News+Image",
-      source: i % 2 === 0 ? 'F1 공식' : 'RaceFans',
-      pubDate: new Date(Date.now() - i * 3600 * 1000).toISOString()
-    }));
-
-    NEWS = NEWS.map(item => ({
-      ...item,
-      sourceClass: detectSourceClass(item.source),
-      tags: detectTags(item.title, item.summary),
-      cardType: detectCardType(item),
-    }));
+    console.warn('❌ API 뉴스 로드 실패 → 정적 JSON fallback 시도', e);
   }
+
+  // 2) 정적 JSON
+  try {
+    const json = await fetchJson(STATIC_JSON_URL);
+    const list = Array.isArray(json) ? json : (json?.news ?? []);
+    if (!Array.isArray(list)) throw new Error('Static JSON is not an array');
+
+    NEWS = list.map(normalizeNewsItem);
+    return;
+  } catch (e) {
+    console.warn('❌ 정적 JSON 로드 실패 → 임시 데이터 사용', e);
+  }
+
+  // 3) temp
+  NEWS = makeTempNews(30);
 }
 
-/* -----------------------------------------------------
-   5) 날짜 포맷
------------------------------------------------------ */
+/* 7) 날짜 포맷 */
 function formatDate(iso) {
   try {
-    return new Date(iso).toLocaleString('ko-KR', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+    return new Date(iso).toLocaleString('ko-KR', {
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
   } catch {
-    return iso;
+    return iso || '';
   }
 }
 
-/* -----------------------------------------------------
-   6) 배지 생성
------------------------------------------------------ */
+/* 8) 배지 생성 */
 function makeBadges(tags, sourceClass) {
-  const tagBadges = (tags || []).slice(0, 2).map(t => `<span class="badge">${t}</span>`).join(' ');
-  return `${tagBadges} <span class="badge">${sourceClass}</span>`;
+  const tagBadges = (tags || [])
+    .slice(0, 2)
+    .map(t => `<span class="badge">${t}</span>`)
+    .join(' ');
+  return `${tagBadges} <span class="badge">${sourceClass || 'media'}</span>`;
 }
 
-/* -----------------------------------------------------
-   7) 카드 렌더링
------------------------------------------------------ */
+/* 9) 카드 렌더링- */
 function renderCard(item) {
   const imgTag = item.image ? `<img data-src="${item.image}" alt="">` : '';
+
   if (item.cardType === 'analysis') {
     return `
       <article class="news-card analysis" data-id="${item.id}">
         <div class="meta-row">
           <div class="badges">${makeBadges(item.tags, item.sourceClass)}</div>
           <div style="margin-left:auto;font-size:12px;color:var(--muted)">
-            ${item.source} · ${formatDate(item.pubDate)}
+            ${item.source || ''} · ${formatDate(item.pubDate)}
           </div>
         </div>
         ${imgTag}
         <div class="card-title">${item.title}</div>
-        <div class="card-summary">${item.summary}</div>
+        <div class="card-summary">${item.summary || ''}</div>
       </article>
     `;
   }
+
   return `
     <article class="news-card short" data-id="${item.id}">
       ${item.image ? `<img class="thumb" data-src="${item.image}" alt="">` : `<div class="thumb"></div>`}
       <div class="short-body">
         <div class="s-title">${item.title}</div>
-        <div class="s-text">${item.summary}</div>
+        <div class="s-text">${item.summary || ''}</div>
         <div style="margin-top:6px;font-size:12px;color:var(--muted)">
-          ${item.source} · ${formatDate(item.pubDate)}
+          ${item.source || ''} · ${formatDate(item.pubDate)}
         </div>
       </div>
     </article>
   `;
 }
 
-/* -----------------------------------------------------
-   8) 필터 적용
------------------------------------------------------ */
+/* 10) 필터 적용 */
 function applyFilters(list) {
   const src = sourceFilterEl?.value || 'all';
   let out = list.slice();
-  if (activeCategory !== 'all') out = out.filter(it => (it.tags || []).includes(activeCategory));
-  if (src !== 'all') out = out.filter(it => it.sourceClass === src);
+
+  if (activeCategory !== 'all') {
+    out = out.filter(it => (it.tags || []).includes(activeCategory));
+  }
+  if (src !== 'all') {
+    out = out.filter(it => it.sourceClass === src);
+  }
+
+  // 최신순 정렬
   return out.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 }
 
-/* -----------------------------------------------------
-   9) 리스트 초기화 후 렌더링
------------------------------------------------------ */
+/* 11) 리스트 초기화 후 렌더링 */
 function resetAndRender() {
   renderList = applyFilters(NEWS);
   page = 0;
-  newsContainer.innerHTML = "";
+  if (newsContainer) newsContainer.innerHTML = "";
   loadMore();
 }
 
-/* -----------------------------------------------------
-   10) 무한 스크롤 loadMore()
------------------------------------------------------ */
+/* 12) 무한 스크롤 loadMore() */
 function loadMore() {
-  if (isLoading) return;
+  if (isLoading || !newsContainer) return;
+
   const start = page * PAGE_SIZE;
   const end = start + PAGE_SIZE;
   const slice = renderList.slice(start, end);
@@ -200,30 +253,28 @@ function loadMore() {
     newsEnhance();
     page++;
     isLoading = false;
-  }, 250);
+  }, 200);
 }
 
-/* -----------------------------------------------------
-   11) 뒤로가기 스크롤 저장
------------------------------------------------------ */
+/* 13) 카드 클릭 → 상세 페이지 라우팅 + 스크롤 저장 */
 document.addEventListener("click", e => {
   const card = e.target.closest(".news-card");
   if (!card) return;
 
-  localStorage.setItem("news_scroll", window.scrollY);
+  localStorage.setItem("news_scroll", String(window.scrollY || 0));
   setTimeout(() => {
-    location.href = `news_detail.html?id=${card.dataset.id}`;
+    location.href = `${DETAIL_PAGE_URL}?id=${encodeURIComponent(card.dataset.id)}`;
   }, 50);
 });
 
-/* -----------------------------------------------------
-   12) 뒤로가기 스크롤 복원
------------------------------------------------------ */
+/* 14) 뒤로가기 스크롤 복원 */
 window.addEventListener("DOMContentLoaded", () => {
   const saved = localStorage.getItem("news_scroll");
   if (!saved) return;
 
   const targetY = parseInt(saved, 10);
+  if (Number.isNaN(targetY)) return;
+
   const restoreScroll = () => {
     if (document.body.offsetHeight >= targetY + 200) {
       window.scrollTo(0, targetY);
@@ -235,12 +286,14 @@ window.addEventListener("DOMContentLoaded", () => {
   restoreScroll();
 });
 
-/* -----------------------------------------------------
-   13) 로딩 스피너
------------------------------------------------------ */
+/* 15) 로딩 스피너 */
 function addLoader() {
+  if (!newsContainer) return;
   if (!document.getElementById("loader")) {
-    newsContainer.insertAdjacentHTML('beforeend', `<div id="loader" class="loader">불러오는 중...</div>`);
+    newsContainer.insertAdjacentHTML(
+      'beforeend',
+      `<div id="loader" class="loader">불러오는 중...</div>`
+    );
   }
 }
 function removeLoader() {
@@ -248,11 +301,12 @@ function removeLoader() {
   if (el) el.remove();
 }
 
-/* -----------------------------------------------------
-   14) Lazy Loading
------------------------------------------------------ */
+/* 16) Lazy Loading */
 function setupLazyLoading() {
   const lazyImages = document.querySelectorAll("img[data-src]");
+  if (!lazyImages.length) return;
+
+  // 기존 io가 중복 생성되지 않게 간단 처리
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -263,30 +317,27 @@ function setupLazyLoading() {
       io.unobserve(img);
     });
   });
+
   lazyImages.forEach(img => {
-    img.setAttribute("data-loading", "lazy");
+    img.setAttribute("loading", "lazy");
     io.observe(img);
   });
 }
 
-/* -----------------------------------------------------
-   15) 렌더 후 추가 실행
------------------------------------------------------ */
+/* 17) 렌더 후 추가 실행 */
 function newsEnhance() {
   setupLazyLoading();
 }
 
-/* -----------------------------------------------------
-   16) 무한 스크롤 감지
------------------------------------------------------ */
+/* 18) 무한 스크롤 감지 */
 window.addEventListener('scroll', () => {
   if (isLoading) return;
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 600) loadMore();
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 600) {
+    loadMore();
+  }
 });
 
-/* -----------------------------------------------------
-   17) 탭 필터
------------------------------------------------------ */
+/* 19) 탭 필터 */
 tabsEl.forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelector('.news-category-tabs .active')?.classList.remove('active');
@@ -296,16 +347,12 @@ tabsEl.forEach(btn => {
   });
 });
 
-/* -----------------------------------------------------
-   18) 소스 필터
------------------------------------------------------ */
+/* 20) 소스 필터 */
 if (sourceFilterEl) {
   sourceFilterEl.addEventListener('change', resetAndRender);
 }
 
-/* -----------------------------------------------------
-   19) 초기 실행
------------------------------------------------------ */
+/* 21) 초기 실행 */
 (async () => {
   await loadNewsData();
   resetAndRender();
