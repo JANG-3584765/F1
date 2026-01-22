@@ -7,7 +7,7 @@
 
 const API_BASE = '/api/v1/news';
 const AUTH_ME_URL = 'http://localhost:5000/api/v1/auth/me'; // 로컬 전용(원하면 상대경로로 바꿔도 됨)
-const STATIC_JSON_URL = './news/news.json'; // 🔥 detail 페이지 위치에 맞게 필요 시 수정
+const STATIC_JSON_URL = './news.json';
 
 const articleEl = document.getElementById('detailArticle');
 const params = new URLSearchParams(location.search);
