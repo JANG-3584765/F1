@@ -14,7 +14,7 @@
 // 1) API (Express). 필요하면 배포 URL로 바꾸기
 const DEFAULT_API_URL = 'http://localhost:5000/api/v1/news';
 // 2) 정적 JSON (GitHub Pages)
-const STATIC_JSON_URL = './news/news.json';
+const STATIC_JSON_URL = './news.json';
 
 // 카드 클릭 시 이동할 상세 페이지
 const DETAIL_PAGE_URL = 'news_detail.html';
