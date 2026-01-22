@@ -200,17 +200,30 @@ main {
     padding: 11px 8px;
   }
 
-  /* 팀 컬러 점 + 텍스트 정렬 보정 */
+  /* ✅ (핵심) 모바일에서 테이블 폭을 줄이기: '팀' 컬럼을 점 전용으로 축소 */
+  .ranking-table th:nth-child(2),
+  .ranking-table td:nth-child(2) {
+    width: 28px;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+  }
+
+  /* 모바일에서는 팀 텍스트 숨기고 점만 보이게 */
   .ranking-table td.team-cell {
-    padding-left: 34px;
+    padding-left: 0;        /* 점 전용 컬럼이라 좌측 패딩 제거 */
+    color: transparent;     /* 텍스트 숨김(레이아웃 유지) */
   }
 
   .ranking-table td.team-cell::before {
-    left: 8px;
+    left: 50%;
+    top: 50%;
     width: 8px;
     height: 8px;
+    transform: translate(-50%, -50%);
   }
 
+  /* 컨테이너 정렬 */
   .tab-contents {
     justify-content: flex-start;
   }
