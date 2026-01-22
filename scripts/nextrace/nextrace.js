@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   " " +
                   start.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" });
 
-                // ✅ 세션명/시간 분리 (CSS로 좌/우 정렬 가능)
+                // 세션명/시간 분리 (CSS로 좌/우 정렬 가능)
                 return `
                   <li>
                     <span class="session-name">${s.name}</span>
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
       diff -= minutes * 1000 * 60;
       const seconds = Math.floor(diff / 1000);
 
-      countdownEl.textContent = `${days} : ${hours} : ${minutes} : ${seconds}`;
+      countdownEl.textContent = `${days}일 : ${hours} : ${minutes} : ${seconds}`;
     }, 1000);
   }
 });
