@@ -18,6 +18,9 @@
 
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
+
+/* 클릭 안정성 */
+pointer-events: auto;
 }
 
 /* 좌측 / 중앙 / 우측 영역 */
@@ -38,6 +41,10 @@
     justify-content: flex-end;
     align-items: center;
     padding-right: 20px;
+
+    /*헤더 내부 햄버거 메뉴 덮이지 않게*/
+    position: relative;
+    z-index: 9001;
 }
 
 /* 로고 */
@@ -58,6 +65,15 @@
     border-radius: 6px;
 
     transition: background 0.2s ease;
+
+    /* 터치/클릭 면적 안정화 */
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    -webkit-tap-highlight-color: transparent;
 }
 
 .login-btn:hover,
@@ -117,16 +133,19 @@
 }
 
 .side-menu li {
-    padding: 18px 24px;
+    padding: 0;
     border-bottom: 1px solid #eee;
 }
 
 .side-menu a {
-    text-decoration: none;
-    color: black;
-    font-size: 16px;
-    display: block;
-    transition: background 0.2s ease;
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+
+  display: block;
+  padding: 18px 24px; /* 실제 클릭 영역 확장 */
+
+  transition: background 0.2s ease;
 }
 
 .side-menu a:hover {
@@ -136,7 +155,7 @@
 /* 모바일 최적화 */
 @media (max-width: 480px) {
     .side-menu {
-        width: 220px; /* 모바일에서 더 슬림하게 */
+        width: 220px; /* 모바일 더 슬림하게 */
     }
 
     .logo-img {
