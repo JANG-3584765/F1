@@ -1,29 +1,5 @@
 [
   {
-    "id": 1769096028964,
-    "sourceClass": "official",
-    "source": "Admin",
-    "title": "관리자 테스트 뉴스",
-    "image": "",
-    "summary": "서버에서 직접 생성한 테스트 기사",
-    "tags": [
-      "team"
-    ],
-    "pubDate": "2026-01-22T15:33:48.964Z"
-  },
-  {
-    "id": 1769095921924,
-    "sourceClass": "official",
-    "source": "Admin",
-    "title": "관리자 테스트 뉴스",
-    "image": "",
-    "summary": "서버에서 직접 생성한 테스트 기사",
-    "tags": [
-      "team"
-    ],
-    "pubDate": "2026-01-22T15:32:01.924Z"
-  },
-  {
     "id": 1,
     "sourceClass": "official",
     "source": "Formula1.com",
