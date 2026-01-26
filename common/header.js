@@ -41,9 +41,12 @@ function initHeaderMenu() {
 
   // 메뉴 열기/토글
   hamburgerBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    toggleMenu();
+   hamburgerBtn.addEventListener("click", (e) => {
+  console.log("CLICK", new Date().toISOString());
+  e.stopPropagation();
+  sideMenu.classList.add("open");
+});
+
   });
 
   // 메뉴 닫기
