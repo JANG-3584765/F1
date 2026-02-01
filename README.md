@@ -137,10 +137,10 @@ root
 홈은 다음 5개 모듈로 구성됩니다.
 
 * Next Race(경기 일정 및 결과 연결)
-* Main News(뉴스 연결)
-* Highlights(하이라이트 연결)
-* Standing TOP3(순위 연결): 드라이버, 팀 Top3 제공(가독성 고려)
-* Prediction Quick Link(승부예측 연결)
+* Main News: 홈 전용 JSON 로드 후 ID 기준 정렬, Swiper 기반 캐러셀 구성
+* Highlights: 유튜브 링크 배열 기반 렌더링, 썸네일 자동 생성 및 재생 아이콘 오버레이
+* Standing TOP3: 드라이버/컨스트럭터 탭 전환 UI, 상위 3위만 시상대 형태 레이아웃으로 제공
+* Prediction Quick Link: 승부예측 페이지로 이동하는 CTA 버튼 제공
 
 각 섹션은 독립 모듈로 분리되어 로딩 및 유지보수가 가능합니다.
 각 섹션에 더보기 버튼을 배치하여 각각 메뉴로 접속할 수 있도록 하였습니다.
@@ -259,6 +259,13 @@ CRUD 흐름: Read → Parse → Validate → Modify → Save
 구성:
 * Top5 미리보기
 * 전체 결과 토글
+
+
+## 하이라이트 영상(Video)
+
+* 유튜브 링크 배열 기반 렌더링
+* watch?v / youtu.be 형식 모두 대응하여 ID 추출
+* 썸네일 자동 생성 및 새 탭 유튜브 이동
 
 
 ## Standing
