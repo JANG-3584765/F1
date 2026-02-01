@@ -139,7 +139,7 @@ root
 * Next Race(경기 일정 및 결과 연결)
 * Main News(뉴스 연결)
 * Highlights(하이라이트 연결)
-* Standing TOP3(순위 연결)
+* Standing TOP3(순위 연결): 드라이버, 팀 Top3 제공(가독성 고려)
 * Prediction Quick Link(승부예측 연결)
 
 각 섹션은 독립 모듈로 분리되어 로딩 및 유지보수가 가능합니다.
