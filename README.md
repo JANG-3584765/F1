@@ -28,6 +28,9 @@ Tools / Deploy
 
 ## Project Structure
 
+## Project Structure
+
+```text
 root
  ├─ index.html
 
@@ -37,9 +40,9 @@ root
  │   ├─ header.js
  │   ├─ footer.html
  │   ├─ footer.css
- │   ├─ footer.js
+ │   └─ footer.js
 
- ├─ data/                       # 시즌 데이터(결과, 일정 공통)
+ ├─ data/                       # 시즌 데이터 (일정, 결과 공통)
  │   ├─ 2025_schedule.json
  │   └─ 2026_schedule.json
 
@@ -51,14 +54,15 @@ root
  │   │   ├─ mainnews/
  │   │   ├─ nextrace/
  │   │   └─ standing/
- │   └─ result/circuit/         # 서킷 이미지
+ │   └─ result/
+ │       └─ circuit/            # 서킷 이미지
 
  ├─ scripts/                    # 홈 섹션 모듈
- │   ├─ mainnews/html, css, js
- │   ├─ nextrace/html, css, js
- │   ├─ highlight/html, css, js
- │   ├─ standing/html, css, js
- │   └─ guess/html, css, js
+ │   ├─ mainnews/   (html, css, js)
+ │   ├─ nextrace/   (html, css, js)
+ │   ├─ highlight/  (html, css, js)
+ │   ├─ standing/   (html, css, js)
+ │   └─ guess/      (html, css, js)
 
  ├─ news/                       # Vanilla JS 뉴스
  │   ├─ news.html
@@ -70,35 +74,35 @@ root
  │   ├─ news_generate.js
  │   └─ news.json
 
- ├─ prediction/                 # 승부예측
+ ├─ prediction/
  │   ├─ prediction.html
  │   ├─ prediction.css
  │   └─ prediction.js
 
- ├─ schedule/                   # 경기 일정
+ ├─ schedule/
  │   ├─ schedule.html
  │   ├─ schedule.css
  │   └─ schedule.js
 
- ├─ result/                     # 레이스 결과
+ ├─ result/
  │   ├─ result.html
  │   ├─ result.css
  │   ├─ result.js
  │   └─ 2025_round_result.json
 
- ├─ ranking/                    # 시즌 순위
+ ├─ ranking/
  │   ├─ ranking.html
  │   ├─ ranking.css
  │   ├─ ranking.js
  │   └─ season/
 
- ├─ video/                      # 하이라이트 영상
+ ├─ video/
  │   ├─ video.html
  │   ├─ video.css
  │   ├─ video.js
  │   └─ video.json
 
- ├─ login/                      # 인증 화면
+ ├─ login/
  │   ├─ login.html
  │   ├─ login.css
  │   ├─ login.js
@@ -106,15 +110,15 @@ root
  │   ├─ signup.css
  │   └─ signup.js
 
- ├─ policy/                     # 약관
+ ├─ policy/
  │   ├─ terms.html
  │   ├─ privacy.html
  │   └─ policy.css
 
- ├─ backend/
- │   ├─ server.js
- │   └─ data/
- │       └─ users.json
+ └─ backend/
+     ├─ server.js
+     └─ data/
+         └─ users.json
 
 
 
