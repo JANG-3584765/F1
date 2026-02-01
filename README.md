@@ -136,14 +136,14 @@ root
 
 홈은 다음 5개 모듈로 구성됩니다.
 
-* Next Race
-* Main News
-* Highlights
-* Standing TOP3
-* Prediction Quick Link
+* Next Race(경기 일정 및 결과 연결)
+* Main News(뉴스 연결)
+* Highlights(하이라이트 연결)
+* Standing TOP3(순위 연결)
+* Prediction Quick Link(승부예측 연결)
 
 각 섹션은 독립 모듈로 분리되어 로딩 및 유지보수가 가능합니다.
-
+각 섹션에 더보기 버튼을 배치하여 각각 메뉴로 접속할 수 있도록 하였습니다.
 
 ## Next Race
 
@@ -155,6 +155,9 @@ root
 * 10분 주기 데이터 재검사
 * 국가 → 깃발 이모지 매핑 + fallback 처리
 
+## Main news
+* 뉴스에서의 각 카테고리(팀, 드라이버, 기술, 규정, 루머) 별 메인 뉴스를 배치
+* 클릭 시 해당 기사로 접속할 수 있게 연결
 
 ## News (Vanilla JS)
 
