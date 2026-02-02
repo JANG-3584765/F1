@@ -120,7 +120,7 @@ root
      └─ data/
          └─ users.json
 
-
+```
 
 ## Architecture Overview
 
