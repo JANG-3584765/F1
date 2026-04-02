@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- 데이터 로드 ---
   Promise.all([
-    fetch("/F1/data/2025_schedule.json").then(r => r.json()),
-    fetch("/F1/data/2026_schedule.json").then(r => r.json())
+    fetch(`${BASE_PATH}/data/2025_schedule.json`).then(r => r.json()),
+    fetch(`${BASE_PATH}/data/2026_schedule.json`).then(r => r.json())
   ])
   .then(([data2025, data2026]) => {
     scheduleData = [...data2025, ...data2026];

@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 시즌별 JSON 불러오기 (깃허브 레포지토리 기준 절대 경로)
   Promise.all([
-    fetch("/F1/data/2025_schedule.json").then(res => res.json()),
-    fetch("/F1/data/2026_schedule.json").then(res => res.json())
+    fetch(`${BASE_PATH}/data/2025_schedule.json`).then(res => res.json()),
+    fetch(`${BASE_PATH}/data/2026_schedule.json`).then(res => res.json())
   ])
     .then(([data2025, data2026]) => {
       scheduleData = [...data2025, ...data2026];

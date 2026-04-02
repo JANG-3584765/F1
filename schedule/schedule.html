@@ -36,23 +36,8 @@
   <!-- 푸터 -->
   <div id="footer-container"></div>
 
-  <!-- 공통 헤더 / 푸터 로드 (표준 구조) -->
-  <script>
-    fetch("/F1/common/header.html")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("header-container").innerHTML = html;
-        document.dispatchEvent(new Event("headerLoaded"));
-      })
-      .catch(err => console.error("Header load error:", err));
-
-    fetch("/F1/common/footer.html")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("footer-container").innerHTML = html;
-      })
-      .catch(err => console.error("Footer load error:", err));
-  </script>
+  <!-- BASE_PATH 정의 (동기 로드) -->
+  <script src="../common/config.js"></script>
 
   <!-- 공통 JS -->
   <script src="../common/header.js"></script>

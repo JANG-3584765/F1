@@ -1,8 +1,7 @@
-document.addEventListener("DOMContentLoaded", () => {
-  fetch("/F1/common/footer.html")
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById("footer-container").innerHTML = html;
-    })
-    .catch(err => console.error("Footer load error:", err));
-});
+fetch(`${BASE_PATH}/common/footer.html`)
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('footer-container').innerHTML =
+      html.replaceAll('/F1/', BASE_PATH + '/');
+  })
+  .catch(err => console.error('Footer load error:', err));

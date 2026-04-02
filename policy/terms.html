@@ -100,19 +100,11 @@
     </div>
   </main>
 
-  <!-- 공통 헤더 로드 -->
-  <script>
-    fetch("/F1/common/header.html")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("header-container").innerHTML = html;
-        document.dispatchEvent(new Event("headerLoaded"));
-      })
-      .catch(err => console.error("Header load error:", err));
-  </script>
+  <!-- BASE_PATH 정의 (동기 로드) -->
+  <script src="../common/config.js"></script>
 
   <!-- 공통 헤더 JS -->
-  <script src="/F1/common/header.js"></script>
+  <script src="../common/header.js"></script>
 
 </body>
 </html>

@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  fetch("/F1/scripts/mainnews/mainnews.json")
+  fetch(`${BASE_PATH}/scripts/mainnews/mainnews.json`)
     .then(res => {
       if (!res.ok) throw new Error("JSON fetch 실패");
       return res.json();
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </span>
             <h3 class="main-news-title">${item.title}</h3>
           </div>
-          <a href="/F1/news/news_detail.html?id=${item.id}" class="main-news-link" aria-label="${item.title}"></a>
+          <a href="${BASE_PATH}/news/news_detail.html?id=${item.id}" class="main-news-link" aria-label="${item.title}"></a>
         `;
 
         wrapper.appendChild(slide);
