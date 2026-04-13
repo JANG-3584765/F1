@@ -206,7 +206,6 @@
 .col-driver{ text-align: left; }
 .col-time{ text-align: left; }
 
-/* ✅ Fix drift: rank/laps/points centered with equal padding */
 .results-table th.col-rank,
 .results-table td.col-rank,
 .results-table th.col-laps,

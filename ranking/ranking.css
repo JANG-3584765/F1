@@ -125,10 +125,7 @@ main {
   border-bottom: none;
 }
 
-/* ===== 팀 컬러: 작은 점(dot) =====
-   ✅ 핵심 수정: .ranking-table td.team-cell로 우선순위 올려서
-   td padding 규칙에 덮어씌워지지 않게 함
-*/
+/* ===== 팀 컬러: 작은 점(dot) ===== */
 .ranking-table td.team-cell {
   text-align: left;
   font-weight: 800;
@@ -163,8 +160,8 @@ main {
 .ranking-table td.team-cell[data-team="haas"]::before { background: #b6babd; }
 .ranking-table td.team-cell[data-team="sauber"]::before { background: #00e701; }
 .ranking-table td.team-cell[data-team="alpine"]::before { background: #ff4fd8; }
-.ranking-table td.team-cell[data-team="audi"]::before { background: #000000; }      /* (선택) 2026 */
-.ranking-table td.team-cell[data-team="cadillac"]::before { background: #0b2a6f; }  /* (선택) 2026 */
+.ranking-table td.team-cell[data-team="audi"]::before { background: #000000; }
+.ranking-table td.team-cell[data-team="cadillac"]::before { background: #0b2a6f; }
 
 /* 드라이버 이름은 가독성 위해 왼쪽 정렬 */
 .ranking-table td.name-cell {
@@ -200,7 +197,6 @@ main {
     padding: 11px 8px;
   }
 
-  /* ✅ (핵심) 모바일에서 테이블 폭을 줄이기: '팀' 컬럼을 점 전용으로 축소 */
   .ranking-table th:nth-child(2),
   .ranking-table td:nth-child(2) {
     width: 28px;

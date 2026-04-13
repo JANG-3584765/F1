@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const flagDiv = document.createElement("div");
         flagDiv.className = "flag";
-        const countryFlag = flags[race.location_ko || race.location] || "🏁";
+        const countryFlag = race.flag || flags[race.location_ko || race.location] || "🏁";
         flagDiv.innerHTML = window.twemoji
           ? twemoji.parse(countryFlag)
           : countryFlag;

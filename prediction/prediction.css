@@ -45,10 +45,6 @@
   cursor: pointer;
 }
 
-/* 기존에서 숨기고 싶으면 주석 해제
-#reset-prediction { display:none !important; }
-*/
-
 /* ===== Card (기존 스타일 유지 + 강화) ===== */
 .prediction-card {
   border: 1px solid #ddd;

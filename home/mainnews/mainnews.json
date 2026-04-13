@@ -1,47 +1,42 @@
 [
   {
-    "id": 50,
+    "id": 51,
     "title": "페라리, 2026 파워유닛 첫 테스트 성공",
     "summary": "2026 레귤레이션 대비 첫 파워유닛 테스트에서 긍정적 성과를 얻었다는 소식.",
     "image": "./images/home/mainnews/tech.jpg",
     "date": "2025-12-07",
-    "category": "Tech",
-    "link": "/news/1"
+    "category": "Tech"
   },
   {
-    "id": 49,
+    "id": 52,
     "title": "베르스타펜, 2026 시즌 준비 상황 공개",
     "summary": "레드불의 베르스타펜이 새로운 시즌 준비 상황을 상세히 전했다.",
     "image": "./images/home/mainnews/driver.jpg",
     "date": "2025-12-05",
-    "category": "Driver",
-    "link": "/news/2"
+    "category": "Driver"
   },
   {
-    "id": 48,
+    "id": 53,
     "title": "FIA, 2026 에어로 패키지 규정 초안 발표",
     "summary": "2026년 에어로 패키지의 주요 변경 사항이 공식 초안으로 공개되었다.",
     "image": "./images/home/mainnews/regulation.jpg",
     "date": "2025-12-03",
-    "category": "Regulation",
-    "link": "/news/3"
+    "category": "Regulation"
   },
   {
-    "id": 47,
+    "id": 54,
     "title": "메르세데스, '2026 W17 실버 애로우' 공개",
     "summary": "새로운 에어로 규정, 파워유닛 등 대규모 규정 변경 대비",
     "image": "./images/home/mainnews/team.png",
     "date": "2026-01-22",
-    "category": "Team",
-    "link": "/news/4"
+    "category": "Team"
   },
   {
-    "id": 46,
+    "id": 55,
     "title": "알론소, 2026 시즌 포드와 협상 중?",
     "summary": "여러 매체에서 알론소와 포드의 극비 협상이 포착되었다는 보도가 나오고 있다.",
     "image": "./images/home/mainnews/rumor.jpg",
     "date": "2025-12-01",
-    "category": "Rumor",
-    "link": "/news/5"
+    "category": "Rumor"
   }
 ]

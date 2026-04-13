@@ -1,18 +1,3 @@
-// result.js (type="module")
-// 1) 시즌/라운드 드롭다운 연동
-// 2) 선택 시 레이스 메타(국기, 레이스명(도시), 서킷 이미지/정보) 렌더
-// 3) 결과 JSON(시즌 통합: {rounds:{...}})에서 Top5 + 전체 토글 렌더
-//    - Top5: 1~5위
-//    - 전체: 6위부터 + DNF/DNS/DSQ 포함 (중복 제거)
-// 4) DOTD / Fastest Lap 표시(텍스트 라인 형태)
-// 5) 초기 진입 시: 2025 시즌 24라운드가 가장 먼저 보이게
-//
-// ✅ 추가 반영(요구사항):
-// - 드라이버 셀: "이름(윗줄) + 팀(아랫줄)" 구조로 렌더
-// - 팀 앞에 색깔 동그라미(team dot) 표시
-// - 기록/랩/포인트 표시 유지
-// - (CSS에서) .driver-cell / .driver-name / .driver-team / .team-dot 스타일링 가능
-
 /* =========================
    DOM
 ========================= */
@@ -311,9 +296,6 @@ function formatRecordCell(row) {
   return row.status;
 }
 
-/**
- * ✅ 드라이버 셀: 이름(윗줄) + 팀(아랫줄, 색 동그라미)
- */
 function buildDriverCellTd(row) {
   const td = document.createElement("td");
   td.className = "col-driver";

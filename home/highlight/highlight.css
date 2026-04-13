@@ -37,7 +37,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* contain → cover로 변경 */
+  object-fit: cover;
 }
 
 /* 재생 아이콘 */

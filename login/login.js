@@ -1,13 +1,7 @@
-const pwInput = document.getElementById("password");
-const togglePw = document.getElementById("togglePw");
+const $form = document.querySelector("form");
+const $pwInput = document.querySelector('input[type="password"]');
 
-togglePw.addEventListener("click", () => {
-  const type = pwInput.type === "password" ? "text" : "password";
-  pwInput.type = type;
-});
-
-document.addEventListener("keydown", function(e) {
-  if (e.key === "Enter") {
-    document.getElementById("loginBtn").click();
-  }
+$form?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  alert("로그인 기능은 준비 중입니다.");
 });

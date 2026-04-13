@@ -121,7 +121,7 @@
     "sourceClass": "official",
     "source": "Formula1.com",
     "title": "2025 시즌 개막식 일정 및 세레모니 공개",
-    "image": "httpsum.photos/800/450?random=10",
+    "image": "https://picsum.photos/800/450?random=10",
     "summary": "2025 시즌 개막식에서 전례 없는 3단계 공연이 예정되어 있다고 공식 발표되었다.",
     "tags": [
       "team"
@@ -629,5 +629,55 @@
       "team"
     ],
     "pubDate": "2025-01-10T14:00:00+09:00"
+  },
+  {
+    "id": 51,
+    "sourceClass": "media",
+    "source": "Motorsport.com",
+    "title": "페라리, 2026 파워유닛 첫 테스트 성공",
+    "image": "https://picsum.photos/800/450?random=51",
+    "summary": "2026 레귤레이션 대비 첫 파워유닛 테스트에서 긍정적 성과를 얻었다는 소식.",
+    "tags": ["tech"],
+    "pubDate": "2025-12-07T00:00:00+09:00"
+  },
+  {
+    "id": 52,
+    "sourceClass": "reporter",
+    "source": "Autosport",
+    "title": "베르스타펜, 2026 시즌 준비 상황 공개",
+    "image": "https://picsum.photos/800/450?random=52",
+    "summary": "레드불의 베르스타펜이 새로운 시즌 준비 상황을 상세히 전했다.",
+    "tags": ["driver"],
+    "pubDate": "2025-12-05T00:00:00+09:00"
+  },
+  {
+    "id": 53,
+    "sourceClass": "official",
+    "source": "FIA",
+    "title": "FIA, 2026 에어로 패키지 규정 초안 발표",
+    "image": "https://picsum.photos/800/450?random=53",
+    "summary": "2026년 에어로 패키지의 주요 변경 사항이 공식 초안으로 공개되었다.",
+    "tags": ["reg"],
+    "pubDate": "2025-12-03T00:00:00+09:00"
+  },
+  {
+    "id": 54,
+    "sourceClass": "official",
+    "source": "Formula1.com",
+    "title": "메르세데스, '2026 W17 실버 애로우' 공개",
+    "image": "https://picsum.photos/800/450?random=54",
+    "summary": "새로운 에어로 규정, 파워유닛 등 대규모 규정 변경 대비",
+    "tags": ["team"],
+    "pubDate": "2026-01-22T00:00:00+09:00"
+  },
+  {
+    "id": 55,
+    "sourceClass": "rumor",
+    "source": "F1 Gossip X",
+    "title": "알론소, 2026 시즌 포드와 협상 중?",
+    "image": "https://picsum.photos/800/450?random=55",
+    "summary": "여러 매체에서 알론소와 포드의 극비 협상이 포착되었다는 보도가 나오고 있다.",
+    "tags": ["driver", "rumor"],
+    "pubDate": "2025-12-01T00:00:00+09:00"
   }
 ]

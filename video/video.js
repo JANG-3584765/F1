@@ -1,11 +1,4 @@
-// ============================
-// video.js (No-Embed / New Tab Open)
-// - JSON: { season, rounds: { "1": { city, videos: [...] }, ... } }
-// - videos[].source: "official" | "coupang" | "influencer"
-// - videos[].videoUrl: youtu.be / watch / shorts 어떤 형태든 OK (썸네일만 추출)
-// ============================
-
-const DATA_URL = "./video.json"; // ✅ 파일명이 다르면 여기만 수정
+const DATA_URL = "./video.json";
 
 // 상태
 let selectedSeason = 2025;        // number
@@ -339,7 +332,6 @@ function render() {
     $grid.appendChild(card);
   });
 
-  if (window.twemoji) window.twemoji.parse(document.body);
 }
 
 // ----------------------------

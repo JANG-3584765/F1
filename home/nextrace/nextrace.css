@@ -1,9 +1,7 @@
-/* Sport font (numbers) */
 :root {
   --sport-font: 'Orbitron', 'Oswald', 'Arial Black', sans-serif;
 }
 
-/* Base */
 #next-race-box {
   max-width: 800px;
   margin: 20px auto;
@@ -14,8 +12,6 @@
   padding: 0;
 }
 
-/* Header (desktop / tablet) */
-.race-basic,
 .next-race-header {
   display: flex;
   align-items: center;
@@ -26,41 +22,18 @@
   gap: 12px;
 }
 
-/* Flag */
-.race-basic .flag-img,
 .next-race-header .flag {
   font-size: 2rem;
   line-height: 1;
   flex: 0 0 auto;
 }
 
-/* Center info (index.html structure) */
-.race-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  flex: 1;
-}
-
-/* JS innerHTML structure */
 .next-race-header .race-countdown {
   margin: 0 auto;
 }
 
-/* Hide race title in header */
-.race-basic .race-title {
-  display: none;
-}
-
-/* Countdown (no box, sporty) */
 .race-countdown {
   font-family: var(--sport-font);
-  background: none !important;
-  border: none !important;
-  padding: 0 !important;
-  box-shadow: none !important;
   font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -68,8 +41,6 @@
   white-space: nowrap;
 }
 
-/* Toggle button */
-.race-basic .toggle-details-btn,
 .next-race-header .toggle-details-btn {
   background: #e63946;
   color: #fff;
@@ -82,14 +53,11 @@
   transition: all 0.2s ease;
 }
 
-.race-basic .toggle-details-btn:hover,
 .next-race-header .toggle-details-btn:hover {
   background: #d62839;
   transform: translateY(-2px);
 }
 
-/* Details */
-.race-details,
 .next-race-details {
   display: flex;
   padding: 24px;
@@ -97,7 +65,6 @@
   align-items: center;
 }
 
-/* Circuit (left) */
 .circuit-img {
   flex: 1;
   display: flex;
@@ -112,8 +79,6 @@
   object-fit: cover;
 }
 
-/* Right side (race info + sessions) */
-.race-schedule,
 .next-race-details .race-info {
   flex: 1;
   display: flex;
@@ -121,8 +86,6 @@
   align-items: center;
 }
 
-/* Race title */
-.race-details .race-title,
 .next-race-details .race-title {
   font-size: 1.1rem;
   font-weight: 700;
@@ -130,7 +93,6 @@
   margin-bottom: 14px;
 }
 
-/* Session list */
 .session-list {
   list-style: none;
   padding: 0;
@@ -148,19 +110,16 @@
   font-size: 0.95rem;
 }
 
-/* Session name */
 .session-list .session-name {
   font-weight: 600;
 }
 
-/* Session time */
 .session-list .session-time {
   font-family: var(--sport-font);
   letter-spacing: 0.04em;
   white-space: nowrap;
 }
 
-/* Buttons below */
 .race-btns-wrap {
   display: flex;
   gap: 12px;
@@ -185,10 +144,8 @@
   color: #fff;
 }
 
-/* Mobile */
 @media (max-width: 767px) {
 
-  .race-basic,
   .next-race-header {
     flex-direction: column;
     align-items: center;
@@ -212,7 +169,6 @@
     font-size: 1.05rem;
   }
 
-  .race-details,
   .next-race-details {
     flex-direction: column;
     gap: 20px;

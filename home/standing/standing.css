@@ -24,7 +24,7 @@
 /* 전체 순위 보기 버튼: 섹션 오른쪽 고정 */
 .more-standing-btn {
   display: inline-block;
-  background: black;
+  background: #000;
   color: #fff;
   padding: 6px 12px;
   border-radius: 6px;
@@ -93,7 +93,7 @@
 }
 
 .podium-card.rank-2 {
-  transform: translateY(0px);
+  transform: translateY(0);
 }
 
 .podium-card.rank-3 {

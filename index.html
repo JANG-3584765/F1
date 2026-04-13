@@ -10,11 +10,11 @@
   <link rel="stylesheet" href="./common/footer.css">
 
   <!-- 홈 메인 CSS -->
-  <link rel="stylesheet" href="./scripts/nextrace/nextrace.css">
-  <link rel="stylesheet" href="./scripts/mainnews/mainnews.css">
-  <link rel="stylesheet" href="./scripts/highlight/highlight.css">
-  <link rel="stylesheet" href="./scripts/standing/standing.css">
-  <link rel="stylesheet" href="./scripts/guess/guess.css">
+  <link rel="stylesheet" href="./home/nextrace/nextrace.css">
+  <link rel="stylesheet" href="./home/mainnews/mainnews.css">
+  <link rel="stylesheet" href="./home/highlight/highlight.css">
+  <link rel="stylesheet" href="./home/standing/standing.css">
+  <link rel="stylesheet" href="./home/guess/guess.css">
 
   <!-- Swiper -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
@@ -33,19 +33,9 @@
     <!-- 1. NEXT RACE -->
     <section id="next-race" class="next-race-section">
       <div id="next-race-box" class="next-race-box">
-        <div class="race-basic">
-          <span class="flag-img">🏁</span>
-          <div class="race-info">
-            <div class="race-title">불러오는 중...</div>
-            <div class="race-countdown"></div>
-          </div>
-          <button class="toggle-details-btn">▼</button>
-        </div>
-        <div class="race-details" style="display: none;">
-          <div class="circuit-img"><img src="" alt="Circuit" /></div>
-          <div class="race-schedule">
-            <ul class="session-list"></ul>
-          </div>
+        <div class="next-race-header">
+          <span class="flag">🏁</span>
+          <div class="race-countdown">불러오는 중...</div>
         </div>
       </div>
       <div class="race-btns-wrap">
@@ -55,34 +45,34 @@
     </section>
 
     <!-- 2. MAIN NEWS -->
-<section id="main-news" class="main-news-section">
-  <h2 class="section-title">Main News</h2>
+    <section id="main-news" class="main-news-section">
+      <h2 class="section-title">Main News</h2>
 
-  <div class="swiper main-news-swiper">
-    <div class="swiper-wrapper" id="main-news-wrapper"></div>
+      <div class="swiper main-news-swiper">
+        <div class="swiper-wrapper" id="main-news-wrapper"></div>
 
-    <!-- 화살표 -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-  </div>
+        <!-- 화살표 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
 
-  <div class="more-news-btn-wrap">
-    <a href="./news/news.html" class="more-news-btn">뉴스 더보기</a>
-  </div>
-</section>
+      <div class="more-news-btn-wrap">
+        <a href="./news/news.html" class="more-news-btn">뉴스 더보기</a>
+      </div>
+    </section>
 
     <!-- 3. HIGHLIGHT -->
-<section id="highlights" class="highlights-section">
-  <h2 class="section-title">Highlights</h2>
+    <section id="highlights" class="highlights-section">
+      <h2 class="section-title">Highlights</h2>
 
-  <div class="swiper highlights-swiper">
-    <div class="swiper-wrapper" id="highlight-wrapper"></div>
+      <div class="swiper highlights-swiper">
+        <div class="swiper-wrapper" id="highlight-wrapper"></div>
 
-    <!-- 화살표 -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-  </div>
-</section>
+        <!-- 화살표 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </section>
 
     <!-- 4. STANDING -->
     <section id="standing" class="standing-section">
@@ -116,10 +106,10 @@
   <script defer src="./common/footer.js"></script>
 
   <!-- 페이지 전용 JS -->
-  <script defer src="./scripts/nextrace/nextrace.js"></script>
-  <script defer src="./scripts/mainnews/mainnews.js"></script>
-  <script defer src="./scripts/highlight/highlight.js"></script>
-  <script defer src="./scripts/standing/standing.js"></script>
+  <script defer src="./home/nextrace/nextrace.js"></script>
+  <script defer src="./home/mainnews/mainnews.js"></script>
+  <script defer src="./home/highlight/highlight.js"></script>
+  <script defer src="./home/standing/standing.js"></script>
 
 </body>
 </html>

@@ -1,4 +1,3 @@
-// nextrace.js (깃허브 배포용)
 document.addEventListener("DOMContentLoaded", () => {
   const box = document.getElementById("next-race-box");
 
@@ -18,7 +17,16 @@ document.addEventListener("DOMContentLoaded", () => {
     "카타르": "🇶🇦", "아부다비": "🇦🇪", "아랍에미리트": "🇦🇪"
   };
 
-  // 시즌별 JSON 불러오기 (깃허브 레포지토리 기준 절대 경로)
+  // 펼치기 버튼 이벤트 위임 (renderNextRace 재호출 시에도 단 1회 등록)
+  box.addEventListener("click", e => {
+    const btn = e.target.closest(".toggle-details-btn");
+    if (!btn) return;
+    const details = box.querySelector(".next-race-details");
+    const isClosed = details.style.display === "none";
+    details.style.display = isClosed ? "flex" : "none";
+    btn.textContent = isClosed ? "▲ 접기" : "▼ 펼치기";
+  });
+
   Promise.all([
     fetch(`${BASE_PATH}/data/2025_schedule.json`).then(res => res.json()),
     fetch(`${BASE_PATH}/data/2026_schedule.json`).then(res => res.json())
@@ -26,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(([data2025, data2026]) => {
       scheduleData = [...data2025, ...data2026];
       renderNextRace();
-      setInterval(renderNextRace, 600000); // 10분마다 갱신 (주석/값 일치)
+      setInterval(renderNextRace, 600000); // 10분마다 갱신
     })
     .catch(err => {
       console.error(err);
@@ -78,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
       flags[nextRace.location_ko || nextRace.location] ||
       "🏁";
 
-    // HTML 생성 (기존 형태 유지: next-race-header / next-race-details)
     box.innerHTML = `
       <div class="next-race-header">
         <span class="flag">${flagEmoji}</span>
@@ -87,13 +94,11 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
 
       <div class="next-race-details" style="display: none;">
-        <!-- 왼쪽(서킷)은 건드리지 않음 -->
         <div class="circuit-img">
           <img src="${nextRace.circuit_image || ""}" alt="Circuit" />
           <div class="circuit-name">${nextRace.circuit_ko || nextRace.circuit || "서킷 정보 없음"}</div>
         </div>
 
-        <!-- 오른쪽: 레이스명(가운데) + 세션(좌/우 정렬) -->
         <div class="race-info">
           <h3 class="race-title">${nextRace.race_name_ko || nextRace.race_name}</h3>
           <ul class="session-list">
@@ -106,7 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
                   " " +
                   start.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" });
 
-                // 세션명/시간 분리 (CSS로 좌/우 정렬 가능)
                 return `
                   <li>
                     <span class="session-name">${s.name}</span>
@@ -122,16 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Twemoji 적용
     if (window.twemoji) requestAnimationFrame(() => twemoji.parse(box));
-
-    // 펼치기 버튼 이벤트
-    const toggleBtn = box.querySelector(".toggle-details-btn");
-    const details = box.querySelector(".next-race-details");
-
-    toggleBtn.addEventListener("click", () => {
-      const isClosed = details.style.display === "none";
-      details.style.display = isClosed ? "flex" : "none";
-      toggleBtn.textContent = isClosed ? "▲ 접기" : "▼ 펼치기";
-    });
 
     // 카운트다운
     const countdownEl = box.querySelector(".race-countdown");

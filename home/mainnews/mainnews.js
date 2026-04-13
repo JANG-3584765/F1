@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  fetch(`${BASE_PATH}/scripts/mainnews/mainnews.json`)
+  fetch(`${BASE_PATH}/home/mainnews/mainnews.json`)
     .then(res => {
       if (!res.ok) throw new Error("JSON fetch 실패");
       return res.json();
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // STEP 3: Swiper 초기화
       const mainNewsSwiper = new Swiper(".main-news-swiper", {
-        slidesPerView: 1,          // 기본 1장
+        slidesPerView: 1,
         spaceBetween: 20,
         loop: false,
         allowTouchMove: true,
@@ -52,9 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
         },
 
         breakpoints: {
-  0:    { slidesPerView: 2 },
-  768:  { slidesPerView: 3 }
-},
+          600: { slidesPerView: 2 },
+          768: { slidesPerView: 3 }
+        },
 
         on: {
           init() { updateNavState(this); },
