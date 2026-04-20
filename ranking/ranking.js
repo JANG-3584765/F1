@@ -96,7 +96,7 @@ function teamKey(teamName) {
   if (t.includes("레이싱불스") || t.includes("레이싱")) return "rb";
   if (t.includes("애스턴마틴")) return "astonmartin";
   if (t.includes("하스")) return "haas";
-  if (t.includes("자우버") || t.includes("자우버")) return "sauber";
+  if (t.includes("자우버") || t.includes("킥")) return "sauber";
   if (t.includes("알핀")) return "alpine";
   if (t.includes("아우디")) return "audi";
   if (t.includes("캐딜락")) return "cadillac";

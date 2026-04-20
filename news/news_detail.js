@@ -1,5 +1,13 @@
 const STATIC_JSON_URL = './news.json';
 
+function escapeHtml(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 const articleEl = document.getElementById('detailArticle');
 const params = new URLSearchParams(location.search);
 const newsId = params.get('id');
@@ -29,16 +37,16 @@ function formatDate(iso) {
 
 function renderDetail(item) {
   articleEl.innerHTML = `
-    <h1 class="detail-title">${item.title || '제목 없음'}</h1>
+    <h1 class="detail-title">${escapeHtml(item.title || '제목 없음')}</h1>
 
     <div class="detail-meta">
-      ${item.source || ''} · ${formatDate(item.pubDate)}
+      ${escapeHtml(item.source || '')} · ${formatDate(item.pubDate)}
     </div>
 
-    ${item.image ? `<img src="${item.image}" alt="">` : ''}
+    ${item.image ? `<img src="${escapeHtml(item.image)}" alt="">` : ''}
 
     <div class="detail-summary">
-      ${item.summary || ''}
+      ${escapeHtml(item.summary || '')}
     </div>
   `;
 }

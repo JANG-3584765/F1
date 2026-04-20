@@ -1,3 +1,11 @@
+function escapeHtml(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   fetch(`${BASE_PATH}/video/video.json`)
     .then(res => res.json())
@@ -33,9 +41,9 @@ function renderHighlights(videos) {
 
   const slides = videos.map(v => `
     <div class="swiper-slide highlight-card">
-      <a href="${v.videoUrl}" target="_blank" rel="noopener noreferrer">
+      <a href="${escapeHtml(v.videoUrl)}" target="_blank" rel="noopener noreferrer">
         <div class="highlight-thumb">
-          <img src="${getYoutubeThumbnail(v.videoUrl)}" alt="${v.title}" class="slide-img">
+          <img src="${getYoutubeThumbnail(v.videoUrl)}" alt="${escapeHtml(v.title)}" class="slide-img">
           <span class="play-icon">▶</span>
         </div>
       </a>

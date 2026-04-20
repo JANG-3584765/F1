@@ -9,7 +9,7 @@
 /* 섹션 헤더: TOP3만 가운데 */
 .standing-header {
   display: flex;
-  justify-content: center; /* ✅ TOP3 가운데 */
+  justify-content: center;
   align-items: center;
   margin-bottom: 12px;
 }

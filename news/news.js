@@ -1,4 +1,12 @@
 const STATIC_JSON_URL = './news.json';
+
+function escapeHtml(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
 const DETAIL_PAGE_URL = './news_detail.html';
 
 const newsContainer =
@@ -98,13 +106,13 @@ function formatDate(iso) {
 function makeBadges(tags, sourceClass) {
   const tagBadges = (tags || [])
     .slice(0, 2)
-    .map(t => `<span class="badge">${t}</span>`)
+    .map(t => `<span class="badge">${escapeHtml(t)}</span>`)
     .join(' ');
-  return `${tagBadges} <span class="badge">${sourceClass || 'media'}</span>`;
+  return `${tagBadges} <span class="badge">${escapeHtml(sourceClass || 'media')}</span>`;
 }
 
 function renderCard(item) {
-  const imgTag = item.image ? `<img data-src="${item.image}" alt="">` : '';
+  const imgTag = item.image ? `<img data-src="${escapeHtml(item.image)}" alt="">` : '';
 
   if (item.cardType === 'analysis') {
     return `
@@ -112,24 +120,24 @@ function renderCard(item) {
         <div class="meta-row">
           <div class="badges">${makeBadges(item.tags, item.sourceClass)}</div>
           <div style="margin-left:auto;font-size:12px;color:var(--muted)">
-            ${item.source || ''} · ${formatDate(item.pubDate)}
+            ${escapeHtml(item.source || '')} · ${formatDate(item.pubDate)}
           </div>
         </div>
         ${imgTag}
-        <div class="card-title">${item.title}</div>
-        <div class="card-summary">${item.summary || ''}</div>
+        <div class="card-title">${escapeHtml(item.title)}</div>
+        <div class="card-summary">${escapeHtml(item.summary || '')}</div>
       </article>
     `;
   }
 
   return `
     <article class="news-card short" data-id="${item.id}">
-      ${item.image ? `<img class="thumb" data-src="${item.image}" alt="">` : `<div class="thumb"></div>`}
+      ${item.image ? `<img class="thumb" data-src="${escapeHtml(item.image)}" alt="">` : `<div class="thumb"></div>`}
       <div class="short-body">
-        <div class="s-title">${item.title}</div>
-        <div class="s-text">${item.summary || ''}</div>
+        <div class="s-title">${escapeHtml(item.title)}</div>
+        <div class="s-text">${escapeHtml(item.summary || '')}</div>
         <div style="margin-top:6px;font-size:12px;color:var(--muted)">
-          ${item.source || ''} · ${formatDate(item.pubDate)}
+          ${escapeHtml(item.source || '')} · ${formatDate(item.pubDate)}
         </div>
       </div>
     </article>

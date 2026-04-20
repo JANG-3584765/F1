@@ -1,3 +1,11 @@
+function escapeHtml(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const box = document.getElementById("next-race-box");
 
@@ -95,12 +103,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <div class="next-race-details" style="display: none;">
         <div class="circuit-img">
-          <img src="${nextRace.circuit_image || ""}" alt="Circuit" />
-          <div class="circuit-name">${nextRace.circuit_ko || nextRace.circuit || "서킷 정보 없음"}</div>
+          <img src="${escapeHtml(nextRace.circuit_image || "")}" alt="Circuit" />
+          <div class="circuit-name">${escapeHtml(nextRace.circuit_ko || nextRace.circuit || "서킷 정보 없음")}</div>
         </div>
 
         <div class="race-info">
-          <h3 class="race-title">${nextRace.race_name_ko || nextRace.race_name}</h3>
+          <h3 class="race-title">${escapeHtml(nextRace.race_name_ko || nextRace.race_name)}</h3>
           <ul class="session-list">
             ${nextRace.sessions
               .filter(s => s && s.start && s.start !== "TBD")
@@ -113,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 return `
                   <li>
-                    <span class="session-name">${s.name}</span>
+                    <span class="session-name">${escapeHtml(s.name)}</span>
                     <span class="session-time">${startStr}</span>
                   </li>
                 `;

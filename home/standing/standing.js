@@ -1,5 +1,15 @@
+const STANDING_SEASON = "2026";
+
+function escapeHtml(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  fetch(`${BASE_PATH}/ranking/season/2026.json`)
+  fetch(`${BASE_PATH}/ranking/season/${STANDING_SEASON}.json`)
     .then(res => res.json())
     .then(data => {
       const driverTop3 = data.drivers.slice(0, 3).map(d => ({
@@ -40,9 +50,9 @@ function renderPodium(type) {
     const slide = document.createElement("div");
     slide.className = `podium-card rank-${index + 1}`;
     slide.innerHTML = `
-      <img src="${item.img}" alt="${item.name}">
-      <div class="podium-name">${item.name}</div>
-      <div class="podium-points">${item.points} pts</div>
+      <img src="${escapeHtml(item.img)}" alt="${escapeHtml(item.name)}">
+      <div class="podium-name">${escapeHtml(item.name)}</div>
+      <div class="podium-points">${escapeHtml(item.points)} pts</div>
     `;
     container.appendChild(slide);
   });

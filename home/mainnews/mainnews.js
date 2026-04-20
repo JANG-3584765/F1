@@ -1,3 +1,11 @@
+function escapeHtml(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const wrapper = document.getElementById("main-news-wrapper");
   if (!wrapper) {
@@ -26,14 +34,14 @@ document.addEventListener("DOMContentLoaded", () => {
         slide.className = "swiper-slide main-news-card";
 
         slide.innerHTML = `
-          <img src="${item.image}" alt="${item.title}" class="slide-img" />
+          <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" class="slide-img" />
           <div class="main-news-info-bar">
-            <span class="news-category-badge" data-category="${item.category}">
-              ${item.category}
+            <span class="news-category-badge" data-category="${escapeHtml(item.category)}">
+              ${escapeHtml(item.category)}
             </span>
-            <h3 class="main-news-title">${item.title}</h3>
+            <h3 class="main-news-title">${escapeHtml(item.title)}</h3>
           </div>
-          <a href="${BASE_PATH}/news/news_detail.html?id=${item.id}" class="main-news-link" aria-label="${item.title}"></a>
+          <a href="${BASE_PATH}/news/news_detail.html?id=${item.id}" class="main-news-link" aria-label="${escapeHtml(item.title)}"></a>
         `;
 
         wrapper.appendChild(slide);
