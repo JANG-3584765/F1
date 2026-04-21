@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WhatisF1</title>
 
+  <!-- FOUC 방지: CSS 렌더 전에 테마 즉시 적용 -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t){document.documentElement.dataset.theme=t;}else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.dataset.theme='dark';}})()</script>
+
+  <!-- 다크모드 CSS (최우선 로드) -->
+  <link rel="stylesheet" href="./common/darkmode.css">
+
   <!-- 공통 헤더 / 푸터 CSS -->
   <link rel="stylesheet" href="./common/header.css">
   <link rel="stylesheet" href="./common/footer.css">
@@ -100,6 +106,7 @@
 
   <!-- BASE_PATH 정의 (동기 로드) -->
   <script src="./common/config.js"></script>
+  <script src="./common/darkmode.js"></script>
 
   <!-- 공통 JS -->
   <script defer src="./common/header.js"></script>

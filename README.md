@@ -95,6 +95,15 @@ HTML / CSS / JavaScript와 정적 JSON 데이터로 구성하였습니다.
 - `config.js`: `window.BASE_PATH` 설정 — localhost/GitHub Pages 환경 자동 감지
 - `header.js`: `header.html` fetch 로드, 햄버거 메뉴 토글, Escape/외부 클릭 감지로 자동 닫힘
 - `footer.js`: `footer.html` fetch 로드, BASE_PATH 기준 경로 자동 치환
+- `darkmode.css`: 사이트 공통 CSS 변수 + `[data-theme="dark"]` 팔레트 정의
+- `darkmode.js`: ☀️/🌙 토글 버튼, `localStorage` 저장/복원, MutationObserver로 헤더 비동기 주입 후 버튼 아이콘 동기화
+
+### 다크모드
+
+- 모든 HTML `<head>` 첫 줄에 FOUC 방지 인라인 스크립트 — CSS 렌더 전 `data-theme` 즉시 설정
+- `prefers-color-scheme: dark` 감지로 OS 설정 초기값 반영
+- CSS 변수 (`--bg`, `--card`, `--border`, `--text` 등)로 전체 페이지 팔레트 일괄 전환
+- 헤더 우측 토글 버튼에서 모든 페이지 공통 적용
 
 ---
 
@@ -129,6 +138,7 @@ HTML / CSS / JavaScript와 정적 JSON 데이터로 구성하였습니다.
 
 ### 주요 기능
 
+- 텍스트 검색 input — 제목 / 요약 기준 실시간 필터 (`input` 이벤트, 기존 `applyFilters()` 확장)
 - 카테고리 / 소스 필터 + 최신순 정렬
 - 무한스크롤 (20개 단위 페이지네이션)
 - `IntersectionObserver` 기반 이미지 lazy loading

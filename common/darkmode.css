@@ -1,0 +1,334 @@
+/* ===================================================
+   darkmode.css — 사이트 공통 CSS 변수 + 다크 팔레트
+   모든 HTML 파일에서 첫 번째 CSS로 로드
+=================================================== */
+
+/* ===== 라이트 모드 (기본값) ===== */
+:root {
+  --bg:        #ffffff;
+  --bg-2:      #f4f6f8;
+  --card:      #ffffff;
+  --border:    #e5e7eb;
+  --text:      #111827;
+  --muted:     #6b7280;
+  --accent:    #e10600;
+  --input-bg:  #f9fafb;
+  --shadow:    0 4px 12px rgba(0, 0, 0, 0.10);
+}
+
+/* ===== 다크 팔레트 ===== */
+/* html[data-theme="dark"] : specificity (0,1,1) → 페이지별 :root (0,1,0) 를 이김 */
+html[data-theme="dark"] {
+  --bg:        #0f1117;
+  --bg-2:      #181b26;
+  --card:      #1e2130;
+  --border:    #2d3148;
+  --text:      #e5e7eb;
+  --muted:     #9ca3af;
+  --accent:    #e10600;
+  --input-bg:  #252839;
+  --shadow:    0 4px 12px rgba(0, 0, 0, 0.40);
+  --line:      #2d3148; /* video.css 전용 변수 다크 오버라이드 */
+}
+
+/* ===== body ===== */
+[data-theme="dark"] body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ===== 다크모드 토글 버튼 ===== */
+.darkmode-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.darkmode-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+[data-theme="dark"] .darkmode-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ===== 헤더 ===== */
+[data-theme="dark"] .top-header {
+  background: var(--card);
+  border-color: var(--border);
+}
+[data-theme="dark"] .login-btn,
+[data-theme="dark"] .hamburger-btn {
+  color: var(--text);
+}
+[data-theme="dark"] .side-menu {
+  background: var(--card);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.4);
+}
+[data-theme="dark"] .side-menu a {
+  color: var(--text);
+}
+[data-theme="dark"] .side-menu a:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+[data-theme="dark"] .side-menu li {
+  border-color: var(--border);
+}
+[data-theme="dark"] .close-menu {
+  color: var(--text);
+}
+
+/* ===== 푸터 ===== */
+[data-theme="dark"] .footer {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--muted);
+}
+[data-theme="dark"] .footer-title { color: var(--text); }
+[data-theme="dark"] .footer-email,
+[data-theme="dark"] .sns-text,
+[data-theme="dark"] .info-link   { color: var(--muted); }
+[data-theme="dark"] .info-link:hover { color: var(--text); }
+[data-theme="dark"] .divider     { color: #444; }
+[data-theme="dark"] .footer-disclaimer,
+[data-theme="dark"] .footer-copy { color: #555; }
+
+/* ===== 홈 — Next Race ===== */
+[data-theme="dark"] #next-race-box {
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+[data-theme="dark"] .next-race-header {
+  background: var(--bg-2);
+  border-color: var(--border);
+}
+[data-theme="dark"] .race-countdown { color: var(--text); }
+
+/* ===== 홈 — Main News 섹션 ===== */
+[data-theme="dark"] .main-news-section { background: var(--bg); }
+[data-theme="dark"] .more-news-btn {
+  background: var(--text);
+  color: var(--bg);
+}
+
+/* ===== 홈 — Highlights 섹션 ===== */
+[data-theme="dark"] .highlights-section { background: var(--bg); }
+
+/* ===== 홈 — Standing 섹션 ===== */
+[data-theme="dark"] .standing-section { background: var(--bg); }
+/* specificity (0,3,0) — standing.css의 .standing-tabs .tab (0,2,0) 이김 */
+[data-theme="dark"] .standing-tabs .tab {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+[data-theme="dark"] .standing-tabs .tab.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+[data-theme="dark"] .podium-card { background: var(--card); border-color: var(--border); color: var(--text); }
+[data-theme="dark"] .more-standing-btn { background: var(--text); color: var(--bg); }
+
+/* ===== 순위 (ranking) ===== */
+[data-theme="dark"] .ranking-table {
+  background: var(--card);
+  border-color: var(--border);
+}
+[data-theme="dark"] .ranking-table thead th {
+  background: var(--bg-2);
+  color: var(--text);
+  border-color: var(--border);
+}
+[data-theme="dark"] .ranking-table td {
+  color: var(--text);
+  border-color: var(--border);
+}
+[data-theme="dark"] .season-selector select {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--text);
+}
+[data-theme="dark"] .tab-button {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--text);
+}
+[data-theme="dark"] .tab-button.active {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+/* ===== 결과 (result) ===== */
+[data-theme="dark"] .result-controls {
+  background: var(--card);
+  border-color: var(--border);
+}
+[data-theme="dark"] .dropdowns label { color: var(--muted); }
+[data-theme="dark"] .dropdowns select {
+  background: var(--input-bg);
+  border-color: var(--border);
+  color: var(--text);
+}
+[data-theme="dark"] .race-details {
+  background: var(--card);
+  border-color: var(--border);
+}
+[data-theme="dark"] .race-circuit,
+[data-theme="dark"] .race-spec  { border-color: var(--border); }
+[data-theme="dark"] .race-city,
+[data-theme="dark"] .race-date,
+[data-theme="dark"] .race-extra { color: var(--muted); }
+[data-theme="dark"] .results-table { border-color: var(--border); }
+[data-theme="dark"] .results-table thead th {
+  background: var(--bg-2);
+  color: var(--text);
+}
+[data-theme="dark"] .results-table tbody td {
+  color: var(--text);
+  border-color: var(--border);
+}
+[data-theme="dark"] .driver-team { color: var(--muted); }
+[data-theme="dark"] .toggle-full-btn {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--text);
+}
+[data-theme="dark"] .page-error {
+  background: #2a1a1a;
+  border-color: #5a1a1a;
+  color: #ff8080;
+}
+
+/* ===== 일정 (schedule) ===== */
+[data-theme="dark"] .race-bar {
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+[data-theme="dark"] .race-bar:hover { background: var(--bg-2); }
+[data-theme="dark"] .dropdown-list {
+  background: var(--card);
+  border-color: var(--border);
+}
+[data-theme="dark"] .dropdown-list li:hover { background: var(--bg-2); }
+[data-theme="dark"] .session-list { color: var(--muted); }
+[data-theme="dark"] .location,
+[data-theme="dark"] .circuit { color: var(--muted); }
+[data-theme="dark"] #season-button {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+/* ===== 영상 (video) ===== */
+[data-theme="dark"] #season-button,
+[data-theme="dark"] #round-button {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--text);
+}
+[data-theme="dark"] #season-button:hover,
+[data-theme="dark"] #round-button:hover {
+  background: var(--bg-2);
+  border-color: var(--border);
+}
+[data-theme="dark"] .filter-container {
+  background: var(--card);
+  border-color: var(--border);
+}
+[data-theme="dark"] .tab-btn {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--text);
+}
+[data-theme="dark"] .tab-btn:hover { background: var(--bg-2); }
+[data-theme="dark"] .video-thumb { background: var(--bg-2); }
+[data-theme="dark"] .video-card { border-color: var(--border); }
+
+/* ===== 뉴스 (news) ===== */
+[data-theme="dark"] .news-card.analysis { background: var(--card); }
+[data-theme="dark"] .news-category-tabs button {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--text);
+}
+[data-theme="dark"] #newsSourceFilter,
+[data-theme="dark"] .news-search-input {
+  background: var(--input-bg);
+  border-color: var(--border);
+  color: var(--text);
+}
+[data-theme="dark"] .badge { background: var(--bg-2); }
+[data-theme="dark"] .news-card.short { background: var(--card); }
+
+/* ===== 승부예측 (prediction) ===== */
+[data-theme="dark"] .prediction-intro,
+[data-theme="dark"] .prediction-card {
+  background: var(--card);
+  border-color: var(--border);
+}
+[data-theme="dark"] .prediction-intro p { color: var(--muted); }
+[data-theme="dark"] .prediction-subtitle { color: var(--muted); }
+[data-theme="dark"] #reset-prediction {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--text);
+}
+[data-theme="dark"] .week-summary {
+  background: var(--bg-2);
+  color: var(--text);
+  border-color: var(--border);
+}
+[data-theme="dark"] .prediction-more-btn {
+  background: var(--bg-2);
+  border-color: var(--border);
+  color: var(--text);
+}
+[data-theme="dark"] .rank-picked {
+  background: var(--bg-2);
+  border-color: var(--border);
+}
+[data-theme="dark"] .picked-slot {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--text);
+}
+[data-theme="dark"] .option-card {
+  background: var(--bg-2);
+  color: var(--text);
+  border-color: transparent;
+}
+[data-theme="dark"] .option-card:hover { background: var(--card); }
+[data-theme="dark"] .option-card.selected {
+  background: #162d4a;
+  border-color: #4d9fff;
+  color: #90cbff;
+}
+
+/* ===== 로그인 / 회원가입 ===== */
+[data-theme="dark"] .login-wrap,
+[data-theme="dark"] .signup-wrap { background: var(--bg); }
+[data-theme="dark"] .login-box,
+[data-theme="dark"] .signup-box  {
+  background: var(--card);
+  border-color: var(--border);
+}
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="email"],
+[data-theme="dark"] input[type="password"] {
+  background: var(--input-bg);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+/* ===== 정책 (policy) ===== */
+[data-theme="dark"] .policy-wrap { background: var(--bg); color: var(--text); }

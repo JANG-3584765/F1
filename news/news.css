@@ -56,6 +56,32 @@ body {
   color:#fff;
 }
 
+/* 검색 */
+.news-search-wrap{
+  margin-bottom:10px;
+}
+.news-search-input{
+  width:100%;
+  padding:9px 12px;
+  background:var(--input-bg, #f9fafb);
+  color:var(--text, #111827);
+  border-radius:10px;
+  border:1px solid var(--border, #e5e7eb);
+  font-size:14px;
+  font-weight:600;
+  box-sizing:border-box;
+  outline:none;
+  -webkit-appearance:none;
+}
+.news-search-input:focus{
+  border-color:var(--accent, #e10600);
+  box-shadow:0 0 0 3px rgba(225,6,0,.15);
+  background:#fff;
+}
+[data-theme="dark"] .news-search-input:focus{
+  background:var(--input-bg);
+}
+
 /* 필터 row */
 .news-source-filter{
   margin-bottom:12px;

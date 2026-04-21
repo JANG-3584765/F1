@@ -1,14 +1,14 @@
 /* 공용 헤더 */
 .top-header {
   width: 100%;
-  background: white;
+  background: var(--card, white);
 
   display: grid;
   grid-template-columns: 1fr auto 1fr; /* 왼쪽 - 로고 - 오른쪽 */
   align-items: center;
 
   padding: 12px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border, #eee);
 
   position: sticky;
   top: 0;
@@ -92,7 +92,7 @@
   width: 260px;
   height: 100vh;
 
-  background: white;
+  background: var(--card, white);
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
 
   transition: right 0.3s ease;
@@ -136,12 +136,12 @@
 
 .side-menu li {
   padding: 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border, #eee);
 }
 
 .side-menu a {
   text-decoration: none;
-  color: black;
+  color: var(--text, black);
   font-size: 16px;
 
   display: block;

@@ -14,14 +14,17 @@ const newsContainer =
 
 const tabsEl = document.querySelectorAll('.news-category-tabs button');
 const sourceFilterEl = document.getElementById('newsSourceFilter');
+const searchEl = document.getElementById('newsSearch');
 
 let NEWS = [];
 let activeCategory = 'all';
+let searchQuery = '';
 
 let renderList = [];
 let page = 0;
 const PAGE_SIZE = 20;
 let isLoading = false;
+let renderGen = 0;
 
 async function fetchJson(url) {
   const res = await fetch(url, { cache: 'no-store' });
@@ -154,6 +157,13 @@ function applyFilters(list) {
   if (src !== 'all') {
     out = out.filter(it => it.sourceClass === src);
   }
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    out = out.filter(it =>
+      (it.title || '').toLowerCase().includes(q) ||
+      (it.summary || '').toLowerCase().includes(q)
+    );
+  }
 
   return out.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 }
@@ -161,6 +171,8 @@ function applyFilters(list) {
 function resetAndRender() {
   renderList = applyFilters(NEWS);
   page = 0;
+  isLoading = false;
+  renderGen++;
   if (newsContainer) newsContainer.innerHTML = "";
   loadMore();
 }
@@ -174,9 +186,11 @@ function loadMore() {
   if (slice.length === 0) return;
 
   isLoading = true;
+  const gen = renderGen;
   addLoader();
 
   setTimeout(() => {
+    if (gen !== renderGen) { isLoading = false; removeLoader(); return; }
     removeLoader();
     newsContainer.insertAdjacentHTML('beforeend', slice.map(renderCard).join(''));
     newsEnhance();
@@ -271,6 +285,13 @@ tabsEl.forEach(btn => {
 
 if (sourceFilterEl) {
   sourceFilterEl.addEventListener('change', resetAndRender);
+}
+
+if (searchEl) {
+  searchEl.addEventListener('input', () => {
+    searchQuery = searchEl.value.trim();
+    resetAndRender();
+  });
 }
 
 (async () => {

@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- FOUC 방지: CSS 렌더 전에 테마 즉시 적용 -->
+  <script>(function(){var t=localStorage.getItem("theme");if(t){document.documentElement.dataset.theme=t;}else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){document.documentElement.dataset.theme="dark";}})()</script>
+
+  <!-- 다크모드 CSS (최우선 로드) -->
+  <link rel="stylesheet" href="../common/darkmode.css">
+
   <title>개인정보처리방침 - WhatisF1</title>
 
   <!-- 공통 헤더 CSS -->
@@ -114,6 +120,7 @@
 
   <!-- BASE_PATH 정의 (동기 로드) -->
   <script src="../common/config.js"></script>
+  <script src="../common/darkmode.js"></script>
 
   <!-- 공통 헤더 JS -->
   <script src="../common/header.js"></script>
