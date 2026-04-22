@@ -114,7 +114,7 @@ html[data-theme="dark"] {
 
 /* ===== 홈 — Main News 섹션 ===== */
 [data-theme="dark"] .main-news-section { background: var(--bg); }
-[data-theme="dark"] .more-news-btn {
+[data-theme="dark"] .main-news-section .more-news-btn {
   background: var(--text);
   color: var(--bg);
 }
