@@ -2,7 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const STORAGE_KEY = "season_prediction";
 
   // 로컬스토리지에서 기존 데이터 불러오기 (없으면 초기화)
-  let savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  let savedData;
+  try {
+    savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  } catch {
+    localStorage.removeItem(STORAGE_KEY);
+  }
   if (!savedData || typeof savedData !== "object") savedData = {};
 
   // =====================
